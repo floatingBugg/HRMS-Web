@@ -106,7 +106,7 @@ addWorkingHistory():void{
       etecRelation: [''],
       etecContactNumber: [''],
       etecAddress: [''],
-      EmsTblAcademicQualification: this.fb.array([ this.addAcademicQualificationList()]),
+      EmsTblAcademicQualification: this.fb.array([this.addAcademicQualificationList()]),
       emsTblEmployeeProfessionalDetails: this.fb.array([this.addEmsTblEmployeeProfessionalDetails()]),
       emsTblProfessionalQualification: this.fb.array([this.addemsTblProfessionalQualification()]),
       emsTblWorkingHistory: this.fb.array([this.addemsTblWorkingHistory()]),

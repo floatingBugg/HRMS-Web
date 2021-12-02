@@ -20,7 +20,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>Phone Number</mat-label>
-              <input formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number">
+              <input type="tel" formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="xxxx-xxxxxxx" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>CNIC</mat-label>
@@ -346,7 +346,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-6 input">
                     <mat-label>Salary</mat-label>
-                    <input formControlName="etepdSalary" name="etepdSalary" matInput placeholder="Salary">
+                    <input type="number" formControlName="etepdSalary" name="etepdSalary" matInput placeholder="Salary">
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-6 input">
                     <mat-label>Employment Status</mat-label>
@@ -360,7 +360,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-6 input">
                     <mat-label>Probation</mat-label>
-                    <input formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+                    <input type="number" formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-6 input">
                     <mat-label>Joining Date</mat-label>
@@ -405,11 +405,11 @@
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-6 input">
                 <mat-label>Passing Year</mat-label>
-                <input matInput placeholder="Passing Year" formControlName="etaqPassingYear">
+                <input type="number" matInput placeholder="Passing Year" formControlName="etaqPassingYear">
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-6 input">
                 <mat-label>CGPA</mat-label>
-                <input matInput placeholder="CGPA" formControlName="etaqCgpa">
+                <input type="number" matInput placeholder="CGPA" formControlName="etaqCgpa">
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-6 input">
                 <mat-label>Institute Name</mat-label>
@@ -501,8 +501,8 @@
               placeholder="Designation">
           </mat-form-field>
           <mat-form-field class="col-lg-5 col-md-6 input">
-            <mat-label>Duration</mat-label>
-            <input type="text" matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
+            <mat-label>Duration (mm/yyyy)</mat-label>
+            <input type="number" matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
           </mat-form-field>
           <mat-form-field class="col-lg-5 col-md-6 input">
             <mat-label>Start date</mat-label>
