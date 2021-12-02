@@ -17,7 +17,7 @@ import { PersonalDetailsService } from 'src/app/services/personal-details.servic
 export class AddEmployeeComponent implements OnInit {
 
   personalDetailsForm: any =  FormGroup;
-  EmsTblAcademicQualificationList: any =  FormArray;
+  EmsTblAcademicQualification: any =  FormArray;
   emsTblEmployeeProfessionalDetails:any = FormArray;
   emsTblProfessionalQualification:any = FormArray;
   emsTblWorkingHistory: any = FormArray;
@@ -40,8 +40,8 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addAcademicQualification(): void {
-    this.EmsTblAcademicQualificationList = this.personalDetailsForm.get('EmsTblAcademicQualificationList') as FormArray;
-    this.EmsTblAcademicQualificationList.push(this.addAcademicQualificationList());
+    this.EmsTblAcademicQualification = this.personalDetailsForm.get('EmsTblAcademicQualificationList') as FormArray;
+    this.EmsTblAcademicQualification.push(this.addAcademicQualificationList());
   }
 
   ///////Professional Details/////////////
@@ -106,15 +106,16 @@ addWorkingHistory():void{
       etecRelation: [''],
       etecContactNumber: [''],
       etecAddress: [''],
-      EmsTblAcademicQualificationList: this.fb.array([ this.addAcademicQualificationList()]),
+      EmsTblAcademicQualification: this.fb.array([ this.addAcademicQualificationList()]),
       emsTblEmployeeProfessionalDetails: this.fb.array([this.addEmsTblEmployeeProfessionalDetails()]),
       emsTblProfessionalQualification: this.fb.array([this.addemsTblProfessionalQualification()]),
-      emsTblWorkingHistory: this.fb.array([]),
+      emsTblWorkingHistory: this.fb.array([this.addemsTblWorkingHistory()]),
     });
   }
 
   submitData() {
     // this.personalDetailsForm.controls['emsTblAcademicQualification']
+    debugger
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)

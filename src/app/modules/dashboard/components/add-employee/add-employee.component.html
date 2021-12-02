@@ -331,7 +331,7 @@
           <div class="container">
             <h4>Professional Details</h4>
             <div class="form-group">
-              <div class="col-md-offset-2 col-md-4">
+              <div class="col-md-offset-2 col-md-4 mb-10">
                 <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
                   Add Other Qualification
                 </button>
@@ -396,8 +396,8 @@
               </button>
             </div>
           </div>
-          <div class="mt-5 container" formArrayName="EmsTblAcademicQualificationList"
-            *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualificationList')['controls']; let i = index;">
+          <div class="mt-5 container" formArrayName="EmsTblAcademicQualification"
+            *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualification')['controls']; let i = index;">
             <div [formGroupName]="i">
               <mat-form-field class="col-lg-5 col-md-6 input">
                 <mat-label>Qualification</mat-label>
