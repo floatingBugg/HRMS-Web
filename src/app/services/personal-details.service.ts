@@ -9,7 +9,7 @@ export class PersonalDetailsService {
 
   personalDetails(data: any): Observable<any> {
     return this.http.post(
-      'https://localhost:44390/Employee/Add',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
       data
     );
   }

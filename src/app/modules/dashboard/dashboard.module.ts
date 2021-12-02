@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
 import {MatDialogModule} from '@angular/material/dialog';
 import { DeleteEmployeeComponent } from './components/delete-employee/delete-employee.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { SuccessDialogComponent } from './components/add-employee/success-dialog/success-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     SidebarComponent,
     EmployeeComponent,
     DeleteEmployeeComponent,
+    SuccessDialogComponent,
   ],
   imports: [
     CommonModule,
