@@ -114,31 +114,11 @@ addWorkingHistory():void{
   }
 
   submitData() {
-    // this.personalDetailsForm.controls['emsTblAcademicQualification']
-    debugger
-    console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
-        console.log(result.message);
+    
       });
   }
-
-
-  // get qualifications(): any {
-  //   return this.personalDetailsForm.controls[
-  //     'emsTblAcademicQualification'
-  //   ] as FormArray;
-  // }
-
-  // addQualification() {
-  //   let data = this.qualifications.push(this.qualificationForm);
-  //   console.log(data);
-  // }
-
-  // deleteQualifications(index: number) {
-  //   this.qualifications.removeAt(index);
-  // }
-
 
 }
