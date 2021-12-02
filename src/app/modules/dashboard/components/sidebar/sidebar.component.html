@@ -1,0 +1,36 @@
+<div class="person-display">
+  <img class="user-img mx-auto" src="../../../../../assets/img/dummy-dp.jpg" alt="Display Picture">
+  <br>
+  <h1 class="admin-name">John Doe
+  </h1>
+  <span> Admin </span>
+  <mat-divider class="mt-3"></mat-divider>
+
+  <div class="container">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+            aria-expanded="true" aria-controls="collapseOne">
+            <mat-icon style="margin-right: 20px;">people</mat-icon> Employee
+          </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse hide" aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample">
+          <div class="accordion-body">
+            <section>
+              <div class="row">
+                <button mat-raised-button  routerLink="./employee">  All Employee</button>
+              </div>
+              <br>
+              <div class="row">
+                <button mat-raised-button routerLink="./addemployee">Add Employee</button>
+              </div>
+              <br>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

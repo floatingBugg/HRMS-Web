@@ -1,0 +1,28 @@
+.container{
+  background: white;
+  margin-top: 20vh;
+  border-radius: 10px;
+  h3{
+    font-weight: 700;
+    margin-bottom: 5vh;
+  }
+}
+
+table{
+  width: 100%;
+
+}
+th{
+  font-weight: 700;
+}
+.add{
+  float: right;
+
+}
+.field{
+  float: right;
+  margin-left: 20px;
+}
+mat-label{
+  font-size: 20px;
+}

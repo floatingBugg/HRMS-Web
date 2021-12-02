@@ -1,0 +1,30 @@
+.ems-container, .rms-container, .ims-container{
+  cursor: pointer;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  width: 300px;
+  height: 300px;
+  line-height: 300px;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.ms-container{
+  justify-content: center;
+  margin-top: 20vh;
+}
+.ems-container
+{
+  background-color: rgb(252, 217, 223);
+}
+.rms-container
+{
+  background-color: rgb(203, 238, 243);
+}
+.ims-container{
+  background-color: rgb(190, 253, 248);
+}

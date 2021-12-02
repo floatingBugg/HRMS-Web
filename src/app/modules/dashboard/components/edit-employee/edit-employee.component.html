@@ -1,0 +1,522 @@
+<div class="add-employee-container container">
+  <div class="row">
+    <h3 class=" mt-4"> Edit Employee</h3>
+    <mat-vertical-stepper>
+      <form>
+        <mat-step label="Personal Details">
+          <div class="container">
+            <h4 class="mt-5">Personal Details</h4>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Employee ID</mat-label>
+              <input name="etedEmployeeId" type="number" matInput placeholder="Employee ID">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>First Name</mat-label>
+              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field class=" col-lg-5 col-md-6 input">
+              <mat-label>Last Name</mat-label>
+              <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Phone Number</mat-label>
+              <input formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>CNIC</mat-label>
+              <input type="number" formControlName="etedCnic" name="etedCnic" matInput placeholder="CNIC">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label> Personal Email Address</mat-label>
+              <input matInput formControlName="etedEmailAddress" name="etedEmailAddress" placeholder="Personal Email Address">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Professional Email Address</mat-label>
+              <input matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
+                placeholder="Professional Email Address">
+            </mat-form-field>
+            <mat-form-field class=" col-lg-5 col-md-6 input">
+              <mat-label>Address</mat-label>
+              <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-a6 input">
+              <mat-label>Date of Birth</mat-label>
+              <input placeholder="Date of Birth" formControlName="etedDob" name="etedDob" matInput [matDatepicker]="dob">
+              <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+              <mat-datepicker #dob></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Gender</mat-label>
+              <mat-select formControlName="etedGender" name="etedGender">
+                <mat-option value="female">Female</mat-option>
+                <mat-option value="male">Male</mat-option>
+                <mat-option value="other">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Marital Status</mat-label>
+              <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
+                <mat-option value="single">Single</mat-option>
+                <mat-option value="married">Married</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Employment Status</mat-label>
+              <mat-select formControlName="etedStatus" name="etedStatus">
+                <mat-option value="one">Active</mat-option>
+                <mat-option value="two">Inactive</mat-option>
+                <mat-option value="three">Probation</mat-option>
+                <mat-option value="four">Released</mat-option>
+                <mat-option value="five">Resigned</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Blood Group</mat-label>
+              <mat-select formControlName="etedBloodGroup" name="etedBloodGroup">
+                <mat-option value="A+">A+</mat-option>
+                <mat-option value="A-">A-</mat-option>
+                <mat-option value="B+">B+</mat-option>
+                <mat-option value="B-">B-</mat-option>
+                <mat-option value="O+">O+</mat-option>
+                <mat-option value="O-">O-</mat-option>
+                <mat-option value="AB+">AB+</mat-option>
+                <mat-option value="AB-">AB-</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Religion</mat-label>
+              <mat-select formControlName="etedReligion" name="etedReligion">
+                <mat-option value="muslim">Muslim</mat-option>
+                <mat-option value="nonmuslim">Non-Muslim</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Nationality</mat-label>
+              <mat-select formControlName="etedNationality" name="etedNationality">
+                <mat-option [value]="">-- select one --</mat-option>
+                <mat-option value="afghan">Afghan</mat-option>
+                <mat-option value="albanian"> Albanian</mat-option>
+                <mat-option value="algerian">Algerian</mat-option>
+                <mat-option value="american">American</mat-option>
+                <mat-option value="andorran">Andorran</mat-option>
+                <mat-option value="angolan">Angolan</mat-option>
+                <mat-option value="antiguans">Antiguans</mat-option>
+                <mat-option value="argentinean">Argentinean</mat-option>
+                <mat-option value="armenian">Armenian</mat-option>
+                <mat-option value="australian">Australian</mat-option>
+                <mat-option value="austrian">Austrian</mat-option>
+                <mat-option value="azerbaijani">Azerbaijani</mat-option>
+                <mat-option value="bahamian">Bahamian</mat-option>
+                <mat-option value="bahraini">Bahraini</mat-option>
+                <mat-option value="bangladeshi">Bangladeshi</mat-option>
+                <mat-option value="barbadian">Barbadian</mat-option>
+                <mat-option value="barbudans">Barbudans</mat-option>
+                <mat-option value="batswana">Batswana</mat-option>
+                <mat-option value="belarusian">Belarusian</mat-option>
+                <mat-option value="belgian">Belgian</mat-option>
+                <mat-option value="belizean">Belizean</mat-option>
+                <mat-option value="beninese">Beninese</mat-option>
+                <mat-option value="bhutanese">Bhutanese</mat-option>
+                <mat-option value="bolivian">Bolivian</mat-option>
+                <mat-option value="bosnian">Bosnian</mat-option>
+                <mat-option value="brazilian">Brazilian</mat-option>
+                <mat-option value="british">British</mat-option>
+                <mat-option value="bruneian">Bruneian</mat-option>
+                <mat-option value="bulgarian">Bulgarian</mat-option>
+                <mat-option value="burkinabe">Burkinabe</mat-option>
+                <mat-option value="burmese">Burmese</mat-option>
+                <mat-option value="burundian">Burundian</mat-option>
+                <mat-option value="cambodian">Cambodian</mat-option>
+                <mat-option value="cameroonian">Cameroonian</mat-option>
+                <mat-option value="canadian">Canadian</mat-option>
+                <mat-option value="cape verdean">Cape Verdean</mat-option>
+                <mat-option value="central african">Central African</mat-option>
+                <mat-option value="chadian">Chadian</mat-option>
+                <mat-option value="chilean">Chilean</mat-option>
+                <mat-option value="chinese">Chinese</mat-option>
+                <mat-option value="colombian">Colombian</mat-option>
+                <mat-option value="comoran">Comoran</mat-option>
+                <mat-option value="congolese">Congolese</mat-option>
+                <mat-option value="costa rican">Costa Rican</mat-option>
+                <mat-option value="croatian">Croatian</mat-option>
+                <mat-option value="cuban">Cuban</mat-option>
+                <mat-option value="cypriot">Cypriot</mat-option>
+                <mat-option value="czech">Czech</mat-option>
+                <mat-option value="danish">Danish</mat-option>
+                <mat-option value="djibouti">Djibouti</mat-option>
+                <mat-option value="dominican">Dominican</mat-option>
+                <mat-option value="dutch">Dutch</mat-option>
+                <mat-option value="east timorese">East Timorese</mat-option>
+                <mat-option value="ecuadorean">Ecuadorean</mat-option>
+                <mat-option value="egyptian">Egyptian</mat-option>
+                <mat-option value="emirian">Emirian</mat-option>
+                <mat-option value="equatorial guinean">Equatorial Guinean</mat-option>
+                <mat-option value="eritrean">Eritrean</mat-option>
+                <mat-option value="estonian">Estonian</mat-option>
+                <mat-option value="ethiopian">Ethiopian</mat-option>
+                <mat-option value="fijian">Fijian</mat-option>
+                <mat-option value="filipino">Filipino</mat-option>
+                <mat-option value="finnish">Finnish</mat-option>
+                <mat-option value="french">French</mat-option>
+                <mat-option value="gabonese">Gabonese</mat-option>
+                <mat-option value="gambian">Gambian</mat-option>
+                <mat-option value="georgian">Georgian</mat-option>
+                <mat-option value="german">German</mat-option>
+                <mat-option value="ghanaian">Ghanaian</mat-option>
+                <mat-option value="greek">Greek</mat-option>
+                <mat-option value="grenadian">Grenadian</mat-option>
+                <mat-option value="guatemalan">Guatemalan</mat-option>
+                <mat-option value="guinea-bissauan">Guinea-Bissauan</mat-option>
+                <mat-option value="guinean">Guinean</mat-option>
+                <mat-option value="guyanese">Guyanese</mat-option>
+                <mat-option value="haitian">Haitian</mat-option>
+                <mat-option value="herzegovinian">Herzegovinian</mat-option>
+                <mat-option value="honduran">Honduran</mat-option>
+                <mat-option value="hungarian">Hungarian</mat-option>
+                <mat-option value="icelander">Icelander</mat-option>
+                <mat-option value="indian">Indian</mat-option>
+                <mat-option value="indonesian">Indonesian</mat-option>
+                <mat-option value="iranian">Iranian</mat-option>
+                <mat-option value="iraqi">Iraqi</mat-option>
+                <mat-option value="irish">Irish</mat-option>
+                <mat-option value="israeli">Israeli</mat-option>
+                <mat-option value="italian">Italian</mat-option>
+                <mat-option value="ivorian">Ivorian</mat-option>
+                <mat-option value="jamaican">Jamaican</mat-option>
+                <mat-option value="japanese">Japanese</mat-option>
+                <mat-option value="jordanian">Jordanian</mat-option>
+                <mat-option value="kazakhstani">Kazakhstani</mat-option>
+                <mat-option value="kenyan">Kenyan</mat-option>
+                <mat-option value="kittian and nevisian">Kittian and Nevisian</mat-option>
+                <mat-option value="kuwaiti">Kuwaiti</mat-option>
+                <mat-option value="kyrgyz">Kyrgyz</mat-option>
+                <mat-option value="laotian">Laotian</mat-option>
+                <mat-option value="latvian">Latvian</mat-option>
+                <mat-option value="lebanese">Lebanese</mat-option>
+                <mat-option value="liberian">Liberian</mat-option>
+                <mat-option value="libyan">Libyan</mat-option>
+                <mat-option value="liechtensteiner">Liechtensteiner</mat-option>
+                <mat-option value="lithuanian">Lithuanian</mat-option>
+                <mat-option value="luxembourger">Luxembourger</mat-option>
+                <mat-option value="macedonian">Macedonian</mat-option>
+                <mat-option value="malagasy">Malagasy</mat-option>
+                <mat-option value="malawian">Malawian</mat-option>
+                <mat-option value="malaysian">Malaysian</mat-option>
+                <mat-option value="maldivan">Maldivan</mat-option>
+                <mat-option value="malian">Malian</mat-option>
+                <mat-option value="maltese">Maltese</mat-option>
+                <mat-option value="marshallese">Marshallese</mat-option>
+                <mat-option value="mauritanian">Mauritanian</mat-option>
+                <mat-option value="mauritian">Mauritian</mat-option>
+                <mat-option value="mexican">Mexican</mat-option>
+                <mat-option value="micronesian">Micronesian</mat-option>
+                <mat-option value="moldovan">Moldovan</mat-option>
+                <mat-option value="monacan">Monacan</mat-option>
+                <mat-option value="mongolian">Mongolian</mat-option>
+                <mat-option value="moroccan">Moroccan</mat-option>
+                <mat-option value="mosotho">Mosotho</mat-option>
+                <mat-option value="motswana">Motswana</mat-option>
+                <mat-option value="mozambican">Mozambican</mat-option>
+                <mat-option value="namibian">Namibian</mat-option>
+                <mat-option value="nauruan">Nauruan</mat-option>
+                <mat-option value="nepalese">Nepalese</mat-option>
+                <mat-option value="new zealander">New Zealander</mat-option>
+                <mat-option value="ni-vanuatu">Ni-Vanuatu</mat-option>
+                <mat-option value="nicaraguan">Nicaraguan</mat-option>
+                <mat-option value="nigerien">Nigerien</mat-option>
+                <mat-option value="north korean">North Korean</mat-option>
+                <mat-option value="northern irish">Northern Irish</mat-option>
+                <mat-option value="norwegian">Norwegian</mat-option>
+                <mat-option value="omani">Omani</mat-option>
+                <mat-option value="pakistani">Pakistani</mat-option>
+                <mat-option value="palauan">Palauan</mat-option>
+                <mat-option value="panamanian">Panamanian</mat-option>
+                <mat-option value="papua new guinean">Papua New Guinean</mat-option>
+                <mat-option value="paraguayan">Paraguayan</mat-option>
+                <mat-option value="peruvian">Peruvian</mat-option>
+                <mat-option value="polish">Polish</mat-option>
+                <mat-option value="portuguese">Portuguese</mat-option>
+                <mat-option value="qatari">Qatari</mat-option>
+                <mat-option value="romanian">Romanian</mat-option>
+                <mat-option value="russian">Russian</mat-option>
+                <mat-option value="rwandan">Rwandan</mat-option>
+                <mat-option value="saint lucian">Saint Lucian</mat-option>
+                <mat-option value="salvadoran">Salvadoran</mat-option>
+                <mat-option value="samoan">Samoan</mat-option>
+                <mat-option value="san marinese">San Marinese</mat-option>
+                <mat-option value="sao tomean">Sao Tomean</mat-option>
+                <mat-option value="saudi">Saudi</mat-option>
+                <mat-option value="scottish">Scottish</mat-option>
+                <mat-option value="senegalese">Senegalese</mat-option>
+                <mat-option value="serbian">Serbian</mat-option>
+                <mat-option value="seychellois">Seychellois</mat-option>
+                <mat-option value="sierra leonean">Sierra Leonean</mat-option>
+                <mat-option value="singaporean">Singaporean</mat-option>
+                <mat-option value="slovakian">Slovakian</mat-option>
+                <mat-option value="slovenian">Slovenian</mat-option>
+                <mat-option value="solomon islander">Solomon Islander</mat-option>
+                <mat-option value="somali">Somali</mat-option>
+                <mat-option value="south african">South African</mat-option>
+                <mat-option value="south korean">South Korean</mat-option>
+                <mat-option value="spanish">Spanish</mat-option>
+                <mat-option value="sri lankan">Sri Lankan</mat-option>
+                <mat-option value="sudanese">Sudanese</mat-option>
+                <mat-option value="surinamer">Surinamer</mat-option>
+                <mat-option value="swazi">Swazi</mat-option>
+                <mat-option value="swedish">Swedish</mat-option>
+                <mat-option value="swiss">Swiss</mat-option>
+                <mat-option value="syrian">Syrian</mat-option>
+                <mat-option value="taiwanese">Taiwanese</mat-option>
+                <mat-option value="tajik">Tajik</mat-option>
+                <mat-option value="tanzanian">Tanzanian</mat-option>
+                <mat-option value="thai">Thai</mat-option>
+                <mat-option value="togolese">Togolese</mat-option>
+                <mat-option value="tongan">Tongan</mat-option>
+                <mat-option value="trinidadian or tobagonian">Trinidadian or Tobagonian</mat-option>
+                <mat-option value="tunisian">Tunisian</mat-option>
+                <mat-option value="turkish">Turkish</mat-option>
+                <mat-option value="tuvaluan">Tuvaluan</mat-option>
+                <mat-option value="ugandan">Ugandan</mat-option>
+                <mat-option value="ukrainian">Ukrainian</mat-option>
+                <mat-option value="uruguayan">Uruguayan</mat-option>
+                <mat-option value="uzbekistani">Uzbekistani</mat-option>
+                <mat-option value="venezuelan">Venezuelan</mat-option>
+                <mat-option value="vietnamese">Vietnamese</mat-option>
+                <mat-option value="welsh">Welsh</mat-option>
+                <mat-option value="yemenite">Yemenite</mat-option>
+                <mat-option value="zambian">Zambian</mat-option>
+                <mat-option value="zimbabwean">Zimbabwean</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <h4 class="mt-5">Emergency Contact Person</h4>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>First Name</mat-label>
+              <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
+            </mat-form-field>
+            <mat-form-field class=" col-lg-5 col-md-6 input">
+              <mat-label>Last Name</mat-label>
+              <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
+            </mat-form-field>
+            <mat-form-field class=" col-lg-5 col-md-6 input">
+              <mat-label>Relation with Employee</mat-label>
+              <input formControlName="etecRelation" name="etecRelation" matInput
+                placeholder="Relation with Employee">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Phone Number</mat-label>
+              <input formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Address</mat-label>
+              <textarea formControlName="etecAddress" name="etecAddress" matInput
+                placeholder="Address"></textarea>
+            </mat-form-field>
+          </div>
+          <!-- <div class="mt-4 row">
+            <div class="col-lg-3">
+              <button mat-stroked-button type="button"  color="primary" matStepperPrevious>Back</button>
+            </div>
+            <div class="col-lg-3">
+              <button mat-stroked-button type="button" color="primary">Save</button>
+            </div>
+            <div class="col-lg-4">
+              <button mat-stroked-button type="button" color="primary">Save & Close</button>
+            </div>
+            <div class="col-lg-2">
+              <button mat-stroked-button type="button"  color="primary" matStepperNext>Next</button>
+            </div>
+          </div> -->
+        </mat-step>
+        <mat-step label="Professional Details">
+          <div class="container">
+            <h4>Professional Details</h4>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Designation</mat-label>
+              <input matInput placeholder="Designation" formControlName="etepdDesignation" name="etepdDesignation">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Salary</mat-label>
+              <input formControlName="etepdSalary" name="etepdSalary" matInput placeholder="Salary">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Employment Status</mat-label>
+              <mat-select>
+                <mat-option value="one">Active</mat-option>
+                <mat-option value="two">Inactive</mat-option>
+                <mat-option value="three">Probation</mat-option>
+                <mat-option value="four">Released</mat-option>
+                <mat-option value="five">Resigned</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Probation</mat-label>
+              <input formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Joining Date</mat-label>
+              <input matInput formControlName="etepdJoiningDate" name="etepdJoiningDate" [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <!-- <div class="mt-5 row">
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+          </div>
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary">Save</button>
+          </div>
+          <div class="col-lg-4">
+            <button mat-stroked-button color="primary">Save & Close</button>
+          </div>
+          <div class="col-lg-2">
+            <button mat-stroked-button color="primary" matStepperNext>Next</button>
+          </div>
+        </div> -->
+        </mat-step>
+        <mat-step label="Academic Qualification">
+          <h4 class="mt-5">Academic Qualification</h4>
+          <div class=" mt-5 container" >
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Degree Title</mat-label>
+              <input matInput placeholder="Degree Title" formControlName="etaqQualification" name="etaqQualification">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Passing Year</mat-label>
+              <input matInput placeholder="Passing Year" formControlName="etaqPassingYear" name="etaqPassingYear">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Grade/CGPA</mat-label>
+              <input matInput placeholder="Grade/CGPA" formControlName="etaqCgpa" name="etaqCgpa">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Institute Name</mat-label>
+              <input matInput placeholder="Institute Name" formControlName="etaqInstituteName" name="etaqInstituteName">
+            </mat-form-field>
+
+          <div class="row">
+            <div class="col-md" style="width: fit-content;">
+              <button type="button"  mat-button >Add Qualification</button>
+            </div>
+            <div class="col-md" style="width: fit-content;" >
+              <button type="button" color="warn"  mat-button>Cancel</button>
+            </div>
+          </div>
+        </div>
+          <!-- <div class="mt-4 row">
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+          </div>
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary">Save</button>
+          </div>
+          <div class="col-lg-4">
+            <button mat-stroked-button color="primary">Save & Close</button>
+          </div>
+          <div class="col-lg-2">
+            <button mat-stroked-button color="primary" matStepperNext>Next</button>
+          </div>
+        </div> -->
+        </mat-step>
+        <mat-step label="Professional Qualification">
+          <p>Professional Qualification</p>
+          <div class=" mt-5 container">
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Degree Title</mat-label>
+              <input matInput placeholder="Certification" formControlName="etpqCertification" name="etpqCertification">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Start date</mat-label>
+              <input formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+              <mat-datepicker #startDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>End date</mat-label>
+              <input formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
+              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+              <mat-datepicker #endDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Institute Name</mat-label>
+              <input matInput placeholder="Institute Name" formControlName="etpqInstituteName" name="etpqInstituteName">
+            </mat-form-field>
+            <!-- <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-label>Duration</mat-label>
+              <input matInput placeholder="Duration" formControlName="duration" name="duration">
+            </mat-form-field> -->
+          </div>
+          <!-- <div class="row">
+            <div class="col-md" style="width: fit-content;">
+              <button type="button" mat-button >Add Professional Qualification</button>
+            </div>
+            <div class="col-md" style="width: fit-content;">
+              <button type="button" color="warn" mat-button>Cancel</button>
+            </div>
+          </div> -->
+          <!-- <div class="mt-4 row">
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+          </div>
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary">Save</button>
+          </div>
+          <div class="col-lg-4">
+            <button mat-stroked-button color="primary">Save & Close</button>
+          </div>
+          <div class="col-lg-2">
+            <button mat-stroked-button color="primary" matStepperNext>Next</button>
+          </div>
+        </div> -->
+        </mat-step>
+        <mat-step label="Working History">
+          <p>Working History</p>
+          <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-label>Company Name</mat-label>
+            <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-label>Designation</mat-label>
+            <input type="text" matInput formControlName="etwhDesignation" name="etwhDesignation"
+              placeholder="Designation">
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-label>Duration</mat-label>
+            <input type="text" matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-label>Start date</mat-label>
+            <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
+            <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+            <mat-datepicker #prevstartDate></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-label>End date</mat-label>
+            <input formControlName="etwhEndDate" name="etwhEndDate" matInput [matDatepicker]="prevendDate">
+            <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
+            <mat-datepicker #prevendDate></mat-datepicker>
+          </mat-form-field>
+          <!-- <div class="mt-4 row">
+          <div class="col-lg-3">
+            <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
+          </div>
+          <div class="col-lg-3">
+            <button mat-stroked-button type="submit" color="primary">Save</button>
+          </div>
+          <div class="col-lg-4">
+            <button mat-stroked-button color="primary">Save & Close</button>
+          </div>
+          <div class="col-lg-2">
+            <button mat-stroked-button color="primary" matStepperNext>Next</button>
+          </div>
+        </div> -->
+          <div class="col-lg-3">
+
+          </div>
+
+          <button mat-stroked-button type="submit" color="primary" >Update</button>
+        </mat-step>
+      </form>
+    </mat-vertical-stepper>
+  </div>
+</div>
