@@ -5,7 +5,6 @@
       <form [formGroup]="personalDetailsForm">
         <mat-step label="Personal Details">
           <div class="container">
-            <h4 class="mt-5">Personal Details</h4>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>First Name</mat-label>
               <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name">
@@ -334,7 +333,6 @@
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
-            <h4>Professional Details</h4>
             <div class="form-group">
               <div class="col-md-offset-2 col-md-4">
                 <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
@@ -393,7 +391,6 @@
           </div>
         </mat-step>
         <mat-step label="Academic Qualification">
-          <p>Academic Qualification</p>
           <div class="form-group">
             <div class="col-md-offset-2 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
@@ -438,7 +435,6 @@
           </div>
         </mat-step>
         <mat-step label="Professional Qualification">
-          <p>Professional Qualification</p>
           <div class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
             <div class="form-group">
@@ -493,7 +489,6 @@
           </div>
         </mat-step>
         <mat-step label="Working History">
-          <p>Working History</p>
           <div class=" mt-5 container"  formArrayName="emsTblWorkingHistory" *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
           <div [formGroupName]=i>
           <mat-form-field class="col-lg-5 col-md-6 input">
