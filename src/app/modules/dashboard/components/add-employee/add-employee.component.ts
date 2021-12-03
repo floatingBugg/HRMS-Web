@@ -24,7 +24,7 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 })
 export class AddEmployeeComponent implements OnInit {
   personalDetailsForm: any = FormGroup;
-  EmsTblAcademicQualificationList: any = FormArray;
+  EmsTblAcademicQualification: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
@@ -70,10 +70,10 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addAcademicQualification(): void {
-    this.EmsTblAcademicQualificationList = this.personalDetailsForm.get(
+    this.EmsTblAcademicQualification = this.personalDetailsForm.get(
       'EmsTblAcademicQualificationList'
     ) as FormArray;
-    this.EmsTblAcademicQualificationList.push(
+    this.EmsTblAcademicQualification.push(
       this.addAcademicQualificationList()
     );
   }
@@ -147,7 +147,7 @@ export class AddEmployeeComponent implements OnInit {
       etedNationality: ['', Validators.required],
       
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
-      EmsTblAcademicQualificationList: this.fb.array([
+      EmsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
       ]),
       emsTblEmployeeProfessionalDetails: this.fb.array([

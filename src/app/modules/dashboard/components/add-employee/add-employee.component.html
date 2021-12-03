@@ -392,8 +392,8 @@
         </mat-step>
         <mat-step label="Academic Qualification">
       
-          <div class="mt-5 container" formArrayName="EmsTblAcademicQualificationList"
-            *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualificationList')['controls']; let i = index;">
+          <div class="mt-5 container" formArrayName="EmsTblAcademicQualification"
+            *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualification')['controls']; let i = index;">
             <div [formGroupName]="i">
               <mat-form-field class="col-lg-5 col-md-6 input">
                 <mat-label>Qualification</mat-label>
