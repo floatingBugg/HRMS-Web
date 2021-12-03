@@ -160,10 +160,10 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
-    if(this.personalDetailsForm.invalid) {
-      this.personalDetailsForm.setErrors({ ...this.personalDetailsForm.errors, 'yourErrorName': true });
-      return;
-    }
+    // if(this.personalDetailsForm.invalid) {
+    //   this.personalDetailsForm.setErrors({ ...this.personalDetailsForm.errors, 'yourErrorName': true });
+    //   return;
+    // }
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {

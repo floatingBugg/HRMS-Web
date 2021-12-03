@@ -7,19 +7,19 @@
           <div class="container">
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>First Name</mat-label>
-              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name">
+              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name" maxlength="20">
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-6 input">
               <mat-label>Last Name</mat-label>
-              <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name">
+              <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name" maxlength="20">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>Phone Number</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number">
+              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>CNIC</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput placeholder="CNIC">
+              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput placeholder="CNIC" maxlength="13" >
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label> Personal Email Address</mat-label>
@@ -302,7 +302,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>Phone Number</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number">
+              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number" maxlength="11">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-6 input">
               <mat-label>Address</mat-label>

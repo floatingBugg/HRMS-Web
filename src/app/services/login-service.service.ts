@@ -9,7 +9,7 @@ export class LoginServiceService {
 
   login(data: any): Observable<any> {
     return this.http.post(
-      'http://hamzaashiq46-001-site1.ftempurl.com/auth/userAuth', data
+      'http://hamzaashiq467-001-site1.itempurl.com/auth/userAuth', data
     );
   }
 
