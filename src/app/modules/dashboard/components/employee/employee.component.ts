@@ -20,18 +20,22 @@ export class EmployeeComponent implements OnInit {
     'actions',
   ];
   dataSource = new MatTableDataSource(
-    this.employeeDataa.personalDetailsForm.value
+    //this.employeeDataa
   );
+ 
+  employeeData: any = [];
+
+  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,private employeeDataa: EmployeeDataService) {}
+  
+  ngOnInit(): void {
+    this.getEmployeeData();
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  employeeData: any = [];
-  constructor(
-    public dialog: MatDialog,
-    private personalDetails: PersonalDetailsService,
-    private employeeDataa: EmployeeDataService
-  ) {}
+
   openDialog(id: any) {
     const dialogRef = this.dialog.open(DeleteEmployeeComponent);
     dialogRef.afterClosed().subscribe((res: any) => {
@@ -44,9 +48,6 @@ export class EmployeeComponent implements OnInit {
         });
       }
     });
-  }
-  ngOnInit(): void {
-    this.getEmployeeData();
   }
 
   getEmployeeData() {
