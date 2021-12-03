@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormBuilder,
   AbstractControl,
+  RequiredValidator,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
@@ -130,20 +131,21 @@ export class AddEmployeeComponent implements OnInit {
   }
   createForm() {
     this.personalDetailsForm = this.fb.group({
-      etedFirstName: [''],
-      etedLastName: [''],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedCnic: [''],
-      etedDob: [''],
-      etedContactNumber: [''],
-      etedAddress: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
-      etedStatus: [''],
+      etedFirstName: ['', Validators.required],
+      etedLastName: ['', Validators.required],
+      etedContactNumber: ['', Validators.required],
+      etedCnic: ['', Validators.required],
+      etedEmailAddress: ['', Validators.required],
+      etedOfficialEmailAddress: ['', Validators.required],
+      etedAddress: ['', Validators.required],
+      etedDob: ['', Validators.required],
+      etedGender: ['', Validators.required],
+      etedMaritalStatus: ['', Validators.required],
+      etedStatus: ['', Validators.required],
+      etedBloodGroup: ['', Validators.required],
+      etedReligion: ['', Validators.required],
+      etedNationality: ['', Validators.required],
+      
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       EmsTblAcademicQualificationList: this.fb.array([
         this.addAcademicQualificationList(),
@@ -158,8 +160,10 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
-    // this.personalDetailsForm.controls['emsTblAcademicQualification']
-    console.log(this.personalDetailsForm.value);
+    if(this.personalDetailsForm.invalid) {
+      this.personalDetailsForm.setErrors({ ...this.personalDetailsForm.errors, 'yourErrorName': true });
+      return;
+    }
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {

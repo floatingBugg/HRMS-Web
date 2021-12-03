@@ -1,6 +1,6 @@
-<div class="add-employee-container container">
+<div class="add-employee-container container m-0">
   <div class="row">
-    <h3 class=" mt-4"> Add Employee</h3>
+    <h3 class="mt-4"> Add Employee</h3>
     <mat-vertical-stepper>
       <form [formGroup]="personalDetailsForm">
         <mat-step label="Personal Details">
@@ -312,11 +312,11 @@
           </div>
           <div class="col-md-offset-2 col-md-4">
             <button type="button" class="btn btn-primary" (click)="addEmergencyContact()">
-              Add Other Qualification
+              Add Other Emergency Contact
             </button>
           </div>
           </div>
-          <div class="mt-4 row">
+          <!-- <div class="mt-4 row">
             <div class="col-lg-3">
               <button mat-stroked-button type="button" color="primary" matStepperPrevious>Back</button>
             </div>
@@ -329,16 +329,11 @@
             <div class="col-lg-2">
               <button mat-stroked-button type="button" color="primary" matStepperNext>Next</button>
             </div>
-          </div>
+          </div> -->
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
-            <div class="form-group">
-              <div class="col-md-offset-2 col-md-4">
-                <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
-                  Add Other Qualification
-                </button>
-              </div>
+            <div class="form-group">             
               <div formArrayName="emsTblEmployeeProfessionalDetails"
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
@@ -373,8 +368,13 @@
                   </mat-form-field>
                 </div>
               </div>
+              <div class="col-md-offset-2 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
+                  Add Other Professional Details
+                </button>
+              </div>
             </div>
-            <div class="mt-5 row">
+            <!-- <div class="mt-5 row">
               <div class="col-lg-3">
                 <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
               </div>
@@ -387,17 +387,11 @@
               <div class="col-lg-2">
                 <button mat-stroked-button color="primary" matStepperNext>Next</button>
               </div>
-            </div>
+            </div> -->
           </div>
         </mat-step>
         <mat-step label="Academic Qualification">
-          <div class="form-group">
-            <div class="col-md-offset-2 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
-                Add Other Qualification
-              </button>
-            </div>
-          </div>
+      
           <div class="mt-5 container" formArrayName="EmsTblAcademicQualificationList"
             *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualificationList')['controls']; let i = index;">
             <div [formGroupName]="i">
@@ -418,8 +412,13 @@
                 <input matInput placeholder="Institute Name" formControlName="etaqInstituteName">
               </mat-form-field>
             </div>
+            <div class="col-md-offset-2 col-md-4">
+              <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
+                Add Other Academic Qualification
+              </button>
+            </div>
           </div>
-          <div class="mt-4 row">
+          <!-- <div class="mt-4 row">
             <div class="col-lg-3">
               <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
             </div>
@@ -432,7 +431,7 @@
             <div class="col-lg-2">
               <button mat-stroked-button color="primary" matStepperNext>Next</button>
             </div>
-          </div>
+          </div> -->
         </mat-step>
         <mat-step label="Professional Qualification">
           <div class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
@@ -463,17 +462,14 @@
                 </mat-form-field>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md" style="width: fit-content;">
-              <button type="button" (click)="addProfessionalQualification()" mat-button>Add Professional
-                Qualification</button>
-            </div>
-            <div class="col-md" style="width: fit-content;">
-              <button type="button" color="warn" mat-button>Cancel</button>
+            <div class="col-md-offset-2 col-md-4">
+              <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
+                Add Other Professional Qualification
+              </button>
             </div>
           </div>
-          <div class="mt-4 row">
+          
+          <!-- <div class="mt-4 row">
             <div class="col-lg-3">
               <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
             </div>
@@ -486,7 +482,8 @@
             <div class="col-lg-2">
               <button mat-stroked-button color="primary" matStepperNext>Next</button>
             </div>
-          </div>
+          </div> -->
+
         </mat-step>
         <mat-step label="Working History">
           <div class=" mt-5 container"  formArrayName="emsTblWorkingHistory" *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
@@ -517,15 +514,14 @@
             <mat-datepicker #prevendDate></mat-datepicker>
           </mat-form-field>
           </div>
+          <div class="col-md-offset-2 col-md-4">
+            <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
+              Add Other Work History
+            </button>
           </div>
-          <div class="row">
-            <div class="col-md" style="width: fit-content;">
-              <button type="button" (click)="addWorkingHistory()" mat-button>Add Work History</button>
-            </div>
-            <div class="col-md" style="width: fit-content;">
-              <button type="button" color="warn" mat-button>Cancel</button>
-            </div>
           </div>
+          
+<!-- 
           <div class="mt-4 row">
             <div class="col-lg-3">
               <button mat-stroked-button color="primary" matStepperPrevious>Back</button>
@@ -539,14 +535,13 @@
             <div class="col-lg-2">
               <button mat-stroked-button color="primary" matStepperNext>Next</button>
             </div>
-          </div>
-          <div class="col-lg-3">
+          </div> -->
 
-          </div>
-
-          <button mat-stroked-button type="submit" color="primary" (click)="submitData()">Save</button>
         </mat-step>
       </form>
     </mat-vertical-stepper>
+    <div>
+    <button mat-stroked-button type="submit" color="primary" (click)="submitData()">Save</button>
+    </div>
   </div>
 </div>
