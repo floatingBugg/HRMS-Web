@@ -23,7 +23,8 @@ import { LoginValidationComponent } from './components/login/login-validation/lo
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -50,8 +51,10 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
-    MatPaginatorModule 
+    MatPaginatorModule,
+    MatSortModule
   ],
+  exports:[MatSortModule],
   providers: [LoginService, {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}, AuthGuard],
   bootstrap: [AppComponent]
 })
