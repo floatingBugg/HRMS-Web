@@ -41,6 +41,26 @@ export class AddEmployeeComponent implements OnInit {
     this.createForm();
   }
 
+    ////////Academic Qualification/////////////
+
+    addAcademicQualificationList(): FormGroup {
+      return this.fb.group({
+        etaqQualification: [''],
+        etaqPassingYear: [0, Validators.pattern('^[0-9]*$')],
+        etaqCgpa: [0, Validators.pattern('^[0-9]*$')],
+        etaqInstituteName: [''],
+      });
+    }
+  
+    addAcademicQualification(): void {
+      this.EmsTblAcademicQualification = this.personalDetailsForm.get(
+        'EmsTblAcademicQualificationList'
+      ) as FormArray;
+      this.EmsTblAcademicQualification.push(
+        this.addAcademicQualificationList()
+      );
+    }
+
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
@@ -58,25 +78,7 @@ export class AddEmployeeComponent implements OnInit {
     ) as FormArray;
     this.emsTblEmergencyContact.push(this.addemsTblEmergencyContact());
   }
-  ////////Academic Qualification/////////////
 
-  addAcademicQualificationList(): FormGroup {
-    return this.fb.group({
-      etaqQualification: [''],
-      etaqPassingYear: ['', Validators.pattern('^[0-9]*$')],
-      etaqCgpa: ['', Validators.required, Validators.pattern('^[0-9]*$')],
-      etaqInstituteName: [''],
-    });
-  }
-
-  addAcademicQualification(): void {
-    this.EmsTblAcademicQualification = this.personalDetailsForm.get(
-      'EmsTblAcademicQualificationList'
-    ) as FormArray;
-    this.EmsTblAcademicQualification.push(
-      this.addAcademicQualificationList()
-    );
-  }
 
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
@@ -84,7 +86,7 @@ export class AddEmployeeComponent implements OnInit {
       etepdSalary: [''],
       etepdProbation: [''],
       etepdDesignation: [''],
-      etepdJoiningDate: [''],
+      etepdJoiningDate: [null],
     });
   }
   addProfessionalDetails(): void {
@@ -99,8 +101,8 @@ export class AddEmployeeComponent implements OnInit {
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
       etpqCertification: [''],
-      etpqStratDate: [''],
-      etpqEndDate: [''],
+      etpqStratDate: [null],
+      etpqEndDate: [null],
       etpqInstituteName: [''],
     });
   }
@@ -118,8 +120,8 @@ export class AddEmployeeComponent implements OnInit {
     return this.fb.group({
       etwhCompanyName: [''],
       etwhDesignation: [''],
-      etwhStratDate: [''],
-      etwhEndDate: [''],
+      etwhStratDate: [null],
+      etwhEndDate: [null],
       etwhDuration: [''],
     });
   }
@@ -164,6 +166,7 @@ export class AddEmployeeComponent implements OnInit {
     //   this.personalDetailsForm.setErrors({ ...this.personalDetailsForm.errors, 'yourErrorName': true });
     //   return;
     // }
+    console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
@@ -180,18 +183,5 @@ export class AddEmployeeComponent implements OnInit {
     }
     return true;
   }
-  // get qualifications(): any {
-  //   return this.personalDetailsForm.controls[
-  //     'emsTblAcademicQualification'
-  //   ] as FormArray;
-  // }
 
-  // addQualification() {
-  //   let data = this.qualifications.push(this.qualificationForm);
-  //   console.log(data);
-  // }
-
-  // deleteQualifications(index: number) {
-  //   this.qualifications.removeAt(index);
-  // }
 }
