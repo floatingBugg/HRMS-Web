@@ -9,18 +9,18 @@ export class PersonalDetailsService {
 
   personalDetails(data: any): Observable<any> {
     return this.http.post(
-      'https://localhost:44390/Employee/Add',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
       data
     );
   }
   getEmployeeData() {
     let url =
-      'https://localhost:44390/Employee/DisplayAllEmployees';
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
   deleteEmployeeData(id: any) {
     return this.http.delete(
-      `http://hamzaashiq46-001-site1.ftempurl.com/Employee/Remove?id=${id}`
+      `http://hamzaashiq467-001-site1.itempurl.com/Employee/Remove?id=${id}`
     );
   }
 }
