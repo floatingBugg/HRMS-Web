@@ -27,7 +27,7 @@ import { DeleteEmployeeComponent } from './components/delete-employee/delete-emp
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SuccessDialogComponent } from './components/add-employee/success-dialog/success-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+import { MatSortModule } from '@angular/material/sort';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -60,6 +60,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatProgressBarModule,
     MatPaginatorModule,
-  ]
+    MatSortModule,
+    MatTableModule
+  ],
+  // exports: [
+  //   MatSortModule
+  // ]
 })
 export class DashboardModule { }

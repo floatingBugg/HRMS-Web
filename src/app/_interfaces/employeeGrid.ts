@@ -1,7 +1,7 @@
 export interface employeeGrid{
-  employee_id: number;
-  name: string;
-  email: Date;
-  mobile: string;
-  designation: string;
+  empID: string;
+  fullName: string;
+  emailAddress: string;
+  contactNumber: string;
+  empDesignation: string;
 }

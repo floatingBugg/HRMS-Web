@@ -1,40 +1,48 @@
-import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { DeleteEmployeeComponent } from './../delete-employee/delete-employee.component';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
-export class EmployeeComponent implements OnInit, AfterViewInit {
+export class EmployeeComponent implements OnInit {
+  
+  @ViewChild('employeeDataPage') paginator!: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort!: MatSort;
+  
   displayedColumns: string[] = [
-    'employee_id',
-    'name',
-    'email',
-    'mobile',
-    'designation',
+    'empID',
+    'fullName',
+    'emailAddress',
+    'contactNumber',
+    'empDesignation',
     'actions',
   ];
 
-  @ViewChild('employeeDataPage') paginator!: MatPaginator;
 
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  public employeeData: any;//new MatTableDataSource<employeeGrid>();
-  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,private employeeDataa: EmployeeDataService) {}
+  public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  
+  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService) {}
 
   ngOnInit(): void {
-    this.getEmployeeData();
-  }
-  ngAfterViewInit(): void {
-
+    this.getEmployeeData(); 
+    this.initializeSorting();
   }
 
+ initializeSorting(): void{
+  setTimeout(() => {
+    this.employeeData.sort = this.sort;
+  },1000);
+ }
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
@@ -48,7 +56,6 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
           if(data){
             this.getEmployeeData();
           }
-
         });
       }
     });
@@ -58,7 +65,7 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
 
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-
+     // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
 
     });
@@ -66,4 +73,5 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   onRowClicked(row: any) {
     alert('Row clicked: '+ row.empID);
  }
+
 }

@@ -14,28 +14,28 @@
       </mat-form-field>
      
     </div>
-  </div>
+  </div>  
 
-  <table mat-table [dataSource]="employeeData" class="mat-elevation-z8">
-    <ng-container matColumnDef="employee_id">
-      <th mat-header-cell *matHeaderCellDef> Employee Id</th>
-      <td mat-cell *matCellDef="let employee "> {{employee.empID}} </td>
+  <table mat-table [dataSource]="employeeData" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="empID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Id</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empID}} </td>
     </ng-container>
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef > Name </th>
-      <td mat-cell *matCellDef="let employee "> {{employee.fullName}} </td>
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.fullName}} </td>
     </ng-container>
-    <ng-container matColumnDef="email">
-      <th mat-header-cell *matHeaderCellDef> Email Address</th>
-      <td mat-cell *matCellDef="let employee "> {{employee.emailAddress}} </td>
+    <ng-container matColumnDef="emailAddress">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</th>
+      <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
     </ng-container>
-    <ng-container matColumnDef="mobile">
-      <th mat-header-cell *matHeaderCellDef> Mobile# </th>
-      <td mat-cell *matCellDef="let employee "> {{employee.contactNumber}} </td>
+    <ng-container matColumnDef="contactNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile# </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.contactNumber}} </td>
     </ng-container>
-    <ng-container matColumnDef="designation">
-      <th mat-header-cell *matHeaderCellDef> Designation </th>
-      <td mat-cell *matCellDef="let employee "> {{employee.empDesignation}} </td>
+    <ng-container matColumnDef="empDesignation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation </th>
+      <td mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
     </ng-container>
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions </th>
