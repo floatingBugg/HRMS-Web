@@ -1,48 +1,48 @@
-<div class="add-employee-container container m-0">
+<div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class="mt-4"> Add Employee</h3>
     <mat-vertical-stepper>
       <form [formGroup]="personalDetailsForm">
         <mat-step label="Personal Details">
-          <div class="container">
-            <mat-form-field class="col-lg-5 col-md-6 input">
+          <div class="container screenMaxWidth">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>First Name</mat-label>
               <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name" maxlength="20">
             </mat-form-field>
-            <mat-form-field class=" col-lg-5 col-md-6 input">
+            <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Last Name</mat-label>
               <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name" maxlength="20">
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Phone Number</mat-label>
               <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>CNIC</mat-label>
               <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput placeholder="CNIC" maxlength="13" >
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label> Personal Email Address</mat-label>
               <input type="email" required matInput formControlName="etedEmailAddress" name="etedEmailAddress"
                 placeholder="Personal Email Address">
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Professional Email Address</mat-label>
               <input type="email" required matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
                 placeholder="Professional Email Address">
             </mat-form-field>
-            <mat-form-field class=" col-lg-5 col-md-6 input">
+            <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Address</mat-label>
               <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-a6 input">
+            <mat-form-field class="col-lg-6 col-md-a6 input">
               <mat-label>Date of Birth</mat-label>
               <input placeholder="Date of Birth" formControlName="etedDob" name="etedDob" matInput
                 [matDatepicker]="dob">
               <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
               <mat-datepicker #dob></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Gender</mat-label>
               <mat-select formControlName="etedGender" name="etedGender">
                 <mat-option value="female">Female</mat-option>
@@ -50,14 +50,14 @@
                 <mat-option value="other">Other</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Employment Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus">
                 <mat-option value="one">Active</mat-option>
@@ -67,7 +67,7 @@
                 <mat-option value="five">Resigned</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Blood Group</mat-label>
               <mat-select formControlName="etedBloodGroup" name="etedBloodGroup">
                 <mat-option value="A+">A+</mat-option>
@@ -80,14 +80,14 @@
                 <mat-option value="AB-">AB-</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Religion</mat-label>
               <mat-select formControlName="etedReligion" name="etedReligion">
                 <mat-option value="muslim">Muslim</mat-option>
                 <mat-option value="nonmuslim">Non-Muslim</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Nationality</mat-label>
               <mat-select formControlName="etedNationality" name="etedNationality">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -288,23 +288,23 @@
             <h4 class="mt-5">Emergency Contact Person</h4>
             <div formArrayName="emsTblEmergencyContact" *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
             <div class="form-group" [formGroupName]=i>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>First Name</mat-label>
               <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
             </mat-form-field>
-            <mat-form-field class=" col-lg-5 col-md-6 input">
+            <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Last Name</mat-label>
               <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
             </mat-form-field>
-            <mat-form-field class=" col-lg-5 col-md-6 input">
+            <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Relation with Employee</mat-label>
               <input formControlName="etecRelation" name="etecRelation" matInput placeholder="Relation with Employee">
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Phone Number</mat-label>
               <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number" maxlength="11">
             </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-6 input">
+            <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Address</mat-label>
               <textarea formControlName="etecAddress" name="etecAddress" matInput placeholder="Address"></textarea>
             </mat-form-field>
@@ -337,16 +337,16 @@
               <div formArrayName="emsTblEmployeeProfessionalDetails"
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
-                  <mat-form-field class="col-lg-5 col-md-6 input">
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation">
                   </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-6 input">
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Salary</mat-label>
                     <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary" matInput placeholder="Salary">
                   </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-6 input">
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Employment Status</mat-label>
                     <mat-select>
                       <mat-option value="one">Active</mat-option>
@@ -356,11 +356,11 @@
                       <mat-option value="five">Resigned</mat-option>
                     </mat-select>
                   </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-6 input">
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Probation</mat-label>
                     <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                   </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-6 input">
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Joining Date</mat-label>
                     <input matInput formControlName="etepdJoiningDate" name="etepdJoiningDate" [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -395,19 +395,19 @@
           <div class="mt-5 container" formArrayName="EmsTblAcademicQualification"
             *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualification')['controls']; let i = index;">
             <div [formGroupName]="i">
-              <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Qualification</mat-label>
                 <input matInput placeholder="Qualification" formControlName="etaqQualification">
               </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Passing Year</mat-label>
                 <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="Passing Year" formControlName="etaqPassingYear">
               </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>CGPA</mat-label>
                 <input (keypress)="onlyNumbersAllowed($event)"  matInput placeholder="CGPA" formControlName="etaqCgpa">
               </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-6 input">
+              <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Institute Name</mat-label>
                 <input matInput placeholder="Institute Name" formControlName="etaqInstituteName">
               </mat-form-field>
@@ -438,24 +438,24 @@
             *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
             <div class="form-group">
               <div [formGroupName]="i">
-                <mat-form-field class="col-lg-5 col-md-6 input">
+                <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Degree Title</mat-label>
                   <input matInput placeholder="Certification" formControlName="etpqCertification"
                     name="etpqCertification">
                 </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-6 input">
+                <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Start date</mat-label>
                   <input formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
                   <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                   <mat-datepicker #startDate></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-6 input">
+                <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>End date</mat-label>
                   <input formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
                   <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
                   <mat-datepicker #endDate></mat-datepicker>
                 </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-6 input">
+                <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Institute Name</mat-label>
                   <input matInput placeholder="Institute Name" formControlName="etpqInstituteName"
                     name="etpqInstituteName">
@@ -488,26 +488,26 @@
         <mat-step label="Working History">
           <div class=" mt-5 container"  formArrayName="emsTblWorkingHistory" *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
           <div [formGroupName]=i>
-          <mat-form-field class="col-lg-5 col-md-6 input">
+          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>Company Name</mat-label>
             <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
           </mat-form-field>
-          <mat-form-field class="col-lg-5 col-md-6 input">
+          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>Designation</mat-label>
             <input matInput formControlName="etwhDesignation" name="etwhDesignation"
               placeholder="Designation">
           </mat-form-field>
-          <mat-form-field class="col-lg-5 col-md-6 input">
+          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>Duration</mat-label>
             <input (keypress)="onlyNumbersAllowed($event)" matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
           </mat-form-field>
-          <mat-form-field class="col-lg-5 col-md-6 input">
+          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>Start date</mat-label>
             <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
             <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
             <mat-datepicker #prevstartDate></mat-datepicker>
           </mat-form-field>
-          <mat-form-field class="col-lg-5 col-md-6 input">
+          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>End date</mat-label>
             <input formControlName="etwhEndDate" name="etwhEndDate" matInput [matDatepicker]="prevendDate">
             <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>

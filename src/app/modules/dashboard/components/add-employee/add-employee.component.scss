@@ -6,6 +6,9 @@
   overflow: hidden;
   padding-bottom: 10vh;
 }
+.screenMaxWidth{
+  max-width: 2560px;
+}
 .input {
   margin-left: 10px;
 }
@@ -25,4 +28,8 @@
 }
 .remove-form{
   float: right;
+}
+.col-lg-6
+{
+  width: 49% !important;
 }
