@@ -63,8 +63,5 @@ import { MatSortModule } from '@angular/material/sort';
     MatSortModule,
     MatTableModule
   ],
-  // exports: [
-  //   MatSortModule
-  // ]
 })
 export class DashboardModule { }
