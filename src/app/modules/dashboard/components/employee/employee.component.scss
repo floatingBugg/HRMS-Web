@@ -2,10 +2,6 @@
   background: white;
   margin-top: 20vh;
   border-radius: 10px;
-  h3{
-    font-weight: 700;
-    margin-bottom: 5vh;
-  }
 }
 
 table{
@@ -29,4 +25,13 @@ mat-label{
 .mat-row:hover {
   cursor: pointer;
   background-color: rgb(211, 205, 205);
+}
+
+.ml-20
+{
+  margin-left: 20px;
+}
+.text-align-right
+{
+  text-align: right;
 }

@@ -1,15 +1,13 @@
 <div class="container m-0">
   <div class="row">
-    <div class="mt-5 col-lg-6">
-      <h3>Employees
-        <button routerLink="../addemployee" mat-fab color="primary">
-        <mat-icon>add</mat-icon>
-      </button></h3>
+    <div class="mt-4 col-lg-6">
+      <h3>Employees</h3>
       
     </div>
-    <div class="mt-4 col-lg-6">
-      <mat-form-field class="field" appearance="standard">
-        <mat-label>Search</mat-label>
+    <div class="col-lg-6 text-align-right">
+      <button routerLink="../addemployee" mat-raised-button color color="primary">Add Employee</button>
+      <mat-form-field class="ml-20" appearance="standard">
+        <mat-label>Search keyword</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
      
@@ -18,7 +16,7 @@
 
   <table mat-table [dataSource]="employeeData" class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="empID">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Employee Id</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Emp ID</th>
       <td mat-cell *matCellDef="let employee"> {{employee.empID}} </td>
     </ng-container>
     <ng-container matColumnDef="fullName">
@@ -30,7 +28,7 @@
       <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
     </ng-container>
     <ng-container matColumnDef="contactNumber">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile# </th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile # </th>
       <td mat-cell *matCellDef="let employee"> {{employee.contactNumber}} </td>
     </ng-container>
     <ng-container matColumnDef="empDesignation">
