@@ -15,7 +15,7 @@ import { HomeComponent } from './components/home/home.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { LoginService } from './components/login/login.service';
+import { LoginService } from './services/login.service';
 import {LoginInterceptor} from './interceptor/login.interceptor'
 import { AuthGuard } from './guards/auth.guard';
 import { MatDialogModule } from '@angular/material/dialog';

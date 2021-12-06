@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { LoginServiceService } from 'src/app/services/login-service.service';
 import { Router } from '@angular/router';
-import { LoginValidationComponent } from './login-validation/login-validation/login-validation.component';
+import { LoginValidationComponent } from '../components/login/login-validation/login-validation/login-validation.component';
 import { MatDialog } from '@angular/material/dialog';
 @Injectable({
   providedIn: 'root',
@@ -35,6 +35,14 @@ export class LoginService {
         }
       });
     }
+  }
+
+  logoutUser()
+  {
+    localStorage.removeItem('token');
+    localStorage.removeItem('loggedIn_UserId');
+    localStorage.removeItem('loggedIn_UserName');
+    this.router.navigate(['/login']);
   }
 
   get user() {
