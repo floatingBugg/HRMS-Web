@@ -54,7 +54,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule
   ],
-  //exports:[MatSortModule],
+  exports:[MatSortModule],
   providers: [LoginService, {provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true}, AuthGuard],
   bootstrap: [AppComponent]
 })

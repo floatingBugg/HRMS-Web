@@ -12,7 +12,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
-export class EmployeeComponent implements OnInit {
+export class EmployeeComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'employee_id',
     'name',
@@ -28,6 +28,9 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmployeeData();
+  }
+  ngAfterViewInit(): void {
+
   }
 
   applyFilter(event: Event) {
@@ -54,8 +57,4 @@ export class EmployeeComponent implements OnInit {
       this.employeeData.data = data.data;
     });
   }
-
-  onRowClicked(row: any) {
-   alert('Row clicked: '+ row.empID);
-}
 }
