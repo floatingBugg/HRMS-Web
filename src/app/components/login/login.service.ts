@@ -27,6 +27,8 @@ export class LoginService {
       this.loginService.login(data).subscribe((result) => {
         if (result.success) {
           localStorage.setItem('token', result.data.token);
+          localStorage.setItem('loggedIn_UserId', result.data.userId);
+          localStorage.setItem('loggedIn_UserName', result.data.userName);
           this.router.navigate(['/home']);
         } else {
           this.dialog.open(LoginValidationComponent);
