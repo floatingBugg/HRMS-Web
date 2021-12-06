@@ -1,16 +1,18 @@
 <div class="container m-0">
   <div class="row">
     <div class="mt-5 col-lg-6">
-      <h3>Employees</h3>
+      <h3>Employees
+        <button routerLink="../addemployee" mat-fab color="primary">
+        <mat-icon>add</mat-icon>
+      </button></h3>
+      
     </div>
     <div class="mt-4 col-lg-6">
       <mat-form-field class="field" appearance="standard">
         <mat-label>Search</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
       </mat-form-field>
-      <button routerLink="../addemployee" class="add" mat-fab color="primary">
-        <mat-icon>add</mat-icon>
-      </button>
+     
     </div>
   </div>
 
@@ -46,7 +48,8 @@
       </td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr>
   </table>
-  
+  <mat-paginator #employeeDataPage [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+  </mat-paginator>
 </div>

@@ -22,8 +22,10 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
     'actions',
   ];
 
-  
-  public employeeData= new MatTableDataSource<employeeGrid>();
+  @ViewChild('employeeDataPage') paginator!: MatPaginator;
+
+  pageSizeOptions: number[] = [5, 10, 25, 100];
+  public employeeData: any;//new MatTableDataSource<employeeGrid>();
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,private employeeDataa: EmployeeDataService) {}
 
   ngOnInit(): void {
@@ -53,8 +55,15 @@ export class EmployeeComponent implements OnInit, AfterViewInit {
   }
 
   getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe((data: any) => {
-      this.employeeData.data = data.data;
+    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
+
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+
+      this.employeeData.paginator = this.paginator;
+
     });
   }
+  onRowClicked(row: any) {
+    alert('Row clicked: '+ row.empID);
+ }
 }
