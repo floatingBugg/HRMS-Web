@@ -26,3 +26,8 @@ th{
 mat-label{
   font-size: 20px;
 }
+
+.mat-row:hover {
+  cursor: pointer;
+  background-color: rgb(211, 205, 205);
+}
