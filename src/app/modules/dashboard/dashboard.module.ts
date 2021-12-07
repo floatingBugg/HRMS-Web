@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import {  DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddEmployeeComponent } from './components/add-employee/add-employee.component';
 import { EditEmployeeComponent } from './components/edit-employee/edit-employee.component';
+import { ViewEmployeeComponent } from './components/view-employee/view-employee/view-employee.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -37,6 +38,7 @@ import { MatSortModule } from '@angular/material/sort';
     EmployeeComponent,
     DeleteEmployeeComponent,
     SuccessDialogComponent,
+    ViewEmployeeComponent
   ],
   imports: [
     CommonModule,

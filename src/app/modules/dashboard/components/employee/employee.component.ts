@@ -49,7 +49,7 @@ export class EmployeeComponent implements OnInit {
     this.employeeData.filter = filterValue.trim().toLowerCase();
   }
 
-  openDialog(id: any) {
+  deleteEmployeeById(id: any) {
     const dialogRef = this.dialog.open(DeleteEmployeeComponent);
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res == true) {
@@ -71,9 +71,6 @@ export class EmployeeComponent implements OnInit {
 
     });
   }
-  onRowClicked(row: any) {
-    alert('Row clicked: '+ row.empID);
-    this.empDataService.getEmployeeDataByID(row.empID)
- }
+  // onRowClicked(row: any) {}
 
 }

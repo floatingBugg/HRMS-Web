@@ -1,6 +1,6 @@
-<!-- <div class="add-employee-container container">
+<div class="add-employee-container container">
   <div class="row">
-    <h3 class=" mt-4"> Employee {{employeeDataS.firstName}}</h3>
+    <h3 class=" mt-4"> Employee {{firstName}}</h3>
     <mat-vertical-stepper>
       <form>
          <mat-step label="Personal Details">
@@ -8,175 +8,175 @@
             <h4>Personal Details</h4>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Employee ID:
-                {{employeeDataS.empID}}
+                {{empID}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">First Name:
-                {{employeeDataS.firstName}}
+                {{firstName}}
               </mat-label>
             </div>
 
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Last Name:
-                {{employeeDataS.lastname}}
-              </mat-label>
+                {{lastname}}
+               </mat-label> 
               <mat-label class=" col-lg-5 col-md-6">Phone Number:
-                {{employeeDataS.phoneNo}}
+                {{phoneNo}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Cnic:
-                {{employeeDataS.cnic}}
+                {{cnic}}
               </mat-label>
               <mat-label class=" col-lg-4 col-md-6">Personal Email Address:
-                {{employeeDataS.personalEmail}}
+                {{personalEmail}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-4 col-md-6 ml-5">Professional Email Address:
-                {{employeeDataS.professionalEmail}}
+                {{professionalEmail}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Address:
-                {{employeeDataS.address}}
+                {{address}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Date of Birth:
-                {{employeeDataS.dob}}
+                {{dob}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Gender:
-                {{employeeDataS.gender}}
+                {{gender}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Marital Status:
-                {{employeeDataS.maritalStatus}}
+                {{maritalStatus}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Employment Status:
-                {{employeeDataS.employementStatus}}
+                {{employementStatus}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Blood Group:
-                {{employeeDataS.bloodGroup}}
+                {{bloodGroup}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Religion:
-                {{employeeDataS.religion}}
+                {{religion}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Nationality:
-                {{employeeDataS.nationality}}
+                {{nationality}}
               </mat-label>
             </div>
             <h4 class="mt-5">Emergency Contact Person</h4>
-            <div *ngFor="let item of employeeDataS.emergencyContact; let i = index">
+            <div *ngFor="let item of emergencyContact; let i = index">
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">First Name:
-                {{employeeDataS.emergencyContact[i].etecFirstName}}
+                {{emergencyContact[i].etecFirstName}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Last Name:
-                {{employeeDataS.emergencyContact[i].etecLastName}}
+                {{emergencyContact[i].etecLastName}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Relation:
-                {{employeeDataS.emergencyContact[i].etecRelation}}
+                {{emergencyContact[i].etecRelation}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Phone Number:
-                {{employeeDataS.emergencyContact[i].etecContactNumber}}
+                {{emergencyContact[i].etecContactNumber}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Address:
-                {{employeeDataS.emergencyContact[i].etecAddress}}
+                {{emergencyContact[i].etecAddress}}
               </mat-label>
             </div>
             </div>
           </div>
         </mat-step>
         <mat-step label="Professional Details">
-          <div class="container" *ngFor="let item of employeeDataS.profDetails; let i = index">
+          <div class="container" *ngFor="let item of profDetails; let i = index">
             <h4>Professional Details</h4>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Designation:
-                {{employeeDataS.profDetails[i].etepdDesignation}}
+                {{profDetails[i].etepdDesignation}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Salary:
-                {{employeeDataS.profDetails[i].etepdSalary}}
+                {{profDetails[i].etepdSalary}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Joining Date:
-                {{employeeDataS.profDetails[i].etepdJoiningDate}}
+                {{profDetails[i].etepdJoiningDate}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Probation:
-                {{employeeDataS.profDetails[i].etepdProbation}}
+                {{profDetails[i].etepdProbation}}
               </mat-label>
             </div>
           </div>
         </mat-step>
         <mat-step label="Academic Qualification">
           <h4 class="mt-5">Academic Qualification</h4>
-          <div class=" mt-5 container"  *ngFor="let item of employeeDataS.academicQualification; let i = index">
+          <div class=" mt-5 container"  *ngFor="let item of academicQualification; let i = index">
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Degree Title:
-                {{employeeDataS.academicQualification[i].etaqQualification}}
+                {{academicQualification[i].etaqQualification}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Passing Year:
-                {{employeeDataS.academicQualification[i].etaqPassingYear}}
+                {{academicQualification[i].etaqPassingYear}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">CGPA:
-                {{employeeDataS.academicQualification[i].etaqCgpa}}
+                {{academicQualification[i].etaqCgpa}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Institue Name:
-                {{employeeDataS.academicQualification[i].etaqInstituteName}}
+                {{academicQualification[i].etaqInstituteName}}
               </mat-label>
             </div>
           </div>
         </mat-step>
         <mat-step label="Professional Qualification">
           <p>Professional Qualification</p>
-          <div class=" mt-5 container" *ngFor="let item of employeeDataS.profQualification; let i = index">
+          <div class=" mt-5 container" *ngFor="let item of profQualification; let i = index">
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Certification:
-                {{employeeDataS.profQualification[i].etpqCertification}}
+                {{profQualification[i].etpqCertification}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Start Date:
-                {{employeeDataS.profQualification[i].etpqStratDate}}
+                {{profQualification[i].etpqStratDate}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">End Date:
-                {{employeeDataS.profQualification[i].etpqEndDate}}
+                {{profQualification[i].etpqEndDate}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Institue Name:
-                {{employeeDataS.profQualification[i].etpqInstituteName}}
+                {{profQualification[i].etpqInstituteName}}
               </mat-label>
             </div>
           </div>
         </mat-step>
         <mat-step label="Working History">
           <p>Working History</p>
-          <div class=" mt-5 container" *ngFor="let item of employeeDataS.workHistory; let i =  index">
+          <div class=" mt-5 container" *ngFor="let item of workHistory; let i =  index">
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">Company:
-                {{employeeDataS.workHistory[i].etwhCompanyName}}
+                {{workHistory[i].etwhCompanyName}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Start Date:
-                {{employeeDataS.workHistory[i].etwhStratDate}}
+                {{workHistory[i].etwhStratDate}}
               </mat-label>
             </div>
             <div class="row">
               <mat-label class=" col-lg-5 col-md-6 ml-5">End Date:
-                {{employeeDataS.workHistory[i].etwhEndDate}}
+                {{workHistory[i].etwhEndDate}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Designation:
-                {{employeeDataS.workHistory[i].etwhDesignation}}
+                {{workHistory[i].etwhDesignation}}
               </mat-label>
               <mat-label class=" col-lg-5 col-md-6">Duration:
-                {{employeeDataS.workHistory[i].etwhDuration}}
+                {{workHistory[i].etwhDuration}}
               </mat-label>
             </div>
           </div>
@@ -187,4 +187,4 @@
       </form>
     </mat-vertical-stepper>
   </div>
-</div> -->
+</div>
