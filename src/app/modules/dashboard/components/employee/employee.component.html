@@ -38,13 +38,13 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions </th>
       <td mat-cell *matCellDef="let employee"> 
-        <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]">
+        <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
           <mat-icon>remove_red_eye</mat-icon>
         </button>
-        <button mat-icon-button [routerLink]="[ '../editemployee',employee.empID]">
+        <button mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)">
+        <button mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)" title="Delete Employee Record">
           <mat-icon>delete_outlint</mat-icon>
         </button>  
       </td>
