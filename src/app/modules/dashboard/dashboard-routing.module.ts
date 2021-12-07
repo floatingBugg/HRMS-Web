@@ -4,11 +4,13 @@ import { AddEmployeeComponent } from './components/add-employee/add-employee.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ViewEmployeeComponent } from './components/view-employee/view-employee/view-employee.component';
 
 
 const routes: Routes = [{path:'',  component: DashboardComponent, children:[
   {path:'addemployee', component:AddEmployeeComponent},
   {path:'editemployee', component:EditEmployeeComponent},
+  {path:'viewemp', component:ViewEmployeeComponent},
   {path:'employee', component:EmployeeComponent},
   {path:'', redirectTo:'/dashboard/employee', pathMatch:'full'},
   {path:'**', redirectTo:'/dashboard/employee', pathMatch:'full'}

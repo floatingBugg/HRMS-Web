@@ -41,9 +41,18 @@ body {
   height: 100%;
 }
 body {
-  margin: 0;
+  margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
 }
 .mat-drawer-content{
   overflow-x:hidden !important;
+}
+.cdk-overlay-pane
+{
+    max-width: 30vw !important;
+}
+.floatRight
+{
+  float: right;
 }

@@ -23,4 +23,9 @@ export class PersonalDetailsService {
       `http://hamzaashiq467-001-site1.itempurl.com/Employee/Remove?id=${id}`
     );
   }
+  viewEmployeeData(id: any){
+    return this.http.get(
+      `http://hamzaashiq467-001-site1.itempurl.com/Employee/GetEmployeebyID?id=${id}`
+    );
+  }
 }

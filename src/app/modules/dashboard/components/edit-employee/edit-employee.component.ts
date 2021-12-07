@@ -8,7 +8,7 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
 })
 export class EditEmployeeComponent implements OnInit {
 
-  constructor(public employeeData: EmployeeDataService) { }
+  constructor(public employeeDataS: EmployeeDataService) { }
 
   ngOnInit(): void {
   }
