@@ -1,3 +1,4 @@
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeeComponent } from './components/employee/employee.component';
@@ -29,6 +30,9 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { SuccessDialogComponent } from './components/add-employee/success-dialog/success-dialog.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoginInterceptor } from 'src/app/interceptor/login.interceptor';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -63,7 +67,14 @@ import { MatSortModule } from '@angular/material/sort';
     MatProgressBarModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatProgressSpinnerModule
   ],
+  providers:[
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass:LoginInterceptor
+    }
+  ]
 })
 export class DashboardModule { }

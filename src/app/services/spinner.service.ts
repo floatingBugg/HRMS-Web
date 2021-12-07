@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class SpinnerService {
  private count =0;
  public spinner$:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
+ private _loading:BehaviorSubject<boolean>= new BehaviorSubject<boolean>(false);
+ public readonly loading$ =this._loading.asObservable();
   constructor() { }
   // getSpinnerObserver(): Observable<string>{
   //   return this.spinner$.asObservable();
@@ -26,4 +28,11 @@ export class SpinnerService {
   //   this.count =0;
   //   this.spinner$.next('stop')
   // }
+
+  show(){
+    this._loading.next(true)
+  }
+  hide(){
+    this._loading.next(false)
+  }
 }

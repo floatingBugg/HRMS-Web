@@ -45,3 +45,9 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+<ng-container *ngIf="loading$ |async">
+  <div class="overlay"></div>
+  <mat-progress-spinner [mode]="'indeterminate'"  ></mat-progress-spinner>
+</ng-container>
+
+

@@ -8,7 +8,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
 })
 export class SpinnerComponent implements OnInit {
  showSpinner = false;
-  constructor(private spinnerService : SpinnerService, private cdRef: ChangeDetectorRef) { }
+  constructor( ) { }
   ngOnInit(): void {
   }
 

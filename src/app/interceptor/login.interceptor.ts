@@ -16,6 +16,7 @@ export class LoginInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
+    this.spinnerService.show();
     if (localStorage.getItem('token')) {
       request = request.clone({
         setHeaders: {
@@ -27,6 +28,7 @@ export class LoginInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       finalize(
         ()=>{
+          this.spinnerService.hide();
           this.spinnerService.spinner$.next(false)
         }
       )

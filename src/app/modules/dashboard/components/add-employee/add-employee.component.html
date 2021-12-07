@@ -45,6 +45,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Gender</mat-label>
               <mat-select formControlName="etedGender" name="etedGender">
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">Male</mat-option>
                 <mat-option value="other">Other</mat-option>
@@ -53,6 +54,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
               </mat-select>
@@ -60,6 +62,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Employment Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus">
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="one">Active</mat-option>
                 <mat-option value="two">Inactive</mat-option>
                 <mat-option value="three">Probation</mat-option>
@@ -70,6 +73,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Blood Group</mat-label>
               <mat-select formControlName="etedBloodGroup" name="etedBloodGroup">
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="A+">A+</mat-option>
                 <mat-option value="A-">A-</mat-option>
                 <mat-option value="B+">B+</mat-option>
@@ -83,6 +87,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Religion</mat-label>
               <mat-select formControlName="etedReligion" name="etedReligion">
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="muslim">Muslim</mat-option>
                 <mat-option value="nonmuslim">Non-Muslim</mat-option>
               </mat-select>
@@ -90,7 +95,7 @@
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Nationality</mat-label>
               <mat-select formControlName="etedNationality" name="etedNationality">
-                <mat-option [value]="">-- select one --</mat-option>
+                <mat-option [value]=""> Select One</mat-option>
                 <mat-option value="afghan">Afghan</mat-option>
                 <mat-option value="albanian"> Albanian</mat-option>
                 <mat-option value="algerian">Algerian</mat-option>
@@ -319,7 +324,7 @@
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
-            <div class="form-group">             
+            <div class="form-group">
               <div formArrayName="emsTblEmployeeProfessionalDetails"
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
@@ -335,6 +340,7 @@
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Employment Status</mat-label>
                     <mat-select>
+                      <mat-option [value]=""> Select One</mat-option>
                       <mat-option value="one">Active</mat-option>
                       <mat-option value="two">Inactive</mat-option>
                       <mat-option value="three">Probation</mat-option>
@@ -363,7 +369,7 @@
           </div>
         </mat-step>
         <mat-step label="Academic Qualification">
-      
+
           <div class="mt-5 container" formArrayName="EmsTblAcademicQualification"
             *ngFor="let item of personalDetailsForm.get('EmsTblAcademicQualification')['controls']; let i = index;">
             <div [formGroupName]="i">
@@ -427,7 +433,6 @@
               </button>
             </div>
           </div>
-
         </mat-step>
         <mat-step label="Working History">
           <div class=" mt-5 container"  formArrayName="emsTblWorkingHistory" *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
@@ -442,10 +447,6 @@
               placeholder="Designation">
           </mat-form-field>
           <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Duration</mat-label>
-            <input (keypress)="onlyNumbersAllowed($event)" matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
             <mat-label>Start date</mat-label>
             <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
             <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
@@ -457,6 +458,10 @@
             <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
             <mat-datepicker #prevendDate></mat-datepicker>
           </mat-form-field>
+          <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-label>Duration</mat-label>
+            <input  matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
+          </mat-form-field>
           </div>
           <div class="col-md-offset-2 col-md-4">
             <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
@@ -467,7 +472,7 @@
         </mat-step>
       </form>
     </mat-vertical-stepper>
-    <div class="text-align-right">
+    <div class="text-align-right mb-3">
     <button class="setPositionRight5em" routerLink="../employee" mat-raised-button color="warn">Cancel</button>
     <button class="setPositionRight4em" mat-raised-button type="submit" color="primary" (click)="submitData()">Save</button>
     </div>

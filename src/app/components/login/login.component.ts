@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from 'src/app/services/spinner.service';
 import { LoginService } from '../../services/login.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { LoginService } from '../../services/login.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  constructor(public loginservice:LoginService) { }
+  loading$ = this.loader.loading$;
+  constructor(public loginservice:LoginService, private loader: SpinnerService) { }
 
   ngOnInit(): void {
 
