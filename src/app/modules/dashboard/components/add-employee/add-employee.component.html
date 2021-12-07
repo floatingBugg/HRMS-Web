@@ -7,33 +7,54 @@
           <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>First Name</mat-label>
-              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name" maxlength="20">
+              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder="First Name"
+                maxlength="20">
+              <mat-error *ngIf="personalDetailsForm.controls['etedFirstName'].errors?.['required'] ">
+                First Name is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Last Name</mat-label>
               <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name" maxlength="20">
+              <mat-error *ngIf="personalDetailsForm.controls['etedLastName'].errors?.['required'] ">
+                Last Name is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Phone Number</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
+              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber"
+                name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
+              <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
+                Phone Number is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>CNIC</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput placeholder="CNIC" maxlength="13" >
+              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput
+                placeholder="CNIC" maxlength="13">
+              <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['required'] ">
+                CNIC is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label> Personal Email Address</mat-label>
               <input type="email" required matInput formControlName="etedEmailAddress" name="etedEmailAddress"
                 placeholder="Personal Email Address">
+              <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
+                Email is <strong>required</strong></mat-error>
+              <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['email'] ">
+                Enter a valid email</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Professional Email Address</mat-label>
-              <input type="email" required matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
-                placeholder="Professional Email Address">
+              <input type="email" required matInput formControlName="etedOfficialEmailAddress"
+                name="etedOfficialEmailAddress" placeholder="Professional Email Address">
+              <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
+                Email is <strong>required</strong></mat-error>
+              <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['email'] ">
+                Enter a valid email</mat-error>
             </mat-form-field>
             <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Address</mat-label>
               <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
+              <mat-error *ngIf="personalDetailsForm.controls['etedAddress'].errors?.['required'] ">
+                Address is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-a6 input">
               <mat-label>Date of Birth</mat-label>
@@ -41,39 +62,47 @@
                 [matDatepicker]="dob">
               <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
               <mat-datepicker #dob></mat-datepicker>
+              <mat-error *ngIf="personalDetailsForm.controls['etedDob'].errors?.['required'] ">
+                Date of Birth is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Gender</mat-label>
               <mat-select formControlName="etedGender" name="etedGender">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">Male</mat-option>
                 <mat-option value="other">Other</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedGender'].errors?.['required'] ">
+                Gender is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
+                Marital Status is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Employment Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]="">---Select One---</mat-option>
                 <mat-option value="one">Active</mat-option>
                 <mat-option value="two">Inactive</mat-option>
                 <mat-option value="three">Probation</mat-option>
                 <mat-option value="four">Released</mat-option>
                 <mat-option value="five">Resigned</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
+                Employment Status is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Blood Group</mat-label>
               <mat-select formControlName="etedBloodGroup" name="etedBloodGroup">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="A+">A+</mat-option>
                 <mat-option value="A-">A-</mat-option>
                 <mat-option value="B+">B+</mat-option>
@@ -83,19 +112,23 @@
                 <mat-option value="AB+">AB+</mat-option>
                 <mat-option value="AB-">AB-</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedBloodGroup'].errors?.['required'] ">
+                Blood Group is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Religion</mat-label>
               <mat-select formControlName="etedReligion" name="etedReligion">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="muslim">Muslim</mat-option>
                 <mat-option value="nonmuslim">Non-Muslim</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedReligion'].errors?.['required'] ">
+                Religion is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Nationality</mat-label>
               <mat-select formControlName="etedNationality" name="etedNationality">
-                <mat-option [value]=""> Select One</mat-option>
+                <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="afghan">Afghan</mat-option>
                 <mat-option value="albanian"> Albanian</mat-option>
                 <mat-option value="algerian">Algerian</mat-option>
@@ -289,38 +322,59 @@
                 <mat-option value="zambian">Zambian</mat-option>
                 <mat-option value="zimbabwean">Zimbabwean</mat-option>
               </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etedNationality'].errors?.['required'] ">
+                Nationality is <strong>required</strong></mat-error>
             </mat-form-field>
             <h4 class="mt-5">Emergency Contact Person</h4>
-            <div formArrayName="emsTblEmergencyContact" *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
-            <div class="form-group" [formGroupName]=i>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>First Name</mat-label>
-              <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
-            </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
-              <mat-label>Last Name</mat-label>
-              <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
-            </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
-              <mat-label>Relation with Employee</mat-label>
-              <input formControlName="etecRelation" name="etecRelation" matInput placeholder="Relation with Employee">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Phone Number</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number" maxlength="11">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Address</mat-label>
-              <textarea formControlName="etecAddress" name="etecAddress" matInput placeholder="Address"></textarea>
-            </mat-form-field>
+            <div formArrayName="emsTblEmergencyContact"
+              *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
+              <div class="form-group" [formGroupName]=i>
+                <mat-form-field class="col-lg-6 col-md-6 input">
+                  <mat-label>First Name</mat-label>
+                  <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
+                  <mat-error *ngIf="item.controls['etecFirstName'].errors?.['required']">
+                    First Name is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class=" col-lg-6 col-md-6 input">
+                  <mat-label>Last Name</mat-label>
+                  <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
+                  <mat-error *ngIf="item.controls['etecLastName'].errors?.['required']">
+                    Last Name is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class=" col-lg-6 col-md-6 input">
+                  <mat-label>Relation with Employee</mat-label>
+                  <input formControlName="etecRelation" name="etecRelation" matInput
+                    placeholder="Relation with Employee">
+                  <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
+                    Relation is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-lg-6 col-md-6 input">
+                  <mat-label>Phone Number</mat-label>
+                  <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber"
+                    name="etecContactNumber" matInput placeholder="Phone Number" maxlength="11">
+                  <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
+                    Phone Number is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-lg-6 col-md-6 input">
+                  <mat-label>Address</mat-label>
+                  <textarea formControlName="etecAddress" name="etecAddress" matInput placeholder="Address"></textarea>
+                  <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
+                    Address is <strong>required</strong></mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addEmergencyContact()">
+                  Add Other Emergency Contact
+                </button>
+              </div>
+              <div class=" col-lg-5 col-md-4">
+                <button class="stepperBtn" mat-flat-button color="primary" matStepperNext>Next</button>
+              </div>
             </div>
           </div>
-          <div class="col-md-offset-2 col-md-4">
-            <button type="button" class="btn btn-primary" (click)="addEmergencyContact()">
-              Add Other Emergency Contact
-            </button>
-          </div>
-          </div>
+
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
@@ -335,12 +389,13 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Salary</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary" matInput placeholder="Salary">
+                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
+                      matInput placeholder="Salary">
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Employment Status</mat-label>
                     <mat-select>
-                      <mat-option [value]=""> Select One</mat-option>
+                      <mat-option [value]=""> ---Select One---</mat-option>
                       <mat-option value="one">Active</mat-option>
                       <mat-option value="two">Inactive</mat-option>
                       <mat-option value="three">Probation</mat-option>
@@ -350,7 +405,9 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Probation</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+                    <input (keypress)="onlyNumbersAllowed($event)" value='3'formControlName="etepdProbation"
+                      name="etepdProbation" matInput placeholder="Probation">
+                      <span  matSuffix>Months &nbsp;</span>
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Joining Date</mat-label>
@@ -360,10 +417,18 @@
                   </mat-form-field>
                 </div>
               </div>
-              <div class="col-md-offset-2 col-md-4">
-                <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
-                  Add Other Professional Details
-                </button>
+              <div class="row">
+                <div class="col-md-offset-2 col-lg-5 col-md-4">
+                  <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
+                    Add Other Professional Details
+                  </button>
+                </div>
+                <div class=" col-lg-5 col-md-4">
+                  <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                  <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                    matStepperPrevious>Back</button>
+
+                </div>
               </div>
             </div>
           </div>
@@ -379,21 +444,29 @@
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Passing Year</mat-label>
-                <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="Passing Year" formControlName="etaqPassingYear">
+                <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="Passing Year"
+                  formControlName="etaqPassingYear">
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>CGPA</mat-label>
-                <input (keypress)="onlyNumbersAllowed($event)"  matInput placeholder="CGPA" formControlName="etaqCgpa">
+                <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="CGPA" formControlName="etaqCgpa">
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Institute Name</mat-label>
                 <input matInput placeholder="Institute Name" formControlName="etaqInstituteName">
               </mat-form-field>
             </div>
-            <div class="col-md-offset-2 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
-                Add Other Academic Qualification
-              </button>
+            <div class="row">
+              <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
+                  Add Other Academic Qualification
+                </button>
+              </div>
+              <div class=" col-lg-5 col-md-4">
+                <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                  matStepperPrevious>Back</button>
+              </div>
             </div>
           </div>
 
@@ -427,54 +500,69 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="col-md-offset-2 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
-                Add Other Professional Qualification
-              </button>
+            <div class="row">
+              <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
+                  Add Other Professional Qualification
+                </button>
+              </div>
+              <div class=" col-lg-5 col-md-4">
+                <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                  matStepperPrevious>Back</button>
+              </div>
             </div>
           </div>
         </mat-step>
         <mat-step label="Working History">
-          <div class=" mt-5 container"  formArrayName="emsTblWorkingHistory" *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
-          <div [formGroupName]=i>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Company Name</mat-label>
-            <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Designation</mat-label>
-            <input matInput formControlName="etwhDesignation" name="etwhDesignation"
-              placeholder="Designation">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Start date</mat-label>
-            <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
-            <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
-            <mat-datepicker #prevstartDate></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>End date</mat-label>
-            <input formControlName="etwhEndDate" name="etwhEndDate" matInput [matDatepicker]="prevendDate">
-            <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
-            <mat-datepicker #prevendDate></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Duration</mat-label>
-            <input  matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
-          </mat-form-field>
-          </div>
-          <div class="col-md-offset-2 col-md-4">
-            <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
-              Add Other Work History
-            </button>
-          </div>
+          <div class=" mt-5 container" formArrayName="emsTblWorkingHistory"
+            *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
+            <div [formGroupName]=i>
+              <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Company Name</mat-label>
+                <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
+              </mat-form-field>
+              <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Designation</mat-label>
+                <input matInput formControlName="etwhDesignation" name="etwhDesignation" placeholder="Designation">
+              </mat-form-field>
+              <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Start date</mat-label>
+                <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
+                <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+                <mat-datepicker #prevstartDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>End date</mat-label>
+                <input formControlName="etwhEndDate" name="etwhEndDate" matInput [matDatepicker]="prevendDate">
+                <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
+                <mat-datepicker #prevendDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Duration</mat-label>
+                <input matInput formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
+                  Add Other Work History
+                </button>
+              </div>
+              <div class=" col-lg-5 col-md-4">
+                <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                  matStepperPrevious>Back</button>
+              </div>
+            </div>
           </div>
         </mat-step>
       </form>
     </mat-vertical-stepper>
     <div class="text-align-right mb-3">
-    <button class="setPositionRight5em" routerLink="../employee" mat-raised-button color="warn">Cancel</button>
-    <button class="setPositionRight4em" mat-raised-button type="submit" color="primary" (click)="submitData()">Save</button>
+      <button class="setPositionRight5em" routerLink="../employee" mat-raised-button color="warn">Cancel</button>
+      <button class="setPositionRight4em" mat-raised-button type="submit" color="primary"
+        (click)="submitData()">Save</button>
     </div>
   </div>
 </div>

@@ -29,16 +29,20 @@ export class AddEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
+  whStartDate = this.personalDetailsForm.etwhStratDate;
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog
-  ) {}
+  ) {
+    console.log(this.whStartDate)
+  }
 
   ngOnInit() {
     this.createForm();
+
   }
 
     ////////Academic Qualification/////////////
@@ -51,7 +55,7 @@ export class AddEmployeeComponent implements OnInit {
         etaqInstituteName: [''],
       });
     }
-  
+
     addAcademicQualification(): void {
       this.EmsTblAcademicQualification = this.personalDetailsForm.get(
         'EmsTblAcademicQualificationList'
@@ -64,11 +68,11 @@ export class AddEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecFirstName: [''],
-      etecLastName: [''],
-      etecRelation: [''],
-      etecContactNumber: [''],
-      etecAddress: [''],
+      etecFirstName: ['',Validators.required],
+      etecLastName: ['',Validators.required],
+      etecRelation: ['',Validators.required],
+      etecContactNumber: ['',Validators.required],
+      etecAddress: ['',Validators.required],
     });
   }
 
@@ -137,8 +141,8 @@ export class AddEmployeeComponent implements OnInit {
       etedLastName: ['', Validators.required],
       etedContactNumber: ['', Validators.required],
       etedCnic: ['', Validators.required],
-      etedEmailAddress: ['', Validators.required],
-      etedOfficialEmailAddress: ['', Validators.required],
+      etedEmailAddress: ['', [Validators.required, Validators.email]],
+      etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
       etedAddress: ['', Validators.required],
       etedDob: ['', Validators.required],
       etedGender: ['', Validators.required],
@@ -147,7 +151,7 @@ export class AddEmployeeComponent implements OnInit {
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-      
+
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       EmsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
