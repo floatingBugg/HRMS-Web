@@ -383,9 +383,27 @@
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
                   <mat-form-field class="col-lg-6 col-md-6 input">
-                    <mat-label>Designation</mat-label>
+                    <!-- <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
-                      name="etepdDesignation">
+                      name="etepdDesignation"> -->
+                      <mat-label>Designation</mat-label>
+                      
+              <mat-select formControlName="etepdDesignation" name="etepdDesignation">
+                <mat-option [value]=""> ---Select One---</mat-option>
+                <mat-option value="HR manager">HR (Manager)</mat-option>
+                <mat-option value="HR officer">HR (Officer)</mat-option>
+                <mat-option value="SNR SoftwareEngineer">SNR Software Engineer</mat-option>
+                <mat-option value="JNR SoftwareEngineer">JNR Software Engineer</mat-option>
+                <mat-option value="SQA Engineer">SQA Engineer</mat-option>
+                <mat-option value="Project Manager">Project Manager</mat-option>
+                <mat-option value="System Administrator">System Administrator</mat-option>
+                <mat-option value="Database Developer">Database Developer</mat-option>
+                <mat-option value="Receptionist">Receptionist</mat-option>
+                <mat-option value="Accountant">Accountant</mat-option>
+                <mat-option value="Office Boy">Office Boy</mat-option>
+                <mat-option value="Guard">Guard</mat-option>
+              </mat-select>
+              
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Salary</mat-label>
