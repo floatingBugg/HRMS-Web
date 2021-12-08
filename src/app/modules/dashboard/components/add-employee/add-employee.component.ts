@@ -24,12 +24,13 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 })
 export class AddEmployeeComponent implements OnInit {
   personalDetailsForm: any = FormGroup;
-  EmsTblAcademicQualification: any = FormArray;
+  emsTblAcademicQualification: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
-  whStartDate = this.personalDetailsForm.etwhStratDate;
+  whStartDate: any;
+  whEndDate: any;
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
@@ -37,42 +38,39 @@ export class AddEmployeeComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog
   ) {
-    console.log(this.whStartDate)
+    console.log(this.whStartDate);
   }
 
   ngOnInit() {
     this.createForm();
-
   }
 
-    ////////Academic Qualification/////////////
+  ////////Academic Qualification/////////////
 
-    addAcademicQualificationList(): FormGroup {
-      return this.fb.group({
-        etaqQualification: [''],
-        etaqPassingYear: [0, Validators.pattern('^[0-9]*$')],
-        etaqCgpa: [0, Validators.pattern('^[0-9]*$')],
-        etaqInstituteName: [''],
-      });
-    }
+  addAcademicQualificationList(): FormGroup {
+    return this.fb.group({
+      etaqQualification: [''],
+      etaqPassingYear: [''],
+      etaqCgpa: [''],
+      etaqInstituteName: [''],
+    });
+  }
 
-    addAcademicQualification(): void {
-      this.EmsTblAcademicQualification = this.personalDetailsForm.get(
-        'EmsTblAcademicQualificationList'
-      ) as FormArray;
-      this.EmsTblAcademicQualification.push(
-        this.addAcademicQualificationList()
-      );
-    }
+  addAcademicQualification(): void {
+    this.emsTblAcademicQualification = this.personalDetailsForm.get(
+      'emsTblAcademicQualification'
+    ) as FormArray;
+    this.emsTblAcademicQualification.push(this.addAcademicQualificationList());
+  }
 
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecFirstName: ['',Validators.required],
-      etecLastName: ['',Validators.required],
-      etecRelation: ['',Validators.required],
-      etecContactNumber: ['',Validators.required],
-      etecAddress: ['',Validators.required],
+      etecFirstName: [''],
+      etecLastName: [''],
+      etecRelation: [''],
+      etecContactNumber: [''],
+      etecAddress: [''],
     });
   }
 
@@ -82,7 +80,6 @@ export class AddEmployeeComponent implements OnInit {
     ) as FormArray;
     this.emsTblEmergencyContact.push(this.addemsTblEmergencyContact());
   }
-
 
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
@@ -137,23 +134,23 @@ export class AddEmployeeComponent implements OnInit {
   }
   createForm() {
     this.personalDetailsForm = this.fb.group({
-      etedFirstName: ['', Validators.required],
-      etedLastName: ['', Validators.required],
-      etedContactNumber: ['', Validators.required],
-      etedCnic: ['', Validators.required],
-      etedEmailAddress: ['', [Validators.required, Validators.email]],
-      etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
-      etedAddress: ['', Validators.required],
-      etedDob: ['', Validators.required],
-      etedGender: ['', Validators.required],
-      etedMaritalStatus: ['', Validators.required],
-      etedStatus: ['', Validators.required],
-      etedBloodGroup: ['', Validators.required],
-      etedReligion: ['', Validators.required],
-      etedNationality: ['', Validators.required],
+      etedFirstName: [''],
+      etedLastName: [''],
+      etedContactNumber: [''],
+      etedCnic: [''],
+      etedEmailAddress: [''],
+      etedOfficialEmailAddress: [''],
+      etedAddress: [''],
+      etedDob: [''],
+      etedGender: [''],
+      etedMaritalStatus: [''],
+      etedStatus: [''],
+      etedBloodGroup: [''],
+      etedReligion: [''],
+      etedNationality: [''],
 
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
-      EmsTblAcademicQualification: this.fb.array([
+      emsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
       ]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
@@ -187,5 +184,12 @@ export class AddEmployeeComponent implements OnInit {
     }
     return true;
   }
-
+  onKeypressEvent(event: any, i: any) {
+    this.whStartDate = event.target.value;
+    console.log(this.whStartDate);
+  }
+  onKeypressEvent2(event: any, i: any) {
+    this.whEndDate = event.target.value;
+    console.log(this.whEndDate);
+  }
 }

@@ -5,54 +5,59 @@
       <form>
         <mat-step label="Personal Details">
           <div class="container">
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
-              <input name="etedEmployeeId" value={{editDataArray.etedEmployeeId}} type="number" matInput placeholder="Employee ID">
+              <input name="etedEmployeeId" value={{editDataArray.etedEmployeeId}} type="number" matInput
+                placeholder="Employee ID">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>First Name</mat-label>
               <input name="etedFirstName" value={{editDataArray.etedFirstName}} matInput placeholder="First Name">
             </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
+            <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Last Name</mat-label>
               <input name="etedLastName" value={{editDataArray.etedLastName}} matInput placeholder="Last Name">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>Phone Number</mat-label>
-              <input name="etedContactNumber" value= {{editDataArray.etedContactNumber}} matInput placeholder="Phone Number">
+              <input name="etedContactNumber" value={{editDataArray.etedContactNumber}} matInput
+                placeholder="Phone Number">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>CNIC</mat-label>
               <input type="number" name="etedCnic" value={{editDataArray.etedCnic}} matInput placeholder="CNIC">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label> Personal Email Address</mat-label>
-              <input matInput name="etedEmailAddress" value={{editDataArray.etedEmailAddress}} placeholder="Personal Email Address">
+              <input matInput name="etedEmailAddress" value={{editDataArray.etedEmailAddress}}
+                placeholder="Personal Email Address">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Professional Email Address</mat-label>
-              <input matInput name="etedOfficialEmailAddress" value={{editDataArray.etedOfficialEmailAddress}} placeholder="Professional Email Address">
+              <input matInput name="etedOfficialEmailAddress" value={{editDataArray.etedOfficialEmailAddress}}
+                placeholder="Professional Email Address">
             </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
+            <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Address</mat-label>
-              <textarea name="etedAddress" value={{editDataArray.etedAddress}} matInput placeholder="Address"></textarea>
+              <textarea name="etedAddress" value={{editDataArray.etedAddress}} matInput
+                placeholder="Address"></textarea>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-a6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Date of Birth</mat-label>
-              <input placeholder="Date of Birth" name="etedDob" value={{editDataArray.etedDob}} matInput [matDatepicker]="dob">
+              <input placeholder="Date of Birth" name="etedDob" value={{editDataArray.etedDob}} matInput
+                [matDatepicker]="dob">
               <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
               <mat-datepicker #dob></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Gender</mat-label>
               <mat-select value={{editDataArray.etedGender}} name="etedGender">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">Male</mat-option>
-                <mat-option value="other">Other</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
               <mat-select value={{editDataArray.etedMaritalStatus}} name="etedMaritalStatus">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -60,9 +65,9 @@
                 <mat-option value="married">Married</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employment Status</mat-label>
-              <mat-select  value={{editDataArray.etedStatus}} name="etedStatus">
+              <mat-select value={{editDataArray.etedStatus}} name="etedStatus">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="one">Active</mat-option>
                 <mat-option value="two">Inactive</mat-option>
@@ -71,7 +76,7 @@
                 <mat-option value="five">Resigned</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Blood Group</mat-label>
               <mat-select value={{editDataArray.etedBloodGroup}} name="etedBloodGroup">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -85,7 +90,7 @@
                 <mat-option value="AB-">AB-</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Religion</mat-label>
               <mat-select value={{editDataArray.etedReligion}} name="etedReligion">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -93,7 +98,7 @@
                 <mat-option value="nonmuslim">Non-Muslim</mat-option>
               </mat-select>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Nationality</mat-label>
               <mat-select value={{editDataArray.etedNationality}} name="etedNationality">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -293,26 +298,37 @@
             </mat-form-field>
             <h4 class="mt-5">Emergency Contact Person</h4>
             <div *ngFor="let item of editDataArray.emsTblEmergencyContact; let i = index">
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>First Name</mat-label>
-              <input value={{editDataArray.emsTblEmergencyContact[i].etecFirstName}} name="etecFirstName" matInput placeholder="First Name">
-            </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
-              <mat-label>Last Name</mat-label>
-              <input value={{editDataArray.emsTblEmergencyContact[i].etecLastName}} name="etecLastName" matInput placeholder="Last Name">
-            </mat-form-field>
-            <mat-form-field class=" col-lg-6 col-md-6 input">
-              <mat-label>Relation with Employee</mat-label>
-              <input value={{editDataArray.emsTblEmergencyContact[i].etecRelation}} name="etecRelation" matInput placeholder="Relation with Employee">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Phone Number</mat-label>
-              <input value={{editDataArray.emsTblEmergencyContact[i].etecContactNumber}} name="etecContactNumber" matInput placeholder="Phone Number">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Address</mat-label>
-              <textarea  value={{editDataArray.emsTblEmergencyContact[i].etecAddress}} name="etecAddress" matInput placeholder="Address"></textarea>
-            </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>First Name</mat-label>
+                <input value={{editDataArray.emsTblEmergencyContact[i].etecFirstName}} name="etecFirstName" matInput
+                  placeholder="First Name">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Last Name</mat-label>
+                <input value={{editDataArray.emsTblEmergencyContact[i].etecLastName}} name="etecLastName" matInput
+                  placeholder="Last Name">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Relation with Employee</mat-label>
+                <mat-select value={{editDataArray.emsTblEmergencyContact[i].etecRelation}} name="etecRelation">
+                  <mat-option [value]="">-- select one --</mat-option>
+                  <mat-option value="father">Father</mat-option>
+                  <mat-option value="mother">Mother</mat-option>
+                  <mat-option value="sister">Sister</mat-option>
+                  <mat-option value="brother">Brother</mat-option>
+                  <mat-option value="guardian">Guardian</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Phone Number</mat-label>
+                <input value={{editDataArray.emsTblEmergencyContact[i].etecContactNumber}} name="etecContactNumber"
+                  matInput placeholder="Phone Number">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Address</mat-label>
+                <textarea value={{editDataArray.emsTblEmergencyContact[i].etecAddress}} name="etecAddress" matInput
+                  placeholder="Address"></textarea>
+              </mat-form-field>
             </div>
           </div>
 
@@ -321,115 +337,129 @@
           <div class="container">
             <h4>Professional Details</h4>
             <div *ngFor="let item of editDataArray.emsTblEmployeeProfessionalDetails; let i = index">
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Designation</mat-label>
-              <input value= {{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdDesignation}} matInput placeholder="Designation" name="etepdDesignation">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Salary</mat-label>
-              <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdSalary}} name="etepdSalary" matInput placeholder="Salary">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Probation</mat-label>
-              <input name="etepdProbation" value= {{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdProbation}} matInput placeholder="Probation">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Joining Date</mat-label>
-              <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdJoiningDate}} matInput name="etepdJoiningDate" [matDatepicker]="picker">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </div>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Designation</mat-label>
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdDesignation}} matInput
+                  placeholder="Designation" name="etepdDesignation">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Salary</mat-label>
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdSalary}} name="etepdSalary"
+                  matInput placeholder="Salary">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5input">
+                <mat-label>Probation</mat-label>
+                <input name="etepdProbation" value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdProbation}}
+                  matInput placeholder="Probation">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Joining Date</mat-label>
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdJoiningDate}} matInput
+                  name="etepdJoiningDate" [matDatepicker]="picker">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </div>
           </div>
 
         </mat-step>
         <mat-step label="Academic Qualification">
           <h4 class="mt-5">Academic Qualification</h4>
           <div class=" mt-5 container" *ngFor="let item of editDataArray.emsTblAcademicQualification; let i = index">
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Degree Title</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqQualification}} matInput placeholder="Degree Title" name="etaqQualification">
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqQualification}} matInput
+                placeholder="Degree Title" name="etaqQualification">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Passing Year</mat-label>
-              <input  value={{editDataArray.emsTblAcademicQualification[i].etaqPassingYear}} matInput placeholder="Passing Year" name="etaqPassingYear">
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqPassingYear}} matInput
+                placeholder="Passing Year" name="etaqPassingYear">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Grade/CGPA</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqCgpa}} matInput placeholder="Grade/CGPA" name="etaqCgpa">
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqCgpa}} matInput placeholder="Grade/CGPA"
+                name="etaqCgpa">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Institute Name</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqInstituteName}} matInput placeholder="Institute Name" name="etaqInstituteName">
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqInstituteName}} matInput
+                placeholder="Institute Name" name="etaqInstituteName">
             </mat-form-field>
-
-            <div class="row">
-              <div class="col-md" style="width: fit-content;">
-                <button type="button" mat-button>Add Qualification</button>
-              </div>
-              <div class="col-md" style="width: fit-content;">
-                <button type="button" color="warn" mat-button>Cancel</button>
-              </div>
-            </div>
           </div>
 
         </mat-step>
-         <mat-step label="Professional Qualification">
+        <mat-step label="Professional Qualification">
           <p>Professional Qualification</p>
-          <div class=" mt-5 container" *ngFor="let item of editDataArray.emsTblProfessionalQualification; let i = index">
-            <mat-form-field class="col-lg-6 col-md-6 input">
+          <div class=" mt-5 container"
+            *ngFor="let item of editDataArray.emsTblProfessionalQualification; let i = index">
+            <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>Degree Title</mat-label>
-              <input value= {{editDataArray.emsTblProfessionalQualification[i].etpqCertification}} matInput placeholder="Certification" name="etpqCertification">
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqCertification}} matInput
+                placeholder="Certification" name="etpqCertification">
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Start date</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqStratDate}} name="etpqStratDate" matInput [matDatepicker]="startDate">
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqStratDate}} name="etpqStratDate"
+                matInput [matDatepicker]="startDate">
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>End date</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqEndDate}} name="etpqEndDate" matInput [matDatepicker]="endDate">
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqEndDate}} name="etpqEndDate" matInput
+                [matDatepicker]="endDate">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Institute Name</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqInstituteName}} matInput placeholder="Institute Name" name="etpqInstituteName">
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqInstituteName}} matInput
+                placeholder="Institute Name" name="etpqInstituteName">
             </mat-form-field>
-           </div>
+          </div>
         </mat-step>
         <mat-step label="Working History">
           <p>Working History</p>
           <div *ngFor="let item of editDataArray.emsTblWorkingHistory; let i =  index">
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Company Name</mat-label>
-            <input value={{editDataArray.emsTblWorkingHistory[i].etwhCompanyName}} matInput name="etwhCompanyName" placeholder="Company Name">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Designation</mat-label>
-            <input value= {{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} type="text" matInput name="etwhDesignation" placeholder="Designation">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Duration</mat-label>
-            <input value= {{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} type="text" matInput name="etwhDuration" placeholder="Duration">
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>Start date</mat-label>
-            <input value= {{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} matInput [matDatepicker]="prevstartDate">
-            <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
-            <mat-datepicker #prevstartDate></mat-datepicker>
-          </mat-form-field>
-          <mat-form-field class="col-lg-6 col-md-6 input">
-            <mat-label>End date</mat-label>
-            <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} name="etwhEndDate" matInput [matDatepicker]="prevendDate">
-            <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
-            <mat-datepicker #prevendDate></mat-datepicker>
-          </mat-form-field>
-        </div>
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Company Name</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhCompanyName}} matInput name="etwhCompanyName"
+                placeholder="Company Name">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Designation</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} type="text" matInput
+                name="etwhDesignation" placeholder="Designation">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Duration</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} type="text" matInput
+                name="etwhDuration" placeholder="Duration">
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Start date</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} matInput
+                [matDatepicker]="prevstartDate">
+              <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+              <mat-datepicker #prevstartDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-5input">
+              <mat-label>End date</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} name="etwhEndDate" matInput
+                [matDatepicker]="prevendDate">
+              <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
+              <mat-datepicker #prevendDate></mat-datepicker>
+            </mat-form-field>
+          </div>
           <button mat-stroked-button type="submit" color="primary">Update</button>
-        </mat-step> 
+        </mat-step>
       </form>
     </mat-vertical-stepper>
+        <div class="text-align-right">
+      <button  routerLink="./employee" mat-raised-button color="warn">Cancel</button>
+      <button  style="margin-left: 10px;" mat-raised-button type="submit"
+        color="primary" >Save</button>
+    </div>
   </div>
 </div>

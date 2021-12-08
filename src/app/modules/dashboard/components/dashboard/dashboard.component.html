@@ -1,26 +1,28 @@
-<div class="loader-container" >
-  <mat-progress-bar mode="indeterminate" *ngIf="spinnerService.spinner$ | async"   ></mat-progress-bar>
+<div class="loader-container">
+  <mat-progress-bar mode="indeterminate" *ngIf="spinnerService.spinner$ | async"></mat-progress-bar>
 </div>
 <mat-toolbar color="primary">
-  <button mat-icon-button class="example-icon" (click)="drawer.toggle()"
+  <!-- <button mat-icon-button class="example-icon" (click)="drawer.toggle()"
     aria-label="Menu">
-    <mat-icon>menu</mat-icon>
+    <mat-icon>menu</mat-icon></button> -->
+
+  <button routerLink="../home" mat-icon-button>
+    <mat-icon>home</mat-icon>
   </button>
   <span>HRMS</span>
+
   <span class="example-spacer"></span>
-  <button mat-icon-button class="user-img" aria-label="UserImg">
-  <img  class="user-img" src="../../../../../assets/img/user.jpg">
-  </button>
+
   <button mat-icon-button class="example-icon" (click)="logout()" aria-label="Settings">
     Logout
-  <mat-icon>exit_to_app</mat-icon>
+    <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
 
-
-<mat-drawer-container class="example-container" autosize>
+<router-outlet></router-outlet>
+<!-- <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side" opened>
     <app-sidebar></app-sidebar>
   </mat-drawer>
   <router-outlet></router-outlet>
-</mat-drawer-container>
+</mat-drawer-container> -->

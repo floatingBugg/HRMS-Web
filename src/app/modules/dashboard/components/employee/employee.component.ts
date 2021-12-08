@@ -14,27 +14,27 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
   styleUrls: ['./employee.component.scss'],
 })
 export class EmployeeComponent implements OnInit {
-  
+
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
-  
+
   displayedColumns: string[] = [
     'empID',
     'fullName',
-    'emailAddress',
-    'contactNumber',
     'empDesignation',
+    'contactNumber',
+    'emailAddress',
     'actions',
   ];
 
 
-  pageSizeOptions: number[] = [5, 10, 25, 100];
+  pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
-  
+
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) {}
 
   ngOnInit(): void {
-    this.getEmployeeData(); 
+    this.getEmployeeData();
     this.initializeSorting();
   }
 
@@ -43,7 +43,7 @@ export class EmployeeComponent implements OnInit {
     this.employeeData.sort = this.sort;
   },1000);
  }
- 
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
