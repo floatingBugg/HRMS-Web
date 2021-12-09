@@ -1,7 +1,7 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class="mt-4"> Add Employee</h3>
-    <mat-vertical-stepper linear>
+    <mat-vertical-stepper [selectedIndex]="1">
       <form [formGroup]="personalDetailsForm">
         <mat-step label="Personal Details" [stepControl]="personalDetailsForm">
           <div class="container screenMaxWidth">
@@ -34,21 +34,21 @@
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label> Personal Email Address</mat-label>
-              <input type="email" required matInput formControlName="etedEmailAddress" name="etedEmailAddress"
+              <input type="email" matInput formControlName="etedEmailAddress" name="etedEmailAddress"
                 placeholder="Personal Email Address">
-              <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
+              <!-- <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
               <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['email'] ">
-                Enter a valid email</mat-error>
+                Enter a valid email</mat-error> -->
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Professional Email Address</mat-label>
-              <input type="email" required matInput formControlName="etedOfficialEmailAddress"
-                name="etedOfficialEmailAddress" placeholder="Professional Email Address">
-              <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
+              <mat-label>Official Email Address</mat-label>
+              <input type="email" matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
+                placeholder="Official Email Address">
+              <!-- <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
               <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['email'] ">
-                Enter a valid email</mat-error>
+                Enter a valid email</mat-error> -->
             </mat-form-field>
             <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Address</mat-label>
@@ -344,6 +344,17 @@
                   <mat-label>Relation with Employee</mat-label>
                   <input formControlName="etecRelation" name="etecRelation" matInput
                     placeholder="Relation with Employee">
+                  <mat-select formControlName="etecRelation" name="etecRelation" matInput>
+                    <mat-option [value]="">-- Select one --</mat-option>
+                    <mat-option value="father">Father</mat-option>
+                    <mat-option value="mother">Mother</mat-option>
+                    <mat-option value="sister">Sister</mat-option>
+                    <mat-option value="brother">Brother</mat-option>
+                    <mat-option value="guardian">Guardian</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
+                    Employment Status is <strong>required</strong></mat-error>
+
                   <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
                     Relation is <strong>required</strong></mat-error>
                 </mat-form-field>
@@ -384,31 +395,25 @@
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <!-- <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
-<<<<<<< HEAD
-                      name="etepdDesignation">
-                    <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
-                      Designation is <strong>required</strong></mat-error>
-=======
                       name="etepdDesignation"> -->
-                      <mat-label>Designation</mat-label>
+                    <mat-label>Designation</mat-label>
 
-              <mat-select formControlName="etepdDesignation" name="etepdDesignation">
-                <mat-option [value]=""> ---Select One---</mat-option>
-                <mat-option value="HR manager">HR (Manager)</mat-option>
-                <mat-option value="HR officer">HR (Officer)</mat-option>
-                <mat-option value="SNR SoftwareEngineer">SNR Software Engineer</mat-option>
-                <mat-option value="JNR SoftwareEngineer">JNR Software Engineer</mat-option>
-                <mat-option value="SQA Engineer">SQA Engineer</mat-option>
-                <mat-option value="Project Manager">Project Manager</mat-option>
-                <mat-option value="System Administrator">System Administrator</mat-option>
-                <mat-option value="Database Developer">Database Developer</mat-option>
-                <mat-option value="Receptionist">Receptionist</mat-option>
-                <mat-option value="Accountant">Accountant</mat-option>
-                <mat-option value="Office Boy">Office Boy</mat-option>
-                <mat-option value="Guard">Guard</mat-option>
-              </mat-select>
+                    <mat-select formControlName="etepdDesignation" name="etepdDesignation">
+                      <mat-option [value]=""> ---Select One---</mat-option>
+                      <mat-option value="HR manager">HR (Manager)</mat-option>
+                      <mat-option value="HR officer">HR (Officer)</mat-option>
+                      <mat-option value="SNR SoftwareEngineer">SNR Software Engineer</mat-option>
+                      <mat-option value="JNR SoftwareEngineer">JNR Software Engineer</mat-option>
+                      <mat-option value="SQA Engineer">SQA Engineer</mat-option>
+                      <mat-option value="Project Manager">Project Manager</mat-option>
+                      <mat-option value="System Administrator">System Administrator</mat-option>
+                      <mat-option value="Database Developer">Database Developer</mat-option>
+                      <mat-option value="Receptionist">Receptionist</mat-option>
+                      <mat-option value="Accountant">Accountant</mat-option>
+                      <mat-option value="Office Boy">Office Boy</mat-option>
+                      <mat-option value="Guard">Guard</mat-option>
+                    </mat-select>
 
->>>>>>> 86186b32f390d226d25bf4512f218d6aaa04dce0
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Salary</mat-label>
@@ -419,17 +424,22 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Joining Date</mat-label>
-                    <input matInput formControlName="etepdJoiningDate" name="etepdJoiningDate" [matDatepicker]="picker">
+                    <input readonly matInput formControlName="etepdJoiningDate" name="etepdJoiningDate"
+                      [matDatepicker]="picker">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="item.controls['etepdJoiningDate'].errors?.['required']">
                       Joining Date is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
+                    <mat-label>Probation Period</mat-label>
+                    <input (click)="getJoiningDate(i)" value="03" type="number" id="monthVal" matInput #postalCode
+                      maxlength="5">
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Probation</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" value='3' formControlName="etepdProbation"
-                      name="etepdProbation" matInput placeholder="Probation">
-                    <span matSuffix>Months &nbsp;</span>
+                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=newDate
+                      formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
                   </mat-form-field>
@@ -565,19 +575,19 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Start date</mat-label>
-                  <input (click)=" onKeypressEvent($event,i)" ng-Model="firstDate" formControlName="etwhStratDate"
-                    matInput [matDatepicker]="prevstartDate">
+                  <input formControlName="etwhStratDate" (dateChange)="compareDates(i)" matInput
+                    [matDatepicker]="prevstartDate" readonly>
                   <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
                   <mat-datepicker #prevstartDate></mat-datepicker>
                   <mat-error *ngIf="item.controls['etwhStratDate'].errors?.['required']">
                     Start Date is <strong>requiredsd</strong></mat-error>
 
                 </mat-form-field>
-                <h3> hi {{whStartDate | date}}</h3>
+                <h2>{{whStartDate | date}}</h2>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>End date</mat-label>
-                  <input (click)=" onKeypressEvent2($event,i)" formControlName="etwhEndDate" name="etwhEndDate" matInput
-                    [matDatepicker]="prevendDate">
+                  <input formControlName="etwhEndDate" (dateChange)="compareDates(i)" name="etwhEndDate" matInput
+                    [matDatepicker]="prevendDate" readonly>
                   <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
                   <mat-datepicker #prevendDate></mat-datepicker>
                   <mat-error *ngIf="item.controls['etwhEndDate'].errors?.['required']">
@@ -585,8 +595,8 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Duration</mat-label>
-                  <input ng-click="dayDiff(firstDate,secondDate)" matInput formControlName="etwhDuration"
-                    name="etwhDuration" placeholder="Duration">
+                  <input (click)="getDuration()" ng-click="dayDiff(firstDate,secondDate)" matInput
+                    formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
                   <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
                     Duration is <strong>required</strong></mat-error>
                 </mat-form-field>
