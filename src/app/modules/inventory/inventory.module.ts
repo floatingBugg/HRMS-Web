@@ -5,11 +5,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
-
+import { MatInputModule } from '@angular/material/input';
+import { MatRippleModule } from '@angular/material/core';
 
 const routes: Routes = [
   { path: '', component: InventoryComponent }
 ]
+
 @NgModule({
   declarations: [
     InventoryComponent
@@ -19,7 +21,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     MatIconModule,
     MatToolbarModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatRippleModule,
   ]
 })
 export class InventoryModule { }
