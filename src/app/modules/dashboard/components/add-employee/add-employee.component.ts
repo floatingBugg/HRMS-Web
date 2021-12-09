@@ -17,6 +17,7 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -30,7 +31,15 @@ export class AddEmployeeComponent implements OnInit {
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
   whStartDate: any;
+  whStartDates: any;
   whEndDate: any;
+  startDate: any;
+  day:any;
+  diff :any;
+  profDetailsJoiningDate:any;
+  noOfDays:any
+  monthValue:any;
+  newDate:any;
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
@@ -39,10 +48,15 @@ export class AddEmployeeComponent implements OnInit {
     public dialog: MatDialog
   ) {
     console.log(this.whStartDate);
+    console.log('hellozzzz',this.day)
   }
 
   ngOnInit() {
     this.createForm();
+    // this.whStartDates = this.startDate.value;
+    // console.log('date val:' , this.whStartDates)
+    console.log(this.whStartDate)
+    console.log('hellottt',this.day)
   }
 
   ////////Academic Qualification/////////////
@@ -85,7 +99,7 @@ export class AddEmployeeComponent implements OnInit {
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
       etepdSalary: [''],
-      etepdProbation: [''],
+      etepdProbation: [this.newDate],
       etepdDesignation: [''],
       etepdJoiningDate: [null],
     });
@@ -191,5 +205,69 @@ export class AddEmployeeComponent implements OnInit {
   onKeypressEvent2(event: any, i: any) {
     this.whEndDate = event.target.value;
     console.log(this.whEndDate);
+  }
+
+  compareDates(index: any) {
+    let control = this.personalDetailsForm.get('emsTblWorkingHistory')['controls'][index]['controls'];
+    this.whStartDate = control['etwhStratDate'].value;
+    this.whEndDate = control['etwhEndDate'].value;
+    console.log(this.whStartDate);
+    console.log(this.whEndDate);
+     let start:any =new Date( this.whStartDate) ;
+     let end:any = new Date( this.whEndDate)
+     this.diff = end-start;
+     let msInDay = 1000*3600*24
+     this.noOfDays= this.diff/msInDay;
+     console.log('new Date ', this.diff/msInDay)
+    // console.log(contorl['etwhStratDate'].value);
+    // let diff = this.whEndDate - this.whStartDate
+    // let msInDay = 1000*3600*24
+    // this.day = diff/msInDay;
+    // console.log('hello',diff/msInDay)
+  }
+
+  getDuration( ){
+  //  let months: number=0;
+  //  let year:number =0;
+  //  let days:number=0;
+  //  let weeks:number=0;
+  //   let msInDay = 1000*3600*24
+  //   this.day = this.diff/msInDay;
+  //   console.log('hello',this.diff/msInDay)
+  //   while(this.day){
+  //     if(this.day>= 365){
+  //        year++;
+  //        this.day -= 365;
+  //     }else if(this.day >= 30 || this.day >= 31 || this.day >= 29){
+  //        months++;
+  //        this.day -= 30;
+  //     }else if(this.day >= 7){
+  //        weeks++;
+  //        this.day -= 7;
+  //     }else{
+  //        days++;
+  //        this.day--;
+  //     }
+  //  };
+  //  console.log('ffff',days ,'days',year,'year',months,'months',weeks,'weeks')
+  var years = Math.floor( this.noOfDays / 365);
+    var months = Math.floor( this.noOfDays % 365 / 30);
+    var days = Math.floor( this.noOfDays % 365 % 30);
+    console.log(years,':', months , ':', days)
+    return [years, months, days].join(':');
+
+  }
+
+  getJoiningDate(index: any){
+   let control = this.personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls'][index]['controls'];
+   let pdjoinDate= control['etepdJoiningDate'].value;
+   let d = new Date(pdjoinDate)
+  let monthval = (<HTMLInputElement>document.getElementById("monthVal")).value
+  console.log(monthval)
+  let probationDate = d.setMonth(d.getMonth()+parseInt(monthval));
+    this.newDate = new Date(probationDate);
+
+   console.log('new Date ', this.newDate)
+  console.log("ederef",monthval);
   }
 }
