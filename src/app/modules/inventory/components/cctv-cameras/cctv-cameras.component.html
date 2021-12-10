@@ -1,7 +1,7 @@
 <div class="laptop-container container m-0 screenMaxWidth">
     <div class="row">
-      <h3 class="mt-4"> Laptop </h3>
-      <form [formGroup]="laptopForm">
+      <h3 class="mt-4"> CCTV Cameras </h3>
+      <form [formGroup]="cctvCamerasForm">
         <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Asset ID</mat-label>
@@ -9,65 +9,50 @@
                 maxlength="20">
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Asset Name</mat-label>
+                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                  maxlength="20">
+              </mat-form-field>
+              <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Sr.No</mat-label>
                 <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                   maxlength="20">
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
-                <mat-label>Name</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                  maxlength="20">
-              </mat-form-field>
-              <mat-form-field class="col-lg-6 col-md-6 input">
-                  <mat-label>Generation</mat-label>
+                  <mat-label>Model No</mat-label>
                   <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                     maxlength="20">
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
-                    <mat-label>Company Name</mat-label>
+                    <mat-label>Resolution</mat-label>
                     <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                       maxlength="20">
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
-                      <mat-label>Processor</mat-label>
+                      <mat-label>Quantity</mat-label>
                       <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                         maxlength="20">
                     </mat-form-field>
                     <mat-form-field class="col-lg-6 col-md-6 input">
-                        <mat-label>RAM</mat-label>
+                        <mat-label>Cost</mat-label>
                         <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                           maxlength="20">
                       </mat-form-field>
                       <mat-form-field class="col-lg-6 col-md-6 input">
-                          <mat-label>Hard Drive</mat-label>
+                          <mat-label>Date of Purchasing</mat-label>
                           <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                             maxlength="20">
                         </mat-form-field>
                         <mat-form-field class="col-lg-6 col-md-6 input">
-                            <mat-label>Quantity</mat-label>
+                            <mat-label>Assigned To</mat-label>
                             <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                               maxlength="20">
                           </mat-form-field>
-                          <mat-form-field class="col-lg-6 col-md-6 input">
-                              <mat-label>Cost</mat-label>
-                              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                                maxlength="20">
-                            </mat-form-field>
-                            <mat-form-field class="col-lg-6 col-md-6 input">
-                                <mat-label>Date of Purchasing</mat-label>
-                                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                                  maxlength="20">
-                              </mat-form-field>
-                              <mat-form-field class="col-lg-6 col-md-6 input">
-                                  <mat-label>Assigned To</mat-label>
-                                  <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                                    maxlength="20">
-                                </mat-form-field>
 </div>
           </form>
           <div class="text-align-right">
             <button class="setPositionRight5em" routerLink="" mat-raised-button color="warn">Cancel</button>
-            <button class="setPositionRight4em" [disabled]="laptopForm.invalid" mat-raised-button type="submit"
+            <button class="setPositionRight4em" [disabled]="cctvCamerasForm.invalid" mat-raised-button type="submit"
               color="primary">Save</button>
           </div>
       </div>

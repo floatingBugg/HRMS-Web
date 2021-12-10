@@ -24,6 +24,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HomeComponent,
     LoginValidationComponent,
     SpinnerComponent,
+   
+ 
   ],
   imports: [
     BrowserModule,
