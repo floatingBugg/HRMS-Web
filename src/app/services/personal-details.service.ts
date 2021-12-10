@@ -19,7 +19,7 @@ export class PersonalDetailsService {
 
     return this.http.post(
       'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
-      data,
+      [{ data: data }, { userName: this.userName }, { userID: this.userID }],
       { headers: httpHeaders }
     );
   }

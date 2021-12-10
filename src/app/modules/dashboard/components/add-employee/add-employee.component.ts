@@ -32,6 +32,8 @@ export class AddEmployeeComponent implements OnInit {
   probationDate: any;
   monthval: any = 3;
   whDuration: any;
+  userID = localStorage.getItem('loggedIn_UserId');
+  userName = localStorage.getItem('loggedIn_UserName');
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
