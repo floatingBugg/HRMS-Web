@@ -429,27 +429,27 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Designation</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} type="text" matInput
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} type="text" matInput
                 name="etwhDesignation" placeholder="Designation">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Duration</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} type="text" matInput
-                name="etwhDuration" placeholder="Duration">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Start date</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} matInput
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} matInput
                 [matDatepicker]="prevstartDate">
               <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
               <mat-datepicker #prevstartDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>End date</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} name="etwhEndDate" matInput
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} name="etwhEndDate" matInput
                 [matDatepicker]="prevendDate">
               <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
               <mat-datepicker #prevendDate></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Duration</mat-label>
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} type="text" matInput
+                name="etwhDuration" placeholder="Duration">
             </mat-form-field>
           </div>
           <button mat-stroked-button type="submit" color="primary">Update</button>

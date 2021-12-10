@@ -29,6 +29,7 @@ export class LoginService {
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);
+          console.log(result)
           this.router.navigate(['/home']);
         } else {
           this.dialog.open(LoginValidationComponent);

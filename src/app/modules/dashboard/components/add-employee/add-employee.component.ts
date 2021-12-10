@@ -1,23 +1,12 @@
+import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormArray,
-  Validators,
-  FormGroup,
-  FormBuilder,
-  AbstractControl,
-  RequiredValidator,
-} from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
-import { TimeInterval } from 'rxjs/internal/operators/timeInterval';
+
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
@@ -34,12 +23,15 @@ export class AddEmployeeComponent implements OnInit {
   whStartDates: any;
   whEndDate: any;
   startDate: any;
-  day:any;
-  diff :any;
-  profDetailsJoiningDate:any;
-  noOfDays:any
-  monthValue:any;
-  newDate:any;
+  day: any;
+  diff: any;
+  profDetailsJoiningDate: any;
+  noOfDays: any;
+  monthValue: any;
+  newDate: any;
+  probationDate: any;
+  monthval: any = 3;
+  whDuration: any;
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
@@ -48,15 +40,15 @@ export class AddEmployeeComponent implements OnInit {
     public dialog: MatDialog
   ) {
     console.log(this.whStartDate);
-    console.log('hellozzzz',this.day)
+    console.log('hellozzzz', this.day);
   }
 
   ngOnInit() {
     this.createForm();
     // this.whStartDates = this.startDate.value;
     // console.log('date val:' , this.whStartDates)
-    console.log(this.whStartDate)
-    console.log('hellottt',this.day)
+    console.log(this.whStartDate);
+    console.log('hellottt', this.day);
   }
 
   ////////Academic Qualification/////////////
@@ -80,11 +72,11 @@ export class AddEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecFirstName: [''],
-      etecLastName: [''],
-      etecRelation: [''],
-      etecContactNumber: [''],
-      etecAddress: [''],
+      etecFirstName: ['', Validators.required],
+      etecLastName: ['', Validators.required],
+      etecRelation: ['', Validators.required],
+      etecContactNumber: ['', Validators.required],
+      etecAddress: ['', Validators.required],
     });
   }
 
@@ -148,20 +140,20 @@ export class AddEmployeeComponent implements OnInit {
   }
   createForm() {
     this.personalDetailsForm = this.fb.group({
-      etedFirstName: [''],
-      etedLastName: [''],
-      etedContactNumber: [''],
-      etedCnic: [''],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedAddress: [''],
-      etedDob: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
+      etedFirstName: ['', Validators.required],
+      etedLastName: ['', Validators.required],
+      etedContactNumber: ['', Validators.required],
+      etedCnic: ['', Validators.required],
+      etedEmailAddress: ['', [Validators.required, Validators.email]],
+      etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
+      etedAddress: ['', Validators.required],
+      etedDob: ['', Validators.required],
+      etedGender: ['', Validators.required],
+      etedMaritalStatus: ['', Validators.required],
+      etedStatus: ['', Validators.required],
+      etedBloodGroup: ['', Validators.required],
+      etedReligion: ['', Validators.required],
+      etedNationality: ['', Validators.required],
 
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([
@@ -177,16 +169,15 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
-    // if(this.personalDetailsForm.invalid) {
-    //   this.personalDetailsForm.setErrors({ ...this.personalDetailsForm.errors, 'yourErrorName': true });
-    //   return;
-    // }
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
+          console.log(result.message);
+        } else {
+          this.dialog.open(AddEmployeeFailureDialogComponent);
           console.log(result.message);
         }
       });
@@ -208,66 +199,81 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   compareDates(index: any) {
-    let control = this.personalDetailsForm.get('emsTblWorkingHistory')['controls'][index]['controls'];
+    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+      'controls'
+    ][index]['controls'];
     this.whStartDate = control['etwhStratDate'].value;
     this.whEndDate = control['etwhEndDate'].value;
     console.log(this.whStartDate);
     console.log(this.whEndDate);
-     let start:any =new Date( this.whStartDate) ;
-     let end:any = new Date( this.whEndDate)
-     this.diff = end-start;
-     let msInDay = 1000*3600*24
-     this.noOfDays= this.diff/msInDay;
-     console.log('new Date ', this.diff/msInDay)
-    // console.log(contorl['etwhStratDate'].value);
-    // let diff = this.whEndDate - this.whStartDate
-    // let msInDay = 1000*3600*24
-    // this.day = diff/msInDay;
-    // console.log('hello',diff/msInDay)
+    let start: any = new Date(this.whStartDate);
+    let end: any = new Date(this.whEndDate);
+    this.diff = end - start;
+    let msInDay = 1000 * 3600 * 24;
+    this.noOfDays = this.diff / msInDay;
+    console.log('new Date ', this.diff / msInDay);
+
+    if (this.whStartDate != null && this.whEndDate != null) {
+      this.getDuration(index);
+    }
   }
 
-  getDuration( ){
-  //  let months: number=0;
-  //  let year:number =0;
-  //  let days:number=0;
-  //  let weeks:number=0;
-  //   let msInDay = 1000*3600*24
-  //   this.day = this.diff/msInDay;
-  //   console.log('hello',this.diff/msInDay)
-  //   while(this.day){
-  //     if(this.day>= 365){
-  //        year++;
-  //        this.day -= 365;
-  //     }else if(this.day >= 30 || this.day >= 31 || this.day >= 29){
-  //        months++;
-  //        this.day -= 30;
-  //     }else if(this.day >= 7){
-  //        weeks++;
-  //        this.day -= 7;
-  //     }else{
-  //        days++;
-  //        this.day--;
-  //     }
-  //  };
-  //  console.log('ffff',days ,'days',year,'year',months,'months',weeks,'weeks')
-  var years = Math.floor( this.noOfDays / 365);
-    var months = Math.floor( this.noOfDays % 365 / 30);
-    var days = Math.floor( this.noOfDays % 365 % 30);
-    console.log(years,':', months , ':', days)
-    return [years, months, days].join(':');
+  getDuration(index: any) {
+    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+      'controls'
+    ][index]['controls'];
+    var years = Math.floor(this.noOfDays / 365);
+    var months = Math.floor((this.noOfDays % 365) / 30);
+    var days = Math.floor((this.noOfDays % 365) % 30);
 
+    if (years == 0 && months == 0) {
+      this.whDuration = String([days, ' days '].join(''));
+    } else if (months == 0) {
+      this.whDuration = String([years, ` years `, days, ' days '].join(''));
+    } else if (years == 0) {
+      this.whDuration = String([months, ' months ', days, ' days '].join(''));
+    } else {
+      this.whDuration = String(
+        [years, ` years `, months, ' months ', days, ' days '].join('')
+      );
+    }
+    control['etwhDuration'].setValue(this.whDuration);
+    return console.log(this.whDuration);
   }
 
-  getJoiningDate(index: any){
-   let control = this.personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls'][index]['controls'];
-   let pdjoinDate= control['etepdJoiningDate'].value;
-   let d = new Date(pdjoinDate)
-  let monthval = (<HTMLInputElement>document.getElementById("monthVal")).value
-  console.log(monthval)
-  let probationDate = d.setMonth(d.getMonth()+parseInt(monthval));
+  getJoiningDate(index: any) {
+    let control = this.personalDetailsForm.get(
+      'emsTblEmployeeProfessionalDetails'
+    )['controls'][index]['controls'];
+    let pdjoinDate = control['etepdJoiningDate'].value;
+    let d = new Date(pdjoinDate);
+    this.monthval = (<HTMLInputElement>(
+      document.getElementById('monthVal')
+    )).value;
+    let probationDate = d.setMonth(d.getMonth() + parseInt(this.monthval));
     this.newDate = new Date(probationDate);
+    this.probationDate = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate);
+    control['etepdProbation'].setValue(this.probationDate);
+  }
 
-   console.log('new Date ', this.newDate)
-  console.log("ederef",monthval);
+  checkEmergencyInput(emergencyFirstName: any) {
+    let btn = <HTMLInputElement>document.getElementById('emergencyBtn');
+    emergencyFirstName = <HTMLInputElement>(
+      document.getElementById('emergencyFirstName')
+    );
+    if (emergencyFirstName.value.length == 0) {
+      btn.disabled = false;
+    } else {
+      btn.disabled = true;
+    }
+  }
+
+  isAddEmergencyDisabled() {
+      let result = this.personalDetailsForm.controls['emsTblEmergencyContact'][
+        'controls'
+      ][0].valid
+      return !result
   }
 }

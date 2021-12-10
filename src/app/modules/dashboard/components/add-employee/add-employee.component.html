@@ -1,9 +1,9 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class="mt-4"> Add Employee</h3>
-    <mat-vertical-stepper [selectedIndex]="1">
+    <mat-vertical-stepper>
       <form [formGroup]="personalDetailsForm">
-        <mat-step label="Personal Details" [stepControl]="personalDetailsForm">
+        <mat-step label="Personal Details" [stepControl]="personalDetailsForm" [stepControl]="personalDetailsForm">
           <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>First Name</mat-label>
@@ -36,19 +36,19 @@
               <mat-label> Personal Email Address</mat-label>
               <input type="email" matInput formControlName="etedEmailAddress" name="etedEmailAddress"
                 placeholder="Personal Email Address">
-              <!-- <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
+              <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
               <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['email'] ">
-                Enter a valid email</mat-error> -->
+                Enter a valid email</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-6 input">
               <mat-label>Official Email Address</mat-label>
               <input type="email" matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
                 placeholder="Official Email Address">
-              <!-- <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
+              <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
               <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['email'] ">
-                Enter a valid email</mat-error> -->
+                Enter a valid email</mat-error>
             </mat-form-field>
             <mat-form-field class=" col-lg-6 col-md-6 input">
               <mat-label>Address</mat-label>
@@ -58,7 +58,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-6 col-md-a6 input">
               <mat-label>Date of Birth</mat-label>
-              <input placeholder="Date of Birth" formControlName="etedDob" name="etedDob" matInput
+              <input readonly placeholder="Date of Birth" formControlName="etedDob" name="etedDob" matInput
                 [matDatepicker]="dob">
               <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
               <mat-datepicker #dob></mat-datepicker>
@@ -330,20 +330,22 @@
               <div class="form-group" [formGroupName]=i>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>First Name</mat-label>
-                  <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
+                  <input id="emergencyFirstName" formControlName="etecFirstName" name="etecFirstName" matInput
+                    placeholder="First Name">
                   <mat-error *ngIf="item.controls['etecFirstName'].errors?.['required']">
                     First Name is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class=" col-lg-6 col-md-6 input">
                   <mat-label>Last Name</mat-label>
-                  <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
+                  <input id="emergencyLastName" formControlName="etecLastName" name="etecLastName" matInput
+                    placeholder="Last Name">
                   <mat-error *ngIf="item.controls['etecLastName'].errors?.['required']">
                     Last Name is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class=" col-lg-6 col-md-6 input">
                   <mat-label>Relation with Employee</mat-label>
-                  <input formControlName="etecRelation" name="etecRelation" matInput
-                    placeholder="Relation with Employee">
+                  <input id="emergencyRelation" (keyup)="checkEmergencyInput(this)" formControlName="etecRelation"
+                    name="etecRelation" matInput placeholder="Relation with Employee">
                   <mat-select formControlName="etecRelation" name="etecRelation" matInput>
                     <mat-option [value]="">-- Select one --</mat-option>
                     <mat-option value="father">Father</mat-option>
@@ -354,20 +356,21 @@
                   </mat-select>
                   <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
                     Employment Status is <strong>required</strong></mat-error>
-
                   <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
                     Relation is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Phone Number</mat-label>
-                  <input (keypress)="onlyNumbersAllowed($event)" formControlName="etecContactNumber"
-                    name="etecContactNumber" matInput placeholder="Phone Number" maxlength="11">
+                  <input id="emergencyContact" (keypress)="onlyNumbersAllowed($event)"
+                    formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number"
+                    maxlength="11">
                   <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
                     Phone Number is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Address</mat-label>
-                  <textarea formControlName="etecAddress" name="etecAddress" matInput placeholder="Address"></textarea>
+                  <textarea id="emergencyAddress" formControlName="etecAddress" name="etecAddress" matInput
+                    placeholder="Address"></textarea>
                   <mat-error *ngIf="item.controls['etecAddress'].errors?.['required']">
                     Address is <strong>required</strong></mat-error>
                 </mat-form-field>
@@ -375,7 +378,8 @@
             </div>
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" (click)="addEmergencyContact()">
+                <button id="emergencyBtn" type="button" class="btn btn-primary" [disabled]="isAddEmergencyDisabled()"
+                  (click)="addEmergencyContact()">
                   Add Other Emergency Contact
                 </button>
               </div>
@@ -384,7 +388,6 @@
               </div>
             </div>
           </div>
-
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
@@ -397,7 +400,6 @@
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation"> -->
                     <mat-label>Designation</mat-label>
-
                     <mat-select formControlName="etepdDesignation" name="etepdDesignation">
                       <mat-option [value]=""> ---Select One---</mat-option>
                       <mat-option value="HR manager">HR (Manager)</mat-option>
@@ -413,7 +415,6 @@
                       <mat-option value="Office Boy">Office Boy</mat-option>
                       <mat-option value="Guard">Guard</mat-option>
                     </mat-select>
-
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Salary</mat-label>
@@ -425,7 +426,7 @@
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Joining Date</mat-label>
                     <input readonly matInput formControlName="etepdJoiningDate" name="etepdJoiningDate"
-                      [matDatepicker]="picker">
+                      [matDatepicker]="picker" (dateChange)="getJoiningDate(i)">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                     <mat-error *ngIf="item.controls['etepdJoiningDate'].errors?.['required']">
@@ -433,12 +434,11 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Probation Period</mat-label>
-                    <input (click)="getJoiningDate(i)" value="03" type="number" id="monthVal" matInput #postalCode
-                      maxlength="5">
+                    <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Probation</mat-label>
-                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=newDate
+                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
                       formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
@@ -446,13 +446,13 @@
                 </div>
               </div>
               <div class="row mt-3">
-                <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <!-- <div class="col-md-offset-2 col-lg-5 col-md-4">
                   <button type="button" class="btn btn-primary" (click)="addProfessionalDetails()">
                     Add Other Professional Details
                   </button>
-                </div>
-                <div class=" col-lg-5 col-md-4">
-                  <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                </div> -->
+                <div class=" col-lg-5 col-md-4" style="align-items: flex-end;">
+                  <button class="  stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
                   <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                     matStepperPrevious>Back</button>
 
@@ -508,7 +508,7 @@
               <div class="form-group">
                 <div [formGroupName]="i">
                   <mat-form-field class="col-lg-6 col-md-6 input">
-                    <mat-label>Degree Title</mat-label>
+                    <mat-label>Certification title</mat-label>
                     <input matInput placeholder="Certification" formControlName="etpqCertification"
                       name="etpqCertification">
                     <mat-error *ngIf="item.controls['etpqCertification'].errors?.['required']">
@@ -539,7 +539,6 @@
                   </mat-form-field>
                 </div>
               </div>
-
             </div>
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
@@ -554,7 +553,6 @@
               </div>
             </div>
           </div>
-
         </mat-step>
         <mat-step label="Working History">
           <div class="form-group">
@@ -580,10 +578,8 @@
                   <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
                   <mat-datepicker #prevstartDate></mat-datepicker>
                   <mat-error *ngIf="item.controls['etwhStratDate'].errors?.['required']">
-                    Start Date is <strong>requiredsd</strong></mat-error>
-
+                    Start Date is <strong>required</strong></mat-error>
                 </mat-form-field>
-                <h2>{{whStartDate | date}}</h2>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>End date</mat-label>
                   <input formControlName="etwhEndDate" (dateChange)="compareDates(i)" name="etwhEndDate" matInput
@@ -595,13 +591,12 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Duration</mat-label>
-                  <input (click)="getDuration()" ng-click="dayDiff(firstDate,secondDate)" matInput
+                  <input [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)" matInput
                     formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
                   <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
                     Duration is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
-
             </div>
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
