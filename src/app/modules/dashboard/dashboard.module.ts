@@ -32,6 +32,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginInterceptor } from 'src/app/interceptor/login.interceptor';
+import { AddEmployeeFailureDialogComponent } from './components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { LoginInterceptor } from 'src/app/interceptor/login.interceptor';
     EmployeeComponent,
     DeleteEmployeeComponent,
     SuccessDialogComponent,
-    ViewEmployeeComponent
+    ViewEmployeeComponent,
+    AddEmployeeFailureDialogComponent
   ],
   imports: [
     CommonModule,

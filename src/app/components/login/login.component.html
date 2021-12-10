@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="col-lg-5">
-      <form [formGroup]="loginservice.loginForm" class="login-form" novalidate (ngSubmit)="loginservice.loginUser()">
+      <form [formGroup]="loginservice.loginForm" class="login-form" novalidate>
         <h1 class="login-h" color="primary">HRMS</h1>
         <mat-form-field class="login-full-width">
           <mat-label>Email Address</mat-label>
@@ -33,10 +33,10 @@
           <div class="col-lg-6">
             <mat-checkbox class="remember-me" (click)="rememberMe()" color="primary">Remember me</mat-checkbox>
           </div>
-          
+
         </div>
         <div class="row mx-auto" style="justify-content: center;">
-          <button mat-raised-button type="submit" class="login-btn" [disabled]="loginservice.loginForm.invalid" color="primary">Login</button>
+          <button mat-raised-button type="reset" (click)="loginservice.loginUser()" class="login-btn" [disabled]="loginservice.loginForm.invalid" color="primary">Login</button>
         </div>
       </form>
     </div>
