@@ -39,10 +39,12 @@
                           maxlength="20">
                       </mat-form-field>
                       <mat-form-field class="col-lg-6 col-md-6 input">
-                          <mat-label>Date of Purchasing</mat-label>
-                          <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                            maxlength="20">
-                        </mat-form-field>
+                        <mat-label>Date of Purchasing</mat-label>
+                         <input readonly formControlName="etedFirstName" name="etedFirstName" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                          maxlength="20"> 
+                        <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                        <mat-datepicker #dob></mat-datepicker>
+                      </mat-form-field>
                         <mat-form-field class="col-lg-6 col-md-6 input">
                             <mat-label>Assigned To</mat-label>
                             <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
