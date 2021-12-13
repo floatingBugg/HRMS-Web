@@ -344,8 +344,6 @@
                 </mat-form-field>
                 <mat-form-field class=" col-lg-5 col-md-5 input">
                   <mat-label>Relation with Employee</mat-label>
-                  <input id="emergencyRelation" (keyup)="checkEmergencyInput(this)" formControlName="etecRelation"
-                    name="etecRelation" matInput placeholder="Relation with Employee">
                   <mat-select formControlName="etecRelation" name="etecRelation" matInput>
                     <mat-option [value]="">-- Select one --</mat-option>
                     <mat-option value="father">Father</mat-option>
@@ -354,10 +352,8 @@
                     <mat-option value="brother">Brother</mat-option>
                     <mat-option value="guardian">Guardian</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
-                    Employment Status is <strong>required</strong></mat-error>
                   <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
-                    Relation is <strong>required</strong></mat-error>
+                    Relation with Employee is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Phone Number</mat-label>

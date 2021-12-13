@@ -1,5 +1,5 @@
 import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
@@ -12,6 +12,8 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss'],
 })
+
+
 export class AddEmployeeComponent implements OnInit {
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
@@ -32,7 +34,8 @@ export class AddEmployeeComponent implements OnInit {
   probationDate: any;
   monthval: any = 3;
   whDuration: any;
-  userID = localStorage.getItem('loggedIn_UserId');
+  errorMsg:any;
+  userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   constructor(
     public employeeData: EmployeeDataService,
@@ -40,17 +43,9 @@ export class AddEmployeeComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog
-  ) {
-    console.log(this.whStartDate);
-    console.log('hellozzzz', this.day);
-  }
-
+  ) {}
   ngOnInit() {
     this.createForm();
-    // this.whStartDates = this.startDate.value;
-    // console.log('date val:' , this.whStartDates)
-    console.log(this.whStartDate);
-    console.log('hellottt', this.day);
   }
 
   ////////Academic Qualification/////////////
@@ -58,8 +53,8 @@ export class AddEmployeeComponent implements OnInit {
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
       etaqQualification: [''],
-      etaqPassingYear: [''],
-      etaqCgpa: [''],
+      etaqPassingYear: [0],
+      etaqCgpa: [0],
       etaqInstituteName: [''],
     });
   }
@@ -156,7 +151,8 @@ export class AddEmployeeComponent implements OnInit {
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-
+      etedCreatedBy:[this.userId],
+      etedCreatedByName:[this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
