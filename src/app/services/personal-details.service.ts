@@ -11,7 +11,7 @@ export class PersonalDetailsService {
 
   personalDetails(data: any): Observable<any> {
     return this.http.post(
-      'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/AddEmployee',
       data
     );
   }
@@ -22,7 +22,7 @@ export class PersonalDetailsService {
   }
   deleteEmployeeData(id: any) {
     return this.http.delete(
-      `http://hamzaashiq467-001-site1.itempurl.com/Employee/Remove?id=${id}`
+      `http://hamzaashiq467-001-site1.itempurl.com/Employee/DeleteEmployee?id=${id}`
     );
   }
   viewEmployeeData(id: any): Observable<any> {
