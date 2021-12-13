@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class PersonalDetailsService {
   constructor(private http: HttpClient) {}
-  userID = localStorage.getItem('loggedIn_UserId');
-  userName = localStorage.getItem('loggedIn_UserName');
+  _userId = localStorage.getItem('loggedIn_UserId');
+  _userName = localStorage.getItem('loggedIn_UserName');
 
   personalDetails(data: any): Observable<any> {
-    let httpHeaders = new HttpHeaders({
-      'content-type': 'application/json',
-    });
-
-    httpHeaders = httpHeaders.set('userID', 'this.userID');
-    httpHeaders = httpHeaders.set('userName', 'this.userName');
+    debugger
+    let params = new HttpParams({
+      fromObject : {
+        userId : 'this._userId',
+        userName : 'this._userName'
+      }
+    })
 
     return this.http.post(
-      'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
-      [{ data: data }, { userName: this.userName }, { userID: this.userID }],
-      { headers: httpHeaders }
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add', data,{ params: params}
     );
   }
   getEmployeeData() {

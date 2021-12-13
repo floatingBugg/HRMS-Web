@@ -171,10 +171,12 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
+    debugger;
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
+        debugger;
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
           console.log(result.message);
@@ -273,9 +275,9 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   isAddEmergencyDisabled() {
-      let result = this.personalDetailsForm.controls['emsTblEmergencyContact'][
-        'controls'
-      ][0].valid
-      return !result
+    let result =
+      this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][0]
+        .valid;
+    return !result;
   }
 }
