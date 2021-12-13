@@ -1,5 +1,5 @@
 import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
@@ -55,7 +55,7 @@ export class AddEmployeeComponent implements OnInit {
       etaqQualification: [''],
       etaqPassingYear: [0],
       etaqCgpa: [0],
-      etaqInstituteName: [''],
+      etaqInstituteName: ['']
     });
   }
 
@@ -167,12 +167,10 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
-    debugger;
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
-        debugger;
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
           console.log(result.message);

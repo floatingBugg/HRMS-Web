@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-employee-failure-dialog',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-employee-failure-dialog.component.scss']
 })
 export class AddEmployeeFailureDialogComponent implements OnInit {
-
+  errorRef:ElementRef | undefined
   constructor() { }
 
   ngOnInit(): void {

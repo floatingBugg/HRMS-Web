@@ -10,12 +10,6 @@ export class PersonalDetailsService {
   _userName = localStorage.getItem('loggedIn_UserName');
 
   personalDetails(data: any): Observable<any> {
-    debugger;
-    let params = new HttpParams({
-      fromString: ` userId =${this._userId}
-        userName= ${this._userName}`,
-    });
-
     return this.http.post(
       'http://hamzaashiq467-001-site1.itempurl.com/Employee/Add',
       data
