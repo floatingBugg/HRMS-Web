@@ -15,8 +15,11 @@
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Type</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                  maxlength="20">
+                <mat-select formControlName="etedGender" name="etedGender">
+                  <mat-option [value]=""> ---Select One---</mat-option>
+                  <mat-option value="female">Flash</mat-option>
+                  <mat-option value="male">Hard Drive</mat-option>
+                </mat-select>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Capacity</mat-label>
@@ -33,11 +36,13 @@
                       <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                         maxlength="20">
                     </mat-form-field>
-                      <mat-form-field class="col-lg-6 col-md-6 input">
-                          <mat-label>Date of Purchasing</mat-label>
-                          <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                            maxlength="20">
-                        </mat-form-field>
+                    <mat-form-field class="col-lg-6 col-md-6 input">
+                      <mat-label>Date of Purchasing</mat-label>
+                       <input readonly formControlName="etedFirstName" name="etedFirstName" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                        maxlength="20"> 
+                      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                      <mat-datepicker #dob></mat-datepicker>
+                    </mat-form-field>
                         <mat-form-field class="col-lg-6 col-md-6 input">
                             <mat-label>Assigned To</mat-label>
                             <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""

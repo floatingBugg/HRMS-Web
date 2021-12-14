@@ -22,6 +22,9 @@ import { PowerCablesComponent } from './components/power-cables/power-cables.com
 import { StationeryComponent } from './components/stationery/stationery.component';
 import { FansComponent } from './components/fans/fans.component';
 import { FurnitureComponent } from './components/furniture/furniture.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
 
 
 
@@ -51,7 +54,10 @@ import { FurnitureComponent } from './components/furniture/furniture.component';
     MatToolbarModule,
     MatButtonModule,
     MatInputModule,
+    MatDatepickerModule,
     MatRippleModule,
+    MatNativeDateModule,
+    MatSelectModule,
     InventoryRoutingModule,
     ReactiveFormsModule,
     FormsModule
