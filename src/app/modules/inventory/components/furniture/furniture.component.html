@@ -3,11 +3,7 @@
       <h3 class="mt-4"> Furniture </h3>
       <form [formGroup]="furnitureForm">
         <div class="container screenMaxWidth">
-            <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Asset ID</mat-label>
-              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                maxlength="20">
-            </mat-form-field>
+          
             <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Asset Name</mat-label>
                 <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
@@ -17,9 +13,10 @@
                 <mat-label>Type</mat-label>
                 <mat-select formControlName="etedGender" name="etedGender">
                   <mat-option [value]=""> ---Select One---</mat-option>
-                  <mat-option value="female">Table</mat-option>
-                  <mat-option value="male">Chair</mat-option>
-                  <mat-option value="male">Draws</mat-option>
+                  <mat-option value="female">Tables</mat-option>
+                  <mat-option value="male">Chairs</mat-option>
+                  <mat-option value="male">Drawers</mat-option>
+                  <mat-option value="male">Sofas</mat-option>
                 </mat-select>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">

@@ -4,11 +4,6 @@
       <form [formGroup]="acForm">
         <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
-              <mat-label>Asset ID</mat-label>
-              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                maxlength="20">
-            </mat-form-field>
-            <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Asset Name</mat-label>
                 <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
                   maxlength="20">
@@ -20,8 +15,12 @@
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Size</mat-label>
-                  <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                    maxlength="20">
+                  <mat-select formControlName="etedGender" name="etedGender">
+                    <mat-option [value]=""> ---Select One---</mat-option>
+                    <mat-option value="female">1 ton</mat-option>
+                    <mat-option value="male">1.5 ton</mat-option>
+                    <mat-option value="male">2 ton</mat-option>
+                  </mat-select>
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Quantity</mat-label>
