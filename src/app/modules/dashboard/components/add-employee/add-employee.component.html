@@ -21,24 +21,24 @@
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Phone Number</mat-label>
               <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedContactNumber"
-                name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
+                name="etedContactNumber" matInput placeholder="03_ _ _ _ _ _ _ _ _" maxlength="11">
               <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
                 Phone Number is <strong>required</strong></mat-error>
-                <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['minlength'] ">
-                  Enter a valid phone number</mat-error>
+              <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['minlength'] ">
+                Enter a valid phone number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>CNIC</mat-label>
-              <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput
-                placeholder="CNIC" >
+              <input (keypress)="onlyNumbersAllowed($event)" maxlength="13" formControlName="etedCnic" name="etedCnic"
+                matInput placeholder="_ _ _ _ _ _ _ _ _ _ _ _ _" autocomplete="off">
               <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['required'] ">
                 CNIC is <strong>required</strong></mat-error>
-                <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['minlength'] ">
-                  Enter a valid CNIC</mat-error>
+              <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['minlength'] ">
+                Enter a valid CNIC</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label> Personal Email Address</mat-label>
-              <input type="email" matInput formControlName="etedEmailAddress" name="etedEmailAddress"
+              <input autocomplete="off" type="email" matInput formControlName="etedEmailAddress" name="etedEmailAddress"
                 placeholder="Personal Email Address">
               <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
@@ -47,7 +47,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Official Email Address</mat-label>
-              <input type="email" matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
+              <input autocomplete="off" type="email" matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
                 placeholder="Official Email Address">
               <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
@@ -56,7 +56,7 @@
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Address</mat-label>
-              <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
+              <textarea autocomplete="off" formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
               <mat-error *ngIf="personalDetailsForm.controls['etedAddress'].errors?.['required'] ">
                 Address is <strong>required</strong></mat-error>
             </mat-form-field>
@@ -362,12 +362,12 @@
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Phone Number</mat-label>
                   <input id="emergencyContact" (keypress)="onlyNumbersAllowed($event)"
-                    formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="Phone Number"
+                    formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="03_ _ _ _ _ _ _ _ _"
                     maxlength="11">
                   <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
                     Phone Number is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
-                      Enter a valid Phone number</mat-error>
+                  <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
+                    Enter a valid Phone number</mat-error>
 
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
@@ -407,8 +407,8 @@
                       <mat-option [value]=""> ---Select One---</mat-option>
                       <mat-option value="HR manager">HR (Manager)</mat-option>
                       <mat-option value="HR officer">HR (Officer)</mat-option>
-                      <mat-option value="SNR SoftwareEngineer">SNR Software Engineer</mat-option>
-                      <mat-option value="JNR SoftwareEngineer">JNR Software Engineer</mat-option>
+                      <mat-option value="SNR SoftwareEngineer">Sr. Software Engineer</mat-option>
+                      <mat-option value="JNR SoftwareEngineer">Jr. Software Engineer</mat-option>
                       <mat-option value="SQA Engineer">SQA Engineer</mat-option>
                       <mat-option value="Project Manager">Project Manager</mat-option>
                       <mat-option value="System Administrator">System Administrator</mat-option>
@@ -471,18 +471,27 @@
               <div [formGroupName]="i">
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Degree Title</mat-label>
-                  <input matInput placeholder="Degree Title" formControlName="etaqQualification">
+                  <mat-select formControlName="etaqQualification" name="etaqQualification">
+                    <mat-option [value]=""> ---Select One---</mat-option>
+                    <mat-option value="Matriculation/O-Levels">Matriculation/O-Levels</mat-option>
+                    <mat-option value="Intermediate/A-Levels">Intermediate/A-Levels</mat-option>
+                    <mat-option value="Bachelors">Bachelors</mat-option>
+                    <mat-option value="Masters">Masters/MSc</mat-option>
+                    <mat-option value="MS/Mphil">MS/Mphil</mat-option>
+                    <mat-option value="Doctorate">Doctorate/PHD</mat-option>
+                  </mat-select>
                   <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
                     Degree Title is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Passing Year</mat-label>
-                  <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="Passing Year"
-                    formControlName="etaqPassingYear">
+                  <input type="text" pattern="\d*" maxlength="4" snr (keypress)="onlyNumbersAllowed($event)" matInput
+                    placeholder="Passing Year" formControlName="etaqPassingYear">
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>CGPA</mat-label>
-                  <input (keypress)="onlyNumbersAllowed($event)" matInput placeholder="CGPA" formControlName="etaqCgpa">
+                  <input type="number" required min="0" value="0" step=0.00392156863 matInput placeholder="CGPA"
+                    formControlName="etaqCgpa">
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Institute Name</mat-label>

@@ -4,6 +4,7 @@ import { LoginServiceService } from 'src/app/services/login-service.service';
 import { Router } from '@angular/router';
 import { LoginValidationComponent } from '../components/login/login-validation/login-validation/login-validation.component';
 import { MatDialog } from '@angular/material/dialog';
+import { LocalStorage } from 'src/assets/localStorage';
 @Injectable({
   providedIn: 'root',
 })
@@ -13,14 +14,17 @@ export class LoginService {
     password: new FormControl('', [
       Validators.required
     ]),
+
   });
 
   constructor(
     private loginService: LoginServiceService,
     private router: Router,
     public dialog: MatDialog
-  ) {}
-
+  ) {
+    // this.getForm()
+  }
+rememberlogin:boolean=false;
   loginUser() {
     if (this.loginForm.valid) {
       let data = this.loginForm.value;
@@ -30,6 +34,7 @@ export class LoginService {
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);
           console.log(result)
+          // this.remember();
           this.router.navigate(['/home']);
         } else {
           this.dialog.open(LoginValidationComponent);
@@ -38,11 +43,22 @@ export class LoginService {
     }
   }
 
+  // remember(){
+  //   debugger
+  //   this.rememberlogin ? localStorage.setItem(LocalStorage.LoginForm, JSON.stringify(this.loginForm.value)):localStorage.removeItem(LocalStorage.LoginForm)
+  // }
+// getForm(){
+//   debugger
+//   var existingValue=localStorage.getItem(LocalStorage.LoginForm)
+//   if(existingValue){
+//     this.rememberlogin=true;
+//     let loginForm:any=JSON.stringify(localStorage.getItem(LocalStorage.LoginForm))
+//     this.loginForm.patchValue(loginForm)
+//   }
+// }
   logoutUser()
   {
     localStorage.removeItem('token');
-    localStorage.removeItem('loggedIn_UserId');
-    localStorage.removeItem('loggedIn_UserName');
     this.router.navigate(['/login']);
   }
 

@@ -6,37 +6,38 @@
       </div>
     </div>
     <div class="col-lg-5">
-      <form [formGroup]="loginservice.loginForm" class="login-form" novalidate>
+      <form [formGroup]="loginForm" class="login-form" novalidate>
         <h1 class="login-h" color="primary">HRMS</h1>
         <mat-form-field class="login-full-width">
           <mat-label>Email Address</mat-label>
-          <input formControlName='email' id="email" name="email" placeholder="Email Address" matInput>
-            <mat-error *ngIf="loginservice.loginForm.controls['email'].errors?.['required'] ">
-              Email is <strong>required</strong></mat-error>
-              <mat-error *ngIf="loginservice.loginForm.controls['email'].errors?.['email'] ">
-                Enter a valid email</mat-error>
+          <input #email formControlName='email' id="email" name="email" placeholder="Email Address" matInput>
+          <mat-error *ngIf="loginForm.controls['email'].errors?.['required'] ">
+            Email is <strong>required</strong></mat-error>
+          <mat-error *ngIf="loginForm.controls['email'].errors?.['email'] ">
+            Enter a valid email</mat-error>
         </mat-form-field>
         <mat-form-field class="login-full-width">
           <mat-label>Enter your password</mat-label>
-          <input matInput type="password" formControlName='password' name="password" [type]="hide ? 'password' : 'text'"
-            placeholder="Password">
+          <input #password matInput id="password" type="password" formControlName='password' name="password"
+            [type]="hide ? 'password' : 'text'" placeholder="Password">
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <mat-error *ngIf="loginservice.loginForm.controls['password'].errors?.['required'] ">
-          Password is <strong>required</strong></mat-error>
-           <mat-error *ngIf="loginservice.loginForm.controls['password'].errors?.['minlength'] ">
+          <mat-error *ngIf="loginForm.controls['password'].errors?.['required'] ">
+            Password is <strong>required</strong></mat-error>
+          <mat-error *ngIf="loginForm.controls['password'].errors?.['minlength'] ">
             Password should be 8 characters long</mat-error>
         </mat-form-field>
         <div class="row ">
           <div class="col-lg-6">
-            <mat-checkbox class="remember-me" (click)="rememberMe()" color="primary">Remember me</mat-checkbox>
+            <mat-checkbox class="remember-me" (click)="remember()" color="primary">Remember me</mat-checkbox>
           </div>
 
         </div>
         <div class="row mx-auto" style="justify-content: center;">
-          <button mat-raised-button type="reset" (click)="loginservice.loginUser()" class="login-btn" [disabled]="loginservice.loginForm.invalid" color="primary">Login</button>
+          <button mat-raised-button type="reset" (click)="loginUser()" class="login-btn" [disabled]="loginForm.invalid"
+            color="primary">Login</button>
         </div>
       </form>
     </div>
@@ -45,7 +46,5 @@
 </div>
 <ng-container *ngIf="loading$ |async">
   <div class="overlay"></div>
-  <mat-progress-spinner [mode]="'indeterminate'"  ></mat-progress-spinner>
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
 </ng-container>
-
-

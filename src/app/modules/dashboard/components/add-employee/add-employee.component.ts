@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatDialog } from '@angular/material/dialog';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 @Component({
@@ -53,8 +54,8 @@ export class AddEmployeeComponent implements OnInit {
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
       etaqQualification: [''],
-      etaqPassingYear: [0],
-      etaqCgpa: [0],
+      etaqPassingYear: [ ,Validators.maxLength(4)],
+      etaqCgpa: [],
       etaqInstituteName: ['']
     });
   }
