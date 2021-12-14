@@ -72,7 +72,7 @@ export class AddEmployeeComponent implements OnInit {
       etecFirstName: ['', Validators.required],
       etecLastName: ['', Validators.required],
       etecRelation: ['', Validators.required],
-      etecContactNumber: ['', Validators.required],
+      etecContactNumber: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
       etecAddress: ['', Validators.required],
     });
   }
@@ -139,8 +139,8 @@ export class AddEmployeeComponent implements OnInit {
     this.personalDetailsForm = this.fb.group({
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
-      etedContactNumber: ['', Validators.required],
-      etedCnic: ['', Validators.required],
+      etedContactNumber: ['',[Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      etedCnic: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
       etedEmailAddress: ['', [Validators.required, Validators.email]],
       etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
       etedAddress: ['', Validators.required],

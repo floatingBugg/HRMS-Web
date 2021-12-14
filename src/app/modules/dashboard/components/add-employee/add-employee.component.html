@@ -3,7 +3,7 @@
     <h3 class="mt-4"> Add Employee</h3>
     <mat-vertical-stepper>
       <form [formGroup]="personalDetailsForm">
-        <mat-step label="Personal Details" [stepControl]="personalDetailsForm" [stepControl]="personalDetailsForm">
+        <mat-step label="Personal Details" [stepControl]="personalDetailsForm">
           <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>First Name</mat-label>
@@ -24,13 +24,17 @@
                 name="etedContactNumber" matInput placeholder="Phone Number" maxlength="11">
               <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
                 Phone Number is <strong>required</strong></mat-error>
+                <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['minlength'] ">
+                  Enter a valid phone number</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>CNIC</mat-label>
               <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedCnic" name="etedCnic" matInput
-                placeholder="CNIC" maxlength="13">
+                placeholder="CNIC" >
               <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['required'] ">
                 CNIC is <strong>required</strong></mat-error>
+                <mat-error *ngIf="personalDetailsForm.controls['etedCnic'].errors?.['minlength'] ">
+                  Enter a valid CNIC</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label> Personal Email Address</mat-label>
@@ -362,6 +366,9 @@
                     maxlength="11">
                   <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
                     Phone Number is <strong>required</strong></mat-error>
+                    <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
+                      Enter a valid Phone number</mat-error>
+
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Address</mat-label>

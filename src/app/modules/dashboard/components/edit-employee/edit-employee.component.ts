@@ -1,18 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute } from '@angular/router';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { AddEmployeeFailureDialogComponent } from '../add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { SuccessDialogComponent } from '../add-employee/success-dialog/success-dialog.component';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.scss']
+  styleUrls: ['./edit-employee.component.scss'],
 })
 export class EditEmployeeComponent implements OnInit {
-
-  constructor(public empDataService: PersonalDetailsService, private personaldetails: PersonalDetailsService, public route: ActivatedRoute, private fb:FormBuilder, public dialog: MatDialog) { }
+  constructor(
+    public empDataService: PersonalDetailsService,
+    private personaldetails: PersonalDetailsService,
+    public route: ActivatedRoute,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {}
   id: any;
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
@@ -20,7 +25,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
-  public editDataArray: any;
+  public editDataArray: any = FormArray;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   ngOnInit() {
@@ -29,10 +34,11 @@ export class EditEmployeeComponent implements OnInit {
       if (data.success) {
         console.log(data.data[0]);
         this.editDataArray = data.data[0];
+        // debugger;
+      
       }
-
     });
-    this.updateForm()
+    this.updateForm();
   }
 
   ////////Academic Qualification/////////////
@@ -42,7 +48,7 @@ export class EditEmployeeComponent implements OnInit {
       etaqQualification: [''],
       etaqPassingYear: [0],
       etaqCgpa: [0],
-      etaqInstituteName: ['']
+      etaqInstituteName: [''],
     });
   }
 
@@ -56,10 +62,10 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecFirstName: ['' ],
-      etecLastName: ['' ],
-      etecRelation: ['' ],
-      etecContactNumber: ['' ],
+      etecFirstName: [''],
+      etecLastName: [''],
+      etecRelation: [''],
+      etecContactNumber: [''],
       etecAddress: [''],
     });
   }
@@ -125,21 +131,21 @@ export class EditEmployeeComponent implements OnInit {
   updateForm() {
     this.personalDetailsForm = this.fb.group({
       etedFirstName: [''],
-      etedLastName: ['' ],
-      etedContactNumber: ['' ],
-      etedCnic: ['' ],
+      etedLastName: [''],
+      etedContactNumber: [''],
+      etedCnic: [''],
       etedEmailAddress: [''],
       etedOfficialEmailAddress: [''],
-      etedAddress: ['' ],
+      etedAddress: [''],
       etedDob: [''],
-      etedGender: ['' ],
-      etedMaritalStatus: ['' ],
-      etedStatus: ['' ],
+      etedGender: [''],
+      etedMaritalStatus: [''],
+      etedStatus: [''],
       etedBloodGroup: [''],
-      etedReligion: ['', ],
-      etedNationality: ['', ],
-      etedModifiedBy:[this.userId],
-      etedModifiedByName:[this.userName],
+      etedReligion: [''],
+      etedNationality: [''],
+      etedModifiedBy: [this.userId],
+      etedModifiedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
@@ -153,7 +159,7 @@ export class EditEmployeeComponent implements OnInit {
       emsTblWorkingHistory: this.fb.array([this.addemsTblWorkingHistory()]),
     });
   }
-   updateData(){
+  updateData() {
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
@@ -166,5 +172,5 @@ export class EditEmployeeComponent implements OnInit {
           console.log(result.message);
         }
       });
- }
+  }
 }
