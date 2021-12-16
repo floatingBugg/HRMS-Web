@@ -7,54 +7,50 @@
           <div class="container">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
-              <input name="etedEmployeeId" value={{editDataArray.etedEmployeeId}} type="number" matInput
+              <input name="etedEmployeeId" formControlName="etedEmployeeId" readonly type="number" matInput
                 placeholder="Employee ID">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label for="etedFirstName">First Name</mat-label>
-              <input id="etedFirstName" name="etedFirstName" value={{editDataArray.etedFirstName}} matInput
+              <input formControlName="etedFirstName" id="etedFirstName" name="etedFirstName" matInput
                 placeholder="First Name">
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Last Name</mat-label>
-              <input formControlName="etedLastName" name="etedLastName" value={{editDataArray.etedLastName}} matInput
-                placeholder="Last Name">
+              <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>Phone Number</mat-label>
-              <input formControlName="etedContactNumber" name="etedContactNumber"
-                value={{editDataArray.etedContactNumber}} matInput placeholder="Phone Number">
+              <input formControlName="etedContactNumber" name="etedContactNumber" matInput placeholder="Phone Number">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>CNIC</mat-label>
-              <input formControlName="etedCnic" type="number" name="etedCnic" value={{editDataArray.etedCnic}} matInput
-                placeholder="CNIC">
+              <input formControlName="etedCnic" type="number" name="etedCnic" matInput placeholder="CNIC">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label> Personal Email Address</mat-label>
-              <input formArrayName="etedEmailAddress" matInput name="etedEmailAddress"
-                value={{editDataArray.etedEmailAddress}} placeholder="Personal Email Address">
+              <input formControlName="etedEmailAddress" matInput name="etedEmailAddress"
+                placeholder="Personal Email Address">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Professional Email Address</mat-label>
-              <input formControlName="etedOfficialEmailAddress" matInput name="etedOfficialEmailAddress"
-                value={{editDataArray.etedOfficialEmailAddress}} placeholder="Professional Email Address">
+              <input matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
+                placeholder="Professional Email Address">
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Address</mat-label>
-              <textarea formControlName="etedAddress" name="etedAddress" value={{editDataArray.etedAddress}} matInput
-                placeholder="Address"></textarea>
+              <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Date of Birth</mat-label>
-              <input formControlName="etedDob" placeholder="Date of Birth" name="etedDob"
-                value={{editDataArray.etedDob}} matInput [matDatepicker]="dob">
+              <input formControlName="etedDob" placeholder="Date of Birth" name="etedDob" matInput
+                [matDatepicker]="dob">
               <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
               <mat-datepicker #dob></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Gender</mat-label>
-              <mat-select formControlName="etedGender" value={{editDataArray.etedGender}} name="etedGender">
+              <mat-select formControlName="etedGender" name="etedGender">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="female">Female</mat-option>
                 <mat-option value="male">Male</mat-option>
@@ -62,8 +58,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
-              <mat-select formControlName="etedMaritalStatus" value={{editDataArray.etedMaritalStatus}}
-                name="etedMaritalStatus">
+              <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="single">Single</mat-option>
                 <mat-option value="married">Married</mat-option>
@@ -71,18 +66,18 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employment Status</mat-label>
-              <mat-select formControlName="etedStatus" value={{editDataArray.etedStatus}} name="etedStatus">
+              <mat-select formControlName="etedStatus" name="etedStatus">
                 <mat-option [value]="">-- select one --</mat-option>
-                <mat-option value="one">Active</mat-option>
-                <mat-option value="two">Inactive</mat-option>
-                <mat-option value="three">Probation</mat-option>
-                <mat-option value="four">Released</mat-option>
-                <mat-option value="five">Resigned</mat-option>
+                <mat-option value="Active">Active</mat-option>
+                <mat-option value="Inactive">Inactive</mat-option>
+                <mat-option value="Probation">Probation</mat-option>
+                <mat-option value="Released">Released</mat-option>
+                <mat-option value="Resigned">Resigned</mat-option>
               </mat-select>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Blood Group</mat-label>
-              <mat-select formControlName="etedBloodGroup" value={{editDataArray.etedBloodGroup}} name="etedBloodGroup">
+              <mat-select formControlName="etedBloodGroup" name="etedBloodGroup">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="A+">A+</mat-option>
                 <mat-option value="A-">A-</mat-option>
@@ -96,7 +91,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Religion</mat-label>
-              <mat-select formControlName="etedReligion" value={{editDataArray.etedReligion}} name="etedReligion">
+              <mat-select formControlName="etedReligion" name="etedReligion">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="muslim">Muslim</mat-option>
                 <mat-option value="nonmuslim">Non-Muslim</mat-option>
@@ -104,8 +99,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Nationality</mat-label>
-              <mat-select formControlName="etedNationality" value={{editDataArray.etedNationality}}
-                name="etedNationality">
+              <mat-select formControlName="etedNationality" name="etedNationality">
                 <mat-option [value]="">-- select one --</mat-option>
                 <mat-option value="afghan">Afghan</mat-option>
                 <mat-option value="albanian"> Albanian</mat-option>
@@ -302,46 +296,57 @@
               </mat-select>
             </mat-form-field>
             <h4 class="mt-5">Emergency Contact Person</h4>
-
-              <div formArrayName="emsTblEmergencyContact"
+            <ng-container formArrayName="emsTblEmergencyContact"
               *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
               <div class="form-group" [formGroupName]=i>
-              <mat-form-field class="col-lg-5 col-md-5 input">
-                <mat-label>First Name</mat-label>
-                <input formControlName="etecFirstName" value={{editDataArray.emsTblEmergencyContact[0].etecFirstName}}
-                  name="etecFirstName" matInput placeholder="First Name">
-              </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-5 input">
-                <mat-label>Last Name</mat-label>
-                <input formControlName="etecLastName" value={{editDataArray.emsTblEmergencyContact[0].etecLastName}}
-                  name="etecLastName" matInput placeholder="Last Name">
-              </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-5 input">
-                <mat-label>Relation with Employee</mat-label>
-                <mat-select formControlName="etecRelation"
-                  value={{editDataArray.emsTblEmergencyContact[0].etecRelation}} name="etecRelation">
-                  <mat-option [value]="">-- select one --</mat-option>
-                  <mat-option value="father">Father</mat-option>
-                  <mat-option value="mother">Mother</mat-option>
-                  <mat-option value="sister">Sister</mat-option>
-                  <mat-option value="brother">Brother</mat-option>
-                  <mat-option value="guardian">Guardian</mat-option>
-                </mat-select>
-              </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-5 input">
-                <mat-label>Phone Number</mat-label>
-                <input formControlName="etecContactNumber"
-                  value={{editDataArray.emsTblEmergencyContact[0].etecContactNumber}} name="etecContactNumber" matInput
-                  placeholder="Phone Number">
-              </mat-form-field>
-              <mat-form-field class="col-lg-5 col-md-5 input">
-                <mat-label>Address</mat-label>
-                <textarea formControlName="etecAddress" value={{editDataArray.emsTblEmergencyContact[0].etecAddress}}
-                  name="etecAddress" matInput placeholder="Address"></textarea>
-              </mat-form-field>
+                <div class="form-group">
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>First Name</mat-label>
+                    <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Last Name</mat-label>
+                    <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Relation with Employee</mat-label>
+                    <mat-select formControlName="etecRelation" name="etecRelation">
+                      <mat-option [value]="">-- select one --</mat-option>
+                      <mat-option value="father">Father</mat-option>
+                      <mat-option value="mother">Mother</mat-option>
+                      <mat-option value="sister">Sister</mat-option>
+                      <mat-option value="brother">Brother</mat-option>
+                      <mat-option value="guardian">Guardian</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Phone Number</mat-label>
+                    <input formControlName="etecContactNumber" name="etecContactNumber" matInput
+                      placeholder="Phone Number">
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Address</mat-label>
+                    <textarea formControlName="etecAddress" name="etecAddress" matInput
+                      placeholder="Address"></textarea>
+                  </mat-form-field>
+                </div>
               </div>
-               </div>
+
+
+            </ng-container>
+            <div class="row mt-3">
+              <div class="col-md-offset-2 col-lg-5 col-md-4">
+                <button id="emergencyBtn" type="button" class="btn btn-primary" [disabled]="isAddEmergencyDisabled()"
+                  (click)="addEmergencyContact()">
+                  Add Other Emergency Contact
+                </button>
+              </div>
+              <div class=" col-lg-5 col-md-4">
+                <button class="stepperBtn" mat-flat-button color="primary" matStepperNext>Next</button>
+              </div>
             </div>
+          </div>
+
         </mat-step>
         <mat-step label="Professional Details">
           <div class="container">
@@ -349,26 +354,22 @@
             <div *ngFor="let item of editDataArray.emsTblEmployeeProfessionalDetails; let i = index">
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Designation</mat-label>
-                <input formControlName="etepdDesignation"
-                  value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdDesignation}} matInput
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdDesignation}} matInput
                   placeholder="Designation" name="etepdDesignation">
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Salary</mat-label>
-                <input formControlName="etepdSalary"
-                  value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdSalary}} name="etepdSalary" matInput
-                  placeholder="Salary">
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdSalary}} name="etepdSalary"
+                  matInput placeholder="Salary">
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5input">
                 <mat-label>Probation</mat-label>
-                <input formControlName="etepdProbation" name="etepdProbation"
-                  value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdProbation}} matInput
-                  placeholder="Probation">
+                <input name="etepdProbation" value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdProbation}}
+                  matInput placeholder="Probation">
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Joining Date</mat-label>
-                <input formControlName="etepdJoiningDate"
-                  value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdJoiningDate}} matInput
+                <input value={{editDataArray.emsTblEmployeeProfessionalDetails[i].etepdJoiningDate}} matInput
                   name="etepdJoiningDate" [matDatepicker]="picker">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
@@ -382,25 +383,22 @@
           <div class=" mt-5 container" *ngFor="let item of editDataArray.emsTblAcademicQualification; let i = index">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Degree Title</mat-label>
-              <input formControlName="etaqQualification"
-                value={{editDataArray.emsTblAcademicQualification[i].etaqQualification}} matInput
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqQualification}} matInput
                 placeholder="Degree Title" name="etaqQualification">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Passing Year</mat-label>
-              <input formControlName="etaqPassingYear"
-                value={{editDataArray.emsTblAcademicQualification[i].etaqPassingYear}} matInput
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqPassingYear}} matInput
                 placeholder="Passing Year" name="etaqPassingYear">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Grade/CGPA</mat-label>
-              <input formControlName="etaqCgpa" value={{editDataArray.emsTblAcademicQualification[i].etaqCgpa}} matInput
-                placeholder="Grade/CGPA" name="etaqCgpa">
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqCgpa}} matInput placeholder="Grade/ "
+                name="etaqCgpa">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Institute Name</mat-label>
-              <input formControlName="etaqInstituteName"
-                value={{editDataArray.emsTblAcademicQualification[i].etaqInstituteName}} matInput
+              <input value={{editDataArray.emsTblAcademicQualification[i].etaqInstituteName}} matInput
                 placeholder="Institute Name" name="etaqInstituteName">
             </mat-form-field>
           </div>
@@ -412,30 +410,26 @@
             *ngFor="let item of editDataArray.emsTblProfessionalQualification; let i = index">
             <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>Degree Title</mat-label>
-              <input formControlName="etpqCertification"
-                value={{editDataArray.emsTblProfessionalQualification[i].etpqCertification}} matInput
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqCertification}} matInput
                 placeholder="Certification" name="etpqCertification">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Start date</mat-label>
-              <input formControlName="etpqStratDate"
-                value={{editDataArray.emsTblProfessionalQualification[i].etpqStratDate}} name="etpqStratDate" matInput
-                [matDatepicker]="startDate">
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqStratDate}} name="etpqStratDate"
+                matInput [matDatepicker]="startDate">
               <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
               <mat-datepicker #startDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>End date</mat-label>
-              <input formControlName="etpqEndDate"
-                value={{editDataArray.emsTblProfessionalQualification[i].etpqEndDate}} name="etpqEndDate" matInput
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqEndDate}} name="etpqEndDate" matInput
                 [matDatepicker]="endDate">
               <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
               <mat-datepicker #endDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Institute Name</mat-label>
-              <input formControlName="etpqInstituteName"
-                value={{editDataArray.emsTblProfessionalQualification[i].etpqInstituteName}} matInput
+              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqInstituteName}} matInput
                 placeholder="Institute Name" name="etpqInstituteName">
             </mat-form-field>
           </div>
@@ -445,32 +439,32 @@
           <div *ngFor="let item of editDataArray.emsTblWorkingHistory; let i =  index">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Company Name</mat-label>
-              <input formControlName="etwhCompanyName" value={{editDataArray.emsTblWorkingHistory[i].etwhCompanyName}}
-                matInput name="etwhCompanyName" placeholder="Company Name">
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhCompanyName}} matInput name="etwhCompanyName"
+                placeholder="Company Name">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Designation</mat-label>
-              <input formControlName="etwhDesignation" value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}}
-                type="text" matInput name="etwhDesignation" placeholder="Designation">
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} type="text" matInput
+                name="etwhDesignation" placeholder="Designation">
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Start date</mat-label>
-              <input formControlName="etwhStratDate" value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}}
-                matInput [matDatepicker]="prevstartDate">
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} matInput
+                [matDatepicker]="prevstartDate">
               <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
               <mat-datepicker #prevstartDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5input">
               <mat-label>End date</mat-label>
-              <input formControlName="etwhEndDate" value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}}
-                name="etwhEndDate" matInput [matDatepicker]="prevendDate">
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} name="etwhEndDate" matInput
+                [matDatepicker]="prevendDate">
               <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
               <mat-datepicker #prevendDate></mat-datepicker>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Duration</mat-label>
-              <input formControlName="etwhDuration" value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}}
-                type="text" matInput name="etwhDuration" placeholder="Duration">
+              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} type="text" matInput
+                name="etwhDuration" placeholder="Duration">
             </mat-form-field>
           </div>
           <button mat-stroked-button (click)="updateData()" type="submit" color="primary">Update</button>
@@ -479,7 +473,8 @@
     </mat-vertical-stepper>
     <div class="text-align-right">
       <button routerLink="./employee" mat-raised-button color="warn">Cancel</button>
-      <button style="margin-left: 10px;" mat-raised-button type="submit" color="primary">Save</button>
+      <button style="margin-left: 10px;" (click)="updateData()" mat-raised-button type="submit"
+        color="primary">Save</button>
     </div>
   </div>
 </div>

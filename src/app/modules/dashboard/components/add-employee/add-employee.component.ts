@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatDialog } from '@angular/material/dialog';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 
 @Component({
@@ -53,10 +52,10 @@ export class AddEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      etaqQualification: [''],
-      etaqPassingYear: [ ,Validators.maxLength(4)],
-      etaqCgpa: [],
-      etaqInstituteName: ['']
+      etaqQualification: ['',Validators.required],
+      etaqPassingYear: [ ,[Validators.maxLength(4),Validators.required]],
+      etaqCgpa: [,Validators.required],
+      etaqInstituteName: ['',Validators.required]
     });
   }
 
@@ -105,10 +104,10 @@ export class AddEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
-      etpqCertification: [''],
-      etpqStratDate: [null],
-      etpqEndDate: [null],
-      etpqInstituteName: [''],
+      etpqCertification: ['',Validators.required],
+      etpqStratDate: [null,Validators.required],
+      etpqEndDate: [null,Validators.required],
+      etpqInstituteName: ['',Validators.required],
     });
   }
   addProfessionalQualification(): void {
@@ -123,11 +122,11 @@ export class AddEmployeeComponent implements OnInit {
   //////Working History//////////
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
-      etwhCompanyName: [''],
-      etwhDesignation: [''],
-      etwhStratDate: [null],
-      etwhEndDate: [null],
-      etwhDuration: [''],
+      etwhCompanyName: ['',Validators.required],
+      etwhDesignation: ['',Validators.required],
+      etwhStratDate: [null,Validators.required],
+      etwhEndDate: [null,Validators.required],
+      etwhDuration: ['',Validators.required],
     });
   }
   addWorkingHistory(): void {
@@ -156,15 +155,13 @@ export class AddEmployeeComponent implements OnInit {
       etedCreatedByName:[this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([
-        this.addAcademicQualificationList(),
       ]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
         this.addEmsTblEmployeeProfessionalDetails(),
       ]),
       emsTblProfessionalQualification: this.fb.array([
-        this.addemsTblProfessionalQualification(),
       ]),
-      emsTblWorkingHistory: this.fb.array([this.addemsTblWorkingHistory()]),
+      emsTblWorkingHistory: this.fb.array([]),
     });
   }
   submitData() {
@@ -275,4 +272,10 @@ export class AddEmployeeComponent implements OnInit {
         .valid;
     return !result;
   }
+  // isAddAcademicQualificationDisabled() {
+  //   let result =
+  //     this.personalDetailsForm.controls['emsTblAcademicQualification']['controls']
+  //       .valid;
+  //   return !result;
+  // }
 }

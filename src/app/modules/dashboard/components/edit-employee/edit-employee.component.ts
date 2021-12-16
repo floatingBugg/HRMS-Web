@@ -11,13 +11,6 @@ import { SuccessDialogComponent } from '../add-employee/success-dialog/success-d
   styleUrls: ['./edit-employee.component.scss'],
 })
 export class EditEmployeeComponent implements OnInit {
-  constructor(
-    public empDataService: PersonalDetailsService,
-    private personaldetails: PersonalDetailsService,
-    public route: ActivatedRoute,
-    private fb: FormBuilder,
-    public dialog: MatDialog
-  ) {}
   id: any;
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
@@ -26,19 +19,136 @@ export class EditEmployeeComponent implements OnInit {
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
   public editDataArray: any = FormArray;
+  public empID: any;
+  public firstName: any;
+  public lastname: any;
+  public phoneNo: any;
+  public cnic: any;
+  public personalEmail: any;
+  public professionalEmail: any;
+  public address: any;
+  public dob: any;
+  public gender: any;
+  public maritalStatus: any;
+  public employementStatus: any;
+  public bloodGroup: any;
+  public religion: any;
+  public nationality: any;
+  ///////Emergency Contact ////////
+  public emergencyContact = [
+    {
+      etecFirstName: '',
+      etecLastName: '',
+      etecRelation: '',
+      etecContactNumber: '',
+      etecAddress: '',
+    },
+  ];
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
+  constructor(
+    public empDataService: PersonalDetailsService,
+    private personaldetails: PersonalDetailsService,
+    public route: ActivatedRoute,
+    private fb: FormBuilder,
+    public dialog: MatDialog
+  ) {
+    this.updateForm();
+  }
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
-        console.log(data.data[0]);
+        let oneEmployeeData = data.data[0];
+        console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
-        // debugger;
-      
+        console.log(this.editDataArray);
+        this.empID = oneEmployeeData.etedEmployeeId;
+        this.personalDetailsForm.controls['etedEmployeeId'].setValue(
+          oneEmployeeData.etedEmployeeId
+        );
+        this.personalDetailsForm.controls['etedFirstName'].setValue(
+          oneEmployeeData.etedFirstName
+        );
+        this.personalDetailsForm.controls['etedLastName'].setValue(
+          oneEmployeeData.etedLastName
+        );
+        this.personalDetailsForm.controls['etedContactNumber'].setValue(
+          oneEmployeeData.etedContactNumber
+        );
+        this.personalDetailsForm.controls['etedCnic'].setValue(
+          oneEmployeeData.etedCnic
+        );
+        this.personalDetailsForm.controls['etedEmailAddress'].setValue(
+          oneEmployeeData.etedEmailAddress
+        );
+        this.personalDetailsForm.controls['etedOfficialEmailAddress'].setValue(
+          oneEmployeeData.etedOfficialEmailAddress
+        );
+        this.personalDetailsForm.controls['etedAddress'].setValue(
+          oneEmployeeData.etedAddress
+        );
+        this.personalDetailsForm.controls['etedDob'].setValue(
+          oneEmployeeData.etedDob
+        );
+        this.personalDetailsForm.controls['etedGender'].setValue(
+          oneEmployeeData.etedGender
+        );
+        this.personalDetailsForm.controls['etedMaritalStatus'].setValue(
+          oneEmployeeData.etedMaritalStatus
+        );
+        this.personalDetailsForm.controls['etedStatus'].setValue(
+          oneEmployeeData.etedStatus
+        );
+        this.personalDetailsForm.controls['etedBloodGroup'].setValue(
+          oneEmployeeData.etedBloodGroup
+        );
+        this.personalDetailsForm.controls['etedNationality'].setValue(
+          oneEmployeeData.etedNationality
+        );
+        this.personalDetailsForm.controls['etedReligion'].setValue(
+          oneEmployeeData.etedReligion
+        );
+        //////Emergency Contact /////
+        this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
+        console.log('emergencyContact', this.emergencyContact);
+        for (let i = 0; i < this.emergencyContact.length; i++) {
+          this.addEmergencyContact();
+          console.log(this.emergencyContact.length, i);
+          let control =
+            this.personalDetailsForm.controls['emsTblEmergencyContact'][
+              'controls'
+            ][i]['controls'];
+          control['etecFirstName'].patchValue(
+            this.emergencyContact[i]['etecFirstName']
+          );
+          control['etecLastName'].patchValue(
+            this.emergencyContact[i]['etecLastName']
+          );
+          control['etecRelation'].patchValue(
+            this.emergencyContact[i]['etecRelation']
+          );
+          control['etecContactNumber'].patchValue(
+            this.emergencyContact[i]['etecContactNumber']
+          );
+          control['etecAddress'].patchValue(
+            this.emergencyContact[i]['etecAddress']
+          );
+          console.log(
+            this.personalDetailsForm.get('emsTblEmergencyContact')[
+              'controls'
+            ][0]['controls'].length
+          );
+          // let value = control['etecFirstName'].value;
+          console.log(control);
+
+          console.log(
+            'emstable',
+            oneEmployeeData['emsTblEmergencyContact'][i]['etecFirstName']
+          );
+        }
       }
     });
-    this.updateForm();
   }
 
   ////////Academic Qualification/////////////
@@ -130,6 +240,7 @@ export class EditEmployeeComponent implements OnInit {
   }
   updateForm() {
     this.personalDetailsForm = this.fb.group({
+      etedEmployeeId: [''],
       etedFirstName: [''],
       etedLastName: [''],
       etedContactNumber: [''],
@@ -144,8 +255,8 @@ export class EditEmployeeComponent implements OnInit {
       etedBloodGroup: [''],
       etedReligion: [''],
       etedNationality: [''],
-      etedModifiedBy: [this.userId],
-      etedModifiedByName: [this.userName],
+      etedModifiedBy: [''],
+      etedModifiedByName: [''],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
@@ -162,7 +273,7 @@ export class EditEmployeeComponent implements OnInit {
   updateData() {
     console.log(this.personalDetailsForm.value);
     this.personaldetails
-      .personalDetails(this.personalDetailsForm.value)
+      .updateEmployeeData(this.personalDetailsForm.value)
       .subscribe((result) => {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
@@ -172,5 +283,12 @@ export class EditEmployeeComponent implements OnInit {
           console.log(result.message);
         }
       });
+  }
+
+  isAddEmergencyDisabled() {
+    let result =
+      this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][0]
+        .valid;
+    return !result;
   }
 }

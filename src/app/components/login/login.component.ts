@@ -64,8 +64,6 @@ export class LoginComponent implements OnInit {
     var password = localStorage.getItem("userPw");
     this.loginForm.controls['email'].setValue(email);
     this.loginForm.controls['password'].setValue(password);
-    (<HTMLInputElement>document.getElementById("email")).value != email;
-    (<HTMLInputElement>document.getElementById("password")).value!=password;
 
   }
   ngOnInit(): void {

@@ -120,7 +120,7 @@ export class ViewEmployeeComponent implements OnInit {
       }
       else
       {
-        
+
       }
     });
   }

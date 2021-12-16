@@ -1,37 +1,40 @@
 <mat-toolbar color="primary">
   <span>HRMS</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="user-img" aria-label="UserImg">
-  <img  class="user-img" src="../../../../../assets/img/user.jpg">
-  </button>
   <button mat-icon-button class="example-icon" (click)="logout()" aria-label="Settings">
     Logout
-  <mat-icon>exit_to_app</mat-icon>
+    <mat-icon>exit_to_app</mat-icon>
   </button>
 </mat-toolbar>
 <div class="container">
   <div class="ms-container row">
 
-<div class="card ems-container" routerLink="/dashboard"  matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
-  <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
-  <div class="container">
-    <p style="font-size: 14px;"><b>Employee Management System</b></p>
-  </div>
-</div>
+    <div class="card ems-container" routerLink="/dashboard" matRipple [matRippleCentered]="centered"
+      [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
+      [matRippleColor]="color">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
+      <div class="container">
+        <p style="font-size: 14px;"><b>Employee Management System</b></p>
+      </div>
+    </div>
 
-<div class="card rms-container" routerLink="#"  matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
-  <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" style="width:100%">
-  <div class="container">
-    <p style="font-size: 14px;"><b>Recruitment Management System</b></p>
-  </div>
-</div>
-<div class="card ims-container" routerLink="/inventory"  matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
-  <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
-  <div class="container">
-    <p style="font-size: 14px;"><b>Inventory Management System</b></p>
-  </div>
-</div>
-<!-- <div class="rms-container mx-auto mat-elevation-z4"
+    <div class="card rms-container" routerLink="#" matRipple [matRippleCentered]="centered"
+      [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
+      [matRippleColor]="color">
+      <img src="https://www.w3schools.com/howto/img_avatar2.png" alt="Avatar" style="width:100%">
+      <div class="container">
+        <p style="font-size: 14px;"><b>Recruitment Management System</b></p>
+      </div>
+    </div>
+    <div class="card ims-container" routerLink="/inventory" matRipple [matRippleCentered]="centered"
+      [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
+      [matRippleColor]="color">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:100%">
+      <div class="container">
+        <p style="font-size: 14px;"><b>Inventory Management System</b></p>
+      </div>
+    </div>
+    <!-- <div class="rms-container mx-auto mat-elevation-z4"
      matRipple
      [matRippleCentered]="centered"
      [matRippleDisabled]="disabled"
@@ -49,5 +52,5 @@
      [matRippleColor]="color">
      Inventory Management System
 </div> -->
-</div>
+  </div>
 </div>

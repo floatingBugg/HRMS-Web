@@ -30,4 +30,11 @@ export class PersonalDetailsService {
       `http://hamzaashiq467-001-site1.itempurl.com/Employee/GetEmployeebyID?id=${id}`
     );
   }
+
+  updateEmployeeData(data:any):Observable<any>{
+    return this.http.post(
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/UpdateEmployee',
+      data
+    );
+  }
 }
