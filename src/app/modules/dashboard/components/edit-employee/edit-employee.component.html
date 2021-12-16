@@ -378,92 +378,102 @@
 
         </mat-step>
         <mat-step label="Academic Qualification">
-          <div class=" mt-5 container" *ngFor="let item of editDataArray.emsTblAcademicQualification; let i = index">
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Degree Title</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqQualification}} matInput
-                placeholder="Degree Title" name="etaqQualification">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Passing Year</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqPassingYear}} matInput
-                placeholder="Passing Year" name="etaqPassingYear">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Grade/CGPA</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqCgpa}} matInput placeholder="Grade/ "
-                name="etaqCgpa">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Institute Name</mat-label>
-              <input value={{editDataArray.emsTblAcademicQualification[i].etaqInstituteName}} matInput
-                placeholder="Institute Name" name="etaqInstituteName">
-            </mat-form-field>
+          <div class=" mt-5 container" formArrayName="emsTblAcademicQualification"
+            *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
+            <div class="form-group" [formGroupName]=i>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Degree Title</mat-label>
+                <input formControlName="etaqQualification" matInput placeholder="Degree Title" name="etaqQualification">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Passing Year</mat-label>
+                <input formControlName="etaqPassingYear" matInput placeholder="Passing Year" name="etaqPassingYear">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Grade/CGPA</mat-label>
+                <input formControlName="etaqCgpa" matInput placeholder="Grade/ " name="etaqCgpa">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Institute Name</mat-label>
+                <input formControlName="etaqInstituteName" matInput placeholder="Institute Name"
+                  name="etaqInstituteName">
+              </mat-form-field>
+            </div>
           </div>
-
+          <div class="row  mt-3">
+            <div class="col-md-offset-2 col-lg-5 col-md-4">
+              <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
+                Add Other Academic Qualification
+              </button>
+            </div>
+            <div class=" col-lg-5 col-md-4">
+              <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+              <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                matStepperPrevious>Back</button>
+            </div>
+          </div>
         </mat-step>
         <mat-step label="Professional Qualification">
-          <div class=" mt-5 container"
-            *ngFor="let item of editDataArray.emsTblProfessionalQualification; let i = index">
-            <mat-form-field class="col-lg-5 col-md-5input">
-              <mat-label>Degree Title</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqCertification}} matInput
-                placeholder="Certification" name="etpqCertification">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Start date</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqStratDate}} name="etpqStratDate"
-                matInput [matDatepicker]="startDate">
-              <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-              <mat-datepicker #startDate></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>End date</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqEndDate}} name="etpqEndDate" matInput
-                [matDatepicker]="endDate">
-              <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-              <mat-datepicker #endDate></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Institute Name</mat-label>
-              <input value={{editDataArray.emsTblProfessionalQualification[i].etpqInstituteName}} matInput
-                placeholder="Institute Name" name="etpqInstituteName">
-            </mat-form-field>
+          <div formArrayName="emsTblProfessionalQualification"
+            *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
+            <div class="form-group" [formGroupName]=i>
+              <mat-form-field class="col-lg-5 col-md-5input">
+                <mat-label>Certification</mat-label>
+                <input formControlName="etpqCertification" matInput placeholder="Certification"
+                  name="etpqCertification">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Start date</mat-label>
+                <input formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
+                <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                <mat-datepicker #startDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>End date</mat-label>
+                <input formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                <mat-datepicker #endDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Institute Name</mat-label>
+                <input formControlName="etpqInstituteName" matInput placeholder="Institute Name"
+                  name="etpqInstituteName">
+              </mat-form-field>
+            </div>
           </div>
         </mat-step>
         <mat-step label="Working History">
-          <div *ngFor="let item of editDataArray.emsTblWorkingHistory; let i =  index">
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Company Name</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhCompanyName}} matInput name="etwhCompanyName"
-                placeholder="Company Name">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Designation</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDesignation}} type="text" matInput
-                name="etwhDesignation" placeholder="Designation">
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Start date</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhStratDate}} matInput
-                [matDatepicker]="prevstartDate">
-              <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
-              <mat-datepicker #prevstartDate></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5input">
-              <mat-label>End date</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhEndDate}} name="etwhEndDate" matInput
-                [matDatepicker]="prevendDate">
-              <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
-              <mat-datepicker #prevendDate></mat-datepicker>
-            </mat-form-field>
-            <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Duration</mat-label>
-              <input value={{editDataArray.emsTblWorkingHistory[i].etwhDuration}} type="text" matInput
-                name="etwhDuration" placeholder="Duration">
-            </mat-form-field>
+          <div formArrayName="emsTblWorkingHistory"
+            *ngFor="let item of personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
+            <div class="form-group" [formGroupName]=i>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <div></div>
+                <mat-label>Company Name</mat-label>
+                <input formControlName="etwhCompanyName" matInput name="etwhCompanyName" placeholder="Company Name">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Designation</mat-label>
+                <input formControlName="etwhDesignation" type="text" matInput name="etwhDesignation"
+                  placeholder="Designation">
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Start date</mat-label>
+                <input formControlName="etwhStratDate" matInput [matDatepicker]="prevstartDate">
+                <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+                <mat-datepicker #prevstartDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5input">
+                <mat-label>End date</mat-label>
+                <input formControlName="etwhEndDate" name="etwhEndDate" matInput [matDatepicker]="prevendDate">
+                <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
+                <mat-datepicker #prevendDate></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Duration</mat-label>
+                <input formControlName="etwhDuration" type="text" matInput name="etwhDuration" placeholder="Duration">
+              </mat-form-field>
+            </div>
           </div>
-          <button mat-stroked-button (click)="updateData()" type="submit" color="primary">Update</button>
         </mat-step>
       </form>
     </mat-vertical-stepper>

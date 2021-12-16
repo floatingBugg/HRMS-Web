@@ -44,6 +44,31 @@ export class EditEmployeeComponent implements OnInit {
       etecAddress: '',
     },
   ];
+  public academicQualification = [
+    {
+      etaqQualification: '',
+      etaqPassingYear: '',
+      etaqCgpa: '',
+      etaqInstituteName: '',
+    },
+  ];
+  professionalQualification = [
+    {
+      etpqCertification: '',
+      etpqStratDate: '',
+      etpqEndDate: '',
+      etpqInstituteName: '',
+    },
+  ];
+  workingHistory = [
+    {
+      etwhCompanyName: '',
+      etwhDesignation: '',
+      etwhStratDate: '',
+      etwhEndDate: '',
+      etwhDuration: '',
+    },
+  ];
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   constructor(
@@ -62,7 +87,7 @@ export class EditEmployeeComponent implements OnInit {
         let oneEmployeeData = data.data[0];
         console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
-        console.log(this.editDataArray);
+        console.log('edit array', this.editDataArray);
         this.empID = oneEmployeeData.etedEmployeeId;
         this.personalDetailsForm.controls['etedEmployeeId'].setValue(
           oneEmployeeData.etedEmployeeId
@@ -115,23 +140,23 @@ export class EditEmployeeComponent implements OnInit {
         for (let i = 0; i < this.emergencyContact.length; i++) {
           this.addEmergencyContact();
           console.log(this.emergencyContact.length, i);
-          let control =
+          let controlEmrgency =
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
               'controls'
             ][i]['controls'];
-          control['etecFirstName'].patchValue(
+          controlEmrgency['etecFirstName'].patchValue(
             this.emergencyContact[i]['etecFirstName']
           );
-          control['etecLastName'].patchValue(
+          controlEmrgency['etecLastName'].patchValue(
             this.emergencyContact[i]['etecLastName']
           );
-          control['etecRelation'].patchValue(
+          controlEmrgency['etecRelation'].patchValue(
             this.emergencyContact[i]['etecRelation']
           );
-          control['etecContactNumber'].patchValue(
+          controlEmrgency['etecContactNumber'].patchValue(
             this.emergencyContact[i]['etecContactNumber']
           );
-          control['etecAddress'].patchValue(
+          controlEmrgency['etecAddress'].patchValue(
             this.emergencyContact[i]['etecAddress']
           );
           console.log(
@@ -139,12 +164,75 @@ export class EditEmployeeComponent implements OnInit {
               'controls'
             ][0]['controls'].length
           );
-          // let value = control['etecFirstName'].value;
-          console.log(control);
+        }
+        /////Academic Qualification //////
+        this.academicQualification =
+          oneEmployeeData.emsTblAcademicQualification;
+        for (let i = 0; i < this.academicQualification.length; i++) {
+          this.addAcademicQualification();
+          let controlAcademicQualification =
+            this.personalDetailsForm.controls['emsTblAcademicQualification'][
+              'controls'
+            ][i]['controls'];
+          controlAcademicQualification['etaqQualification'].patchValue(
+            this.academicQualification[i]['etaqQualification']
+          );
+          controlAcademicQualification['etaqPassingYear'].patchValue(
+            this.academicQualification[i]['etaqPassingYear']
+          );
+          controlAcademicQualification['etaqCgpa'].patchValue(
+            this.academicQualification[i]['etaqCgpa']
+          );
+          controlAcademicQualification['etaqInstituteName'].patchValue(
+            this.academicQualification[i]['etaqInstituteName']
+          );
+        }
 
-          console.log(
-            'emstable',
-            oneEmployeeData['emsTblEmergencyContact'][i]['etecFirstName']
+        ////////Professional Qualification////////
+        this.professionalQualification =
+          oneEmployeeData.emsTblProfessionalQualification;
+        for (let i = 0; i < this.professionalQualification.length; i++) {
+          this.addProfessionalQualification();
+          let controlProfessionalQualification =
+            this.personalDetailsForm.controls[
+              'emsTblProfessionalQualification'
+            ]['controls'][i]['controls'];
+          controlProfessionalQualification['etpqCertification'].patchValue(
+            this.professionalQualification[i]['etpqCertification']
+          );
+          controlProfessionalQualification['etpqStratDate'].patchValue(
+            this.professionalQualification[i]['etpqStratDate']
+          );
+          controlProfessionalQualification['etpqEndDate'].patchValue(
+            this.professionalQualification[i]['etpqEndDate']
+          );
+          controlProfessionalQualification['etpqInstituteName'].patchValue(
+            this.professionalQualification[i]['etpqInstituteName']
+          );
+        }
+
+        /////Working History////
+        this.workingHistory = oneEmployeeData.emsTblWorkingHistory;
+        for (let i = 0; i < this.workingHistory.length; i++) {
+          this.addWorkingHistory();
+          let controlWorkingHistory =
+            this.personalDetailsForm.controls['emsTblWorkingHistory'][
+              'controls'
+            ][i]['controls'];
+          controlWorkingHistory['etwhCompanyName'].patchValue(
+            this.workingHistory[i]['etwhCompanyName']
+          );
+          controlWorkingHistory['etwhDesignation'].patchValue(
+            this.workingHistory[i]['etwhDesignation']
+          );
+          controlWorkingHistory['etwhStratDate'].patchValue(
+            this.workingHistory[i]['etwhStratDate']
+          );
+          controlWorkingHistory['etwhEndDate'].patchValue(
+            this.workingHistory[i]['etwhEndDate']
+          );
+          controlWorkingHistory['etwhDuration'].patchValue(
+            this.workingHistory[i]['etwhDuration']
           );
         }
       }
@@ -258,16 +346,12 @@ export class EditEmployeeComponent implements OnInit {
       etedModifiedBy: [''],
       etedModifiedByName: [''],
       emsTblEmergencyContact: this.fb.array([]),
-      emsTblAcademicQualification: this.fb.array([
-        this.addAcademicQualificationList(),
-      ]),
+      emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
         this.addEmsTblEmployeeProfessionalDetails(),
       ]),
-      emsTblProfessionalQualification: this.fb.array([
-        this.addemsTblProfessionalQualification(),
-      ]),
-      emsTblWorkingHistory: this.fb.array([this.addemsTblWorkingHistory()]),
+      emsTblProfessionalQualification: this.fb.array([]),
+      emsTblWorkingHistory: this.fb.array([]),
     });
   }
   updateData() {
@@ -284,6 +368,38 @@ export class EditEmployeeComponent implements OnInit {
         }
       });
   }
+
+  // getAcademicData() {
+  //   this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
+  //     if (data.success) {
+  //       let academicQualificationArray = data.data[0];
+  //       let academicQualification =
+  //         academicQualificationArray.emsTblAcademicQualification;
+  //       console.log(this.id);
+  //       console.log('academicQualification', academicQualification, this.id);
+  //       for (let i = 0; i < academicQualification.length; i++) {
+  //         this.addAcademicQualification();
+  //         console.log(academicQualification.length, i);
+  //         let controlAcademy =
+  //           this.personalDetailsForm.controls['emsTblAcademicQualification'][
+  //             'controls'
+  //           ][i]['controls'];
+  //         controlAcademy['etaqQualification'].patchValue(
+  //           academicQualificationArray[i]['etaqQualification']
+  //         );
+  //         controlAcademy['etaqPassingYear'].patchValue(
+  //           academicQualificationArray[i]['etaqPassingYear']
+  //         );
+  //         controlAcademy['etaqCgpa'].patchValue(
+  //           academicQualificationArray[i]['etaqCgpa']
+  //         );
+  //         controlAcademy['etaqInstituteName'].patchValue(
+  //           academicQualificationArray[i]['etaqInstituteName']
+  //         );
+  //       }
+  //     }
+  //   });
+  // }
 
   isAddEmergencyDisabled() {
     let result =
