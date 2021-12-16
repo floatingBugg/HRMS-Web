@@ -257,7 +257,7 @@ export class EditEmployeeComponent implements OnInit {
       etedNationality: [''],
       etedModifiedBy: [''],
       etedModifiedByName: [''],
-      emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
+      emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([
         this.addAcademicQualificationList(),
       ]),
