@@ -47,8 +47,8 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Official Email Address</mat-label>
-              <input autocomplete="off" type="email" matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
-                placeholder="Official Email Address">
+              <input autocomplete="off" type="email" matInput formControlName="etedOfficialEmailAddress"
+                name="etedOfficialEmailAddress" placeholder="Official Email Address">
               <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['required'] ">
                 Email is <strong>required</strong></mat-error>
               <mat-error *ngIf="personalDetailsForm.controls['etedOfficialEmailAddress'].errors?.['email'] ">
@@ -56,7 +56,8 @@
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Address</mat-label>
-              <textarea autocomplete="off" formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
+              <textarea autocomplete="off" formControlName="etedAddress" name="etedAddress" matInput
+                placeholder="Address"></textarea>
               <mat-error *ngIf="personalDetailsForm.controls['etedAddress'].errors?.['required'] ">
                 Address is <strong>required</strong></mat-error>
             </mat-form-field>
@@ -362,8 +363,8 @@
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Phone Number</mat-label>
                   <input id="emergencyContact" (keypress)="onlyNumbersAllowed($event)"
-                    formControlName="etecContactNumber" name="etecContactNumber" matInput placeholder="03_ _ _ _ _ _ _ _ _"
-                    maxlength="11">
+                    formControlName="etecContactNumber" name="etecContactNumber" matInput
+                    placeholder="03_ _ _ _ _ _ _ _ _" maxlength="11">
                   <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
                     Phone Number is <strong>required</strong></mat-error>
                   <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
@@ -407,8 +408,8 @@
                       <mat-option [value]=""> ---Select One---</mat-option>
                       <mat-option value="HR manager">HR (Manager)</mat-option>
                       <mat-option value="HR officer">HR (Officer)</mat-option>
-                      <mat-option value="SNR SoftwareEngineer">Sr. Software Engineer</mat-option>
-                      <mat-option value="JNR SoftwareEngineer">Jr. Software Engineer</mat-option>
+                      <mat-option value="Sr. SoftwareEngineer">Sr. Software Engineer</mat-option>
+                      <mat-option value="Jr. SoftwareEngineer">Jr. Software Engineer</mat-option>
                       <mat-option value="SQA Engineer">SQA Engineer</mat-option>
                       <mat-option value="Project Manager">Project Manager</mat-option>
                       <mat-option value="System Administrator">System Administrator</mat-option>
@@ -476,7 +477,15 @@
                     <mat-option value="Matriculation/O-Levels">Matriculation/O-Levels</mat-option>
                     <mat-option value="Intermediate/A-Levels">Intermediate/A-Levels</mat-option>
                     <mat-option value="Bachelors">Bachelors</mat-option>
+                    <mat-option value="BS Software Engineering">BS Software Engineering</mat-option>
+                    <mat-option value="BS Computer Science">BS Computer Science</mat-option>
+                    <mat-option value="Doctorate">BS Information Technology</mat-option>
+                    <mat-option value="BS Business Administration">BS Business Administration</mat-option>
                     <mat-option value="Masters">Masters/MSc</mat-option>
+                    <mat-option value="MS Software Engineering">MS Software Engineering</mat-option>
+                    <mat-option value="MS Computer Science">MS Computer Science</mat-option>
+                    <mat-option value="MS Information Technology">MS Information Technology</mat-option>
+                    <mat-option value="MS Business Administration">MS Business Administration</mat-option>
                     <mat-option value="MS/Mphil">MS/Mphil</mat-option>
                     <mat-option value="Doctorate">Doctorate/PHD</mat-option>
                   </mat-select>
@@ -501,7 +510,7 @@
             </div>
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary"  (click)="addAcademicQualification()">
+                <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
                   Add Other Academic Qualification
                 </button>
               </div>

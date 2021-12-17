@@ -34,14 +34,27 @@ export class EditEmployeeComponent implements OnInit {
   public bloodGroup: any;
   public religion: any;
   public nationality: any;
+  probationDate: any;
+  monthval: any = 3;
+  newDate: any;
   ///////Emergency Contact ////////
   public emergencyContact = [
     {
+      etecEcId: '' as any,
       etecFirstName: '',
       etecLastName: '',
       etecRelation: '',
       etecContactNumber: '',
       etecAddress: '',
+    },
+  ];
+
+  professionalDetails = [
+    {
+      etepdSalary: [''],
+      etepdProbation: [''],
+      etepdDesignation: [''],
+      etepdJoiningDate: [null],
     },
   ];
   public academicQualification = [
@@ -134,35 +147,51 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etedReligion'].setValue(
           oneEmployeeData.etedReligion
         );
+
+        ///////Professional Details//////
+        this.professionalDetails=
+          oneEmployeeData.emsTblEmployeeProfessionalDetails;
+          for (let i = 0; i < this.professionalDetails.length; i++) {
+        let controlProfessionalDetails =
+          this.personalDetailsForm.controls[
+            'emsTblEmployeeProfessionalDetails'
+          ]['controls'][i]['controls'];
+        controlProfessionalDetails['etepdDesignation'].patchValue(
+          this.professionalDetails[i]['etepdDesignation']
+        );
+        controlProfessionalDetails['etepdSalary'].patchValue(
+          this.professionalDetails[i]['etepdSalary']
+        );
+        controlProfessionalDetails['etepdJoiningDate'].patchValue(
+          this.professionalDetails[i]['etepdJoiningDate']
+        );
+        controlProfessionalDetails['etepdProbation'].patchValue(
+          this.professionalDetails[i]['etepdProbation']
+        );
+        console.log('professional details', controlProfessionalDetails['etepdDesignation']);
+          }
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
-        console.log('emergencyContact', this.emergencyContact);
         for (let i = 0; i < this.emergencyContact.length; i++) {
           this.addEmergencyContact();
-          console.log(this.emergencyContact.length, i);
-          let controlEmrgency =
+          let controlEmergencyContact =
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
               'controls'
             ][i]['controls'];
-          controlEmrgency['etecFirstName'].patchValue(
+          controlEmergencyContact['etecFirstName'].patchValue(
             this.emergencyContact[i]['etecFirstName']
           );
-          controlEmrgency['etecLastName'].patchValue(
+          controlEmergencyContact['etecLastName'].patchValue(
             this.emergencyContact[i]['etecLastName']
           );
-          controlEmrgency['etecRelation'].patchValue(
+          controlEmergencyContact['etecRelation'].patchValue(
             this.emergencyContact[i]['etecRelation']
           );
-          controlEmrgency['etecContactNumber'].patchValue(
+          controlEmergencyContact['etecContactNumber'].patchValue(
             this.emergencyContact[i]['etecContactNumber']
           );
-          controlEmrgency['etecAddress'].patchValue(
+          controlEmergencyContact['etecAddress'].patchValue(
             this.emergencyContact[i]['etecAddress']
-          );
-          console.log(
-            this.personalDetailsForm.get('emsTblEmergencyContact')[
-              'controls'
-            ][0]['controls'].length
           );
         }
         /////Academic Qualification //////
@@ -260,6 +289,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
+      etecEcId: '',
       etecFirstName: [''],
       etecLastName: [''],
       etecRelation: [''],
@@ -279,7 +309,7 @@ export class EditEmployeeComponent implements OnInit {
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
       etepdSalary: [''],
-      etepdProbation: [],
+      etepdProbation: [this.newDate],
       etepdDesignation: [''],
       etepdJoiningDate: [null],
     });
@@ -400,6 +430,29 @@ export class EditEmployeeComponent implements OnInit {
   //     }
   //   });
   // }
+  onlyNumbersAllowed(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+  getJoiningDate(index: any) {
+    let control = this.personalDetailsForm.get(
+      'emsTblEmployeeProfessionalDetails'
+    )['controls'][index]['controls'];
+    let pdjoinDate = control['etepdJoiningDate'].value;
+    let d = new Date(pdjoinDate);
+    this.monthval = (<HTMLInputElement>(
+      document.getElementById('monthVal')
+    )).value;
+    let probationDate = d.setMonth(d.getMonth() + parseInt(this.monthval));
+    this.newDate = new Date(probationDate);
+    this.probationDate = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate);
+    control['etepdProbation'].setValue(this.probationDate);
+  }
 
   isAddEmergencyDisabled() {
     let result =

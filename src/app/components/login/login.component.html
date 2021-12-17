@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="col-lg-5">
-      <form [formGroup]="loginForm" class="login-form" novalidate>
+      <form [formGroup]="loginForm"  class="login-form" novalidate>
         <h1 class="login-h" color="primary">HRMS</h1>
         <mat-form-field class="login-full-width">
           <mat-label>Email Address</mat-label>
@@ -36,8 +36,8 @@
 
         </div>
         <div class="row mx-auto" style="justify-content: center;">
-          <button mat-raised-button type="reset" (click)="loginUser()" class="login-btn" [disabled]="loginForm.invalid"
-            color="primary">Login</button>
+          <button id="submit-btn" mat-raised-button type="reset"
+            class="login-btn"  (click)="loginUser()" [disabled]="loginForm.invalid" color="primary">Login</button>
         </div>
       </form>
     </div>
