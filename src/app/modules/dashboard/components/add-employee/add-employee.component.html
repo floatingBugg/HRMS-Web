@@ -410,7 +410,9 @@
                       <mat-option value="HR officer">HR (Officer)</mat-option>
                       <mat-option value="Sr. SoftwareEngineer">Sr. Software Engineer</mat-option>
                       <mat-option value="Jr. SoftwareEngineer">Jr. Software Engineer</mat-option>
-                      <mat-option value="SQA Engineer">SQA Engineer</mat-option>
+                      <mat-option value="SQA Engineer Intern">SQA Engineer Intern</mat-option>
+                      <mat-option value="Sr. SQA Engineer">Sr. SQA Engineer</mat-option>
+                      <mat-option value="Jr. SQA Engineer">Jr. SQA Engineer</mat-option>
                       <mat-option value="Project Manager">Project Manager</mat-option>
                       <mat-option value="System Administrator">System Administrator</mat-option>
                       <mat-option value="Database Developer">Database Developer</mat-option>
@@ -537,7 +539,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Start date</mat-label>
-                    <input formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
+                    <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
                     <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                     <mat-datepicker #startDate></mat-datepicker>
                     <mat-error *ngIf="item.controls['etpqStratDate'].errors?.['required']">
@@ -545,7 +547,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>End date</mat-label>
-                    <input formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
+                    <input readonly formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
                     <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
                     <mat-datepicker #endDate></mat-datepicker>
                     <mat-error *ngIf="item.controls['etpqEndDate'].errors?.['required']">
@@ -612,7 +614,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Duration</mat-label>
-                  <input [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)" matInput
+                  <input readonly [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)" matInput
                     formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
                   <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
                     Duration is <strong>required</strong></mat-error>

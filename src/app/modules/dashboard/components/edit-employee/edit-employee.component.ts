@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
@@ -37,6 +37,13 @@ export class EditEmployeeComponent implements OnInit {
   probationDate: any;
   monthval: any = 3;
   newDate: any;
+  whDuration: any;
+  whStartDate: any;
+  whStartDates: any;
+  whEndDate: any;
+  diff: any;
+  noOfDays: any;
+
   ///////Emergency Contact ////////
   public emergencyContact = [
     {
@@ -62,8 +69,8 @@ export class EditEmployeeComponent implements OnInit {
     {
       etaqAqId: '',
       etaqQualification: '',
-      etaqPassingYear: '',
-      etaqCgpa: '',
+      etaqPassingYear: [],
+      etaqCgpa: [],
       etaqInstituteName: '',
     },
   ];
@@ -88,6 +95,7 @@ export class EditEmployeeComponent implements OnInit {
   ];
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
+
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -298,8 +306,8 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       etaqAqId: [0],
       etaqQualification: [''],
-      etaqPassingYear: [0],
-      etaqCgpa: [0],
+      etaqPassingYear: [],
+      etaqCgpa: [],
       etaqInstituteName: [''],
     });
   }
@@ -318,7 +326,14 @@ export class EditEmployeeComponent implements OnInit {
       etecFirstName: [''],
       etecLastName: [''],
       etecRelation: [''],
-      etecContactNumber: [''],
+      etecContactNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
       etecAddress: [''],
     });
   }
@@ -333,11 +348,11 @@ export class EditEmployeeComponent implements OnInit {
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
-      etepdPdId: [''],
-      etepdSalary: [''],
-      etepdProbation: [this.newDate],
-      etepdDesignation: [''],
-      etepdJoiningDate: [null],
+      etepdPdId: ['', Validators.required],
+      etepdSalary: ['', Validators.required],
+      etepdProbation: [this.newDate, Validators.required],
+      etepdDesignation: ['', Validators.required],
+      etepdJoiningDate: [null, Validators.required],
     });
   }
   addProfessionalDetails(): void {
@@ -351,11 +366,11 @@ export class EditEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
-      etpqPqId: [0],
-      etpqCertification: [''],
-      etpqStratDate: [null],
-      etpqEndDate: [null],
-      etpqInstituteName: [''],
+      etpqPqId: [0, Validators.required],
+      etpqCertification: ['', Validators.required],
+      etpqStratDate: [null, Validators.required],
+      etpqEndDate: [null, Validators.required],
+      etpqInstituteName: ['', Validators.required],
     });
   }
   addProfessionalQualification(): void {
@@ -389,8 +404,22 @@ export class EditEmployeeComponent implements OnInit {
       etedEmployeeId: [''],
       etedFirstName: [''],
       etedLastName: [''],
-      etedContactNumber: [''],
-      etedCnic: [''],
+      etedContactNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
+      etedCnic: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
       etedEmailAddress: [''],
       etedOfficialEmailAddress: [''],
       etedAddress: [''],
@@ -422,9 +451,10 @@ export class EditEmployeeComponent implements OnInit {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
           console.log(result.message);
+
         } else {
+        
           this.dialog.open(AddEmployeeFailureDialogComponent);
-          console.log(result.message);
         }
       });
   }
@@ -489,5 +519,47 @@ export class EditEmployeeComponent implements OnInit {
       this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][0]
         .valid;
     return !result;
+  }
+  compareDates(index: any) {
+    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+      'controls'
+    ][index]['controls'];
+    this.whStartDate = control['etwhStratDate'].value;
+    this.whEndDate = control['etwhEndDate'].value;
+    console.log(this.whStartDate);
+    console.log(this.whEndDate);
+    let start: any = new Date(this.whStartDate);
+    let end: any = new Date(this.whEndDate);
+    this.diff = end - start;
+    let msInDay = 1000 * 3600 * 24;
+    this.noOfDays = this.diff / msInDay;
+    console.log('new Date ', this.diff / msInDay);
+
+    if (this.whStartDate != null && this.whEndDate != null) {
+      this.getDuration(index);
+    }
+  }
+
+  getDuration(index: any) {
+    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+      'controls'
+    ][index]['controls'];
+    var years = Math.floor(this.noOfDays / 365);
+    var months = Math.floor((this.noOfDays % 365) / 30);
+    var days = Math.floor((this.noOfDays % 365) % 30);
+
+    if (years == 0 && months == 0) {
+      this.whDuration = String([days, ' days '].join(''));
+    } else if (months == 0) {
+      this.whDuration = String([years, ` years `, days, ' days '].join(''));
+    } else if (years == 0) {
+      this.whDuration = String([months, ' months ', days, ' days '].join(''));
+    } else {
+      this.whDuration = String(
+        [years, ` years `, months, ' months ', days, ' days '].join('')
+      );
+    }
+    control['etwhDuration'].setValue(this.whDuration);
+    return console.log(this.whDuration);
   }
 }

@@ -12,8 +12,6 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss'],
 })
-
-
 export class AddEmployeeComponent implements OnInit {
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
@@ -34,7 +32,7 @@ export class AddEmployeeComponent implements OnInit {
   probationDate: any;
   monthval: any = 3;
   whDuration: any;
-  errorMsg:any;
+  errorMsg: any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   constructor(
@@ -52,10 +50,10 @@ export class AddEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      etaqQualification: ['',Validators.required],
-      etaqPassingYear: [ ,[Validators.maxLength(4),Validators.required]],
-      etaqCgpa: [,Validators.required],
-      etaqInstituteName: ['',Validators.required]
+      etaqQualification: ['', Validators.required],
+      etaqPassingYear: [, [Validators.maxLength(4), Validators.required]],
+      etaqCgpa: [, Validators.required],
+      etaqInstituteName: ['', Validators.required],
     });
   }
 
@@ -72,7 +70,14 @@ export class AddEmployeeComponent implements OnInit {
       etecFirstName: ['', Validators.required],
       etecLastName: ['', Validators.required],
       etecRelation: ['', Validators.required],
-      etecContactNumber: ['', [Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
+      etecContactNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
       etecAddress: ['', Validators.required],
     });
   }
@@ -87,10 +92,10 @@ export class AddEmployeeComponent implements OnInit {
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
-      etepdSalary: [''],
-      etepdProbation: [this.newDate],
-      etepdDesignation: [''],
-      etepdJoiningDate: [null],
+      etepdSalary: ['', Validators.required],
+      etepdProbation: [this.newDate, Validators.required],
+      etepdDesignation: ['', Validators.required],
+      etepdJoiningDate: [null, Validators.required],
     });
   }
   addProfessionalDetails(): void {
@@ -104,10 +109,10 @@ export class AddEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
-      etpqCertification: ['',Validators.required],
-      etpqStratDate: [null,Validators.required],
-      etpqEndDate: [null,Validators.required],
-      etpqInstituteName: ['',Validators.required],
+      etpqCertification: ['', Validators.required],
+      etpqStratDate: [null, Validators.required],
+      etpqEndDate: [null, Validators.required],
+      etpqInstituteName: ['', Validators.required],
     });
   }
   addProfessionalQualification(): void {
@@ -122,11 +127,11 @@ export class AddEmployeeComponent implements OnInit {
   //////Working History//////////
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
-      etwhCompanyName: ['',Validators.required],
-      etwhDesignation: ['',Validators.required],
-      etwhStratDate: [null,Validators.required],
-      etwhEndDate: [null,Validators.required],
-      etwhDuration: ['',Validators.required],
+      etwhCompanyName: ['', Validators.required],
+      etwhDesignation: ['', Validators.required],
+      etwhStratDate: [null, Validators.required],
+      etwhEndDate: [null, Validators.required],
+      etwhDuration: ['', Validators.required],
     });
   }
   addWorkingHistory(): void {
@@ -139,8 +144,22 @@ export class AddEmployeeComponent implements OnInit {
     this.personalDetailsForm = this.fb.group({
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
-      etedContactNumber: ['',[Validators.required, Validators.minLength(11), Validators.maxLength(11)]],
-      etedCnic: ['', [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
+      etedContactNumber: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(11),
+          Validators.maxLength(11),
+        ],
+      ],
+      etedCnic: [
+        ,
+        [
+          Validators.required,
+          Validators.minLength(13),
+          Validators.maxLength(13),
+        ],
+      ],
       etedEmailAddress: ['', [Validators.required, Validators.email]],
       etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
       etedAddress: ['', Validators.required],
@@ -151,16 +170,14 @@ export class AddEmployeeComponent implements OnInit {
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-      etedCreatedBy:[this.userId],
-      etedCreatedByName:[this.userName],
+      etedCreatedBy: [this.userId],
+      etedCreatedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
-      emsTblAcademicQualification: this.fb.array([
-      ]),
+      emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
         this.addEmsTblEmployeeProfessionalDetails(),
       ]),
-      emsTblProfessionalQualification: this.fb.array([
-      ]),
+      emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
     });
   }
@@ -173,7 +190,12 @@ export class AddEmployeeComponent implements OnInit {
           this.dialog.open(SuccessDialogComponent);
           console.log(result.message);
         } else {
-          this.dialog.open(AddEmployeeFailureDialogComponent);
+          this.errorMsg = result.message;
+          console.log('error Msgggg', this.errorMsg);
+          localStorage.setItem('errorMessage', this.errorMsg);
+          this.dialog.open(AddEmployeeFailureDialogComponent, {
+            width: '600px',
+          });
           console.log(result.message);
         }
       });

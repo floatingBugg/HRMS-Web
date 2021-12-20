@@ -7,7 +7,10 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 })
 export class AddEmployeeFailureDialogComponent implements OnInit {
   errorRef:ElementRef | undefined
-  constructor() { }
+  errorMsg:any;
+  constructor() {
+    this.errorMsg =  localStorage.getItem('errorMessage')
+   }
 
   ngOnInit(): void {
   }
