@@ -59,7 +59,7 @@ export class EditEmployeeComponent implements OnInit {
   ];
   public academicQualification = [
     {
-      etaqAqId:'',
+      etaqAqId: '',
       etaqQualification: '',
       etaqPassingYear: '',
       etaqCgpa: '',
@@ -203,13 +203,6 @@ export class EditEmployeeComponent implements OnInit {
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
-          for (let i = 0; i < this.academicQualification.length; i++) {
-            let controlAcademicQualificationId = (this.personalDetailsForm.controls[
-              'emsTblAcademicQualification'
-            ]['controls'][i]['controls']['etaqAqId'] =
-              this.emsTblAcademicQualification[i]['etaqAqId']);
-            console.log('Academic id',controlAcademicQualificationId);
-          }
         for (let i = 0; i < this.academicQualification.length; i++) {
           this.addAcademicQualification();
           let controlAcademicQualification =
@@ -285,7 +278,7 @@ export class EditEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      etaqAqId:[0],
+      etaqAqId: [0],
       etaqQualification: [''],
       etaqPassingYear: [0],
       etaqCgpa: [0],
