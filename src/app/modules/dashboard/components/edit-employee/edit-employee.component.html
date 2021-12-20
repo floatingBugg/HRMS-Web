@@ -391,9 +391,9 @@
             </ng-container>
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button id="emergencyBtn" type="button" class="btn btn-primary" [disabled]="isAddEmergencyDisabled()"
+                <button id="emergencyBtn" type="button" class="btn btn-primary" 
                   (click)="addEmergencyContact()">
-                  Add Other Emergency Contact
+                  Add  Emergency Contact
                 </button>
               </div>
               <div class=" col-lg-5 col-md-4">
@@ -461,7 +461,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Probation</mat-label>
-                    <input required readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
+                    <input  readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
                       formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
@@ -537,7 +537,7 @@
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
-                Add Other Academic Qualification
+                Add  Academic Qualification
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -591,7 +591,7 @@
           <div class="row mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
-                Add Other Professional Qualification
+                Add  Professional Qualification
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -650,7 +650,7 @@
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
-                Add Other Work History
+                Add  Work History
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -663,7 +663,7 @@
     </mat-vertical-stepper>
     <div class="text-align-right">
       <button routerLink="./employee" mat-raised-button color="warn">Cancel</button>
-      <button style="margin-left: 10px;" (click)="updateData()" mat-raised-button type="submit"
+      <button style="margin-left: 10px;" (click)="updateData()" [disabled]="personalDetailsForm.invalid" mat-raised-button type="submit"
         color="primary">Save</button>
     </div>
   </div>

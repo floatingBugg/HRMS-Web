@@ -189,7 +189,7 @@ export class EditEmployeeComponent implements OnInit {
 
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
-        debugger;
+
         let arrayLength = this.emergencyContact.length;
         for (let i = 0; i < arrayLength; i++) {
           this.addEmergencyContact();
@@ -443,7 +443,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateData() {
-    debugger;
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
