@@ -391,9 +391,8 @@
             </ng-container>
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button id="emergencyBtn" type="button" class="btn btn-primary" 
-                  (click)="addEmergencyContact()">
-                  Add  Emergency Contact
+                <button id="emergencyBtn" type="button" class="btn btn-primary" (click)="addEmergencyContact()">
+                  Add Emergency Contact
                 </button>
               </div>
               <div class=" col-lg-5 col-md-4">
@@ -461,7 +460,7 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Probation</mat-label>
-                    <input  readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
+                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
                       formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
@@ -511,13 +510,15 @@
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Passing Year</mat-label>
-                <input formControlName="etaqPassingYear" matInput placeholder="Passing Year" name="etaqPassingYear">
+                <input formControlName="etaqPassingYear" maxlength="4" (keypress)="onlyNumbersAllowed($event)" matInput
+                  placeholder="Passing Year" name="etaqPassingYear">
                 <mat-error *ngIf="item.controls['etaqPassingYear'].errors?.['required']">
                   Passing Year is <strong>required</strong></mat-error>
               </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Grade/CGPA</mat-label>
-                <input formControlName="etaqCgpa" matInput placeholder="Grade/ " name="etaqCgpa">
+                <input type="number" min="0" value="0" step=0.00392156863 formControlName="etaqCgpa" matInput
+                  placeholder="Grade/ " name="etaqCgpa">
                 <mat-error *ngIf="item.controls['etaqCgpa'].errors?.['required']">
                   CGPA/Grade is <strong>required</strong></mat-error>
               </mat-form-field>
@@ -525,8 +526,8 @@
                 <mat-label>Institute Name</mat-label>
                 <input formControlName="etaqInstituteName" matInput placeholder="Institute Name"
                   name="etaqInstituteName">
-                  <mat-error *ngIf="item.controls['etaqInstituteName'].errors?.['required']">
-                    Institute Name is <strong>required</strong></mat-error>
+                <mat-error *ngIf="item.controls['etaqInstituteName'].errors?.['required']">
+                  Institute Name is <strong>required</strong></mat-error>
               </mat-form-field>
             </div>
 
@@ -537,7 +538,7 @@
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
-                Add  Academic Qualification
+                Add Academic Qualification
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -559,9 +560,9 @@
                 <mat-label>Certification</mat-label>
                 <input formControlName="etpqCertification" matInput placeholder="Certification"
                   name="etpqCertification">
-                  <mat-error *ngIf="item.controls['etpqCertification'].errors?.['required']">
-                    Certification is <strong>required</strong></mat-error>
-                </mat-form-field>
+                <mat-error *ngIf="item.controls['etpqCertification'].errors?.['required']">
+                  Certification is <strong>required</strong></mat-error>
+              </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Start date</mat-label>
                 <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput
@@ -583,15 +584,15 @@
                 <mat-label>Institute Name</mat-label>
                 <input formControlName="etpqInstituteName" matInput placeholder="Institute Name"
                   name="etpqInstituteName">
-                  <mat-error *ngIf="item.controls['etpqInstituteName'].errors?.['required']">
-                    Institute Name is <strong>required</strong></mat-error>
-                </mat-form-field>
+                <mat-error *ngIf="item.controls['etpqInstituteName'].errors?.['required']">
+                  Institute Name is <strong>required</strong></mat-error>
+              </mat-form-field>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
-                Add  Professional Qualification
+                Add Professional Qualification
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -617,9 +618,9 @@
                 <input formControlName="etwhDesignation" type="text" matInput name="etwhDesignation"
                   placeholder="Designation">
 
-                  <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
-                    Designation is <strong>required</strong></mat-error>
-                </mat-form-field>
+                <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
+                  Designation is <strong>required</strong></mat-error>
+              </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Start date</mat-label>
                 <input readonly formControlName="etwhStratDate" (dateChange)="compareDates(i)" matInput
@@ -642,15 +643,15 @@
                 <mat-label>Duration</mat-label>
                 <input readonly [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)"
                   formControlName="etwhDuration" type="text" matInput name="etwhDuration" placeholder="Duration">
-                  <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
-                    Duration is <strong>required</strong></mat-error>
-                </mat-form-field>
+                <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
+                  Duration is <strong>required</strong></mat-error>
+              </mat-form-field>
             </div>
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
               <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
-                Add  Work History
+                Add Work History
               </button>
             </div>
             <div class=" col-lg-5 col-md-4">
@@ -663,7 +664,7 @@
     </mat-vertical-stepper>
     <div class="text-align-right">
       <button routerLink="./employee" mat-raised-button color="warn">Cancel</button>
-      <button style="margin-left: 10px;" (click)="updateData()" [disabled]="personalDetailsForm.invalid" mat-raised-button type="submit"
+      <button style="margin-left: 10px;" (click)="updateData()" mat-raised-button type="submit"
         color="primary">Save</button>
     </div>
   </div>

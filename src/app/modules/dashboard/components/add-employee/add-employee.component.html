@@ -498,7 +498,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Passing Year</mat-label>
-                  <input type="text" pattern="\d*" maxlength="4" snr (keypress)="onlyNumbersAllowed($event)" matInput
+                  <input type="text" pattern="\d*" maxlength="4" (keypress)="onlyNumbersAllowed($event)" matInput
                     placeholder="Passing Year" formControlName="etaqPassingYear">
                   <mat-error *ngIf="item.controls['etaqPassingYear'].errors?.['required']">
                     Passing Year is <strong>required</strong></mat-error>
