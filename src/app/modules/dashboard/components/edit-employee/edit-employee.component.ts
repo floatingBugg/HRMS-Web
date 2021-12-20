@@ -40,7 +40,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact ////////
   public emergencyContact = [
     {
-      etecEcId: '' as any,
+      etecEcId: '',
       etecFirstName: '',
       etecLastName: '',
       etecRelation: '',
@@ -59,6 +59,7 @@ export class EditEmployeeComponent implements OnInit {
   ];
   public academicQualification = [
     {
+      etaqAqId:'',
       etaqQualification: '',
       etaqPassingYear: '',
       etaqCgpa: '',
@@ -149,27 +150,29 @@ export class EditEmployeeComponent implements OnInit {
         );
 
         ///////Professional Details//////
-        this.professionalDetails=
+        this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
-          for (let i = 0; i < this.professionalDetails.length; i++) {
         let controlProfessionalDetails =
           this.personalDetailsForm.controls[
             'emsTblEmployeeProfessionalDetails'
-          ]['controls'][i]['controls'];
+          ]['controls'][0]['controls'];
         controlProfessionalDetails['etepdDesignation'].patchValue(
-          this.professionalDetails[i]['etepdDesignation']
+          this.professionalDetails[0]['etepdDesignation']
         );
         controlProfessionalDetails['etepdSalary'].patchValue(
-          this.professionalDetails[i]['etepdSalary']
+          this.professionalDetails[0]['etepdSalary']
         );
         controlProfessionalDetails['etepdJoiningDate'].patchValue(
-          this.professionalDetails[i]['etepdJoiningDate']
+          this.professionalDetails[0]['etepdJoiningDate']
         );
         controlProfessionalDetails['etepdProbation'].patchValue(
-          this.professionalDetails[i]['etepdProbation']
+          this.professionalDetails[0]['etepdProbation']
         );
-        console.log('professional details', controlProfessionalDetails['etepdDesignation']);
-          }
+        console.log(
+          'professional details',
+          controlProfessionalDetails['etepdDesignation']
+        );
+
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
         for (let i = 0; i < this.emergencyContact.length; i++) {
@@ -178,6 +181,9 @@ export class EditEmployeeComponent implements OnInit {
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
               'controls'
             ][i]['controls'];
+          // console.log( 'hello',
+          //   controlEmergencyContact=this.emergencyContact
+          // );
           controlEmergencyContact['etecFirstName'].patchValue(
             this.emergencyContact[i]['etecFirstName']
           );
@@ -197,6 +203,13 @@ export class EditEmployeeComponent implements OnInit {
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
+          for (let i = 0; i < this.academicQualification.length; i++) {
+            let controlAcademicQualificationId = (this.personalDetailsForm.controls[
+              'emsTblAcademicQualification'
+            ]['controls'][i]['controls']['etaqAqId'] =
+              this.emsTblAcademicQualification[i]['etaqAqId']);
+            console.log('Academic id',controlAcademicQualificationId);
+          }
         for (let i = 0; i < this.academicQualification.length; i++) {
           this.addAcademicQualification();
           let controlAcademicQualification =
@@ -272,6 +285,7 @@ export class EditEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
+      etaqAqId:[0],
       etaqQualification: [''],
       etaqPassingYear: [0],
       etaqCgpa: [0],
@@ -289,7 +303,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecEcId: '',
+      etecEcId: [0],
       etecFirstName: [''],
       etecLastName: [''],
       etecRelation: [''],
@@ -384,7 +398,9 @@ export class EditEmployeeComponent implements OnInit {
       emsTblWorkingHistory: this.fb.array([]),
     });
   }
+
   updateData() {
+    debugger;
     console.log(this.personalDetailsForm.value);
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)

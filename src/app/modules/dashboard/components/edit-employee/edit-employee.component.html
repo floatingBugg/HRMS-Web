@@ -455,6 +455,10 @@
                   name="etaqInstituteName">
               </mat-form-field>
             </div>
+
+          </div>
+          <div *ngIf="academicQualification.length < 0">
+            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
