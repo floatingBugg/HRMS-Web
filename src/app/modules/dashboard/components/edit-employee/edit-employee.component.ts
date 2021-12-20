@@ -304,11 +304,11 @@ export class EditEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      etaqAqId: [0],
-      etaqQualification: [''],
-      etaqPassingYear: [],
-      etaqCgpa: [],
-      etaqInstituteName: [''],
+      etaqAqId: [0, Validators.required],
+      etaqQualification: ['', Validators.required],
+      etaqPassingYear: [, Validators.required],
+      etaqCgpa: [, Validators.required],
+      etaqInstituteName: ['', Validators.required],
     });
   }
 
@@ -323,9 +323,9 @@ export class EditEmployeeComponent implements OnInit {
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
       etecEcId: [''],
-      etecFirstName: [''],
-      etecLastName: [''],
-      etecRelation: [''],
+      etecFirstName: ['', Validators.required],
+      etecLastName: ['', Validators.required],
+      etecRelation: ['', Validators.required],
       etecContactNumber: [
         '',
         [
@@ -334,7 +334,7 @@ export class EditEmployeeComponent implements OnInit {
           Validators.maxLength(11),
         ],
       ],
-      etecAddress: [''],
+      etecAddress: ['', Validators.required],
     });
   }
 
@@ -386,11 +386,11 @@ export class EditEmployeeComponent implements OnInit {
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
       etwhWhId: [0],
-      etwhCompanyName: [''],
-      etwhDesignation: [''],
-      etwhStratDate: [null],
-      etwhEndDate: [null],
-      etwhDuration: [''],
+      etwhCompanyName: ['', Validators.required],
+      etwhDesignation: ['', Validators.required],
+      etwhStratDate: [null, Validators.required],
+      etwhEndDate: [null, Validators.required],
+      etwhDuration: ['', Validators.required],
     });
   }
   addWorkingHistory(): void {
@@ -402,8 +402,8 @@ export class EditEmployeeComponent implements OnInit {
   updateForm() {
     this.personalDetailsForm = this.fb.group({
       etedEmployeeId: [''],
-      etedFirstName: [''],
-      etedLastName: [''],
+      etedFirstName: ['', Validators.required],
+      etedLastName: ['', Validators.required],
       etedContactNumber: [
         '',
         [
@@ -420,18 +420,18 @@ export class EditEmployeeComponent implements OnInit {
           Validators.maxLength(13),
         ],
       ],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedAddress: [''],
-      etedDob: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
-      etedModifiedBy: [''],
-      etedModifiedByName: [''],
+      etedEmailAddress: ['', [Validators.required, Validators.email]],
+      etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
+      etedAddress: ['', Validators.required],
+      etedDob: ['', Validators.required],
+      etedGender: ['', Validators.required],
+      etedMaritalStatus: ['', Validators.required],
+      etedStatus: ['', Validators.required],
+      etedBloodGroup: ['', Validators.required],
+      etedReligion: ['', Validators.required],
+      etedNationality: ['', Validators.required],
+      etedModifiedBy: ['', Validators.required],
+      etedModifiedByName: ['', Validators.required],
       emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
@@ -451,9 +451,7 @@ export class EditEmployeeComponent implements OnInit {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
           console.log(result.message);
-
         } else {
-        
           this.dialog.open(AddEmployeeFailureDialogComponent);
         }
       });

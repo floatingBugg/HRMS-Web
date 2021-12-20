@@ -1,9 +1,9 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class="mt-4"> Add Employee</h3>
-    <mat-vertical-stepper>
+    <mat-vertical-stepper linear>
       <form [formGroup]="personalDetailsForm">
-        <mat-step label="Personal Details" [stepControl]="personalDetailsForm">
+        <mat-step label="Personal Details" >
           <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>First Name</mat-label>
@@ -421,6 +421,8 @@
                       <mat-option value="Office Boy">Office Boy</mat-option>
                       <mat-option value="Guard">Guard</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
+                      Designation is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Salary</mat-label>
@@ -498,15 +500,21 @@
                   <mat-label>Passing Year</mat-label>
                   <input type="text" pattern="\d*" maxlength="4" snr (keypress)="onlyNumbersAllowed($event)" matInput
                     placeholder="Passing Year" formControlName="etaqPassingYear">
+                  <mat-error *ngIf="item.controls['etaqPassingYear'].errors?.['required']">
+                    Passing Year is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Grade/CGPA</mat-label>
                   <input type="number" min="0" value="0" step=0.00392156863 matInput placeholder="Grade/CGPA"
                     formControlName="etaqCgpa">
+                  <mat-error *ngIf="item.controls['etaqCgpa'].errors?.['required']">
+                    CGPA/Grade is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Institute Name</mat-label>
                   <input matInput placeholder="Institute Name" formControlName="etaqInstituteName">
+                  <mat-error *ngIf="item.controls['etaqInstituteName'].errors?.['required']">
+                    Institute Name is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -539,7 +547,8 @@
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Start date</mat-label>
-                    <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput [matDatepicker]="startDate">
+                    <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput
+                      [matDatepicker]="startDate">
                     <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                     <mat-datepicker #startDate></mat-datepicker>
                     <mat-error *ngIf="item.controls['etpqStratDate'].errors?.['required']">
