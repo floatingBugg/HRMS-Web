@@ -300,6 +300,10 @@
               *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
               <div class="form-group" [formGroupName]=i>
                 <div class="form-group">
+                  <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                    <mat-label>Emergency Contact Id</mat-label>
+                    <input formControlName="etecEcId" name="etecEcId" matInput placeholder="Emergency Contact Id">
+                  </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>First Name</mat-label>
                     <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
@@ -355,6 +359,11 @@
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
                   <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                      <mat-label>Profesiional Details Id</mat-label>
+                      <input formControlName="etepdPdId" name="etepdPdId" matInput
+                        placeholder="Professional Details Id">
+                    </mat-form-field>
                     <!-- <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation"> -->
@@ -409,7 +418,7 @@
                 <div class=" col-lg-5 col-md-4" style="align-items: flex-end;">
                   <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                     matStepperPrevious>Back</button>
-                    <button class="  stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+                  <button class="  stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
                 </div>
               </div>
             </div>
@@ -419,6 +428,10 @@
           <div class=" mt-5 container" formArrayName="emsTblAcademicQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
             <div class="form-group" [formGroupName]=i>
+              <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                <mat-label>Academic Qualification Id</mat-label>
+                <input formControlName="etaqAqId" name="etaqAqId" matInput placeholder="Academic QualificationId">
+              </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <mat-label>Degree Title</mat-label>
                 <mat-select formControlName="etaqQualification" name="etaqQualification">
@@ -477,6 +490,10 @@
           <div formArrayName="emsTblProfessionalQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
             <div class="form-group" [formGroupName]=i>
+              <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                <mat-label>Profesiional Qualification Id</mat-label>
+                <input formControlName="etpqPqId" name="etpqPqId" matInput placeholder="Professional QualificationId">
+              </mat-form-field>
               <mat-form-field class="col-lg-5 col-md-5input">
                 <mat-label>Certification</mat-label>
                 <input formControlName="etpqCertification" matInput placeholder="Certification"

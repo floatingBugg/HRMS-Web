@@ -51,6 +51,7 @@ export class EditEmployeeComponent implements OnInit {
 
   professionalDetails = [
     {
+      etepdPdId: [''],
       etepdSalary: [''],
       etepdProbation: [''],
       etepdDesignation: [''],
@@ -68,6 +69,7 @@ export class EditEmployeeComponent implements OnInit {
   ];
   professionalQualification = [
     {
+      etpqPqId: '',
       etpqCertification: '',
       etpqStratDate: '',
       etpqEndDate: '',
@@ -76,6 +78,7 @@ export class EditEmployeeComponent implements OnInit {
   ];
   workingHistory = [
     {
+      etwhWhId: '',
       etwhCompanyName: '',
       etwhDesignation: '',
       etwhStratDate: '',
@@ -156,16 +159,19 @@ export class EditEmployeeComponent implements OnInit {
           this.personalDetailsForm.controls[
             'emsTblEmployeeProfessionalDetails'
           ]['controls'][0]['controls'];
-        controlProfessionalDetails['etepdDesignation'].patchValue(
+        controlProfessionalDetails['etepdPdId'].setValue(
+          this.professionalDetails[0]['etepdPdId']
+        );
+        controlProfessionalDetails['etepdDesignation'].setValue(
           this.professionalDetails[0]['etepdDesignation']
         );
-        controlProfessionalDetails['etepdSalary'].patchValue(
+        controlProfessionalDetails['etepdSalary'].setValue(
           this.professionalDetails[0]['etepdSalary']
         );
-        controlProfessionalDetails['etepdJoiningDate'].patchValue(
+        controlProfessionalDetails['etepdJoiningDate'].setValue(
           this.professionalDetails[0]['etepdJoiningDate']
         );
-        controlProfessionalDetails['etepdProbation'].patchValue(
+        controlProfessionalDetails['etepdProbation'].setValue(
           this.professionalDetails[0]['etepdProbation']
         );
         console.log(
@@ -175,28 +181,30 @@ export class EditEmployeeComponent implements OnInit {
 
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
-        for (let i = 0; i < this.emergencyContact.length; i++) {
+        debugger;
+        let arrayLength = this.emergencyContact.length;
+        for (let i = 0; i < arrayLength; i++) {
           this.addEmergencyContact();
           let controlEmergencyContact =
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
               'controls'
             ][i]['controls'];
-          // console.log( 'hello',
-          //   controlEmergencyContact=this.emergencyContact
-          // );
-          controlEmergencyContact['etecFirstName'].patchValue(
+          controlEmergencyContact['etecEcId'].setValue(
+            this.emergencyContact[i]['etecEcId']
+          );
+          controlEmergencyContact['etecFirstName'].setValue(
             this.emergencyContact[i]['etecFirstName']
           );
-          controlEmergencyContact['etecLastName'].patchValue(
+          controlEmergencyContact['etecLastName'].setValue(
             this.emergencyContact[i]['etecLastName']
           );
-          controlEmergencyContact['etecRelation'].patchValue(
+          controlEmergencyContact['etecRelation'].setValue(
             this.emergencyContact[i]['etecRelation']
           );
-          controlEmergencyContact['etecContactNumber'].patchValue(
+          controlEmergencyContact['etecContactNumber'].setValue(
             this.emergencyContact[i]['etecContactNumber']
           );
-          controlEmergencyContact['etecAddress'].patchValue(
+          controlEmergencyContact['etecAddress'].setValue(
             this.emergencyContact[i]['etecAddress']
           );
         }
@@ -209,16 +217,19 @@ export class EditEmployeeComponent implements OnInit {
             this.personalDetailsForm.controls['emsTblAcademicQualification'][
               'controls'
             ][i]['controls'];
-          controlAcademicQualification['etaqQualification'].patchValue(
+          controlAcademicQualification['etaqAqId'].setValue(
+            this.academicQualification[i]['etaqAqId']
+          );
+          controlAcademicQualification['etaqQualification'].setValue(
             this.academicQualification[i]['etaqQualification']
           );
-          controlAcademicQualification['etaqPassingYear'].patchValue(
+          controlAcademicQualification['etaqPassingYear'].setValue(
             this.academicQualification[i]['etaqPassingYear']
           );
-          controlAcademicQualification['etaqCgpa'].patchValue(
+          controlAcademicQualification['etaqCgpa'].setValue(
             this.academicQualification[i]['etaqCgpa']
           );
-          controlAcademicQualification['etaqInstituteName'].patchValue(
+          controlAcademicQualification['etaqInstituteName'].setValue(
             this.academicQualification[i]['etaqInstituteName']
           );
         }
@@ -232,17 +243,21 @@ export class EditEmployeeComponent implements OnInit {
             this.personalDetailsForm.controls[
               'emsTblProfessionalQualification'
             ]['controls'][i]['controls'];
-          controlProfessionalQualification['etpqCertification'].patchValue(
+
+          controlProfessionalQualification['etpqCertification'].setValue(
             this.professionalQualification[i]['etpqCertification']
           );
-          controlProfessionalQualification['etpqStratDate'].patchValue(
+          controlProfessionalQualification['etpqStratDate'].setValue(
             this.professionalQualification[i]['etpqStratDate']
           );
-          controlProfessionalQualification['etpqEndDate'].patchValue(
+          controlProfessionalQualification['etpqEndDate'].setValue(
             this.professionalQualification[i]['etpqEndDate']
           );
-          controlProfessionalQualification['etpqInstituteName'].patchValue(
+          controlProfessionalQualification['etpqInstituteName'].setValue(
             this.professionalQualification[i]['etpqInstituteName']
+          );
+          controlProfessionalQualification['etpqPqId'].setValue(
+            this.professionalQualification[i]['etpqPqId']
           );
         }
 
@@ -254,19 +269,22 @@ export class EditEmployeeComponent implements OnInit {
             this.personalDetailsForm.controls['emsTblWorkingHistory'][
               'controls'
             ][i]['controls'];
-          controlWorkingHistory['etwhCompanyName'].patchValue(
+          controlWorkingHistory['etwhWhId'].setValue(
+            this.workingHistory[i]['etwhWhId']
+          );
+          controlWorkingHistory['etwhCompanyName'].setValue(
             this.workingHistory[i]['etwhCompanyName']
           );
-          controlWorkingHistory['etwhDesignation'].patchValue(
+          controlWorkingHistory['etwhDesignation'].setValue(
             this.workingHistory[i]['etwhDesignation']
           );
-          controlWorkingHistory['etwhStratDate'].patchValue(
+          controlWorkingHistory['etwhStratDate'].setValue(
             this.workingHistory[i]['etwhStratDate']
           );
-          controlWorkingHistory['etwhEndDate'].patchValue(
+          controlWorkingHistory['etwhEndDate'].setValue(
             this.workingHistory[i]['etwhEndDate']
           );
-          controlWorkingHistory['etwhDuration'].patchValue(
+          controlWorkingHistory['etwhDuration'].setValue(
             this.workingHistory[i]['etwhDuration']
           );
         }
@@ -296,7 +314,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecEcId: [0],
+      etecEcId: [''],
       etecFirstName: [''],
       etecLastName: [''],
       etecRelation: [''],
@@ -315,6 +333,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
+      etepdPdId: [''],
       etepdSalary: [''],
       etepdProbation: [this.newDate],
       etepdDesignation: [''],
@@ -332,6 +351,7 @@ export class EditEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
+      etpqPqId: [0],
       etpqCertification: [''],
       etpqStratDate: [null],
       etpqEndDate: [null],
@@ -350,6 +370,7 @@ export class EditEmployeeComponent implements OnInit {
   //////Working History//////////
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
+      etwhWhId: [0],
       etwhCompanyName: [''],
       etwhDesignation: [''],
       etwhStratDate: [null],
