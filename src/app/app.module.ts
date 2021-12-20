@@ -23,6 +23,7 @@ import { LoginValidationComponent } from './components/login/login-validation/lo
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { LogoutValidationComponent } from './components/login/logout-validation/logout-validation.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     HomeComponent,
     LoginValidationComponent,
     SpinnerComponent,
+    LogoutValidationComponent,
    
  
   ],
