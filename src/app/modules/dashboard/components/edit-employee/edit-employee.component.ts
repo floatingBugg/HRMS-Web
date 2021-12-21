@@ -43,7 +43,7 @@ export class EditEmployeeComponent implements OnInit {
   whEndDate: any;
   diff: any;
   noOfDays: any;
-  public currentIndex: any = 0;
+  public currentIndexEmergency: any = 0;
   public currentIndexAcademic: any = 0;
   public currentIndexProfessionalQ: any = 0;
   public currentIndexWorkingHistory: any = 0;
@@ -150,9 +150,7 @@ export class EditEmployeeComponent implements OnInit {
 
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
-
-        let arrayLength = this.emergencyContact.length;
-        for (let i = 0; i < arrayLength; i++) {
+        for (let i = 0; i < this.emergencyContact.length; i++) {
           this.addEmergencyContact();
           let controlEmergencyContact =
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
@@ -177,7 +175,6 @@ export class EditEmployeeComponent implements OnInit {
           controlEmergencyContact['etecAddress'].setValue(
             this.emergencyContact[i]['etecAddress']
           );
-          console.log('emergency ', controlEmergencyContact);
         }
         /////Academic Qualification //////
         this.academicQualification =
@@ -285,7 +282,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecEcId: ['', Validators.required],
+      etecEcId: [0],
       etecFirstName: ['', Validators.required],
       etecLastName: ['', Validators.required],
       etecRelation: ['', Validators.required],
@@ -393,15 +390,13 @@ export class EditEmployeeComponent implements OnInit {
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-      etedModifiedBy: [this.userId],
-      etedModifiedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([]),
-      emsTblEmployeeProfessionalDetails: this.fb.array([
-        this.addEmsTblEmployeeProfessionalDetails(),
-      ]),
+      emsTblEmployeeProfessionalDetails: this.fb.array([  this.addEmsTblEmployeeProfessionalDetails(),]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
+      etedModifiedBy: [this.userId],
+      etedModifiedByName: [this.userName],
     });
   }
 
@@ -521,7 +516,7 @@ export class EditEmployeeComponent implements OnInit {
   isAddEmergencyDisabled() {
     let result =
       this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][
-        this.currentIndex
+        this.currentIndexEmergency
       ].valid;
     return !result;
   }
@@ -547,15 +542,9 @@ export class EditEmployeeComponent implements OnInit {
       ].valid;
     return !result;
   }
-  /////Aaddd Emergency Form Function/////
-
-  addEmergencyForm() {
-    this.addEmergencyContact();
-  }
-
   //Current Index Setter Emergency
   setCurrentIndexEmergency(index: any) {
-    this.currentIndex = index;
+    this.currentIndexEmergency = index;
   }
   //Current Index Setter Academic Qualification
   setCurrentIndexAcademicQualification(index: any) {

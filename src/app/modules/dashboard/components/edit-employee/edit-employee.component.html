@@ -335,7 +335,7 @@
             </mat-form-field>
             <h4 class="mt-5">Emergency Contact Person</h4>
             <div formArrayName="emsTblEmergencyContact"
-              *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls'];  index as i;">
+              *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls'];  let i = index;">
               {{setCurrentIndexEmergency(i)}}
               <div class="form-group" [formGroupName]=i>
                 <p class="mb-3"><b>Emergency Contact Person: {{i+1}}</b></p>
@@ -388,7 +388,7 @@
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
                 <button id="emergencyBtn" type="button" class="btn btn-primary" [disabled]="isAddEmergencyDisabled()"
-                  (click)="addEmergencyForm()">
+                  (click)="addEmergencyContact()">
                   Add Emergency Contact
                 </button>
               </div>
