@@ -1,4 +1,71 @@
-.setPositionRight5em
-{
-  right: 0em;
+.ms-container{
+  justify-content: center;
+  margin-top: 5vh;
 }
+.ems-container
+{
+  background-color: rgb(5, 138, 148);
+  border-radius: none;
+}
+.rms-container
+{
+  background-color: rgb(187, 212, 207);
+  margin-left: 2em;
+  border-radius: none;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 16em;
+  border-radius: 5px;
+  border-color: white;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+.example-container {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.example-sidenav {
+  padding: 20px;
+}
+.user-img{
+  border-radius: 50px;
+}
+.example-icon{
+  margin-right: 30px;
+  margin-left: 10px;
+}
+.loader-container{
+  z-index: 99;
+  position: fixed;
+  width: 100%;
+}
+
+
+.setPosition
+{
+  justify-content: center;
+}
+.stepperBtn{
+  float: right; padding-left: 15px; padding-right: 15px;
+}
+
+
