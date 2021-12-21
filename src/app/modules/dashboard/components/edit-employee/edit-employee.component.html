@@ -4,22 +4,22 @@
     <mat-vertical-stepper>
       <form [formGroup]="personalDetailsForm">
         <mat-step label="Personal Details">
-          <div class="container">
+          <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
               <input name="etedEmployeeId" formControlName="etedEmployeeId" readonly type="number" matInput
-                placeholder="Employee ID">
+                placeholder="Employee ID" >
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label for="etedFirstName">First Name</mat-label>
               <input formControlName="etedFirstName" id="etedFirstName" name="etedFirstName" matInput
-                placeholder="First Name">
+                placeholder="First Name" maxlength="20">
               <mat-error *ngIf="personalDetailsForm.controls['etedFirstName'].errors?.['required'] ">
                 First Name is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Last Name</mat-label>
-              <input formControlName="etedLastName" name="etedLastName" matInput placeholder="Last Name">
+              <input formControlName="etedLastName" name="etedLastName" maxlength="20" matInput placeholder="Last Name">
               <mat-error *ngIf="personalDetailsForm.controls['etedLastName'].errors?.['required'] ">
                 Last Name is <strong>required</strong></mat-error>
             </mat-form-field>
@@ -334,68 +334,66 @@
                 Nationality is <strong>required</strong></mat-error>
             </mat-form-field>
             <h4 class="mt-5">Emergency Contact Person</h4>
-            <ng-container formArrayName="emsTblEmergencyContact"
-              *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls']; let i = index;">
-              <div class="form-group" [formGroupName]=i>
-                <div class="form-group">
-                  <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
-                    <mat-label>Emergency Contact Id</mat-label>
-                    <input formControlName="etecEcId" name="etecEcId" matInput placeholder="Emergency Contact Id">
-
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>First Name</mat-label>
-                    <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
-                    <mat-error *ngIf="item.controls['etecFirstName'].errors?.['required']">
-                      First Name is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Last Name</mat-label>
-                    <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
-                    <mat-error *ngIf="item.controls['etecLastName'].errors?.['required']">
-                      Last Name is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Relation with Employee</mat-label>
-                    <mat-select formControlName="etecRelation" name="etecRelation">
-                      <mat-option [value]="">-- select one --</mat-option>
-                      <mat-option value="father">Father</mat-option>
-                      <mat-option value="mother">Mother</mat-option>
-                      <mat-option value="sister">Sister</mat-option>
-                      <mat-option value="brother">Brother</mat-option>
-                      <mat-option value="guardian">Guardian</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
-                      Relation with Employee is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Phone Number</mat-label>
-                    <input formControlName="etecContactNumber" maxlength="11" name="etecContactNumber" matInput
-                      placeholder="Phone Number">
-                    <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
-                      Phone Number is <strong>required</strong></mat-error>
-                    <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
-                      Enter a valid Phone number</mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Address</mat-label>
-                    <textarea formControlName="etecAddress" name="etecAddress" matInput
-                      placeholder="Address"></textarea>
-                    <mat-error *ngIf="item.controls['etecAddress'].errors?.['required']">
-                      Address is <strong>required</strong></mat-error>
-                  </mat-form-field>
+              <div formArrayName="emsTblEmergencyContact"
+                *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls'];  index as i;">
+                {{setCurrentIndexEmergency(i)}}
+                <div class="form-group" [formGroupName]=i>
+                  <p class="mb-3"><b>Emergency Contact Person: {{i+1}}</b></p>
+                    <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                      <mat-label>Emergency Contact Id</mat-label>
+                      <input formControlName="etecEcId" name="etecEcId" matInput placeholder="Emergency Contact Id">
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>First Name</mat-label>
+                      <input formControlName="etecFirstName" name="etecFirstName" matInput placeholder="First Name">
+                      <mat-error *ngIf="item.controls['etecFirstName'].errors?.['required']">
+                        First Name is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Last Name</mat-label>
+                      <input formControlName="etecLastName" name="etecLastName" matInput placeholder="Last Name">
+                      <mat-error *ngIf="item.controls['etecLastName'].errors?.['required']">
+                        Last Name is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Relation with Employee</mat-label>
+                      <mat-select formControlName="etecRelation" name="etecRelation">
+                        <mat-option [value]="">-- select one --</mat-option>
+                        <mat-option value="father">Father</mat-option>
+                        <mat-option value="mother">Mother</mat-option>
+                        <mat-option value="sister">Sister</mat-option>
+                        <mat-option value="brother">Brother</mat-option>
+                        <mat-option value="guardian">Guardian</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="item.controls['etecRelation'].errors?.['required']">
+                        Relation with Employee is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Phone Number</mat-label>
+                      <input formControlName="etecContactNumber"  (keypress)="onlyNumbersAllowed($event)" maxlength="11" name="etecContactNumber" matInput
+                        placeholder="Phone Number">
+                      <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['required']">
+                        Phone Number is <strong>required</strong></mat-error>
+                      <mat-error *ngIf="item.controls['etecContactNumber'].errors?.['minlength']">
+                        Enter a valid Phone number</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Address</mat-label>
+                      <textarea formControlName="etecAddress" name="etecAddress" matInput
+                        placeholder="Address"></textarea>
+                      <mat-error *ngIf="item.controls['etecAddress'].errors?.['required']">
+                        Address is <strong>required</strong></mat-error>
+                    </mat-form-field>
                 </div>
               </div>
-
-
-            </ng-container>
             <div class="row mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button id="emergencyBtn" type="button" class="btn btn-primary" (click)="addEmergencyContact()">
+                <button id="emergencyBtn" type="button" class="btn btn-primary" [disabled]="isAddEmergencyDisabled()"
+                  (click)="addEmergencyForm()">
                   Add Emergency Contact
                 </button>
               </div>
-              <div class=" col-lg-5 col-md-4">
+              <div align="end" class=" col-lg-5 col-md-4">
                 <button class="stepperBtn" mat-flat-button color="primary" matStepperNext>Next</button>
               </div>
             </div>
@@ -410,7 +408,7 @@
                 <div [formGroupName]="i">
 
                   <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
-                    <mat-label>Profesiional Details Id</mat-label>
+                    <mat-label>Professional Details Id</mat-label>
                     <input formControlName="etepdPdId" name="etepdPdId" matInput placeholder="Professional Details Id">
                   </mat-form-field>
                   <!-- <mat-label>Designation</mat-label>
@@ -481,7 +479,9 @@
         <mat-step label="Academic Qualification">
           <div class=" mt-5 container" formArrayName="emsTblAcademicQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
+            {{setCurrentIndexAcademicQualification(i)}}
             <div class="form-group" [formGroupName]=i>
+              <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Academic Qualification Id</mat-label>
                 <input formControlName="etaqAqId" name="etaqAqId" matInput placeholder="Academic QualificationId">
@@ -537,7 +537,8 @@
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addAcademicQualification()">
+              <button type="button" class="btn btn-primary" [disabled]="isAcademicQualificationDisabled()"
+                (click)="addAcademicQualification()">
                 Add Academic Qualification
               </button>
             </div>
@@ -551,7 +552,9 @@
         <mat-step label="Professional Qualification">
           <div formArrayName="emsTblProfessionalQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
+            {{setCurrentIndexProfessionalQualification(i)}}
             <div class="form-group" [formGroupName]=i>
+              <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Profesiional Qualification Id</mat-label>
                 <input formControlName="etpqPqId" name="etpqPqId" matInput placeholder="Professional QualificationId">
@@ -591,7 +594,8 @@
           </div>
           <div class="row mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addProfessionalQualification()">
+              <button type="button" class="btn btn-primary" [disabled]="isProfessionalQualificationDisabled()"
+                (click)="addProfessionalQualification()">
                 Add Professional Qualification
               </button>
             </div>
@@ -605,7 +609,9 @@
         <mat-step label="Working History">
           <div formArrayName="emsTblWorkingHistory"
             *ngFor="let item of personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
+            {{setCurrentIndexWorkingHistory(i)}}
             <div class="form-group" [formGroupName]=i>
+              <p class="mb-3"><b>Working History: {{i+1}}</b></p>
               <mat-form-field class="col-lg-5 col-md-5 input">
                 <div></div>
                 <mat-label>Company Name</mat-label>
@@ -650,7 +656,8 @@
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
-              <button type="button" class="btn btn-primary" (click)="addWorkingHistory()">
+              <button type="button" class="btn btn-primary" [disabled]="isWokringHistoryDisabled()"
+                (click)="addWorkingHistory()">
                 Add Work History
               </button>
             </div>
@@ -664,8 +671,8 @@
     </mat-vertical-stepper>
     <div class="text-align-right">
       <button routerLink="./employee" mat-raised-button color="warn">Cancel</button>
-      <button style="margin-left: 10px;"  (click)="updateData()" mat-raised-button type="submit"
-        color="primary">Save</button>
+      <button style="margin-left: 10px;" [disabled]="!personalDetailsForm.invalid" (click)="updateData()"
+        mat-raised-button type="submit" color="primary">Save</button>
     </div>
   </div>
 </div>

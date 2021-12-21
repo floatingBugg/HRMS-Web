@@ -294,10 +294,4 @@ export class AddEmployeeComponent implements OnInit {
         .valid;
     return !result;
   }
-  // isAddAcademicQualificationDisabled() {
-  //   let result =
-  //     this.personalDetailsForm.controls['emsTblAcademicQualification']['controls']
-  //       .valid;
-  //   return !result;
-  // }
 }

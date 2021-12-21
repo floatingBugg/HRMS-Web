@@ -43,56 +43,16 @@ export class EditEmployeeComponent implements OnInit {
   whEndDate: any;
   diff: any;
   noOfDays: any;
-
+  public currentIndex: any = 0;
+  public currentIndexAcademic: any = 0;
+  public currentIndexProfessionalQ: any = 0;
+  public currentIndexWorkingHistory: any = 0;
   ///////Emergency Contact ////////
-  public emergencyContact = [
-    {
-      etecEcId: '',
-      etecFirstName: '',
-      etecLastName: '',
-      etecRelation: '',
-      etecContactNumber: '',
-      etecAddress: '',
-    },
-  ];
-
-  professionalDetails = [
-    {
-      etepdPdId: [''],
-      etepdSalary: [''],
-      etepdProbation: [''],
-      etepdDesignation: [''],
-      etepdJoiningDate: [null],
-    },
-  ];
-  public academicQualification = [
-    {
-      etaqAqId: '',
-      etaqQualification: '',
-      etaqPassingYear: [],
-      etaqCgpa: [],
-      etaqInstituteName: '',
-    },
-  ];
-  professionalQualification = [
-    {
-      etpqPqId: '',
-      etpqCertification: '',
-      etpqStratDate: '',
-      etpqEndDate: '',
-      etpqInstituteName: '',
-    },
-  ];
-  workingHistory = [
-    {
-      etwhWhId: '',
-      etwhCompanyName: '',
-      etwhDesignation: '',
-      etwhStratDate: '',
-      etwhEndDate: '',
-      etwhDuration: '',
-    },
-  ];
+  emergencyContact: any;
+  professionalDetails: any;
+  academicQualification: any;
+  professionalQualification: any;
+  workingHistory: any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
 
@@ -322,7 +282,7 @@ export class EditEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecEcId: [''],
+      etecEcId: ['', Validators.required],
       etecFirstName: ['', Validators.required],
       etecLastName: ['', Validators.required],
       etecRelation: ['', Validators.required],
@@ -405,7 +365,7 @@ export class EditEmployeeComponent implements OnInit {
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
       etedContactNumber: [
-        '',
+        ,
         [
           Validators.required,
           Validators.minLength(11),
@@ -413,7 +373,7 @@ export class EditEmployeeComponent implements OnInit {
         ],
       ],
       etedCnic: [
-        '',
+        ,
         [
           Validators.required,
           Validators.minLength(13),
@@ -511,12 +471,6 @@ export class EditEmployeeComponent implements OnInit {
     control['etepdProbation'].setValue(this.probationDate);
   }
 
-  isAddEmergencyDisabled() {
-    let result =
-      this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][0]
-        .valid;
-    return !result;
-  }
   compareDates(index: any) {
     let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
       'controls'
@@ -558,5 +512,58 @@ export class EditEmployeeComponent implements OnInit {
     }
     control['etwhDuration'].setValue(this.whDuration);
     return console.log(this.whDuration);
+  }
+
+  ///// Disable Form /////////
+  isAddEmergencyDisabled() {
+    let result =
+      this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][
+        this.currentIndex
+      ].valid;
+    return !result;
+  }
+
+  isAcademicQualificationDisabled() {
+    let result =
+      this.personalDetailsForm.controls['emsTblAcademicQualification'][
+        'controls'
+      ][this.currentIndexAcademic].valid;
+    return !result;
+  }
+  isProfessionalQualificationDisabled() {
+    let result =
+      this.personalDetailsForm.controls['emsTblProfessionalQualification'][
+        'controls'
+      ][this.currentIndexProfessionalQ].valid;
+    return !result;
+  }
+  isWokringHistoryDisabled() {
+    let result =
+      this.personalDetailsForm.controls['emsTblWorkingHistory']['controls'][
+        this.currentIndexWorkingHistory
+      ].valid;
+    return !result;
+  }
+  /////Aaddd Emergency Form Function/////
+
+  addEmergencyForm() {
+    this.addEmergencyContact();
+  }
+
+  //Current Index Setter Emergency
+  setCurrentIndexEmergency(index: any) {
+    this.currentIndex = index;
+  }
+  //Current Index Setter Academic Qualification
+  setCurrentIndexAcademicQualification(index: any) {
+    this.currentIndexAcademic = index;
+  }
+  //Current Index Setter Professional Qualification
+  setCurrentIndexProfessionalQualification(index: any) {
+    this.currentIndexProfessionalQ = index;
+  }
+  //Current Index Setter Working History
+  setCurrentIndexWorkingHistory(index: any) {
+    this.currentIndexWorkingHistory = index;
   }
 }
