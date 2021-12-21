@@ -73,6 +73,7 @@ export class EditEmployeeComponent implements OnInit {
         console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
         console.log('edit array', this.editDataArray);
+        console.log('Personal Form', this.personalDetailsForm);
         this.empID = oneEmployeeData.etedEmployeeId;
         this.personalDetailsForm.controls['etedEmployeeId'].setValue(
           oneEmployeeData.etedEmployeeId
@@ -157,6 +158,7 @@ export class EditEmployeeComponent implements OnInit {
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
               'controls'
             ][i]['controls'];
+
           controlEmergencyContact['etecEcId'].setValue(
             this.emergencyContact[i]['etecEcId']
           );
@@ -175,6 +177,7 @@ export class EditEmployeeComponent implements OnInit {
           controlEmergencyContact['etecAddress'].setValue(
             this.emergencyContact[i]['etecAddress']
           );
+          console.log('emergency ', controlEmergencyContact);
         }
         /////Academic Qualification //////
         this.academicQualification =
@@ -390,8 +393,8 @@ export class EditEmployeeComponent implements OnInit {
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-      etedModifiedBy: ['', Validators.required],
-      etedModifiedByName: ['', Validators.required],
+      etedModifiedBy: [this.userId],
+      etedModifiedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
