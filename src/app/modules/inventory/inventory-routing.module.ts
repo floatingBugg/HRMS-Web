@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AcComponent } from './components/ac/ac.component';
+import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.component';
 import { CctvCamerasComponent } from './components/cctv-cameras/cctv-cameras.component';
 import { DrivesComponent } from './components/drives/drives.component';
 import { FansComponent } from './components/fans/fans.component';
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'stationery', component: StationeryComponent},
       { path: 'fans', component: FansComponent},
       { path: 'furniture', component: FurnitureComponent},
+      { path: 'asset-reserve', component: AssetReserveComponent},
       
     ]
   }];
