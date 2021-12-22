@@ -43,11 +43,12 @@ export class EditEmployeeComponent implements OnInit {
   whEndDate: any;
   diff: any;
   noOfDays: any;
-  public currentIndexEmergency: any = 0;
-  public currentIndexAcademic: any = 0;
-  public currentIndexProfessionalQ: any = 0;
-  public currentIndexWorkingHistory: any = 0;
-  ///////Emergency Contact ////////
+  public currentIndexEmergency: any = -1;
+  public currentIndexAcademic: any = -1;
+  public currentIndexProfessionalQ: any = -1;
+  public currentIndexWorkingHistory: any = -1;
+  public currentIndexProfessionalDetails:any = 0;
+  ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
   academicQualification: any;
@@ -392,7 +393,9 @@ export class EditEmployeeComponent implements OnInit {
       etedNationality: ['', Validators.required],
       emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([]),
-      emsTblEmployeeProfessionalDetails: this.fb.array([  this.addEmsTblEmployeeProfessionalDetails(),]),
+      emsTblEmployeeProfessionalDetails: this.fb.array([
+        this.addEmsTblEmployeeProfessionalDetails(),
+      ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
       etedModifiedBy: [this.userId],
@@ -514,33 +517,59 @@ export class EditEmployeeComponent implements OnInit {
 
   ///// Disable Form /////////
   isAddEmergencyDisabled() {
-    let result =
-      this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][
-        this.currentIndexEmergency
-      ].valid;
-    return !result;
+    if (this.currentIndexEmergency >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblEmergencyContact']['controls'][
+          this.currentIndexEmergency
+        ].valid;
+      return !result;
+    } else {
+      return false;
+    }
   }
-
+  isProfessionalDetailsDisabled() {
+    if (this.currentIndexProfessionalDetails == 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails']['controls'][
+          0
+        ].valid;
+      return !result;
+    } else {
+      return false;
+    }
+  }
   isAcademicQualificationDisabled() {
-    let result =
-      this.personalDetailsForm.controls['emsTblAcademicQualification'][
-        'controls'
-      ][this.currentIndexAcademic].valid;
-    return !result;
+    if (this.currentIndexAcademic >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblAcademicQualification'][
+          'controls'
+        ][this.currentIndexAcademic].valid;
+      return !result;
+    } else {
+      return false;
+    }
   }
   isProfessionalQualificationDisabled() {
-    let result =
-      this.personalDetailsForm.controls['emsTblProfessionalQualification'][
-        'controls'
-      ][this.currentIndexProfessionalQ].valid;
-    return !result;
+    if (this.currentIndexProfessionalQ >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblProfessionalQualification'][
+          'controls'
+        ][this.currentIndexProfessionalQ].valid;
+      return !result;
+    } else {
+      return false;
+    }
   }
   isWokringHistoryDisabled() {
-    let result =
-      this.personalDetailsForm.controls['emsTblWorkingHistory']['controls'][
-        this.currentIndexWorkingHistory
-      ].valid;
-    return !result;
+    if (this.currentIndexWorkingHistory >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblWorkingHistory']['controls'][
+          this.currentIndexWorkingHistory
+        ].valid;
+      return !result;
+    } else {
+      return false;
+    }
   }
   //Current Index Setter Emergency
   setCurrentIndexEmergency(index: any) {

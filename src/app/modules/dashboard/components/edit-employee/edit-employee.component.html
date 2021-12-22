@@ -1,10 +1,11 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class="mt-4"> Edit Employee {{editDataArray.etedFirstName}}</h3>
-    <mat-vertical-stepper>
+    <mat-vertical-stepper [formGroup]="personalDetailsForm" linear>
       <form [formGroup]="personalDetailsForm">
-        <mat-step label="Personal Details">
-          <div class="container screenMaxWidth">
+        <mat-step [stepControl]="personalDetailsForm.get('emsTblEmergencyContact')['controls']"
+          label="Personal Details">
+          <div class="screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
               <input name="etedEmployeeId" formControlName="etedEmployeeId" readonly type="number" matInput
@@ -393,90 +394,90 @@
                 </button>
               </div>
               <div align="end" class=" col-lg-5 col-md-4">
-                <button class="stepperBtn" mat-flat-button color="primary" matStepperNext>Next</button>
+                <button class="stepperBtn" [disabled]="isAddEmergencyDisabled()" mat-flat-button color="primary"
+                  matStepperNext>Next</button>
               </div>
             </div>
           </div>
 
         </mat-step>
         <mat-step label="Professional Details">
-          <div class="container">
-            <div class="form-group">
-              <div formArrayName="emsTblEmployeeProfessionalDetails"
-                *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
-                <div [formGroupName]="i">
+          <div class="form-group">
+            <div formArrayName="emsTblEmployeeProfessionalDetails"
+              *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
+              <div [formGroupName]="i">
 
-                  <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
-                    <mat-label>Professional Details Id</mat-label>
-                    <input formControlName="etepdPdId" name="etepdPdId" matInput placeholder="Professional Details Id">
-                  </mat-form-field>
-                  <!-- <mat-label>Designation</mat-label>
+                <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
+                  <mat-label>Professional Details Id</mat-label>
+                  <input formControlName="etepdPdId" name="etepdPdId" matInput placeholder="Professional Details Id">
+                </mat-form-field>
+                <!-- <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation"> -->
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Designation</mat-label>
-                    <mat-select formControlName="etepdDesignation" name="etepdDesignation">
-                      <mat-option [value]=""> ---Select One---</mat-option>
-                      <mat-option value="HR manager">HR (Manager)</mat-option>
-                      <mat-option value="HR officer">HR (Officer)</mat-option>
-                      <mat-option value="Sr. Software Engineer">Sr. Software Engineer</mat-option>
-                      <mat-option value="Jr. Software Engineer">Jr. Software Engineer</mat-option>
-                      <mat-option value="SQA Engineer Intern">SQA Engineer Intern</mat-option>
-                      <mat-option value="Sr. SQA Engineer">Sr. SQA Engineer</mat-option>
-                      <mat-option value="Jr. SQA Engineer">Jr. SQA Engineer</mat-option>
-                      <mat-option value="Project Manager">Project Manager</mat-option>
-                      <mat-option value="System Administrator">System Administrator</mat-option>
-                      <mat-option value="Database Developer">Database Developer</mat-option>
-                      <mat-option value="Receptionist">Receptionist</mat-option>
-                      <mat-option value="Accountant">Accountant</mat-option>
-                      <mat-option value="Office Boy">Office Boy</mat-option>
-                      <mat-option value="Guard">Guard</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
-                      Designation is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Salary</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
-                      matInput placeholder="Salary">
-                    <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
-                      Salary is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Joining Date</mat-label>
-                    <input readonly matInput formControlName="etepdJoiningDate" name="etepdJoiningDate"
-                      [matDatepicker]="picker" (dateChange)="getJoiningDate(i)">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                    <mat-error *ngIf="item.controls['etepdJoiningDate'].errors?.['required']">
-                      Joining Date is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Probation Period</mat-label>
-                    <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Probation</mat-label>
-                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
-                      formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
-                    <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
-                      Probation is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                </div>
+                <mat-form-field class="col-lg-5 col-md-5 input">
+                  <mat-label>Designation</mat-label>
+                  <mat-select formControlName="etepdDesignation" name="etepdDesignation">
+                    <mat-option [value]=""> ---Select One---</mat-option>
+                    <mat-option value="HR manager">HR (Manager)</mat-option>
+                    <mat-option value="HR officer">HR (Officer)</mat-option>
+                    <mat-option value="Sr. Software Engineer">Sr. Software Engineer</mat-option>
+                    <mat-option value="Jr. Software Engineer">Jr. Software Engineer</mat-option>
+                    <mat-option value="SQA Engineer Intern">SQA Engineer Intern</mat-option>
+                    <mat-option value="Sr. SQA Engineer">Sr. SQA Engineer</mat-option>
+                    <mat-option value="Jr. SQA Engineer">Jr. SQA Engineer</mat-option>
+                    <mat-option value="Project Manager">Project Manager</mat-option>
+                    <mat-option value="System Administrator">System Administrator</mat-option>
+                    <mat-option value="Database Developer">Database Developer</mat-option>
+                    <mat-option value="Receptionist">Receptionist</mat-option>
+                    <mat-option value="Accountant">Accountant</mat-option>
+                    <mat-option value="Office Boy">Office Boy</mat-option>
+                    <mat-option value="Guard">Guard</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
+                    Designation is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-lg-5 col-md-5 input">
+                  <mat-label>Salary</mat-label>
+                  <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
+                    matInput placeholder="Salary">
+                  <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
+                    Salary is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-lg-5 col-md-5 input">
+                  <mat-label>Joining Date</mat-label>
+                  <input readonly matInput formControlName="etepdJoiningDate" name="etepdJoiningDate"
+                    [matDatepicker]="picker" (dateChange)="getJoiningDate(i)">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error *ngIf="item.controls['etepdJoiningDate'].errors?.['required']">
+                    Joining Date is <strong>required</strong></mat-error>
+                </mat-form-field>
+                <mat-form-field class="col-lg-5 col-md-5 input">
+                  <mat-label>Probation Period</mat-label>
+                  <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
+                </mat-form-field>
+                <mat-form-field class="col-lg-5 col-md-5 input">
+                  <mat-label>Probation</mat-label>
+                  <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
+                    formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+                  <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
+                    Probation is <strong>required</strong></mat-error>
+                </mat-form-field>
               </div>
-              <div class="row mt-3">
-                <div class=" col-lg-5 col-md-4" style="margin-left: 40vh;">
-                  <button class="stepperBtn " style="margin-left: 10px; float: right;" mat-flat-button color="primary"
-                    matStepperPrevious>Back</button>
-                  <button class="  stepperBtn " style="float: right;" mat-flat-button color="primary"
-                    matStepperNext>Next</button>
-                </div>
+            </div>
+            <div class="row mt-3">
+              <div class=" col-lg-5 col-md-4" style="margin-left: 40vh;">
+                <button style="margin-left: 10px; float: right;" class="  stepperBtn "
+                  [disabled]="isProfessionalDetailsDisabled() " mat-flat-button color="primary"
+                  matStepperNext>Next</button>
+                <button class="stepperBtn " style="float: right;" mat-flat-button color="primary"
+                  matStepperPrevious>Back</button>
               </div>
             </div>
           </div>
         </mat-step>
         <mat-step label="Academic Qualification">
-          <div class=" mt-5 container" formArrayName="emsTblAcademicQualification"
+          <div class="mt-5" formArrayName="emsTblAcademicQualification"
             *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
             {{setCurrentIndexAcademicQualification(i)}}
             <div class="form-group" [formGroupName]=i>
@@ -529,10 +530,6 @@
                   Institute Name is <strong>required</strong></mat-error>
               </mat-form-field>
             </div>
-
-          </div>
-          <div *ngIf="academicQualification.length < 0">
-            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
@@ -544,7 +541,8 @@
             <div class=" col-lg-5 col-md-4">
               <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                 matStepperPrevious>Back</button>
-              <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+              <button class="stepperBtn " [disabled]="isAcademicQualificationDisabled()" mat-flat-button color="primary"
+                matStepperNext>Next</button>
             </div>
           </div>
         </mat-step>
@@ -601,7 +599,8 @@
             <div class=" col-lg-5 col-md-4">
               <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                 matStepperPrevious>Back</button>
-              <button class="stepperBtn " mat-flat-button color="primary" matStepperNext>Next</button>
+              <button class="stepperBtn " mat-flat-button color="primary"
+                [disabled]="isProfessionalQualificationDisabled()" matStepperNext>Next</button>
             </div>
           </div>
         </mat-step>
