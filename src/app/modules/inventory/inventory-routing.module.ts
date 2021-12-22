@@ -20,35 +20,31 @@ import { StationeryComponent } from './components/stationery/stationery.componen
 
 const routes: Routes = [
   {
-    path: '', component: InventoryLayoutComponent, children: [
+    path: '',
+    component: InventoryLayoutComponent,
+    children: [
       { path: '', component: InventoryComponent },
-      { path: 'laptop', component: LaptopComponent},
-      { path: 'screens', component: ScreensComponent},
-      { path: 'drives', component: DrivesComponent},
-      { path: 'cctv-cameras', component: CctvCamerasComponent},
-      { path: 'ac', component: AcComponent},
-      { path: 'printers', component: PrintersComponent},
-      { path: 'key-board', component: KeyBoardComponent},
-      { path: 'mouse', component: MouseComponent},
-      { path: 'power-cables', component: PowerCablesComponent},
-      { path: 'stationery', component: StationeryComponent},
-      { path: 'fans', component: FansComponent},
-      { path: 'furniture', component: FurnitureComponent},
-      { path: 'asset-reserve', component: AssetReserveComponent},
-      { path: 'assigned-laptops', component: AssignedLaptopsComponent},
-      { path: 'unassigned-laptops', component: UnassignedLaptopsComponent},
-     
-      
-    ]
-  }];
-
-
-
-
-
+      { path: 'laptop', component: LaptopComponent },
+      { path: 'screens', component: ScreensComponent },
+      { path: 'drives', component: DrivesComponent },
+      { path: 'cctv-cameras', component: CctvCamerasComponent },
+      { path: 'ac', component: AcComponent },
+      { path: 'printers', component: PrintersComponent },
+      { path: 'key-board', component: KeyBoardComponent },
+      { path: 'mouse', component: MouseComponent },
+      { path: 'power-cables', component: PowerCablesComponent },
+      { path: 'stationery', component: StationeryComponent },
+      { path: 'fans', component: FansComponent },
+      { path: 'furniture', component: FurnitureComponent },
+      { path: 'asset-reserve', component: AssetReserveComponent },
+      { path: 'assigned-laptops', component: AssignedLaptopsComponent },
+      { path: 'unassigned-laptops', component: UnassignedLaptopsComponent },
+    ],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class InventoryRoutingModule { }
+export class InventoryRoutingModule {}

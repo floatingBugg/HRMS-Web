@@ -40,7 +40,7 @@
             </div>
             <div class="row mt-2">
               <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Date of Birth:</b>
-                {{dob}}
+                {{dob | date}}
               </mat-label>
               <mat-label class=" col-lg-6 col-md-6"><b>Gender:</b>
                 {{gender}}
@@ -112,7 +112,7 @@
               </div>
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Joining Date:</b>
-                  {{profDetails[i].etepdJoiningDate}}
+                  {{profDetails[i].etepdJoiningDate | date}}
                 </mat-label>
                 <mat-label class=" col-lg-6 col-md-6"><b>Probation:</b>
                   {{profDetails[i].etepdProbation}}
@@ -159,12 +159,12 @@
                   {{profQualification[i].etpqCertification}}
                 </mat-label>
                 <mat-label class=" col-lg-6 col-md-6"><b>Start Date:</b>
-                  {{profQualification[i].etpqStratDate}}
+                  {{profQualification[i].etpqStratDate | date}}
                 </mat-label>
               </div>
               <div class="row mt-2">
                 <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
-                  {{profQualification[i].etpqEndDate}}
+                  {{profQualification[i].etpqEndDate | date}}
                 </mat-label>
                 <mat-label class="col-lg-6 col-md-6"><b>Institue Name:</b>
                   {{profQualification[i].etpqInstituteName}}
@@ -185,12 +185,12 @@
                   {{workHistory[i].etwhCompanyName}}
                 </mat-label>
                 <mat-label class="col-lg-6 col-md-6"><b>Start Date:</b>
-                  {{workHistory[i].etwhStratDate}}
+                  {{workHistory[i].etwhStratDate | date}}
                 </mat-label>
               </div>
               <div class="row mt-2">
                 <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
-                  {{workHistory[i].etwhEndDate}}
+                  {{workHistory[i].etwhEndDate | date}}
                 </mat-label>
                 <mat-label class="col-lg-6 col-md-6"><b>Designation:</b>
                   {{workHistory[i].etwhDesignation}}

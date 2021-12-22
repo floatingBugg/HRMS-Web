@@ -51,8 +51,6 @@ import { UnassignedLaptopsComponent } from './components/laptop/unassigned-lapto
     AssetReserveComponent,
     AssignedLaptopsComponent,
     UnassignedLaptopsComponent,
-    
-   
   ],
   imports: [
     CommonModule,
