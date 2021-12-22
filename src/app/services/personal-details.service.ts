@@ -11,13 +11,13 @@ export class PersonalDetailsService {
 
   personalDetails(data: any): Observable<any> {
     return this.http.post(
-      'https://localhost:5001/Employee/AddEmployee',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/AddEmployee',
       data
     );
   }
   getEmployeeData() {
     let url =
-      'https://localhost:5001/Employee/DisplayAllEmployees';
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
   deleteEmployeeData(id: any) {
