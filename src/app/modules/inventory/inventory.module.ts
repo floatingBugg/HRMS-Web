@@ -30,6 +30,18 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { AssignedLaptopsComponent } from './components/laptop/assigned-laptops/assigned-laptops.component';
 import { UnassignedLaptopsComponent } from './components/laptop/unassigned-laptops/unassigned-laptops.component';
+import { AssignedScreensComponent } from './components/screens/assigned-screens/assigned-screens.component';
+import { UnassignedScreensComponent } from './components/screens/unassigned-screens/unassigned-screens.component';
+import { AssignedPrintersComponent } from './components/printers/assigned-printers/assigned-printers.component';
+import { UnassignedPrintersComponent } from './components/printers/unassigned-printers/unassigned-printers.component';
+import { AssignedPowerCablesComponent } from './components/power-cables/assigned-power-cables/assigned-power-cables.component';
+import { UnassignedPowerCablesComponent } from './components/power-cables/unassigned-power-cables/unassigned-power-cables.component';
+import { AssignedMouseComponent } from './components/mouse/assigned-mouse/assigned-mouse.component';
+import { UnassignedMouseComponent } from './components/mouse/unassigned-mouse/unassigned-mouse.component';
+import { AssignedKeyboardComponent } from './components/key-board/assigned-keyboard/assigned-keyboard.component';
+import { UnassignedKeyboardComponent } from './components/key-board/unassigned-keyboard/unassigned-keyboard.component';
+import { AssignedStationeryComponent } from './components/stationery/assigned-stationery/assigned-stationery.component';
+import { UnassignedStationeryComponent } from './components/stationery/unassigned-stationery/unassigned-stationery.component';
 
 
 @NgModule({
@@ -51,6 +63,18 @@ import { UnassignedLaptopsComponent } from './components/laptop/unassigned-lapto
     AssetReserveComponent,
     AssignedLaptopsComponent,
     UnassignedLaptopsComponent,
+    AssignedScreensComponent,
+    UnassignedScreensComponent,
+    AssignedPrintersComponent,
+    UnassignedPrintersComponent,
+    AssignedPowerCablesComponent,
+    UnassignedPowerCablesComponent,
+    AssignedMouseComponent,
+    UnassignedMouseComponent,
+    AssignedKeyboardComponent,
+    UnassignedKeyboardComponent,
+    AssignedStationeryComponent,
+    UnassignedStationeryComponent,
     
    
   ],
