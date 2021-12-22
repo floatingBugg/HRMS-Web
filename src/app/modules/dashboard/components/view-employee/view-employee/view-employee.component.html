@@ -1,9 +1,9 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
-    <h3 class=" mt-4">Employee Detail:  {{firstName}}</h3>
+    <h3 class=" mt-4">Employee Detail: {{firstName}}</h3>
     <mat-vertical-stepper>
       <form>
-         <mat-step label="Personal Details">
+        <mat-step label="Personal Details">
           <div class="container">
             <div class="row">
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Employee ID:</b>
@@ -17,7 +17,7 @@
             <div class="row mt-2">
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Last Name:</b>
                 {{lastname}}
-               </mat-label>
+              </mat-label>
               <mat-label class="col-lg-6 col-md-6"><b>Phone Number:</b>
                 {{phoneNo}}
               </mat-label>
@@ -69,144 +69,148 @@
             </div>
             <h4 class="mt-3">Emergency Contact Person</h4>
             <div *ngIf="emergencyContact.length > 0">
-            <div *ngFor="let item of emergencyContact; let i = index">
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>First Name:</b>
-                {{emergencyContact[i].etecFirstName}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Last Name:</b>
-                {{emergencyContact[i].etecLastName}}
-              </mat-label>
+              <div *ngFor="let item of emergencyContact; let i = index">
+                <p class="mb-3 mt-3"><b>Emergency Contact Person: {{i+1}}</b></p>
+                <div class="row mt-2">
+                  <mat-label class=" col-lg-6 col-md-6 ml-5"><b>First Name:</b>
+                    {{emergencyContact[i].etecFirstName}}
+                  </mat-label>
+                  <mat-label class=" col-lg-6 col-md-6"><b>Last Name:</b>
+                    {{emergencyContact[i].etecLastName}}
+                  </mat-label>
+                </div>
+                <div class="row mt-2">
+                  <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Relation:</b>
+                    {{emergencyContact[i].etecRelation}}
+                  </mat-label>
+                  <mat-label class=" col-lg-6 col-md-6"><b>Phone Number:</b>
+                    {{emergencyContact[i].etecContactNumber}}
+                  </mat-label>
+                </div>
+                <div class="row mt-2">
+                  <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Address:</b>
+                    {{emergencyContact[i].etecAddress}}
+                  </mat-label>
+                </div>
+              </div>
             </div>
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Relation:</b>
-                {{emergencyContact[i].etecRelation}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Phone Number:</b>
-                {{emergencyContact[i].etecContactNumber}}
-              </mat-label>
+            <div *ngIf="emergencyContact.length <= 0">
+              <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
             </div>
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Address:</b>
-                {{emergencyContact[i].etecAddress}}
-              </mat-label>
-            </div>
-          </div>
-          </div>
-          <div *ngIf="emergencyContact.length <= 0">
-            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
-          </div>
           </div>
         </mat-step>
         <mat-step label="Professional Details">
           <div *ngIf="profDetails.length > 0">
-          <div class="container" *ngFor="let item of profDetails; let i = index">
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Designation:</b>
-                {{profDetails[i].etepdDesignation}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Salary:</b>
-                {{profDetails[i].etepdSalary}}
-              </mat-label>
-            </div>
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Joining Date:</b>
-                {{profDetails[i].etepdJoiningDate}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Probation:</b>
-                {{profDetails[i].etepdProbation}}
-              </mat-label>
+            <div class="container" *ngFor="let item of profDetails; let i = index">
+              <div class="row mt-2">
+                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Designation:</b>
+                  {{profDetails[i].etepdDesignation}}
+                </mat-label>
+                <mat-label class=" col-lg-6 col-md-6"><b>Salary:</b>
+                  {{profDetails[i].etepdSalary}}
+                </mat-label>
+              </div>
+              <div class="row mt-2">
+                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Joining Date:</b>
+                  {{profDetails[i].etepdJoiningDate}}
+                </mat-label>
+                <mat-label class=" col-lg-6 col-md-6"><b>Probation:</b>
+                  {{profDetails[i].etepdProbation}}
+                </mat-label>
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="profDetails.length <= 0">
-          <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
-        </div>
+          <div *ngIf="profDetails.length <= 0">
+            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
+          </div>
         </mat-step>
         <mat-step label="Academic Qualification">
           <div *ngIf="academicQualification.length > 0">
-          <div class="container" *ngFor="let item of academicQualification; let i = index">
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Degree Title:</b>
-                {{academicQualification[i].etaqQualification}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Passing Year</b>:
-                {{academicQualification[i].etaqPassingYear}}
-              </mat-label>
-            </div>
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>CGPA:</b>
-                {{academicQualification[i].etaqCgpa}}
-              </mat-label>
-              <mat-label class="col-lg-6 col-md-6"><b>Institue Name:</b>
-                {{academicQualification[i].etaqInstituteName}}
-              </mat-label>
+            <div class="container" *ngFor="let item of academicQualification; let i = index">
+              <p class="mb-3 mt-3"><b>Academic Qualification: {{i+1}}</b></p>
+              <div class="row mt-2">
+                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Degree Title:</b>
+                  {{academicQualification[i].etaqQualification}}
+                </mat-label>
+                <mat-label class=" col-lg-6 col-md-6"><b>Passing Year</b>:
+                  {{academicQualification[i].etaqPassingYear}}
+                </mat-label>
+              </div>
+              <div class="row mt-2">
+                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>CGPA:</b>
+                  {{academicQualification[i].etaqCgpa}}
+                </mat-label>
+                <mat-label class="col-lg-6 col-md-6"><b>Institue Name:</b>
+                  {{academicQualification[i].etaqInstituteName}}
+                </mat-label>
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="academicQualification.length <= 0">
-          <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
-        </div>
+          <div *ngIf="academicQualification.length <= 0">
+            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
+          </div>
         </mat-step>
         <mat-step label="Professional Qualification">
           <div *ngIf="profQualification.length > 0">
-          <div class="container" *ngFor="let item of profQualification; let i = index">
-            <div class="row mt-2">
-              <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Certification:</b>
-                {{profQualification[i].etpqCertification}}
-              </mat-label>
-              <mat-label class=" col-lg-6 col-md-6"><b>Start Date:</b>
-                {{profQualification[i].etpqStratDate}}
-              </mat-label>
-            </div>
-            <div class="row mt-2">
-              <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
-                {{profQualification[i].etpqEndDate}}
-              </mat-label>
-              <mat-label class="col-lg-6 col-md-6"><b>Institue Name:</b>
-                {{profQualification[i].etpqInstituteName}}
-              </mat-label>
+            <div class="container" *ngFor="let item of profQualification; let i = index">
+              <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
+              <div class="row mt-2">
+                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Certification:</b>
+                  {{profQualification[i].etpqCertification}}
+                </mat-label>
+                <mat-label class=" col-lg-6 col-md-6"><b>Start Date:</b>
+                  {{profQualification[i].etpqStratDate}}
+                </mat-label>
+              </div>
+              <div class="row mt-2">
+                <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
+                  {{profQualification[i].etpqEndDate}}
+                </mat-label>
+                <mat-label class="col-lg-6 col-md-6"><b>Institue Name:</b>
+                  {{profQualification[i].etpqInstituteName}}
+                </mat-label>
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="profQualification.length <= 0">
-          <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
-        </div>
+          <div *ngIf="profQualification.length <= 0">
+            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
+          </div>
         </mat-step>
         <mat-step label="Working History">
           <div *ngIf="workHistory.length > 0">
-          <div class="container" *ngFor="let item of workHistory; let i =  index">
-            <div class="row mt-2">
-              <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company:</b>
-                {{workHistory[i].etwhCompanyName}}
-              </mat-label>
-              <mat-label class="col-lg-6 col-md-6"><b>Start Date:</b>
-                {{workHistory[i].etwhStratDate}}
-              </mat-label>
-            </div>
-            <div class="row mt-2">
-              <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
-                {{workHistory[i].etwhEndDate}}
-              </mat-label>
-              <mat-label class="col-lg-6 col-md-6"><b>Designation:</b>
-                {{workHistory[i].etwhDesignation}}
-              </mat-label>
+            <div class="container" *ngFor="let item of workHistory; let i =  index">
+              <p class="mb-3 mt-3"><b>Working History: {{i+1}}</b></p>
+              <div class="row mt-2">
+                <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company:</b>
+                  {{workHistory[i].etwhCompanyName}}
+                </mat-label>
+                <mat-label class="col-lg-6 col-md-6"><b>Start Date:</b>
+                  {{workHistory[i].etwhStratDate}}
+                </mat-label>
               </div>
               <div class="row mt-2">
-              <mat-label class="col-lg-6 col-md-6"><b>Duration:</b>
-                {{workHistory[i].etwhDuration}}
-              </mat-label>
+                <mat-label class="col-lg-6 col-md-6 ml-5"><b>End Date:</b>
+                  {{workHistory[i].etwhEndDate}}
+                </mat-label>
+                <mat-label class="col-lg-6 col-md-6"><b>Designation:</b>
+                  {{workHistory[i].etwhDesignation}}
+                </mat-label>
+              </div>
+              <div class="row mt-2">
+                <mat-label class="col-lg-6 col-md-6"><b>Duration:</b>
+                  {{workHistory[i].etwhDuration}}
+                </mat-label>
+              </div>
             </div>
           </div>
-        </div>
-        <div *ngIf="workHistory.length <= 0">
-          <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
-        </div>
+          <div *ngIf="workHistory.length <= 0">
+            <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
+          </div>
         </mat-step>
       </form>
     </mat-vertical-stepper>
     <div class="text-align-right marginBottom6em">
       <button class="setPositionRight5em" routerLink="./employee" mat-raised-button color="warn">Back</button>
-      </div>
+    </div>
   </div>
 </div>
