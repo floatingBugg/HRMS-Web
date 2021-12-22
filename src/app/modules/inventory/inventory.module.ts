@@ -26,7 +26,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { AssignedLaptopsComponent } from './components/laptop/assigned-laptops/assigned-laptops.component';
+import { UnassignedLaptopsComponent } from './components/laptop/unassigned-laptops/unassigned-laptops.component';
 
 
 @NgModule({
@@ -46,7 +49,9 @@ import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.
     FansComponent,
     FurnitureComponent,
     AssetReserveComponent,
-   
+    AssignedLaptopsComponent,
+    UnassignedLaptopsComponent,
+    
    
   ],
   imports: [
@@ -62,7 +67,9 @@ import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.
     MatSelectModule,
     InventoryRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatTableModule,
+    MatPaginatorModule
   ]
 })
 export class InventoryModule { }

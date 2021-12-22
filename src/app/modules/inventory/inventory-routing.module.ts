@@ -9,7 +9,9 @@ import { FurnitureComponent } from './components/furniture/furniture.component';
 import { InventoryLayoutComponent } from './components/inventory-layout/inventory-layout.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { KeyBoardComponent } from './components/key-board/key-board.component';
+import { AssignedLaptopsComponent } from './components/laptop/assigned-laptops/assigned-laptops.component';
 import { LaptopComponent } from './components/laptop/laptop.component';
+import { UnassignedLaptopsComponent } from './components/laptop/unassigned-laptops/unassigned-laptops.component';
 import { MouseComponent } from './components/mouse/mouse.component';
 import { PowerCablesComponent } from './components/power-cables/power-cables.component';
 import { PrintersComponent } from './components/printers/printers.component';
@@ -20,7 +22,7 @@ const routes: Routes = [
   {
     path: '', component: InventoryLayoutComponent, children: [
       { path: '', component: InventoryComponent },
-      { path: 'laptop', component: LaptopComponent },
+      { path: 'laptop', component: LaptopComponent},
       { path: 'screens', component: ScreensComponent},
       { path: 'drives', component: DrivesComponent},
       { path: 'cctv-cameras', component: CctvCamerasComponent},
@@ -33,6 +35,9 @@ const routes: Routes = [
       { path: 'fans', component: FansComponent},
       { path: 'furniture', component: FurnitureComponent},
       { path: 'asset-reserve', component: AssetReserveComponent},
+      { path: 'assigned-laptops', component: AssignedLaptopsComponent},
+      { path: 'unassigned-laptops', component: UnassignedLaptopsComponent},
+     
       
     ]
   }];

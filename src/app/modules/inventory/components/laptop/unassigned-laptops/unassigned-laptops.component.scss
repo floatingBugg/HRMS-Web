@@ -1,0 +1,39 @@
+.container{
+    background: white;
+    margin-top: 20vh;
+    border-radius: 10px;
+  }
+  .screenMaxWidth{
+    max-width: 2560px;
+  }
+  table{
+    width: 100%;
+  
+  }
+  th{
+    font-weight: 700;
+  }
+  .add{
+    float: right;
+  
+  }
+  .field{
+    float: right;
+    margin-left: 20px;
+  }
+  mat-label{
+    font-size: 16px;
+  }
+  .mat-row:hover {
+    //cursor: pointer;
+    background-color: #808ccf;
+  }
+  
+  .ml-20
+  {
+    margin-left: 20px;
+  }
+  .text-align-right
+  {
+    text-align: right;
+  }
