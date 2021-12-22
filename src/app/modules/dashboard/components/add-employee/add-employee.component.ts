@@ -55,10 +55,10 @@ export class AddEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      etaqQualification: ['', Validators.required],
-      etaqPassingYear: [, [Validators.maxLength(4), Validators.required]],
-      etaqCgpa: [, Validators.required],
-      etaqInstituteName: ['', Validators.required],
+      qualification: ['', Validators.required],
+      passingYear: [, [Validators.maxLength(4), Validators.required]],
+      cgpa: [, Validators.required],
+      academicInstituteName: ['', Validators.required],
     });
   }
 
@@ -72,10 +72,10 @@ export class AddEmployeeComponent implements OnInit {
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
-      etecFirstName: ['', Validators.required],
-      etecLastName: ['', Validators.required],
-      etecRelation: ['', Validators.required],
-      etecContactNumber: [
+      emergencyfirstname: ['', Validators.required],
+      emergencylastname: ['', Validators.required],
+      emergencyrelation: ['', Validators.required],
+      emergencycontact: [
         '',
         [
           Validators.required,
@@ -83,7 +83,7 @@ export class AddEmployeeComponent implements OnInit {
           Validators.maxLength(11),
         ],
       ],
-      etecAddress: ['', Validators.required],
+      emergencyaddress: ['', Validators.required],
     });
   }
 
@@ -97,10 +97,10 @@ export class AddEmployeeComponent implements OnInit {
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
     return this.fb.group({
-      etepdSalary: ['', Validators.required],
-      etepdProbation: [this.newDate, Validators.required],
-      etepdDesignation: ['', Validators.required],
-      etepdJoiningDate: [null, Validators.required],
+      salary: ['', Validators.required],
+      probation: [this.newDate, Validators.required],
+      profdesignation: ['', Validators.required],
+      joiningDate: [null, Validators.required],
     });
   }
   addProfessionalDetails(): void {
@@ -114,10 +114,10 @@ export class AddEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
-      etpqCertification: ['', Validators.required],
-      etpqStratDate: [null, Validators.required],
-      etpqEndDate: [null, Validators.required],
-      etpqInstituteName: ['', Validators.required],
+      certification: ['', Validators.required],
+      profstartDate: [null, Validators.required],
+      profendDate: [null, Validators.required],
+      professionalInstituteName: ['', Validators.required],
     });
   }
   addProfessionalQualification(): void {
@@ -132,11 +132,11 @@ export class AddEmployeeComponent implements OnInit {
   //////Working History//////////
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
-      etwhCompanyName: ['', Validators.required],
-      etwhDesignation: ['', Validators.required],
-      etwhStratDate: [null, Validators.required],
-      etwhEndDate: [null, Validators.required],
-      etwhDuration: ['', Validators.required],
+      companyname: ['', Validators.required],
+      workdesignation: ['', Validators.required],
+      workstartdate: [null, Validators.required],
+      workenddate: [null, Validators.required],
+      duration: ['', Validators.required],
     });
   }
   addWorkingHistory(): void {
@@ -147,9 +147,9 @@ export class AddEmployeeComponent implements OnInit {
   }
   createForm() {
     this.personalDetailsForm = this.fb.group({
-      etedFirstName: ['', Validators.required],
-      etedLastName: ['', Validators.required],
-      etedContactNumber: [
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
+      contact: [
         '',
         [
           Validators.required,
@@ -157,7 +157,7 @@ export class AddEmployeeComponent implements OnInit {
           Validators.maxLength(11),
         ],
       ],
-      etedCnic: [
+      cnic: [
         ,
         [
           Validators.required,
@@ -165,16 +165,16 @@ export class AddEmployeeComponent implements OnInit {
           Validators.maxLength(13),
         ],
       ],
-      etedEmailAddress: ['', [Validators.required, Validators.email]],
-      etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
-      etedAddress: ['', Validators.required],
-      etedDob: ['', Validators.required],
-      etedGender: ['', Validators.required],
-      etedMaritalStatus: ['', Validators.required],
-      etedStatus: ['', Validators.required],
-      etedBloodGroup: ['', Validators.required],
-      etedReligion: ['', Validators.required],
-      etedNationality: ['', Validators.required],
+      personalemail: ['', [Validators.required, Validators.email]],
+      officialemail: ['', [Validators.required, Validators.email]],
+      address: ['', Validators.required],
+      dob: ['', Validators.required],
+      gender: ['', Validators.required],
+      martialstatus: ['', Validators.required],
+      empstatus: ['', Validators.required],
+      bloodgroup: ['', Validators.required],
+      religion: ['', Validators.required],
+      nationality: ['', Validators.required],
       etedCreatedBy: [this.userId],
       etedCreatedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
@@ -225,8 +225,8 @@ export class AddEmployeeComponent implements OnInit {
     let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
       'controls'
     ][index]['controls'];
-    this.whStartDate = control['etwhStratDate'].value;
-    this.whEndDate = control['etwhEndDate'].value;
+    this.whStartDate = control['workstartdate'].value;
+    this.whEndDate = control['workenddate'].value;
     console.log(this.whStartDate);
     console.log(this.whEndDate);
     let start: any = new Date(this.whStartDate);
@@ -260,7 +260,7 @@ export class AddEmployeeComponent implements OnInit {
         [years, ` years `, months, ' months ', days, ' days '].join('')
       );
     }
-    control['etwhDuration'].setValue(this.whDuration);
+    control['duration'].setValue(this.whDuration);
     return console.log(this.whDuration);
   }
 
@@ -268,7 +268,7 @@ export class AddEmployeeComponent implements OnInit {
     let control = this.personalDetailsForm.get(
       'emsTblEmployeeProfessionalDetails'
     )['controls'][index]['controls'];
-    let pdjoinDate = control['etepdJoiningDate'].value;
+    let pdjoinDate = control['joiningDate'].value;
     let d = new Date(pdjoinDate);
     this.monthval = (<HTMLInputElement>(
       document.getElementById('monthVal')
@@ -278,7 +278,7 @@ export class AddEmployeeComponent implements OnInit {
     this.probationDate = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
     }).format(this.newDate);
-    control['etepdProbation'].setValue(this.probationDate);
+    control['probation'].setValue(this.probationDate);
   }
 
   checkEmergencyInput(emergencyFirstName: any) {
