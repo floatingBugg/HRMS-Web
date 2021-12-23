@@ -73,7 +73,7 @@ const routes: Routes = [
       { path: 'unassigned-furniture', component: UnassignedFurnitureComponent },
       { path: 'assigned-keyboard', component: AssignedKeyboardComponent },
       { path: 'unassigned-keyboard', component: UnassignedKeyboardComponent },
-      { path: 'assigned-laptop', component: AssignedLaptopsComponent },
+      { path: 'assigned-laptops', component: AssignedLaptopsComponent },
       { path: 'unassigned-laptops', component: UnassignedLaptopsComponent },
       { path: 'assigned-mouse', component: AssignedMouseComponent },
       { path: 'unassigned-mouse', component: UnassignedMouseComponent },
