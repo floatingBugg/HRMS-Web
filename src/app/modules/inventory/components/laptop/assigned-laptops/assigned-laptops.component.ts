@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -32,7 +33,9 @@ export class AssignedLaptopsComponent implements OnInit {
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(
+    public dialog: MatDialog,private personalDetails: PersonalDetailsService,
+    public empDataService: EmployeeDataService) { }
 
   ngOnInit(): void {
     this.getEmployeeData();
@@ -59,18 +62,18 @@ export class AssignedLaptopsComponent implements OnInit {
   //     }
   //   });
   // }
-  
+
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-  
+
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
      // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
-  
+
     });
   }
   // onRowClicked(row: any) {}
-  
+
   }
-  
+
 
