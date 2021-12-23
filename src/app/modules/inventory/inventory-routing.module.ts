@@ -59,7 +59,7 @@ const routes: Routes = [
       { path: 'stationery', component: StationeryComponent},
       { path: 'fans', component: FansComponent},
       { path: 'furniture', component: FurnitureComponent},
-      { path: 'asset-reserve', component: AssetReserveComponent},
+      { path: 'asset-reserve/:id', component: AssetReserveComponent},
       { path: 'assigned-ac', component: AssignedAcComponent},
       { path: 'unassigned-ac', component: UnassignedAcComponent},
       { path: 'assigned-camera', component: AssignedCamerasComponent},
