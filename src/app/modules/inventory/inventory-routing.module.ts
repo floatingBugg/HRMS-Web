@@ -2,11 +2,21 @@ import { componentFactoryName } from '@angular/compiler';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AcComponent } from './components/ac/ac.component';
+import { AssignedAcComponent } from './components/ac/assigned-ac/assigned-ac.component';
+import { UnassignedAcComponent } from './components/ac/unassigned-ac/unassigned-ac.component';
 import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.component';
+import { AssignedCamerasComponent } from './components/cctv-cameras/assigned-cameras/assigned-cameras.component';
 import { CctvCamerasComponent } from './components/cctv-cameras/cctv-cameras.component';
+import { UnassignedCamerasComponent } from './components/cctv-cameras/unassigned-cameras/unassigned-cameras.component';
+import { AssignedDrivesComponent } from './components/drives/assigned-drives/assigned-drives.component';
 import { DrivesComponent } from './components/drives/drives.component';
+import { UnassignedDrivesComponent } from './components/drives/unassigned-drives/unassigned-drives.component';
+import { AssignedFansComponent } from './components/fans/assigned-fans/assigned-fans.component';
 import { FansComponent } from './components/fans/fans.component';
+import { UnassignedFansComponent } from './components/fans/unassigned-fans/unassigned-fans.component';
+import { AssignedFurnitureComponent } from './components/furniture/assigned-furniture/assigned-furniture.component';
 import { FurnitureComponent } from './components/furniture/furniture.component';
+import { UnassignedFurnitureComponent } from './components/furniture/unassigned-furniture/unassigned-furniture.component';
 import { InventoryLayoutComponent } from './components/inventory-layout/inventory-layout.component';
 import { InventoryComponent } from './components/inventory/inventory.component';
 import { AssignedKeyboardComponent } from './components/key-board/assigned-keyboard/assigned-keyboard.component';
@@ -49,23 +59,31 @@ const routes: Routes = [
       { path: 'stationery', component: StationeryComponent},
       { path: 'fans', component: FansComponent},
       { path: 'furniture', component: FurnitureComponent},
-      { path: 'asset-reserve/:id', component: AssetReserveComponent},
-      { path: 'assigned-laptop', component: AssignedLaptopsComponent},
-      { path: 'unassigned-laptops', component: UnassignedLaptopsComponent},
+      { path: 'asset-reserve', component: AssetReserveComponent},
+      { path: 'assigned-ac', component: AssignedAcComponent},
+      { path: 'unassigned-ac', component: UnassignedAcComponent},
+      { path: 'assigned-camera', component: AssignedCamerasComponent},
+      { path: 'unassigned-cameras', component: UnassignedCamerasComponent},
+      { path: 'assigned-drives', component: AssignedDrivesComponent},
+      { path: 'unasssigned-drives', component: UnassignedDrivesComponent},
+      { path: 'assigned-fans', component: AssignedFansComponent},
+      { path: 'unassigned-fans', component: UnassignedFansComponent},
+      { path: 'assigned-furniture', component: AssignedFurnitureComponent},
+      { path: 'unassigned-furniture', component: UnassignedFurnitureComponent},
       { path: 'assigned-keyboard', component: AssignedKeyboardComponent},
       { path: 'unassigned-keyboard', component: UnassignedKeyboardComponent},
+      { path: 'assigned-laptop', component: AssignedLaptopsComponent},
+      { path: 'unassigned-laptops', component: UnassignedLaptopsComponent},
       { path: 'assigned-mouse', component: AssignedMouseComponent},
       { path: 'unassigned-mouse', component: UnassignedMouseComponent},
-      { path: 'assigned-screens', component: AssignedScreensComponent},
-      { path: 'unassigned-screens', component: UnassignedScreensComponent},
-      { path: 'assigned-printers', component: AssignedPrintersComponent},
-      { path: 'unassigned-printers', component: UnassignedPrintersComponent},
       { path: 'assigned-power-cables', component: AssignedPowerCablesComponent},
       { path: 'unassigned-power-cables', component: UnassignedPowerCablesComponent},
+      { path: 'assigned-printers', component: AssignedPrintersComponent},
+      { path: 'unassigned-printers', component: UnassignedPrintersComponent},
+      { path: 'assigned-screens', component: AssignedScreensComponent},
+      { path: 'unassigned-screens', component: UnassignedScreensComponent},
       { path: 'assigned-stationery', component: AssignedStationeryComponent},
       { path: 'unassigned-stationery', component: UnassignedStationeryComponent},
-
-
     ]
   }];
 

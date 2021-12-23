@@ -42,6 +42,16 @@ import { AssignedKeyboardComponent } from './components/key-board/assigned-keybo
 import { UnassignedKeyboardComponent } from './components/key-board/unassigned-keyboard/unassigned-keyboard.component';
 import { AssignedStationeryComponent } from './components/stationery/assigned-stationery/assigned-stationery.component';
 import { UnassignedStationeryComponent } from './components/stationery/unassigned-stationery/unassigned-stationery.component';
+import { AssignedAcComponent } from './components/ac/assigned-ac/assigned-ac.component';
+import { UnassignedAcComponent } from './components/ac/unassigned-ac/unassigned-ac.component';
+import { AssignedCamerasComponent } from './components/cctv-cameras/assigned-cameras/assigned-cameras.component';
+import { UnassignedCamerasComponent } from './components/cctv-cameras/unassigned-cameras/unassigned-cameras.component';
+import { AssignedDrivesComponent } from './components/drives/assigned-drives/assigned-drives.component';
+import { UnassignedDrivesComponent } from './components/drives/unassigned-drives/unassigned-drives.component';
+import { AssignedFansComponent } from './components/fans/assigned-fans/assigned-fans.component';
+import { UnassignedFansComponent } from './components/fans/unassigned-fans/unassigned-fans.component';
+import { AssignedFurnitureComponent } from './components/furniture/assigned-furniture/assigned-furniture.component';
+import { UnassignedFurnitureComponent } from './components/furniture/unassigned-furniture/unassigned-furniture.component';
 
 
 @NgModule({
@@ -75,6 +85,16 @@ import { UnassignedStationeryComponent } from './components/stationery/unassigne
     UnassignedKeyboardComponent,
     AssignedStationeryComponent,
     UnassignedStationeryComponent,
+    AssignedAcComponent,
+    UnassignedAcComponent,
+    AssignedCamerasComponent,
+    UnassignedCamerasComponent,
+    AssignedDrivesComponent,
+    UnassignedDrivesComponent,
+    AssignedFansComponent,
+    UnassignedFansComponent,
+    AssignedFurnitureComponent,
+    UnassignedFurnitureComponent,
 
 
   ],
