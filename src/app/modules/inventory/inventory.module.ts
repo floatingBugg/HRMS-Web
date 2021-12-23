@@ -75,8 +75,8 @@ import { UnassignedStationeryComponent } from './components/stationery/unassigne
     UnassignedKeyboardComponent,
     AssignedStationeryComponent,
     UnassignedStationeryComponent,
-    
-   
+
+
   ],
   imports: [
     CommonModule,

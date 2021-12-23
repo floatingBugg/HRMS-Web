@@ -33,7 +33,9 @@ import { UnassignedStationeryComponent } from './components/stationery/unassigne
 
 const routes: Routes = [
   {
-    path: '', component: InventoryLayoutComponent, children: [
+    path: '',
+    component: InventoryLayoutComponent,
+    children: [
       { path: '', component: InventoryComponent },
       { path: 'laptop', component: LaptopComponent},
       { path: 'screens', component: ScreensComponent},
@@ -47,8 +49,8 @@ const routes: Routes = [
       { path: 'stationery', component: StationeryComponent},
       { path: 'fans', component: FansComponent},
       { path: 'furniture', component: FurnitureComponent},
-      { path: 'asset-reserve', component: AssetReserveComponent},
-      { path: 'assigned-laptops', component: AssignedLaptopsComponent},
+      { path: 'asset-reserve/:id', component: AssetReserveComponent},
+      { path: 'assigned-laptop', component: AssignedLaptopsComponent},
       { path: 'unassigned-laptops', component: UnassignedLaptopsComponent},
       { path: 'assigned-keyboard', component: AssignedKeyboardComponent},
       { path: 'unassigned-keyboard', component: UnassignedKeyboardComponent},
@@ -62,18 +64,13 @@ const routes: Routes = [
       { path: 'unassigned-power-cables', component: UnassignedPowerCablesComponent},
       { path: 'assigned-stationery', component: AssignedStationeryComponent},
       { path: 'unassigned-stationery', component: UnassignedStationeryComponent},
-     
-      
+
+
     ]
   }];
 
-
-
-
-
-
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class InventoryRoutingModule { }
+export class InventoryRoutingModule {}
