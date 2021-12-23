@@ -11,7 +11,7 @@
     <div (click)="getId($event)" class="card ems-container" matRipple [matRippleCentered]="centered"
       [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
       [matRippleColor]="color">
-      <img id="laptop" src="../../../../../assets/img/pexels-photo-7500056.jpeg" alt="Avatar"
+      <img id="laptops" src="../../../../../assets/img/pexels-photo-7500056.jpeg" alt="Avatar"
         style="width: 100%; height: 180px;">
       <div class="container">
         <h5><b>Laptop </b></h5>
@@ -23,12 +23,12 @@
       </div>
     </div>
 
-    <div class="card rms-container" (click)="getId($event)" matRipple [matRippleCentered]="centered"
+    <div id="screens" class="card rms-container" (click)="getId($event)" matRipple [matRippleCentered]="centered"
       [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
       [matRippleColor]="color">
       <img id="screens" src="../../../../../assets/img/pexels-photo-326502.jpeg" alt="Avatar"
         style="width:100%; height: 180px;">
-      <div class="container">
+      <div id="screens" class="container">
         <h5><b>Screens</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -37,10 +37,11 @@
 
       </div>
     </div>
-    <div  class="card ims-container" (click)="getId($event)" matRipple [matRippleCentered]="centered"
-      [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
-      [matRippleColor]="color">
-      <img id="drives" src="../../../../../assets/img/pexels-photo-1082327.jpeg" alt="Avatar" style="width:100%; height: 180px;">
+    <div (click)="getId($event)" class="card ims-container" routerLink="/inventory/asset-reserve" matRipple
+      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+      [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="drives" src="../../../../../assets/img/pexels-photo-1082327.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
       <div class="container">
         <h5><b>Drives</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
@@ -50,10 +51,11 @@
 
       </div>
     </div>
-    <div class="card ims-container " routerLink="/inventory/asset-reserve" matRipple [matRippleCentered]="centered"
-      [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded" [matRippleRadius]="radius"
-      [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-5966513.jpeg" alt="Avatar" style="width:100%; height: 180px;">
+    <div (click)="getId($event)" class="card ims-container " routerLink="/inventory/asset-reserve" matRipple
+      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+      [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="cameras" src="../../../../../assets/img/pexels-photo-5966513.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
       <div class="container">
         <h5><b>CCTV-Cameras</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
@@ -63,10 +65,10 @@
 
       </div>
     </div>
-    <div class="card ems-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
+    <div (click)="getId($event)" class="card ems-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
       [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
       [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/images.jpg" alt="Avatar" style="width:100%; height: 180px;">
+      <img id="ac" src="../../../../../assets/img/images.jpg" alt="Avatar" style="width:100%; height: 180px;">
       <div class="container">
         <h5><b>AC</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
@@ -76,11 +78,12 @@
 
       </div>
     </div>
-    <div class="card rms-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
-      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-      [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-7014415.jpeg" alt="Avatar" style="width:100%; height: 180px;">
-      <div class="container">
+    <div id="printers" (click)="getId($event)" class="card rms-container mt-3 mb-3"
+      routerLink="/inventory/asset-reserve" matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled"
+      [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="printers" src="../../../../../assets/img/pexels-photo-7014415.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
+      <div id="printers" class="container">
         <h5><b>Printers</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -89,11 +92,12 @@
 
       </div>
     </div>
-    <div class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
-      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-      [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-4065748.jpeg" alt="Avatar" style="width:100%; height: 180px;">
-      <div class="container">
+    <div id="keyboard" (click)="getId($event)" class="card ims-container mt-3 mb-3"
+      routerLink="/inventory/asset-reserve" matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled"
+      [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="keyboard" src="../../../../../assets/img/pexels-photo-4065748.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
+      <div id="keyboard" class="container">
         <h5><b>Keyboard</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -102,11 +106,12 @@
 
       </div>
     </div>
-    <div class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
-      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
+    <div id="mouse" (click)="getId($event)" class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve"
+      matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
       [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-7430755.jpeg" alt="Avatar" style="width:100%; height: 180px;">
-      <div class="container">
+      <img id="mouse" src="../../../../../assets/img/pexels-photo-7430755.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
+      <div id="mouse" class="container">
         <h5><b>Mouse</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -115,11 +120,12 @@
 
       </div>
     </div>
-    <div class="card ems-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
-      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-      [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-4339335.jpeg" alt="Avatar" style="width:100%; height: 180px;">
-      <div class="container">
+    <div id="power-cables" (click)="getId($event)" class="card ems-container mt-3 mb-3"
+      routerLink="/inventory/asset-reserve" matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled"
+      [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="power-cables" src="../../../../../assets/img/pexels-photo-4339335.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
+      <div id="power-cables" class="container">
         <h5><b>Power Cables</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -128,11 +134,12 @@
 
       </div>
     </div>
-    <div class="card rms-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
-      [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
-      [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-7718712.jpeg" alt="Avatar" style="width:100%; height: 180px;">
-      <div class="container">
+    <div id="stationery" (click)="getId($event)" class="card rms-container mt-3 mb-3"
+      routerLink="/inventory/asset-reserve" matRipple [matRippleCentered]="centered" [matRippleDisabled]="disabled"
+      [matRippleUnbounded]="unbounded" [matRippleRadius]="radius" [matRippleColor]="color">
+      <img id="stationery" src="../../../../../assets/img/pexels-photo-7718712.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
+      <div id="stationery" class="container">
         <h5><b>Stationery</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
         </mat-label><br>
@@ -141,10 +148,10 @@
 
       </div>
     </div>
-    <div class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
+    <div (click)="getId($event)" class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
       [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
       [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/images.png" alt="Avatar" style="width:100%; height: 180px;">
+      <img id="fans" src="../../../../../assets/img/images.png" alt="Avatar" style="width:100%; height: 180px;">
       <div class="container">
         <h5><b>Fans</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
@@ -154,10 +161,11 @@
 
       </div>
     </div>
-    <div class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
+    <div (click)="getId($event)" class="card ims-container mt-3 mb-3" routerLink="/inventory/asset-reserve" matRipple
       [matRippleCentered]="centered" [matRippleDisabled]="disabled" [matRippleUnbounded]="unbounded"
       [matRippleRadius]="radius" [matRippleColor]="color">
-      <img src="../../../../../assets/img/pexels-photo-416320.jpeg" alt="Avatar" style="width:100%; height: 180px;">
+      <img id="furniture" src="../../../../../assets/img/pexels-photo-416320.jpeg" alt="Avatar"
+        style="width:100%; height: 180px;">
       <div class="container">
         <h5><b>Furniture</b></h5>
         <mat-label class="col-lg-6 col-md-6 ml-5"><b>Quantity:</b>
