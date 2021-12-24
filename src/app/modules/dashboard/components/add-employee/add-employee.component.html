@@ -409,7 +409,7 @@
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation"> -->
                     <mat-label>Designation</mat-label>
-                    <mat-select formControlName="EtepdProfDesignation" name="EtepdProfDesignation">
+                    <mat-select formControlName="etepdDesignation" name="etepdDesignation">
                       <mat-option [value]=""> ---Select One---</mat-option>
                       <mat-option value="HR manager">HR (Manager)</mat-option>
                       <mat-option value="HR officer">HR (Officer)</mat-option>
@@ -426,7 +426,7 @@
                       <mat-option value="Office Boy">Office Boy</mat-option>
                       <mat-option value="Guard">Guard</mat-option>
                     </mat-select>
-                    <mat-error *ngIf="item.controls['EtepdProfDesignation'].errors?.['required']">
+                    <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
                       Designation is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
@@ -629,8 +629,8 @@
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Designation</mat-label>
-                  <input matInput formControlName="EtwhWorkDesignation " name="EtwhWorkDesignation " placeholder="Designation">
-                  <mat-error *ngIf="item.controls['EtwhWorkDesignation '].errors?.['required']">
+                  <input matInput formControlName="etwhDesignation" name="etwhDesignation" placeholder="Designation">
+                  <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
                     Designation is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">

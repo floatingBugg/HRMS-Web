@@ -104,7 +104,7 @@
             <div class="container" *ngFor="let item of profDetails; let i = index">
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Designation:</b>
-                  {{profDetails[i].EtepdProfDesignation}}
+                  {{profDetails[i].etepdDesignation}}
                 </mat-label>
                 <mat-label class=" col-lg-6 col-md-6"><b>Salary:</b>
                   {{profDetails[i].etepdSalary}}
@@ -193,7 +193,7 @@
                   {{workHistory[i].etwhEndDate | date}}
                 </mat-label>
                 <mat-label class="col-lg-6 col-md-6"><b>Designation:</b>
-                  {{workHistory[i].EtwhWorkDesignation }}
+                  {{workHistory[i].etwhDesignation }}
                 </mat-label>
               </div>
               <div class="row mt-2">

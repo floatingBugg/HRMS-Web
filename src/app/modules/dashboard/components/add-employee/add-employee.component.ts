@@ -57,7 +57,7 @@ export class AddEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
-      userImage: [''],
+      etaqUploadDocuments: [''],
       etaqQualification: ['', Validators.required],
       etaqPassingYear: [, [Validators.maxLength(4), Validators.required]],
       etaqCgpa: [, Validators.required],
@@ -102,7 +102,7 @@ export class AddEmployeeComponent implements OnInit {
     return this.fb.group({
       etepdSalary: ['', Validators.required],
       etepdProbation: [this.newDate, Validators.required],
-      EtepdProfDesignation: ['', Validators.required],
+      etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
     });
   }
@@ -136,7 +136,7 @@ export class AddEmployeeComponent implements OnInit {
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
       etwhCompanyName: ['', Validators.required],
-      EtwhWorkDesignation : ['', Validators.required],
+      etwhDesignation: ['', Validators.required],
       etwhStratDate: [null, Validators.required],
       etwhEndDate: [null, Validators.required],
       etwhDuration: ['', Validators.required],
@@ -380,8 +380,8 @@ export class AddEmployeeComponent implements OnInit {
         this.isFileChanged = reader.result ? true : false;
         this.personalDetailsForm.controls['emsTblAcademicQualification'][
           'controls'
-        ][0]['controls'].patchValue({
-          EtaqUploadDocumentsUrl: reader.result,
+        ][0]['controls']['etaqUploadDocuments'].patchValue({
+          etaqUploadDocuments: reader.result,
         });
       };
     }

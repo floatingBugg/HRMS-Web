@@ -47,7 +47,7 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
   public currentIndexWorkingHistory: any = -1;
-  public currentIndexProfessionalDetails:any = 0;
+  public currentIndexProfessionalDetails: any = 0;
   ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
@@ -132,8 +132,8 @@ export class EditEmployeeComponent implements OnInit {
         controlProfessionalDetails['etepdPdId'].setValue(
           this.professionalDetails[0]['etepdPdId']
         );
-        controlProfessionalDetails['EtepdProfDesignation'].setValue(
-          this.professionalDetails[0]['EtepdProfDesignation']
+        controlProfessionalDetails['etepdDesignation'].setValue(
+          this.professionalDetails[0]['etepdDesignation']
         );
         controlProfessionalDetails['etepdSalary'].setValue(
           this.professionalDetails[0]['etepdSalary']
@@ -239,8 +239,8 @@ export class EditEmployeeComponent implements OnInit {
           controlWorkingHistory['etwhCompanyName'].setValue(
             this.workingHistory[i]['etwhCompanyName']
           );
-          controlWorkingHistory['EtwhWorkDesignation '].setValue(
-            this.workingHistory[i]['EtwhWorkDesignation ']
+          controlWorkingHistory['etwhDesignation'].setValue(
+            this.workingHistory[i]['etwhDesignation']
           );
           controlWorkingHistory['etwhStratDate'].setValue(
             this.workingHistory[i]['etwhStratDate']
@@ -307,7 +307,7 @@ export class EditEmployeeComponent implements OnInit {
       etepdPdId: ['', Validators.required],
       etepdSalary: ['', Validators.required],
       etepdProbation: [this.newDate, Validators.required],
-      EtepdProfDesignation: ['', Validators.required],
+      etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
     });
   }
@@ -343,7 +343,7 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       etwhWhId: [0],
       etwhCompanyName: ['', Validators.required],
-      EtwhWorkDesignation : ['', Validators.required],
+      etwhDesignation: ['', Validators.required],
       etwhStratDate: [null, Validators.required],
       etwhEndDate: [null, Validators.required],
       etwhDuration: ['', Validators.required],
@@ -525,9 +525,9 @@ export class EditEmployeeComponent implements OnInit {
   isProfessionalDetailsDisabled() {
     if (this.currentIndexProfessionalDetails == 0) {
       let result =
-        this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails']['controls'][
-          0
-        ].valid;
+        this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails'][
+          'controls'
+        ][0].valid;
       return !result;
     } else {
       return false;

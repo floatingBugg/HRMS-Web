@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-employee.component.scss'],
 })
 export class ViewEmployeeComponent implements OnInit {
-
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -25,22 +24,24 @@ export class ViewEmployeeComponent implements OnInit {
   public religion: any;
   public nationality: any;
   //////Emergency Contact /////
-  public emergencyContact=[
+  public emergencyContact = [
     {
-      etecFirstName:'',
-      etecLastName:'',
-      etecRelation:'',
-      etecContactNumber:'',
-      etecAddress:''
-    }
-  ]
+      etecFirstName: '',
+      etecLastName: '',
+      etecRelation: '',
+      etecContactNumber: '',
+      etecAddress: '',
+    },
+  ];
   //////// Professional Details//////
-  public profDetails=[{
-    EtepdProfDesignation:'',
-    etepdSalary:'',
-    etepdJoiningDate:'',
-    etepdProbation:''
-  }]
+  public profDetails = [
+    {
+      etepdDesignation: '',
+      etepdSalary: '',
+      etepdJoiningDate: '',
+      etepdProbation: '',
+    },
+  ];
   public pdDesignation: any;
   public pdSalary: any;
   public pdProbation: any;
@@ -68,60 +69,60 @@ export class ViewEmployeeComponent implements OnInit {
   public workHistory = [
     {
       etwhCompanyName: '',
-      EtwhWorkDesignation : '',
+      etwhDesignation: '',
       etwhStratDate: '',
       etwhEndDate: '',
       etwhDuration: '',
     },
   ];
-  rowId:any;
-  constructor(public personalDetailService: PersonalDetailsService, public route: ActivatedRoute) {}
+  rowId: any;
+  constructor(
+    public personalDetailService: PersonalDetailsService,
+    public route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     this.rowId = this.route.snapshot.paramMap.get('id');
-  this.getEmployeeDataByID(this.rowId);
+    this.getEmployeeDataByID(this.rowId);
   }
 
   getEmployeeDataByID(rowId: any) {
-    this.personalDetailService.viewEmployeeData(rowId).subscribe((data: any) => {
-      if(data.success)
-      {
-      let oneEmployeeData = data.data;
+    this.personalDetailService
+      .viewEmployeeData(rowId)
+      .subscribe((data: any) => {
+        if (data.success) {
+          let oneEmployeeData = data.data;
 
-      this.empID = oneEmployeeData[0].etedEmployeeId;
-      this.firstName = oneEmployeeData[0].etedFirstName;
-      this.lastname = oneEmployeeData[0].etedLastName;
-      this.phoneNo = oneEmployeeData[0].etedContactNumber;
-      this.cnic = oneEmployeeData[0].etedCnic;
-      this.personalEmail = oneEmployeeData[0].etedEmailAddress;
-      this.professionalEmail = oneEmployeeData[0].etedOfficialEmailAddress;
-      this.address = oneEmployeeData[0].etedAddress;
-      this.dob = oneEmployeeData[0].etedDob;
-      this.gender = oneEmployeeData[0].etedGender;
-      this.maritalStatus = oneEmployeeData[0].etedMaritalStatus;
-      this.employementStatus = oneEmployeeData[0].etedStatus;
-      this.bloodGroup = oneEmployeeData[0].etedBloodGroup;
-      this.religion = oneEmployeeData[0].etedReligion;
-      this.nationality = oneEmployeeData[0].etedNationality;
-      //////Emergency Contact /////
-      this.emergencyContact =
-        oneEmployeeData[0].emsTblEmergencyContact;
-      //////// Professional Details//////
-      this.profDetails =
-        oneEmployeeData[0].emsTblEmployeeProfessionalDetails;
-      /////// Academic Qualification/////////
-      this.academicQualification =
-        oneEmployeeData[0].emsTblAcademicQualification;
-      //////// Professional Qualification///////
-      this.profQualification =
-        oneEmployeeData[0].emsTblProfessionalQualification;
-      //////Working History/////////
-      this.workHistory = oneEmployeeData[0].emsTblWorkingHistory;
-      }
-      else
-      {
-
-      }
-    });
+          this.empID = oneEmployeeData[0].etedEmployeeId;
+          this.firstName = oneEmployeeData[0].etedFirstName;
+          this.lastname = oneEmployeeData[0].etedLastName;
+          this.phoneNo = oneEmployeeData[0].etedContactNumber;
+          this.cnic = oneEmployeeData[0].etedCnic;
+          this.personalEmail = oneEmployeeData[0].etedEmailAddress;
+          this.professionalEmail = oneEmployeeData[0].etedOfficialEmailAddress;
+          this.address = oneEmployeeData[0].etedAddress;
+          this.dob = oneEmployeeData[0].etedDob;
+          this.gender = oneEmployeeData[0].etedGender;
+          this.maritalStatus = oneEmployeeData[0].etedMaritalStatus;
+          this.employementStatus = oneEmployeeData[0].etedStatus;
+          this.bloodGroup = oneEmployeeData[0].etedBloodGroup;
+          this.religion = oneEmployeeData[0].etedReligion;
+          this.nationality = oneEmployeeData[0].etedNationality;
+          //////Emergency Contact /////
+          this.emergencyContact = oneEmployeeData[0].emsTblEmergencyContact;
+          //////// Professional Details//////
+          this.profDetails =
+            oneEmployeeData[0].emsTblEmployeeProfessionalDetails;
+          /////// Academic Qualification/////////
+          this.academicQualification =
+            oneEmployeeData[0].emsTblAcademicQualification;
+          //////// Professional Qualification///////
+          this.profQualification =
+            oneEmployeeData[0].emsTblProfessionalQualification;
+          //////Working History/////////
+          this.workHistory = oneEmployeeData[0].emsTblWorkingHistory;
+        } else {
+        }
+      });
   }
 }
