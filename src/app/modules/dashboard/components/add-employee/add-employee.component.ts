@@ -33,13 +33,15 @@ export class AddEmployeeComponent implements OnInit {
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
+  imageUrl?: any;
   public currentIndexEmergency: any = 0;
   public currentIndexAcademic: any = -1;
-  public currentIndexProfessionalDetails:any = 0;
+  public currentIndexProfessionalDetails: any = 0;
   public currentIndexProfessionalQ: any = -1;
-  public currentIndexWorkingHistory: any =-1;
+  public currentIndexWorkingHistory: any = -1;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
+  isFileChanged!: boolean;
   constructor(
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
@@ -55,6 +57,7 @@ export class AddEmployeeComponent implements OnInit {
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
+      userImage: [''],
       etaqQualification: ['', Validators.required],
       etaqPassingYear: [, [Validators.maxLength(4), Validators.required]],
       etaqCgpa: [, Validators.required],
@@ -293,7 +296,6 @@ export class AddEmployeeComponent implements OnInit {
     }
   }
 
-
   ///// Disable Form /////////
   isAddEmergencyDisabled() {
     if (this.currentIndexEmergency >= 0) {
@@ -310,16 +312,16 @@ export class AddEmployeeComponent implements OnInit {
   isProfessionalDetailsDisabled() {
     if (this.currentIndexProfessionalDetails == 0) {
       let result =
-        this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails']['controls'][
-          0
-        ].valid;
+        this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails'][
+          'controls'
+        ][0].valid;
       return !result;
     } else {
       return false;
     }
   }
   isAcademicQualificationDisabled() {
-    if (this.currentIndexAcademic >=  0) {
+    if (this.currentIndexAcademic >= 0) {
       let result =
         this.personalDetailsForm.controls['emsTblAcademicQualification'][
           'controls'
@@ -366,5 +368,22 @@ export class AddEmployeeComponent implements OnInit {
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
+  }
+  onFileChange(event: any): void {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        this.imageUrl = reader.result;
+        this.isFileChanged = reader.result ? true : false;
+        this.personalDetailsForm.controls['emsTblAcademicQualification'][
+          'controls'
+        ][0]['controls'].patchValue({
+          EtaqUploadDocumentsUrl: reader.result,
+        });
+      };
+    }
   }
 }

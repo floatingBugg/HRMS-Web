@@ -526,6 +526,14 @@
                     Institute Name is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
+              <div class="field col-12 md:col-6">
+                <label id="fileLabel">Profile Image</label>&nbsp;&nbsp;
+                <div class="circle" *ngIf="imageUrl">
+                  <img [src]="imageUrl" class="Image">
+                </div>
+                <input id="file" type="file" (change)="onFileChange($event)" />
+                <label for="file" class="Img"><i class="pi pi-images mr-2"></i>Upload</label><br><br>
+              </div>
             </div>
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
@@ -539,8 +547,8 @@
                   color="primary" matStepperNext>Next</button>
                 <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                   matStepperPrevious>Back</button>
-                  <button style="float: right;" class="setPositionRight4em" [disabled]="isAcademicQualificationDisabled()"
-                    mat-raised-button type="submit" color="primary" (click)="submitData()">Save</button>
+                <button style="float: right;" class="setPositionRight4em" [disabled]="isAcademicQualificationDisabled()"
+                  mat-raised-button type="submit" color="primary" (click)="submitData()">Save</button>
               </div>
             </div>
           </div>
@@ -599,8 +607,9 @@
                   [disabled]="isProfessionalQualificationDisabled()" matStepperNext>Next</button>
                 <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                   matStepperPrevious>Back</button>
-                  <button style="float: right;" class="setPositionRight4em" [disabled]="isProfessionalQualificationDisabled()"
-                    mat-raised-button type="submit" color="primary" (click)="submitData()">Save</button>
+                <button style="float: right;" class="setPositionRight4em"
+                  [disabled]="isProfessionalQualificationDisabled()" mat-raised-button type="submit" color="primary"
+                  (click)="submitData()">Save</button>
               </div>
             </div>
           </div>
