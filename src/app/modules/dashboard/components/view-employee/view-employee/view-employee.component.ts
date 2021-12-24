@@ -68,7 +68,7 @@ export class ViewEmployeeComponent implements OnInit {
   public workHistory = [
     {
       etwhCompanyName: '',
-      etwhDesignation: '',
+      EtwhWorkDesignation : '',
       etwhStratDate: '',
       etwhEndDate: '',
       etwhDuration: '',

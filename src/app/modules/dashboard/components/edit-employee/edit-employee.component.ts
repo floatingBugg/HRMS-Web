@@ -239,8 +239,8 @@ export class EditEmployeeComponent implements OnInit {
           controlWorkingHistory['etwhCompanyName'].setValue(
             this.workingHistory[i]['etwhCompanyName']
           );
-          controlWorkingHistory['etwhDesignation'].setValue(
-            this.workingHistory[i]['etwhDesignation']
+          controlWorkingHistory['EtwhWorkDesignation '].setValue(
+            this.workingHistory[i]['EtwhWorkDesignation ']
           );
           controlWorkingHistory['etwhStratDate'].setValue(
             this.workingHistory[i]['etwhStratDate']
@@ -343,7 +343,7 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       etwhWhId: [0],
       etwhCompanyName: ['', Validators.required],
-      etwhDesignation: ['', Validators.required],
+      EtwhWorkDesignation : ['', Validators.required],
       etwhStratDate: [null, Validators.required],
       etwhEndDate: [null, Validators.required],
       etwhDuration: ['', Validators.required],

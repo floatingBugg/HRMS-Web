@@ -136,7 +136,7 @@ export class AddEmployeeComponent implements OnInit {
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
       etwhCompanyName: ['', Validators.required],
-      etwhDesignation: ['', Validators.required],
+      EtwhWorkDesignation : ['', Validators.required],
       etwhStratDate: [null, Validators.required],
       etwhEndDate: [null, Validators.required],
       etwhDuration: ['', Validators.required],
