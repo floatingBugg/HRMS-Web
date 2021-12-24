@@ -36,7 +36,7 @@ export class ViewEmployeeComponent implements OnInit {
   ]
   //////// Professional Details//////
   public profDetails=[{
-    etepdDesignation:'',
+    EtepdProfDesignation:'',
     etepdSalary:'',
     etepdJoiningDate:'',
     etepdProbation:''

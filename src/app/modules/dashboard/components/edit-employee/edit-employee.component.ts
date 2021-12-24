@@ -132,8 +132,8 @@ export class EditEmployeeComponent implements OnInit {
         controlProfessionalDetails['etepdPdId'].setValue(
           this.professionalDetails[0]['etepdPdId']
         );
-        controlProfessionalDetails['etepdDesignation'].setValue(
-          this.professionalDetails[0]['etepdDesignation']
+        controlProfessionalDetails['EtepdProfDesignation'].setValue(
+          this.professionalDetails[0]['EtepdProfDesignation']
         );
         controlProfessionalDetails['etepdSalary'].setValue(
           this.professionalDetails[0]['etepdSalary']
@@ -144,11 +144,6 @@ export class EditEmployeeComponent implements OnInit {
         controlProfessionalDetails['etepdProbation'].setValue(
           this.professionalDetails[0]['etepdProbation']
         );
-        console.log(
-          'professional details',
-          controlProfessionalDetails['etepdDesignation']
-        );
-
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
         for (let i = 0; i < this.emergencyContact.length; i++) {
@@ -312,7 +307,7 @@ export class EditEmployeeComponent implements OnInit {
       etepdPdId: ['', Validators.required],
       etepdSalary: ['', Validators.required],
       etepdProbation: [this.newDate, Validators.required],
-      etepdDesignation: ['', Validators.required],
+      EtepdProfDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
     });
   }

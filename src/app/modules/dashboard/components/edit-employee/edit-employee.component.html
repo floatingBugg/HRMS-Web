@@ -416,7 +416,7 @@
                       name="etepdDesignation"> -->
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Designation</mat-label>
-                  <mat-select formControlName="etepdDesignation" name="etepdDesignation">
+                  <mat-select formControlName="EtepdProfDesignation" name="EtepdProfDesignation">
                     <mat-option [value]=""> ---Select One---</mat-option>
                     <mat-option value="HR manager">HR (Manager)</mat-option>
                     <mat-option value="HR officer">HR (Officer)</mat-option>
@@ -433,7 +433,7 @@
                     <mat-option value="Office Boy">Office Boy</mat-option>
                     <mat-option value="Guard">Guard</mat-option>
                   </mat-select>
-                  <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
+                  <mat-error *ngIf="item.controls['EtepdProfDesignation'].errors?.['required']">
                     Designation is <strong>required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-5 col-md-5 input">

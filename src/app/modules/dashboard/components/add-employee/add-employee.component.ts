@@ -102,7 +102,7 @@ export class AddEmployeeComponent implements OnInit {
     return this.fb.group({
       etepdSalary: ['', Validators.required],
       etepdProbation: [this.newDate, Validators.required],
-      etepdDesignation: ['', Validators.required],
+      EtepdProfDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
     });
   }
