@@ -24,6 +24,7 @@ export class AssignedScreensComponent implements OnInit {
     'fullName',
     'empDesignation',
     'contactNumber',
+    'quantity',
     'emailAddress',
     'assignedTo',
     'actions',

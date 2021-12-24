@@ -66,7 +66,7 @@ const routes: Routes = [
       { path: 'assigned-cameras', component: AssignedCamerasComponent },
       { path: 'unassigned-cameras', component: UnassignedCamerasComponent },
       { path: 'assigned-drives', component: AssignedDrivesComponent },
-      { path: 'unasssigned-drives', component: UnassignedDrivesComponent },
+      { path: 'unassigned-drives', component: UnassignedDrivesComponent },
       { path: 'assigned-fans', component: AssignedFansComponent },
       { path: 'unassigned-fans', component: UnassignedFansComponent },
       { path: 'assigned-furniture', component: AssignedFurnitureComponent },

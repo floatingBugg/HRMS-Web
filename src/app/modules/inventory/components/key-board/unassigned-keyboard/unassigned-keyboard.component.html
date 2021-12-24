@@ -1,1 +1,66 @@
-<p>unassigned-keyboard works!</p>
+<div class="container m-0 screenMaxWidth">
+    <div class="row">
+      <div class="mt-4 col-lg-6">
+        <h3>Not Asssigned Keyboards</h3>
+  
+      </div>
+      <div class="col-lg-6 text-align-right">
+        <!-- <button routerLink="/inventory/laptop" mat-raised-button color color="primary">Add Laptop</button> -->
+        <mat-form-field class="ml-20" appearance="standard">
+          <mat-label>Search keyword</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+        </mat-form-field>
+  
+      </div>
+    </div>
+  
+    <table mat-table [dataSource]="employeeData" class="mat-elevation-z8" matSort>
+      <ng-container matColumnDef="empID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.empID}} </td>
+      </ng-container>
+      <ng-container matColumnDef="fullName"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
+        <td mat-cell *matCellDef="let employee"> {{employee.fullName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="emailAddress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Processr</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
+      </ng-container>
+      <ng-container matColumnDef="contactNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>RAM</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.contactNumber}} </td>
+      </ng-container>
+      <ng-container matColumnDef="empDesignation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
+      </ng-container>
+      <!-- <ng-container matColumnDef="assignedTo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned To</th>
+        <td mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
+      </ng-container> -->
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions </th>
+        <td mat-cell *matCellDef="let employee">
+          <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" 
+            title="Delete Employee Record">
+            <mat-icon>delete_outlint</mat-icon>
+          </button>
+          <button mat-raised-button title="Delete Employee Record" color="primary">Assign</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
+    </table>
+    <mat-paginator class="mb-1" #employeeDataPage [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
+    </mat-paginator>
+  </div>
+  
+
