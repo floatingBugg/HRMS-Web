@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
+import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 
 @Component({
   selector: 'app-add-employee-failure-dialog',
@@ -8,8 +9,10 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 export class AddEmployeeFailureDialogComponent implements OnInit {
   errorRef:ElementRef | undefined
   errorMsg:any;
-  constructor() {
+  responseMesage:string = ""
+  constructor(private personalDetailService: PersonalDetailsService) {
     this.errorMsg =  localStorage.getItem('errorMessage')
+    this.responseMesage = personalDetailService.responseMessage;
    }
 
   ngOnInit(): void {

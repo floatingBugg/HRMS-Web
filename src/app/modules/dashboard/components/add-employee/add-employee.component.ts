@@ -33,7 +33,7 @@ export class AddEmployeeComponent implements OnInit {
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
-  imageUrl?: any;
+  imageUrl:any []=[];
   public currentIndexEmergency: any = 0;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalDetails: any = 0;
@@ -201,6 +201,7 @@ export class AddEmployeeComponent implements OnInit {
           this.errorMsg = result.message;
           console.log('error Msgggg', this.errorMsg);
           localStorage.setItem('errorMessage', this.errorMsg);
+          this.personaldetails._responseMessage = this.errorMsg;
           this.dialog.open(AddEmployeeFailureDialogComponent, {
             width: '600px',
           });
@@ -369,20 +370,25 @@ export class AddEmployeeComponent implements OnInit {
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
   }
-  onFileChange(event: any): void {
+  
+  onFileChange(event: any, i:any): void {
+    debugger
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        this.imageUrl = reader.result;
+        debugger
+        if(this.currentIndexAcademic >=0){
+        this.imageUrl[i] = reader.result;
         this.isFileChanged = reader.result ? true : false;
         this.personalDetailsForm.controls['emsTblAcademicQualification'][
           'controls'
-        ][0]['controls']['etaqUploadDocuments'].patchValue({
+        ][i].patchValue({
           etaqUploadDocuments: reader.result,
         });
+      }
       };
     }
   }

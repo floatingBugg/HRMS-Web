@@ -528,10 +528,10 @@
               </div>
               <div class="field col-12 md:col-6">
                 <label id="fileLabel">Profile Image</label>&nbsp;&nbsp;
-                <div class="circle" *ngIf="imageUrl">
-                  <img [src]="imageUrl" class="Image">
+                <div class="circle" *ngIf="imageUrl[i]">
+                  <img [src]="imageUrl[i]" class="Image">
                 </div>
-                <input id="file" type="file" (change)="onFileChange($event)" />
+                <input id="file" type="file" (change)="onFileChange($event,i)" />
                 <label for="file" class="Img"><i class="pi pi-images mr-2"></i>Upload</label><br><br>
               </div>
             </div>
