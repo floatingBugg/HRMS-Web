@@ -20,11 +20,13 @@ export class AssignedLaptopsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'emailAddress',
+    'assetID',
+    'nameModel',
+    'company',
+    'ram',
+    'processor',
+    'storage',
+    'generation',
     'assignedTo',
     'actions',
   ];

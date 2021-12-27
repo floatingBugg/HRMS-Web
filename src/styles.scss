@@ -49,7 +49,9 @@ body {
 }
 .cdk-overlay-pane
 {
-    max-width: 30vw !important;
+    // max-width: 30vw !important;
+    overflow: auto;
+    margin-top: 12rem;
 }
 .floatRight
 {

@@ -19,11 +19,9 @@ export class UnassignedMouseComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'emailAddress',
+    'assetID',
+    'name',
+    'type',
     'actions',
   ];
 

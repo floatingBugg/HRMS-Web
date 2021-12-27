@@ -1,12 +1,14 @@
 import {DeleteEmployeeComponent} from '../../../../dashboard/components/delete-employee/delete-employee.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { EmployeeComponent } from 'src/app/modules/dashboard/components/employee/employee.component';
+
 
 
 @Component({
@@ -19,11 +21,13 @@ export class UnassignedLaptopsComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'emailAddress',
+    'assetID',
+    'nameModel',
+    'company',
+    'ram',
+    'processor',
+    'storage',
+    'generation',
     'actions',
   ];
 
@@ -32,7 +36,8 @@ export class UnassignedLaptopsComponent implements OnInit {
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,
+    public empDataService: EmployeeDataService) { }
 
   ngOnInit(): void {
     this.getEmployeeData();
@@ -59,7 +64,9 @@ export class UnassignedLaptopsComponent implements OnInit {
   //     }
   //   });
   // }
-  
+  onCreate(){
+   this.dialog.open(EmployeeComponent);
+  }
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
   

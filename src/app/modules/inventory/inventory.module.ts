@@ -52,6 +52,7 @@ import { AssignedFansComponent } from './components/fans/assigned-fans/assigned-
 import { UnassignedFansComponent } from './components/fans/unassigned-fans/unassigned-fans.component';
 import { AssignedFurnitureComponent } from './components/furniture/assigned-furniture/assigned-furniture.component';
 import { UnassignedFurnitureComponent } from './components/furniture/unassigned-furniture/unassigned-furniture.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -113,7 +114,10 @@ import { UnassignedFurnitureComponent } from './components/furniture/unassigned-
     ReactiveFormsModule,
     FormsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ]
 })
-export class InventoryModule { }
+export class InventoryModule {
+  
+ }
