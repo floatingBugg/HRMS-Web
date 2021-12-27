@@ -201,6 +201,7 @@ export class AddEmployeeComponent implements OnInit {
           this.errorMsg = result.message;
           console.log('error Msgggg', this.errorMsg);
           localStorage.setItem('errorMessage', this.errorMsg);
+          this.personaldetails._responseMessage = this.errorMsg;
           this.dialog.open(AddEmployeeFailureDialogComponent, {
             width: '600px',
           });
@@ -376,11 +377,12 @@ export class AddEmployeeComponent implements OnInit {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
+        debugger
         this.imageUrl = reader.result;
         this.isFileChanged = reader.result ? true : false;
         this.personalDetailsForm.controls['emsTblAcademicQualification'][
           'controls'
-        ][0]['controls']['etaqUploadDocuments'].patchValue({
+        ][0].patchValue({
           etaqUploadDocuments: reader.result,
         });
       };
