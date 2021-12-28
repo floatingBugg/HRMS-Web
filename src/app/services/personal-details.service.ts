@@ -8,38 +8,26 @@ export class PersonalDetailsService {
   constructor(private http: HttpClient) {}
   _userId = localStorage.getItem('loggedIn_UserId');
   _userName = localStorage.getItem('loggedIn_UserName');
-  _responseMessage:any=""
-  get responseMessage(){
+  _responseMessage: any = '';
+  apiUrl = 'http://hamzaashiq467-001-site1.itempurl.com';
+  get responseMessage() {
     return this._responseMessage;
   }
   personalDetails(data: any): Observable<any> {
-    return this.http.post(
-      'https://localhost:44324/Employee/AddEmployee',
-      data
-    );
+    return this.http.post(this.apiUrl + '/Employee/AddEmployee', data);
   }
   getEmployeeData() {
-    let url =
-      'https://localhost:44324/Employee/DisplayAllEmployees';
+    let url = this.apiUrl + '/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
   deleteEmployeeData(id: any) {
-    return this.http.delete(
-      `https://localhost:44324/Employee/DeleteEmployee?id=${id}`
-    );
+    return this.http.delete(this.apiUrl + `/DeleteEmployee?id=${id}`);
   }
   viewEmployeeData(id: any): Observable<any> {
-    return this.http.get(
-      `https://localhost:44324/Employee/GetEmployeebyID?id=${id}`
-    );
+    return this.http.get(this.apiUrl + `/Employee/GetEmployeebyID?id=${id}`);
   }
 
-  updateEmployeeData(data:any):Observable<any>{
-    return this.http.post(
-      'https://localhost:44324/Employee/UpdateEmployee',
-      data
-    );
+  updateEmployeeData(data: any): Observable<any> {
+    return this.http.post(this.apiUrl + '/Employee/UpdateEmployee', data);
   }
 }
-
-

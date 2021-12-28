@@ -5,6 +5,10 @@
       <form [formGroup]="personalDetailsForm">
         <mat-step [stepControl]="personalDetailsForm.get('emsTblEmergencyContact')['controls']"
           label="Personal Details">
+          <mat-label class="col-lg-6 col-md-6 ml-5"><b>User Image:</b></mat-label>
+          <div class="circle" *ngIf="profilePicUrl">
+            <img [src]="profilePicUrl" class="Image">
+          </div>
           <div class="screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
@@ -482,6 +486,12 @@
             {{setCurrentIndexAcademicQualification(i)}}
             <div class="form-group" [formGroupName]=i>
               <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
+              <div class="field col-12 md:col-6">
+                <div class="circle" *ngIf="imageUrl[i]">
+                  <img [src]="imageUrl[i]" class="Image">
+                </div>
+                <input id="file" type="file" (change)="onFileChange($event,i)" />
+              </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Academic Qualification Id</mat-label>
                 <input formControlName="etaqAqId" name="etaqAqId" matInput placeholder="Academic QualificationId">
@@ -552,6 +562,12 @@
             {{setCurrentIndexProfessionalQualification(i)}}
             <div class="form-group" [formGroupName]=i>
               <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
+              <div class="field col-12 md:col-6">
+                <div class="circle" *ngIf="profQualificationUrl[i]">
+                  <img  [src]="profQualificationUrl[i]" class="Image">
+                </div>
+                <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
+              </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Profesiional Qualification Id</mat-label>
                 <input formControlName="etpqPqId" name="etpqPqId" matInput placeholder="Professional QualificationId">
@@ -651,6 +667,10 @@
                   Duration is <strong>required</strong></mat-error>
               </mat-form-field>
             </div>
+            <div class="circle" *ngIf="workingHistoryUrl[i]">
+              <img [src]="workingHistoryUrl[i]" class="Image">
+            </div>
+            <input id="file" type="file" (change)="workingHistoryUpload($event,i)" />
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">

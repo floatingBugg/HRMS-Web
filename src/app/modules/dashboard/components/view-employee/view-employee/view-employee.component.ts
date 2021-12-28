@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./view-employee.component.scss'],
 })
 export class ViewEmployeeComponent implements OnInit {
+  public etedPhotograph: any;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -23,6 +24,8 @@ export class ViewEmployeeComponent implements OnInit {
   public bloodGroup: any;
   public religion: any;
   public nationality: any;
+  public apiURL = this.personalDetailService.apiUrl;
+  profilePicUrl: any;
   //////Emergency Contact /////
   public emergencyContact = [
     {
@@ -50,6 +53,7 @@ export class ViewEmployeeComponent implements OnInit {
   /////// Academic Qualification/////////
   public academicQualification = [
     {
+      etaqUploadDocuments: '',
       etaqQualification: '',
       etaqPassingYear: '',
       etaqCgpa: '',
@@ -59,6 +63,7 @@ export class ViewEmployeeComponent implements OnInit {
   //////// Professional Qualification///////
   public profQualification = [
     {
+      etpqDocuments: '',
       etpqCertification: '',
       etpqStratDate: '',
       etpqEndDate: '',
@@ -68,6 +73,7 @@ export class ViewEmployeeComponent implements OnInit {
   //////// Working History///////
   public workHistory = [
     {
+      etwhExperienceLetter: '',
       etwhCompanyName: '',
       etwhDesignation: '',
       etwhStratDate: '',
@@ -92,7 +98,9 @@ export class ViewEmployeeComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.success) {
           let oneEmployeeData = data.data;
-
+          this.profilePicUrl =
+            this.personalDetailService.apiUrl +
+            oneEmployeeData[0].etedPhotograph;
           this.empID = oneEmployeeData[0].etedEmployeeId;
           this.firstName = oneEmployeeData[0].etedFirstName;
           this.lastname = oneEmployeeData[0].etedLastName;
