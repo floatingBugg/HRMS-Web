@@ -6,6 +6,10 @@
         <mat-step label="Personal Details">
           <div class="container">
             <div class="row">
+              <mat-label class="col-lg-6 col-md-6 ml-5"><b>User Image:</b></mat-label>
+              <div class="circle" *ngIf="profilePicUrl">
+                <img [src]="profilePicUrl" class="Image">
+              </div>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Employee ID:</b>
                 {{empID}}
               </mat-label>
@@ -128,6 +132,10 @@
           <div *ngIf="academicQualification.length > 0">
             <div class="container" *ngFor="let item of academicQualification; let i = index">
               <p class="mb-3 mt-3"><b>Academic Qualification: {{i+1}}</b></p>
+              <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
+              <div class="circle" *ngIf="apiURL+academicQualification[i].etaqUploadDocuments">
+                <img [src]="apiURL+academicQualification[i].etaqUploadDocuments" class="Image">
+              </div>
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Degree Title:</b>
                   {{academicQualification[i].etaqQualification}}
@@ -154,6 +162,10 @@
           <div *ngIf="profQualification.length > 0">
             <div class="container" *ngFor="let item of profQualification; let i = index">
               <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
+              <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
+              <div class="circle" *ngIf="apiURL+profQualification[i].etpqDocuments">
+                <img [src]="apiURL+profQualification[i].etpqDocuments" class="Image">
+              </div>
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Certification:</b>
                   {{profQualification[i].etpqCertification}}
@@ -180,6 +192,10 @@
           <div *ngIf="workHistory.length > 0">
             <div class="container" *ngFor="let item of workHistory; let i =  index">
               <p class="mb-3 mt-3"><b>Working History: {{i+1}}</b></p>
+              <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
+              <div class="circle" *ngIf="apiURL+workHistory[i].etwhExperienceLetter">
+                <img [src]="apiURL+workHistory[i].etwhExperienceLetter" class="Image">
+              </div>
               <div class="row mt-2">
                 <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company:</b>
                   {{workHistory[i].etwhCompanyName}}

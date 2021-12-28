@@ -33,7 +33,10 @@ export class AddEmployeeComponent implements OnInit {
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
-  imageUrl:any []=[];
+  imageUrl: any[] = [];
+  profQualificationUrl: any[] = [];
+  workingHistoryUrl: any[] = [];
+  profilePicUrl: any;
   public currentIndexEmergency: any = 0;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalDetails: any = 0;
@@ -117,6 +120,7 @@ export class AddEmployeeComponent implements OnInit {
   /////////Professional Qualification/////////////
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
+      etpqDocuments: [''],
       etpqCertification: ['', Validators.required],
       etpqStratDate: [null, Validators.required],
       etpqEndDate: [null, Validators.required],
@@ -135,6 +139,7 @@ export class AddEmployeeComponent implements OnInit {
   //////Working History//////////
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
+      etwhExperienceLetter: [''],
       etwhCompanyName: ['', Validators.required],
       etwhDesignation: ['', Validators.required],
       etwhStratDate: [null, Validators.required],
@@ -150,6 +155,7 @@ export class AddEmployeeComponent implements OnInit {
   }
   createForm() {
     this.personalDetailsForm = this.fb.group({
+      etedPhotograph: [''],
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
       etedContactNumber: [
@@ -370,25 +376,86 @@ export class AddEmployeeComponent implements OnInit {
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
   }
-  
-  onFileChange(event: any, i:any): void {
-    debugger
+
+  onFileChange(event: any, i: any): void {
+    debugger;
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        debugger
-        if(this.currentIndexAcademic >=0){
-        this.imageUrl[i] = reader.result;
+        debugger;
+        if (this.currentIndexAcademic >= 0) {
+          this.imageUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblAcademicQualification'][
+            'controls'
+          ][i].patchValue({
+            etaqUploadDocuments: reader.result,
+          });
+        }
+      };
+    }
+  }
+
+  ///////Profile pic Upload///////
+  employeePicUpload(event: any): void {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        this.profilePicUrl = reader.result;
         this.isFileChanged = reader.result ? true : false;
-        this.personalDetailsForm.controls['emsTblAcademicQualification'][
-          'controls'
-        ][i].patchValue({
-          etaqUploadDocuments: reader.result,
+        this.personalDetailsForm.patchValue({
+          etedPhotograph: reader.result,
         });
-      }
+      };
+    }
+  }
+
+  ////////// Professional Qualification////////
+  professionalQualificationUpload(event: any, i: any): void {
+    debugger;
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        debugger;
+        if (this.currentIndexProfessionalQ >= 0) {
+          this.profQualificationUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblProfessionalQualification'][
+            'controls'
+          ][i].patchValue({
+            etpqDocuments: reader.result,
+          });
+        }
+      };
+    }
+  }
+
+  //////Working History/////
+  workingHistoryUpload(event: any, i: any): void {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        if (this.currentIndexWorkingHistory >= 0) {
+          this.workingHistoryUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblWorkingHistory']['controls'][
+            i
+          ].patchValue({
+            etwhExperienceLetter: reader.result,
+          });
+        }
       };
     }
   }

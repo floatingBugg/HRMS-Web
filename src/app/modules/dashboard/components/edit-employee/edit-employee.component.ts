@@ -43,6 +43,11 @@ export class EditEmployeeComponent implements OnInit {
   whEndDate: any;
   diff: any;
   noOfDays: any;
+  imageUrl: any[] = [];
+  profQualificationUrl: any[] = [];
+  workingHistoryUrl: any[] = [];
+  profilePicUrl: any;
+  isFileChanged!: boolean;
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
@@ -75,6 +80,8 @@ export class EditEmployeeComponent implements OnInit {
         this.editDataArray = data.data[0];
         console.log('edit array', this.editDataArray);
         console.log('Personal Form', this.personalDetailsForm);
+        this.profilePicUrl =
+          this.personaldetails.apiUrl +  oneEmployeeData.etedPhotograph;
         this.empID = oneEmployeeData.etedEmployeeId;
         this.personalDetailsForm.controls['etedEmployeeId'].setValue(
           oneEmployeeData.etedEmployeeId
@@ -176,6 +183,9 @@ export class EditEmployeeComponent implements OnInit {
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
         for (let i = 0; i < this.academicQualification.length; i++) {
+          this.imageUrl[i] =
+            this.personaldetails.apiUrl +
+            this.academicQualification[i].etaqUploadDocuments;
           this.addAcademicQualification();
           let controlAcademicQualification =
             this.personalDetailsForm.controls['emsTblAcademicQualification'][
@@ -202,6 +212,9 @@ export class EditEmployeeComponent implements OnInit {
         this.professionalQualification =
           oneEmployeeData.emsTblProfessionalQualification;
         for (let i = 0; i < this.professionalQualification.length; i++) {
+          this.profQualificationUrl[i] =
+            this.personaldetails.apiUrl +
+            this.professionalQualification[i].etpqDocuments;
           this.addProfessionalQualification();
           let controlProfessionalQualification =
             this.personalDetailsForm.controls[
@@ -228,6 +241,9 @@ export class EditEmployeeComponent implements OnInit {
         /////Working History////
         this.workingHistory = oneEmployeeData.emsTblWorkingHistory;
         for (let i = 0; i < this.workingHistory.length; i++) {
+          this.workingHistoryUrl[i] =
+            this.personaldetails.apiUrl +
+            this.workingHistory[i].etwhExperienceLetter;
           this.addWorkingHistory();
           let controlWorkingHistory =
             this.personalDetailsForm.controls['emsTblWorkingHistory'][
@@ -581,5 +597,70 @@ export class EditEmployeeComponent implements OnInit {
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
+  }
+  //////Working History/////
+  workingHistoryUpload(event: any, i: any): void {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        if (this.currentIndexWorkingHistory >= 0) {
+          this.workingHistoryUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblWorkingHistory']['controls'][
+            i
+          ].patchValue({
+            etwhExperienceLetter: reader.result,
+          });
+        }
+      };
+    }
+  }
+
+  ////////// Professional Qualification////////
+  professionalQualificationUpload(event: any, i: any): void {
+    debugger;
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        debugger;
+        if (this.currentIndexProfessionalQ >= 0) {
+          this.profQualificationUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblProfessionalQualification'][
+            'controls'
+          ][i].patchValue({
+            etpqDocuments: reader.result,
+          });
+        }
+      };
+    }
+  }
+
+  onFileChange(event: any, i: any): void {
+    debugger;
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        debugger;
+        if (this.currentIndexAcademic >= 0) {
+          this.imageUrl[i] = reader.result;
+          this.isFileChanged = reader.result ? true : false;
+          this.personalDetailsForm.controls['emsTblAcademicQualification'][
+            'controls'
+          ][i].patchValue({
+            etaqUploadDocuments: reader.result,
+          });
+        }
+      };
+    }
   }
 }

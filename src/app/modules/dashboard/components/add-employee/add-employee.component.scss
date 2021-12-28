@@ -5,32 +5,31 @@
   margin-left: 20px;
   padding-bottom: 10vh;
 }
-.input{
-  margin-right:  10px;
+.input {
+  margin-right: 10px;
 }
 
-.sub-h{
+.sub-h {
   font-size: 16px;
   font-weight: 700;
 }
-.save-btn{
+.save-btn {
   width: 50%;
 }
-.remove-form{
+.remove-form {
   float: right;
 }
-.col-lg-6
-{
+.col-lg-6 {
   width: 49% !important;
 }
 
-
-.setPositionRight5em
-{
+.setPositionRight5em {
   right: 5em;
 }
-.stepperBtn{
-  float: right; padding-left: 15px; padding-right: 15px;
+.stepperBtn {
+  float: right;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -39,9 +38,17 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
-.input{
+.input {
   margin-right: 10px;
+}
+.Image {
+  margin-top: 5vh;
+  height: 50vh;
+  width: 50vh;
+}
+#file {
+  margin-top: 5vh;
 }
