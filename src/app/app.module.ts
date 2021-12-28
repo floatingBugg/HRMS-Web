@@ -24,8 +24,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LogoutValidationComponent } from './components/login/logout-validation/logout-validation.component';
-import { EmployeeComponent } from './modules/dashboard/components/employee/employee.component';
-
+import { AllEmployeesComponent } from './modules/inventory/components/all-employees/all-employees.component';
+import { AssignComponent } from './modules/inventory/components/assign/assign.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +58,7 @@ import { EmployeeComponent } from './modules/dashboard/components/employee/emplo
   ],
   providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents:[EmployeeComponent]
+  entryComponents:[AllEmployeesComponent, AssignComponent],
+  
 })
 export class AppModule { }

@@ -53,6 +53,9 @@ import { UnassignedFansComponent } from './components/fans/unassigned-fans/unass
 import { AssignedFurnitureComponent } from './components/furniture/assigned-furniture/assigned-furniture.component';
 import { UnassignedFurnitureComponent } from './components/furniture/unassigned-furniture/unassigned-furniture.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
+import { AssignComponent } from './components/assign/assign.component';
+
 
 
 @NgModule({
@@ -96,7 +99,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     UnassignedFansComponent,
     AssignedFurnitureComponent,
     UnassignedFurnitureComponent,
-
+    AllEmployeesComponent,
+    AssignComponent,
+   
 
   ],
   imports: [

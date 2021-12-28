@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
-  FormArray,
-  Validators,
-  FormGroup,
-  FormBuilder,
-  AbstractControl,
-  RequiredValidator
-} from '@angular/forms';
+  FormArray,Validators,FormGroup,
+  FormBuilder,AbstractControl,RequiredValidator} from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   MatDialog,
@@ -16,30 +11,39 @@ import {
 } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-laptop',
-  templateUrl: './laptop.component.html',
-  styleUrls: ['./laptop.component.scss']
+  selector: 'app-assign',
+  templateUrl: './assign.component.html',
+  styleUrls: ['./assign.component.scss']
 })
-export class LaptopComponent implements OnInit {
-  laptopForm: any = FormGroup;
+export class AssignComponent implements OnInit {
+  assignForm: any = FormGroup;
+
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-  
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<any>,
    
     
   ) { }
 
   ngOnInit(): void {
     this.createForm();
-
   }
-
-
-
+  onNoClick()
+   {
+    this.dialogRef.close();
+  }
+  onlyNumbersAllowed(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
   createForm() {
-    this.laptopForm = this.fb.group({
+    this.assignForm = this.fb.group({
       etedFirstName: [''],
       etedLastName: [''],
       etedContactNumber: [''],
@@ -56,4 +60,6 @@ export class LaptopComponent implements OnInit {
       etedNationality: [''],
     });
   }
+
+
 }

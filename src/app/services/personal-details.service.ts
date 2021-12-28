@@ -14,29 +14,29 @@ export class PersonalDetailsService {
   }
   personalDetails(data: any): Observable<any> {
     return this.http.post(
-      'https://localhost:44324/Employee/AddEmployee',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/AddEmployee',
       data
     );
   }
   getEmployeeData() {
     let url =
-      'https://localhost:44324/Employee/DisplayAllEmployees';
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
   deleteEmployeeData(id: any) {
     return this.http.delete(
-      `https://localhost:44324/Employee/DeleteEmployee?id=${id}`
+      `http://hamzaashiq467-001-site1.itempurl.com/Employee/DeleteEmployee?id=${id}`
     );
   }
   viewEmployeeData(id: any): Observable<any> {
     return this.http.get(
-      `https://localhost:44324/Employee/GetEmployeebyID?id=${id}`
+      `http://hamzaashiq467-001-site1.itempurl.com/Employee/GetEmployeebyID?id=${id}`
     );
   }
 
   updateEmployeeData(data:any):Observable<any>{
     return this.http.post(
-      'https://localhost:44324/Employee/UpdateEmployee',
+      'http://hamzaashiq467-001-site1.itempurl.com/Employee/UpdateEmployee',
       data
     );
   }

@@ -85,15 +85,10 @@
                                 <mat-datepicker #dob></mat-datepicker>
 
                               </mat-form-field>
-                              <mat-form-field class="col-lg-6 col-md-6 input">
-                                  <mat-label>Assigned To</mat-label>
-                                  <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                                    maxlength="20">
-                                </mat-form-field>
 </div>
           </form>
           <div class="text-align-right">
-            <button class="setPositionRight5em" routerLink="" mat-raised-button color="warn">Cancel</button>
+            <button class="setPositionRight5em"  mat-raised-button color="warn" routerLink="../../inventory/assigned-laptops">Cancel</button>
             <button class="setPositionRight4em" [disabled]="laptopForm.invalid" mat-raised-button type="submit"
               color="primary">Save</button>
           </div>

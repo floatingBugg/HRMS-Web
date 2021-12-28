@@ -31,7 +31,8 @@ export class EmployeeComponent implements OnInit {
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
-  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) {}
+  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
+    public empDataService: EmployeeDataService) {}
 
   ngOnInit(): void {
     this.getEmployeeData();

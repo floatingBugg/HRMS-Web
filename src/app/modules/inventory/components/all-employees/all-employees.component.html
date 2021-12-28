@@ -1,11 +1,10 @@
-<div class="container m-0 screenMaxWidth">
+<div class="container m-0 ">
     <div class="row">
       <div class="mt-4 col-lg-6">
-        <h3>Assigned Laptops</h3>
+        <h3>All Employees</h3>
   
       </div>
       <div class="col-lg-6 text-align-right">
-        <button routerLink="/inventory/laptop" mat-raised-button color color="primary">Add Laptop</button>
         <mat-form-field class="ml-20" appearance="standard">
           <mat-label>Search keyword</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
@@ -15,36 +14,24 @@
     </div>
   
     <table mat-table [dataSource]="employeeData" class="mat-elevation-z8" matSort>
-      <ng-container matColumnDef="assetID">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
+      <ng-container matColumnDef="empID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Emp ID</th>
         <td mat-cell *matCellDef="let employee"> {{employee.empID}} </td>
       </ng-container>
-      <ng-container matColumnDef="nameModel"> 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
+      <ng-container matColumnDef="fullName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
         <td mat-cell *matCellDef="let employee"> {{employee.fullName}} </td>
       </ng-container>
-      <ng-container matColumnDef="company">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Company</th>
+      <ng-container matColumnDef="emailAddress">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</th>
         <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
       </ng-container>
-      <ng-container matColumnDef="ram">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>RAM</th>
+      <ng-container matColumnDef="contactNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile # </th>
         <td mat-cell *matCellDef="let employee"> {{employee.contactNumber}} </td>
       </ng-container>
-      <ng-container matColumnDef="processor">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Processor</th>
-        <td mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
-      </ng-container>
-      <ng-container matColumnDef="storage">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Storage</th>
-        <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
-      </ng-container>
-      <ng-container matColumnDef="generation">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Generation</th>
-        <td mat-cell *matCellDef="let employee"> {{employee.emailAddress}} </td>
-      </ng-container>
-      <ng-container matColumnDef="assignedTo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned To</th>
+      <ng-container matColumnDef="empDesignation">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation </th>
         <td mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
@@ -53,10 +40,10 @@
           <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
             <mat-icon>remove_red_eye</mat-icon>
           </button>
-          <button mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
-            <mat-icon>edit</mat-icon>
+          <button  title="Assign Asset" mat-raised-button  color="primary" (click)="onCreate()">
+           Assign
           </button>
-          <button mat-raised-button title="Delete Employee Record" color="primary">Unassign</button>
+        
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

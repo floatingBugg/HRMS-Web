@@ -7,7 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-import { EmployeeComponent } from 'src/app/modules/dashboard/components/employee/employee.component';
+import { AllEmployeesComponent } from '../../all-employees/all-employees.component';
 
 
 
@@ -65,7 +65,11 @@ export class UnassignedLaptopsComponent implements OnInit {
   //   });
   // }
   onCreate(){
-   this.dialog.open(EmployeeComponent);
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%"
+   this.dialog.open(AllEmployeesComponent);
   }
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {

@@ -4,7 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AcComponent } from './components/ac/ac.component';
 import { AssignedAcComponent } from './components/ac/assigned-ac/assigned-ac.component';
 import { UnassignedAcComponent } from './components/ac/unassigned-ac/unassigned-ac.component';
+import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
+
 import { AssetReserveComponent } from './components/asset-reserve/asset-reserve.component';
+import { AssignComponent } from './components/assign/assign.component';
 import { AssignedCamerasComponent } from './components/cctv-cameras/assigned-cameras/assigned-cameras.component';
 import { CctvCamerasComponent } from './components/cctv-cameras/cctv-cameras.component';
 import { UnassignedCamerasComponent } from './components/cctv-cameras/unassigned-cameras/unassigned-cameras.component';
@@ -78,13 +81,17 @@ const routes: Routes = [
       { path: 'assigned-mouse', component: AssignedMouseComponent },
       { path: 'unassigned-mouse', component: UnassignedMouseComponent },
       { path: 'assigned-power-cables',component: AssignedPowerCablesComponent},
-      {path: 'unassigned-power-cables',component: UnassignedPowerCablesComponent},
+      { path: 'unassigned-power-cables',component: UnassignedPowerCablesComponent},
       { path: 'assigned-printers', component: AssignedPrintersComponent },
       { path: 'unassigned-printers', component: UnassignedPrintersComponent },
       { path: 'assigned-screens', component: AssignedScreensComponent },
       { path: 'unassigned-screens', component: UnassignedScreensComponent },
       { path: 'assigned-stationery', component: AssignedStationeryComponent },
-      {path: 'unassigned-stationery',component: UnassignedStationeryComponent},
+      { path: 'unassigned-stationery',component: UnassignedStationeryComponent},
+      { path: 'all-employees',component: AllEmployeesComponent},
+      { path: 'assign',component: AssignComponent},
+     
+      
     ],
   },
 ];

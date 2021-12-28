@@ -1,0 +1,29 @@
+<div class="assign-container container m-0">
+    <div class="row">
+      <h4 class="mt-4">Assign</h4>
+      <form [formGroup]="assignForm">
+        <div class="container">
+            <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Quantity</mat-label>
+                <input formControlName="etedFirstName"  (keypress)="onlyNumbersAllowed($event)" name="etedFirstName" matInput placeholder=""
+                  maxlength="20">
+              </mat-form-field>
+             <mat-form-field class="col-lg-6 col-md-6 input">
+                      <mat-label>Date of Purchasing</mat-label>
+                       <input formControlName="etedFirstName" name="etedFirstName" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                        maxlength="20"> 
+                      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                      <mat-datepicker #dob></mat-datepicker>
+
+                    </mat-form-field>
+                     
+                       
+</div>
+          </form>
+          <div class="text-align-right">
+            <button class="setPositionRight5em"  mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+            <button class="setPositionRight4em" [disabled]="assignForm.invalid" mat-raised-button type="submit"
+              color="primary">Submit</button>
+          </div>
+      </div>
+      </div>
