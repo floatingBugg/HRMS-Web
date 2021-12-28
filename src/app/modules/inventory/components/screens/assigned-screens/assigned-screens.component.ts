@@ -20,12 +20,10 @@ export class AssignedScreensComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'quantity',
-    'emailAddress',
+    'assetID',
+    'name',
+    'company',
+    'size',
     'assignedTo',
     'actions',
   ];

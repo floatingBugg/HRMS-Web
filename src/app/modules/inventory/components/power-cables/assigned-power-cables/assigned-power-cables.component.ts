@@ -20,11 +20,9 @@ export class AssignedPowerCablesComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'emailAddress',
+    'assetID',
+    'name',
+    'quantity',
     'assignedTo',
     'actions',
   ];

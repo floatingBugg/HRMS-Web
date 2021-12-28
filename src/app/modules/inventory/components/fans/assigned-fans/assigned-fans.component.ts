@@ -20,11 +20,11 @@ export class AssignedFansComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
-    'contactNumber',
-    'emailAddress',
+    'assetID',
+    'model',
+    'company',
+    'type',
+    'quantity',
     'assignedTo',
     'actions',
   ];
