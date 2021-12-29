@@ -6,8 +6,13 @@
         <mat-step [stepControl]="personalDetailsForm.get('emsTblEmergencyContact')['controls']"
           label="Personal Details">
           <mat-label class="col-lg-6 col-md-6 ml-5"><b>User Image:</b></mat-label>
-          <div class="circle" *ngIf="profilePicUrl">
+          <div  *ngIf="profilePicUrl">
+            <div class="row">
             <img [src]="profilePicUrl" class="Image">
+          </div>
+          <div class="row">
+            <input id="file" type="file" (change)="employeePicUpload($event)" />
+          </div>
           </div>
           <div class="screenMaxWidth">
             <mat-form-field class="col-lg-5 col-md-5 input">
