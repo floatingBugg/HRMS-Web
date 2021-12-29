@@ -81,7 +81,7 @@ export class EditEmployeeComponent implements OnInit {
         console.log('edit array', this.editDataArray);
         console.log('Personal Form', this.personalDetailsForm);
         this.profilePicUrl =
-          this.personaldetails.apiUrl +  oneEmployeeData.etedPhotograph;
+         this.personaldetails.apiUrl +  oneEmployeeData.etedPhotograph;
         this.empID = oneEmployeeData.etedEmployeeId;
         this.personalDetailsForm.controls['etedEmployeeId'].setValue(
           oneEmployeeData.etedEmployeeId
@@ -597,6 +597,23 @@ export class EditEmployeeComponent implements OnInit {
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
+  }
+
+   ///////Profile pic Upload///////
+   employeePicUpload(event: any): void {
+    let reader = new FileReader(); // HTML5 FileReader API
+    let file = event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      reader.readAsDataURL(file);
+      // When file uploads set it to file formcontrol
+      reader.onload = () => {
+        this.profilePicUrl = reader.result;
+        this.isFileChanged = reader.result ? true : false;
+        this.personalDetailsForm.patchValue({
+          etedPhotograph: reader.result,
+        });
+      };
+    }
   }
   //////Working History/////
   workingHistoryUpload(event: any, i: any): void {
