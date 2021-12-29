@@ -5,82 +5,104 @@
         <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Name</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                <input formControlName="itaAssetName" name="itaAssetName" matInput placeholder=""
                   maxlength="20">
+                  <mat-error *ngIf="laptopForm.controls['itaAssetName'].errors?.['required'] ">
+                     <strong>Required</strong></mat-error>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Sr. no</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                <input formControlName="itaSerialNo" name="itaSerialNo" matInput placeholder=""
                   maxlength="20">
+                  <mat-error *ngIf="laptopForm.controls['itaSerialNo'].errors?.['required'] ">
+                    <strong>Required</strong></mat-error>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Company Name</mat-label>
-                  <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                  <input formControlName="itaCompanyName" name="itaCompanyName" matInput placeholder=""
                     maxlength="20">
+                    <mat-error *ngIf="laptopForm.controls['itaCompanyName'].errors?.['required'] ">
+                      <strong>Required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Generation</mat-label>
-                    <mat-select formControlName="etedGender" name="etedGender">
+                    <mat-select formControlName="itaGeneration" name="itaGeneration">
                       <mat-option [value]=""> ---Select One---</mat-option>
-                      <mat-option value="female">1 Generation</mat-option>
-                      <mat-option value="male">2 Generation</mat-option>
-                      <mat-option value="female">3 Generation</mat-option>
-                      <mat-option value="male">4 Generation</mat-option>
-                      <mat-option value="female">5 Generation</mat-option>
-                      <mat-option value="male">6 Generation</mat-option>
-                      <mat-option value="female">7 Generation</mat-option>
-                      <mat-option value="female">8 Generation</mat-option>
-                      <mat-option value="male">9 Generation</mat-option>
-                      <mat-option value="female">10 Generation</mat-option>
-                      <mat-option value="male">11 Generation</mat-option>
-                      <mat-option value="female">12 Generation</mat-option>
+                      <mat-option value="1generation">1 Generation</mat-option>
+                      <mat-option value="2generation">2 Generation</mat-option>
+                      <mat-option value="3generation">3 Generation</mat-option>
+                      <mat-option value="4generation">4 Generation</mat-option>
+                      <mat-option value="5generation">5 Generation</mat-option>
+                      <mat-option value="6generation">6 Generation</mat-option>
+                      <mat-option value="7generation">7 Generation</mat-option>
+                      <mat-option value="8generation">8 Generation</mat-option>
+                      <mat-option value="9generation">9 Generation</mat-option>
+                      <mat-option value="10generation">10 Generation</mat-option>
+                      <mat-option value="11generation">11 Generation</mat-option>
+                      <mat-option value="12generation">12 Generation</mat-option>
                     </mat-select>
+                    <mat-error *ngIf="laptopForm.controls['itaGeneration'].errors?.['required'] ">
+                      <strong>Required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                       <mat-label>Processor</mat-label>
-                      <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                      <input formControlName="itaProcessor" name="itaProcessor" matInput placeholder=""
                         maxlength="20">
+                        <mat-error *ngIf="laptopForm.controls['itaProcessor'].errors?.['required'] ">
+                          <strong>Required</strong></mat-error>
                     </mat-form-field>
                     <mat-form-field class="col-lg-6 col-md-6 input">
                         <mat-label>RAM</mat-label>
-                        <mat-select formControlName="etedGender" name="etedGender">
+                        <mat-select formControlName="itaRam" name="itaRam">
                           <mat-option [value]=""> ---Select One---</mat-option>
-                          <mat-option value="female">2 GB</mat-option>
-                          <mat-option value="male">4 GB</mat-option>
-                          <mat-option value="female">6 GB</mat-option>
-                          <mat-option value="male">8 GB</mat-option>
-                          <mat-option value="female">16 GB</mat-option>
-                          <mat-option value="male">32 GB</mat-option>
-                          <mat-option value="female">64 GB</mat-option>
+                          <mat-option value="2gb">2 GB</mat-option>
+                          <mat-option value="4gb">4 GB</mat-option>
+                          <mat-option value="6gb">6 GB</mat-option>
+                          <mat-option value="8gb">8 GB</mat-option>
+                          <mat-option value="16gb">16 GB</mat-option>
+                          <mat-option value="32gb">32 GB</mat-option>
+                          <mat-option value="64gb">64 GB</mat-option>
                         </mat-select>
+                        <mat-error *ngIf="laptopForm.controls['itaRam'].errors?.['required'] ">
+                          <strong>Required</strong></mat-error>
                       </mat-form-field>
                       <mat-form-field class="col-lg-6 col-md-6 input">
                           <mat-label>Hard Type</mat-label>
-                          <mat-select formControlName="etedGender" name="etedGender">
+                          <mat-select formControlName="itaHardriveType" name="itaHardriveType">
                             <mat-option [value]=""> ---Select One---</mat-option>
-                            <mat-option value="female">SSD</mat-option>
-                            <mat-option value="male">HDD</mat-option>
+                            <mat-option value="ssd">SSD</mat-option>
+                            <mat-option value="hdd">HDD</mat-option>
                           </mat-select>
+                          <mat-error *ngIf="laptopForm.controls['itaHardriveType'].errors?.['required'] ">
+                            <strong>Required</strong></mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-lg-6 col-md-6 input">
                           <mat-label>Hard Drive Storage</mat-label>
-                          <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                          <input formControlName="itaStorage" name="itaStorage" matInput placeholder=""
                             maxlength="20">
+                            <mat-error *ngIf="laptopForm.controls['itaStorage'].errors?.['required'] ">
+                              <strong>Required</strong></mat-error>
                         </mat-form-field>
                         <mat-form-field class="col-lg-6 col-md-6 input">
                             <mat-label>Quantity</mat-label>
-                            <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                              maxlength="20">
+                            <input formControlName="itaQuantity" name="itaQuantity" matInput placeholder=""
+                              maxlength="20" (keypress)="onlyNumbersAllowed($event)">
+                              <mat-error *ngIf="laptopForm.controls['itaQuantity'].errors?.['required'] ">
+                                <strong>Required</strong></mat-error>
                           </mat-form-field>
                           <mat-form-field class="col-lg-6 col-md-6 input">
                               <mat-label>Cost</mat-label>
-                              <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                                maxlength="20">
+                              <input formControlName="itaCost" name="itaCost" matInput placeholder=""
+                                maxlength="20" (keypress)="onlyNumbersAllowed($event)">
+                                <mat-error *ngIf="laptopForm.controls['itaCost'].errors?.['required'] ">
+                                  <strong>Required</strong></mat-error>
                             </mat-form-field>
                             <mat-form-field class="col-lg-6 col-md-6 input">
                                 <mat-label>Date of Purchasing</mat-label>
-                                 <input readonly formControlName="etedFirstName" name="etedFirstName" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                                 <input readonly formControlName="itaPurchaseDate" name="itaPurchaseDate" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
                                   maxlength="20"> 
+                                  <mat-error *ngIf="laptopForm.controls['itaPurchaseDate'].errors?.['required'] ">
+                                    <strong>Required</strong></mat-error>
                                 <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                                 <mat-datepicker #dob></mat-datepicker>
 
@@ -88,9 +110,10 @@
 </div>
           </form>
           <div class="text-align-right">
-            <button class="setPositionRight5em"  mat-raised-button color="warn" routerLink="../../inventory/assigned-laptops">Cancel</button>
-            <button class="setPositionRight4em" [disabled]="laptopForm.invalid" mat-raised-button type="submit"
-              color="primary">Save</button>
+            <button class="setPositionRight5em"  mat-raised-button color="warn" routerLink="../../inventory/unassigned-laptops">Cancel</button>
+            <button style="float: right;" class="setPositionRight4em" 
+            [disabled]="laptopForm.invalid" mat-raised-button type="submit"
+              color="primary" (click)="submitData()">Save</button>
           </div>
       </div>
       </div>

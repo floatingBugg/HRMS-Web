@@ -14,6 +14,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { SuccessDialogComponent } from 'src/app/modules/dashboard/components/add-employee/success-dialog/success-dialog.component';
+import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-cctv-cameras',
@@ -22,11 +25,13 @@ import {
 })
 export class CctvCamerasComponent implements OnInit {
   cctvCamerasForm: any = FormGroup;
+  errorMsg: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private inventory: InventoryService
   ) { }
 
   ngOnInit(): void {
@@ -34,21 +39,39 @@ export class CctvCamerasComponent implements OnInit {
   }
   createForm() {
     this.cctvCamerasForm = this.fb.group({
-      etedFirstName: [''],
-      etedLastName: [''],
-      etedContactNumber: [''],
-      etedCnic: [''],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedAddress: [''],
-      etedDob: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
+      itaAssetName: ['', Validators.required],
+      itaSerialNo: ['', Validators.required],
+      itaModel: ['', Validators.required],
+      itaQuantity: ['', Validators.required],
+      itaCost: ['', Validators.required],
+      itaPurchaseDate: ['', Validators.required],
     });
   }
-
+  onlyNumbersAllowed(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+  submitData() {
+    console.log(this.cctvCamerasForm.value);
+    this.inventory
+      .postAssets(this.cctvCamerasForm.value)
+      .subscribe((result) => {
+        if (result.success) {
+          this.dialog.open(SuccessDialogComponent);
+          console.log(result.message);
+        } else {
+          this.errorMsg = result.message;
+          console.log('error Msgggg', this.errorMsg);
+          localStorage.setItem('errorMessage', this.errorMsg);
+          this.inventory._responseMessage = this.errorMsg;
+          this.dialog.open(AddEmployeeFailureDialogComponent, {
+            width: '600px',
+         });
+          console.log(result.message);
+        }
+      });
+  }
 }

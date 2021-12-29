@@ -14,6 +14,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { SuccessDialogComponent } from 'src/app/modules/dashboard/components/add-employee/success-dialog/success-dialog.component';
+import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-key-board',
@@ -22,12 +25,14 @@ import {
 })
 export class KeyBoardComponent implements OnInit {
   keyboardForm: any = FormGroup;
+  errorMsg: any;
 
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private inventory: InventoryService
   ) { }
 
   ngOnInit(): void {
@@ -36,20 +41,33 @@ export class KeyBoardComponent implements OnInit {
 
   createForm() {
     this.keyboardForm = this.fb.group({
-      etedFirstName: [''],
-      etedLastName: [''],
-      etedContactNumber: [''],
-      etedCnic: [''],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedAddress: [''],
-      etedDob: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
+      itaAssetName: ['', Validators.required],
+      itaCompanyName: ['', Validators.required],
+      itaModel: ['', Validators.required],
+      itaQuantity: ['', Validators.required],
+      itaCost: ['', Validators.required],
+      itaPurchaseDate: ['', Validators.required],
+      
     });
+  }
+  submitData() {
+    console.log(this.keyboardForm.value);
+    this.inventory
+      .postAssets(this.keyboardForm.value)
+      .subscribe((result) => {
+        if (result.success) {
+          this.dialog.open(SuccessDialogComponent);
+          console.log(result.message);
+        } else {
+          this.errorMsg = result.message;
+          console.log('error Msgggg', this.errorMsg);
+          localStorage.setItem('errorMessage', this.errorMsg);
+          this.inventory._responseMessage = this.errorMsg;
+          this.dialog.open(AddEmployeeFailureDialogComponent, {
+            width: '600px',
+         });
+          console.log(result.message);
+        }
+      });
   }
 }

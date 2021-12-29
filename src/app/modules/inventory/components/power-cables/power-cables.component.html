@@ -5,37 +5,41 @@
         <div class="container screenMaxWidth">
             <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Asset Name</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                <input formControlName="itaAssetName" name="itaAssetName" matInput placeholder=""
                   maxlength="20">
+                  <mat-error *ngIf="powerCableForm.controls['itaAssetName'].errors?.['required'] ">
+                    <strong>Required</strong></mat-error>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                 <mat-label>Quantity</mat-label>
-                <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                <input formControlName="itaQuantity" name="itaQuantity" matInput placeholder=""
                   maxlength="20">
+                  <mat-error *ngIf="powerCableForm.controls['itaQuantity'].errors?.['required'] ">
+                    <strong>Required</strong></mat-error>
               </mat-form-field>
               <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Cost</mat-label>
-                  <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
+                  <input formControlName="itaCost" name="itaCost" matInput placeholder=""
                     maxlength="20">
+                    <mat-error *ngIf="powerCableForm.controls['itaCost'].errors?.['required'] ">
+                      <strong>Required</strong></mat-error>
                 </mat-form-field>
                 <mat-form-field class="col-lg-6 col-md-6 input">
                   <mat-label>Date of Purchasing</mat-label>
-                   <input readonly formControlName="etedFirstName" name="etedFirstName" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                   <input readonly formControlName="itaPurchaseDate" name="itaPurchaseDate" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
                     maxlength="20"> 
+                    <mat-error *ngIf="powerCableForm.controls['itaPurchaseDate'].errors?.['required'] ">
+                      <strong>Required</strong></mat-error>
                   <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
                   <mat-datepicker #dob></mat-datepicker>
                 </mat-form-field>
-                  <mat-form-field class="col-lg-6 col-md-6 input">
-                      <mat-label>Assigned To</mat-label>
-                      <input formControlName="etedFirstName" name="etedFirstName" matInput placeholder=""
-                        maxlength="20">
-                    </mat-form-field>
                    
 </div>
           </form>
           <div class="text-align-right">
             <button class="setPositionRight5em" routerLink="" mat-raised-button color="warn">Cancel</button>
-            <button class="setPositionRight4em" [disabled]="powerCableForm.invalid" mat-raised-button type="submit"
+            <button class="setPositionRight4em" [disabled]="powerCableForm.invalid"
+             mat-raised-button type="submit" (click)="submitData()"
               color="primary">Save</button>
           </div>
       </div>

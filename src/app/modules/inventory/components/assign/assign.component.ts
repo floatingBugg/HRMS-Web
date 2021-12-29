@@ -44,20 +44,9 @@ export class AssignComponent implements OnInit {
   }
   createForm() {
     this.assignForm = this.fb.group({
-      etedFirstName: [''],
-      etedLastName: [''],
-      etedContactNumber: [''],
-      etedCnic: [''],
-      etedEmailAddress: [''],
-      etedOfficialEmailAddress: [''],
-      etedAddress: [''],
-      etedDob: [''],
-      etedGender: [''],
-      etedMaritalStatus: [''],
-      etedStatus: [''],
-      etedBloodGroup: [''],
-      etedReligion: [''],
-      etedNationality: [''],
+      itasQuantity: ['', Validators.required],
+      itasAssignedDate: ['', Validators.required],
+    
     });
   }
 
