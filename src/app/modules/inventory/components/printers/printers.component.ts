@@ -37,7 +37,13 @@ export class PrintersComponent implements OnInit {
   ngOnInit(): void {
     this.createForm();
   }
-  
+  onlyNumbersAllowed(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
   createForm() {
     this.printerForm = this.fb.group({
       itaAssetName: ['', Validators.required],

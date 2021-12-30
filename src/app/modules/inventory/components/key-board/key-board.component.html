@@ -27,14 +27,14 @@
                 <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Quantity</mat-label>
                     <input formControlName="itaQuantity" name="itaQuantity" matInput placeholder=""
-                      maxlength="20">
+                      maxlength="20" (keypress)="onlyNumbersAllowed($event)">
                       <mat-error *ngIf="keyboardForm.controls['itaQuantity'].errors?.['required'] ">
                         <strong>Required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-6 col-md-6 input">
                       <mat-label>Cost</mat-label>
                       <input formControlName="itaCost" name="itaCost" matInput placeholder=""
-                        maxlength="20">
+                        maxlength="20" (keypress)="onlyNumbersAllowed($event)">
                         <mat-error *ngIf="keyboardForm.controls['itaCost'].errors?.['required'] ">
                           <strong>Required</strong></mat-error>
                     </mat-form-field>
@@ -52,7 +52,7 @@
 </div>
           </form>
           <div class="text-align-right">
-            <button class="setPositionRight5em" routerLink="" mat-raised-button color="warn">Cancel</button>
+            <button class="setPositionRight5em" routerLink="../../inventory/unassigned-keyboard" mat-raised-button color="warn">Cancel</button>
             <button class="setPositionRight4em" [disabled]="keyboardForm.invalid"
              mat-raised-button type="submit" (click)="submitData()"
               color="primary">Save</button>

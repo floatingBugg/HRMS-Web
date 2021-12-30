@@ -19,9 +19,10 @@ export class InventoryService {
 
     return this.http.post(this.apiUrl + '/Asset/AddAsset', data);
   }
-  getAssetsData() {
-    let url = this.apiUrl + '/Employee/DisplayAllEmployees';
-    return this.http.get(url);
+  getAssetData(id: any):  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/DisplayAssetUnassign?type=${id}`);
   }
+
 
 }

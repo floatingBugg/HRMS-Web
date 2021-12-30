@@ -24,6 +24,7 @@ export class LaptopComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
+    debugger;
     this.createForm();
 
   }
@@ -38,6 +39,7 @@ export class LaptopComponent implements OnInit {
 
   createForm() {
     this.laptopForm = this.fb.group({
+      itacCategoryId: 1,
       itaAssetName: ['', Validators.required],
       itaSerialNo: ['', Validators.required],
       itaCompanyName: ['', Validators.required],

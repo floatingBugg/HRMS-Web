@@ -45,6 +45,15 @@ export class StationeryComponent implements OnInit {
       itaPurchaseDate: ['', Validators.required],
     });
   }
+
+  onlyNumbersAllowed(event: any): boolean {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
   submitData() {
     console.log(this.stationeryForm.value);
     this.inventory
