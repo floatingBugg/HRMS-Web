@@ -281,6 +281,9 @@ export class EditEmployeeComponent implements OnInit {
       etaqPassingYear: [, Validators.required],
       etaqCgpa: [, Validators.required],
       etaqInstituteName: ['', Validators.required],
+      etaqUploadDocuments: [''],
+
+
     });
   }
 
@@ -343,6 +346,7 @@ export class EditEmployeeComponent implements OnInit {
       etpqStratDate: [null, Validators.required],
       etpqEndDate: [null, Validators.required],
       etpqInstituteName: ['', Validators.required],
+      etpqDocuments: [''],
     });
   }
   addProfessionalQualification(): void {
@@ -358,6 +362,7 @@ export class EditEmployeeComponent implements OnInit {
   addemsTblWorkingHistory(): FormGroup {
     return this.fb.group({
       etwhWhId: [0],
+      etwhExperienceLetter: [''],
       etwhCompanyName: ['', Validators.required],
       etwhDesignation: ['', Validators.required],
       etwhStratDate: [null, Validators.required],
@@ -374,6 +379,7 @@ export class EditEmployeeComponent implements OnInit {
   updateForm() {
     this.personalDetailsForm = this.fb.group({
       etedEmployeeId: [''],
+      etedPhotograph: [''],
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
       etedContactNumber: [
@@ -601,11 +607,13 @@ export class EditEmployeeComponent implements OnInit {
 
    ///////Profile pic Upload///////
    employeePicUpload(event: any): void {
+     debugger;
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
+      debugger;
       reader.onload = () => {
         this.profilePicUrl = reader.result;
         this.isFileChanged = reader.result ? true : false;
@@ -638,14 +646,14 @@ export class EditEmployeeComponent implements OnInit {
 
   ////////// Professional Qualification////////
   professionalQualificationUpload(event: any, i: any): void {
-    debugger;
+   
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        debugger;
+        
         if (this.currentIndexProfessionalQ >= 0) {
           this.profQualificationUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
@@ -660,14 +668,14 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   onFileChange(event: any, i: any): void {
-    debugger;
+    
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        debugger;
+        
         if (this.currentIndexAcademic >= 0) {
           this.imageUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
