@@ -21,8 +21,8 @@ export class PersonalDetailsService {
     let url = this.apiUrl + '/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
-  deleteEmployeeData(id: any) {
-    return this.http.delete(this.apiUrl + `/DeleteEmployee?id=${id}`);
+  deleteEmployeeData(empid: any) {
+    return this.http.delete(this.apiUrl + `/Employee/DeleteEmployee?empid=${empid}`);
   }
   viewEmployeeData(id: any): Observable<any> {
     return this.http.get(this.apiUrl + `/Employee/GetEmployeebyID?id=${id}`);
