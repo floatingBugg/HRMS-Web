@@ -569,7 +569,7 @@
               <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="profQualificationUrl[i]">
-                  <img  [src]="profQualificationUrl[i]" class="Image">
+                  <button (click)="DownloadFile(profQualificationUrl[i])">Download Here</button>
                 </div>
                 <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
               </div>

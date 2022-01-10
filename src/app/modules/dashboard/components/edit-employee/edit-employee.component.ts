@@ -186,10 +186,12 @@ export class EditEmployeeComponent implements OnInit {
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
         for (let i = 0; i < this.academicQualification.length; i++) {
-          if(this.academicQualification[i].etaqUploadDocuments!=""){
+          if(this.academicQualification[i].etaqUploadDocuments!="" && this.academicQualification[i].etaqUploadDocuments!=null){
           this.imageUrl[i] =
             this.personaldetails.apiUrl +
             this.academicQualification[i].etaqUploadDocuments;
+          }else{
+            this.imageUrl[i] = null;
           }
           this.addAcademicQualification();
           let controlAcademicQualification =
@@ -217,9 +219,14 @@ export class EditEmployeeComponent implements OnInit {
         this.professionalQualification =
           oneEmployeeData.emsTblProfessionalQualification;
         for (let i = 0; i < this.professionalQualification.length; i++) {
+          if(this.professionalQualification[i].etpqDocuments!="" && this.professionalQualification[i].etpqDocuments!=null){
           this.profQualificationUrl[i] =
             this.personaldetails.apiUrl +
             this.professionalQualification[i].etpqDocuments;
+          }
+          else{
+            this.profQualificationUrl[i]=null;
+          }
           this.addProfessionalQualification();
           let controlProfessionalQualification =
             this.personalDetailsForm.controls[
