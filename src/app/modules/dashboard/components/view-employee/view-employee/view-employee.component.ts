@@ -138,7 +138,7 @@ export class ViewEmployeeComponent implements OnInit {
           this.profQualification =
             oneEmployeeData[0].emsTblProfessionalQualification;
             for (let i = 0; i < oneEmployeeData[0].emsTblProfessionalQualification.length; i++) {
-            this.profQualName[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblProfessionalQualification.etpqDocuments;
+            this.profQualName[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblProfessionalQualification[i].etpqDocuments;
             let splitedPathProf = this.profQualName[i].split("/");
             let fileNameProf = splitedPathProf[(splitedPathProf.length-1)];
             this.profQualName[i]=fileNameProf;
