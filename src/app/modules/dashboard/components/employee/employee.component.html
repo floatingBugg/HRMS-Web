@@ -44,9 +44,12 @@
         <button mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)"
-          title="Delete Employee Record">
-          <mat-icon>delete_outlint</mat-icon>
+        
+        
+        <button mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)" title="Delete Employee Record">
+          <!-- <mat-icon>delete_outlint</mat-icon> -->
+          <span class="material-icons">delete_outline</span>
+
         </button>
       </td>
     </ng-container>
