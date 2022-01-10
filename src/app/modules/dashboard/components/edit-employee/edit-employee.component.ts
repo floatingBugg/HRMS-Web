@@ -5,6 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { AddEmployeeFailureDialogComponent } from '../add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { SuccessDialogComponent } from '../add-employee/success-dialog/success-dialog.component';
+import { saveAs } from 'file-saver';
+
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
@@ -44,6 +46,7 @@ export class EditEmployeeComponent implements OnInit {
   diff: any;
   noOfDays: any;
   imageUrl: any[] = [];
+  acadImageUrl: any[] = [];
   profQualificationUrl: any[] = [];
   workingHistoryUrl: any[] = [];
   profilePicUrl: any;
@@ -183,9 +186,11 @@ export class EditEmployeeComponent implements OnInit {
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
         for (let i = 0; i < this.academicQualification.length; i++) {
+          if(this.academicQualification[i].etaqUploadDocuments!=""){
           this.imageUrl[i] =
             this.personaldetails.apiUrl +
             this.academicQualification[i].etaqUploadDocuments;
+          }
           this.addAcademicQualification();
           let controlAcademicQualification =
             this.personalDetailsForm.controls['emsTblAcademicQualification'][
@@ -669,6 +674,7 @@ export class EditEmployeeComponent implements OnInit {
 
   onFileChange(event: any, i: any): void {
     
+    debugger
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
@@ -688,4 +694,8 @@ export class EditEmployeeComponent implements OnInit {
       };
     }
   }
+DownloadFile(path:any){
+saveAs(path)
+}
+
 }

@@ -493,9 +493,9 @@
               <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="imageUrl[i]">
-                  <img [src]="imageUrl[i]" class="Image">
+                <button (click)="DownloadFile(imageUrl[i])">Download Here</button>
                 </div>
-                <input id="file" type="file" (change)="onFileChange($event,i)" />
+                <input id="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" (change)="onFileChange($event,i)" />
               </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Academic Qualification Id</mat-label>
