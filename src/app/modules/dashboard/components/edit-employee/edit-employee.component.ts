@@ -190,6 +190,10 @@ export class EditEmployeeComponent implements OnInit {
           this.imageUrl[i] =
             this.personaldetails.apiUrl +
             this.academicQualification[i].etaqUploadDocuments;
+            debugger
+            let splitedPath = this.imageUrl[i].split("/");
+            let fileName = splitedPath[(splitedPath.length-1)];
+            this.acadImageUrl[i]= fileName;
           }else{
             this.imageUrl[i] = null;
           }

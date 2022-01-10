@@ -493,7 +493,7 @@
               <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="imageUrl[i]">
-                <button (click)="DownloadFile(imageUrl[i])">Download Here</button>
+                <button (click)="DownloadFile(imageUrl[i])">Download Here</button>{{this.acadImageUrl[i]}}
                 </div>
                 <input id="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" (change)="onFileChange($event,i)" />
               </div>
