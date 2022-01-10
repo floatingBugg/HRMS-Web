@@ -253,9 +253,14 @@ export class EditEmployeeComponent implements OnInit {
         /////Working History////
         this.workingHistory = oneEmployeeData.emsTblWorkingHistory;
         for (let i = 0; i < this.workingHistory.length; i++) {
+          if(this.workingHistory[i].etwhExperienceLetter!="" && this.workingHistory[i].etwhExperienceLetter!=null){
           this.workingHistoryUrl[i] =
             this.personaldetails.apiUrl +
             this.workingHistory[i].etwhExperienceLetter;
+          }
+          else{
+            this.workingHistoryUrl[i]=null;
+          }
           this.addWorkingHistory();
           let controlWorkingHistory =
             this.personalDetailsForm.controls['emsTblWorkingHistory'][

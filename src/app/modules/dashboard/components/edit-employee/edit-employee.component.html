@@ -570,8 +570,10 @@
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="profQualificationUrl[i]">
                   <button (click)="DownloadFile(profQualificationUrl[i])">Download Here</button>
+                  
                 </div>
-                <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
+                <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="professionalQualificationUpload($event,i)" />
+                <span>Only Pdf,Docx,jpg</span>
               </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Profesiional Qualification Id</mat-label>
@@ -673,9 +675,9 @@
               </mat-form-field>
             </div>
             <div class="circle" *ngIf="workingHistoryUrl[i]">
-              <img [src]="workingHistoryUrl[i]" class="Image">
+              <button (click)="DownloadFile(workingHistoryUrl[i])">Download Here</button>
             </div>
-            <input id="file" type="file" (change)="workingHistoryUpload($event,i)" />
+            <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"  (change)="workingHistoryUpload($event,i)" />
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">

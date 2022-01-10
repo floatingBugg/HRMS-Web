@@ -2,6 +2,7 @@ import { EmployeeDataService } from '../../../../../services/employee-data.servi
 import { Component, OnInit } from '@angular/core';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { ActivatedRoute } from '@angular/router';
+import { saveAs } from 'file-saver';
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
@@ -133,4 +134,7 @@ export class ViewEmployeeComponent implements OnInit {
         }
       });
   }
+  DownloadFile(path:any){
+    saveAs(path)
+    }
 }
