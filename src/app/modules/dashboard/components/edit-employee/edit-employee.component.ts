@@ -48,7 +48,9 @@ export class EditEmployeeComponent implements OnInit {
   imageUrl: any[] = [];
   acadImageUrl: any[] = [];
   profQualificationUrl: any[] = [];
+  profQualificationName: any[] = [];
   workingHistoryUrl: any[] = [];
+  workingHistoryName: any[] = [];
   profilePicUrl: any;
   isFileChanged!: boolean;
   public currentIndexEmergency: any = -1;
@@ -190,7 +192,6 @@ export class EditEmployeeComponent implements OnInit {
           this.imageUrl[i] =
             this.personaldetails.apiUrl +
             this.academicQualification[i].etaqUploadDocuments;
-            debugger
             let splitedPath = this.imageUrl[i].split("/");
             let fileName = splitedPath[(splitedPath.length-1)];
             this.acadImageUrl[i]= fileName;
@@ -227,6 +228,9 @@ export class EditEmployeeComponent implements OnInit {
           this.profQualificationUrl[i] =
             this.personaldetails.apiUrl +
             this.professionalQualification[i].etpqDocuments;
+            let splitedPath = this.imageUrl[i].split("/");
+            let fileName = splitedPath[(splitedPath.length-1)];
+            this.profQualificationName[i]=fileName;
           }
           else{
             this.profQualificationUrl[i]=null;
@@ -261,6 +265,9 @@ export class EditEmployeeComponent implements OnInit {
           this.workingHistoryUrl[i] =
             this.personaldetails.apiUrl +
             this.workingHistory[i].etwhExperienceLetter;
+            let splitedPath = this.workingHistoryUrl[i].split("/");
+            let fileName = splitedPath[(splitedPath.length-1)];
+            this.workingHistoryName[i]=fileName;
           }
           else{
             this.workingHistoryUrl[i]=null;

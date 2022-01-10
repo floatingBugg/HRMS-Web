@@ -26,6 +26,9 @@ export class ViewEmployeeComponent implements OnInit {
   public religion: any;
   public nationality: any;
   public apiURL = this.personalDetailService.apiUrl;
+  public workHistoryName : any[] = [];
+  public profQualName : any[] = [];
+  public Acadname : any[] = [];
   profilePicUrl: any;
   //////Emergency Contact /////
   public emergencyContact = [
@@ -125,12 +128,32 @@ export class ViewEmployeeComponent implements OnInit {
           /////// Academic Qualification/////////
           this.academicQualification =
             oneEmployeeData[0].emsTblAcademicQualification;
+            for (let i = 0; i < oneEmployeeData[0].emsTblAcademicQualification.length; i++) {
+            this.Acadname[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblAcademicQualification[i].etaqUploadDocuments;
+            let splitedPath = this.Acadname[i].split("/");
+            let fileName = splitedPath[(splitedPath.length-1)];
+            this.Acadname[i]=fileName;
+            }
           //////// Professional Qualification///////
           this.profQualification =
             oneEmployeeData[0].emsTblProfessionalQualification;
+            for (let i = 0; i < oneEmployeeData[0].emsTblProfessionalQualification.length; i++) {
+            this.profQualName[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblProfessionalQualification.etpqDocuments;
+            let splitedPathProf = this.profQualName[i].split("/");
+            let fileNameProf = splitedPathProf[(splitedPathProf.length-1)];
+            this.profQualName[i]=fileNameProf;
+            }
           //////Working History/////////
           this.workHistory = oneEmployeeData[0].emsTblWorkingHistory;
-        } else {
+          for (let i = 0; i < oneEmployeeData[0].emsTblWorkingHistory.length; i++) {
+          this.workHistoryName[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblWorkingHistory[i].etwhExperienceLetter;
+          let splitedPathWork = this.workHistoryName[i].split("/");
+          let fileNameWork = splitedPathWork[(splitedPathWork.length-1)];
+          this.workHistoryName[i]=fileNameWork;
+        } 
+      }
+        else 
+        {
         }
       });
   }

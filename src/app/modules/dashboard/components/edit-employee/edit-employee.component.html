@@ -8,7 +8,7 @@
           <mat-label class="col-lg-6 col-md-6 ml-5"><b>User Image:</b></mat-label>
           <div  *ngIf="profilePicUrl">
             <div class="row">
-            <img [src]="profilePicUrl" class="Image">
+            <img [src]="profilePicUrl" class="Image" alt="No Image Available/Not Uploaded">
           </div>
           <div class="row">
             <input id="file" type="file" (change)="employeePicUpload($event)" />
@@ -569,7 +569,7 @@
               <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="profQualificationUrl[i]">
-                  <button (click)="DownloadFile(profQualificationUrl[i])">Download Here</button>
+                  <button (click)="DownloadFile(profQualificationUrl[i])">Download Here</button>{{profQualificationName[i]}}
                   
                 </div>
                 <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="professionalQualificationUpload($event,i)" />
@@ -675,7 +675,7 @@
               </mat-form-field>
             </div>
             <div class="circle" *ngIf="workingHistoryUrl[i]">
-              <button (click)="DownloadFile(workingHistoryUrl[i])">Download Here</button>
+              <button (click)="DownloadFile(workingHistoryUrl[i])">Download Here</button>{{this.workingHistoryName[i]}}
             </div>
             <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"  (change)="workingHistoryUpload($event,i)" />
           </div>
