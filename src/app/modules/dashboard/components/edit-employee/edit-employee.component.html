@@ -495,7 +495,11 @@
                 <div class="circle" *ngIf="imageUrl[i]">
                 <button (click)="DownloadFile(imageUrl[i])">Download Here</button>{{this.acadImageUrl[i]}}
                 </div>
-                <input id="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" (change)="onFileChange($event,i)" />
+                <div class="circle" id="Input-btn">
+                   
+                  <input id="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" type="file" (change)="onFileChange($event,i)" />
+                
+                </div>
               </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Academic Qualification Id</mat-label>
@@ -572,8 +576,10 @@
                   <button (click)="DownloadFile(profQualificationUrl[i])">Download Here</button>{{profQualificationName[i]}}
                   
                 </div>
+                <div id="Input-btn">
                 <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" (change)="professionalQualificationUpload($event,i)" />
-                <span>Only Pdf,Docx,jpg</span>
+                <span>(Only Pdf,Docx,jpg)</span>
+              </div>
               </div>
               <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                 <mat-label>Profesiional Qualification Id</mat-label>
@@ -677,7 +683,9 @@
             <div class="circle" *ngIf="workingHistoryUrl[i]">
               <button (click)="DownloadFile(workingHistoryUrl[i])">Download Here</button>{{this.workingHistoryName[i]}}
             </div>
+            <div id="Input-btn">
             <input id="file" type="file" accept=".png,.jpeg,.jpg,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"  (change)="workingHistoryUpload($event,i)" />
+          </div>
           </div>
           <div class="row  mt-3">
             <div class="col-md-offset-2 col-lg-5 col-md-4">
