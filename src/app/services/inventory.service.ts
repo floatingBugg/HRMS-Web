@@ -24,5 +24,9 @@ export class InventoryService {
     return this.http.get(this.apiUrl + `/Asset/DisplayAssetUnassign?type=${id}`);
   }
 
+  getsumofAsset(categoryid: any):  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/GetAllSum?type=${categoryid}`);
+  }
 
 }

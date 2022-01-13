@@ -25,10 +25,19 @@ export class InventoryComponent implements OnInit {
   AC = 'AC';
   Printers = 'Printers';
   assetID!: string;
+ 
+
   constructor(private router: Router) {}
+  
 
-  ngOnInit(): void {}
+  
 
+
+  ngOnInit(): void {
+
+  }
+
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.assets.filter = filterValue.trim().toLowerCase();

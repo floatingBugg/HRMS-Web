@@ -147,9 +147,12 @@ export class ViewEmployeeComponent implements OnInit {
           this.workHistory = oneEmployeeData[0].emsTblWorkingHistory;
           for (let i = 0; i < oneEmployeeData[0].emsTblWorkingHistory.length; i++) {
           this.workHistoryName[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblWorkingHistory[i].etwhExperienceLetter;
+          
           let splitedPathWork = this.workHistoryName[i].split("/");
           let fileNameWork = splitedPathWork[(splitedPathWork.length-1)];
           this.workHistoryName[i]=fileNameWork;
+
+
         } 
       }
         else 
