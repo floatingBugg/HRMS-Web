@@ -29,6 +29,9 @@ export class InventoryService {
   getLaptopQuantity(categoryid :any):Observable<any>{
     return this.http.get(this.apiUrl + `/Asset/GetAllQuantity?categoryid=${categoryid}`);
   }
+  getLaptopCost(categoryid :any):Observable<any>{
+    return this.http.get(this.apiUrl + `/Asset/GetAllSum?categoryid=${categoryid}`);
+  }
 
   getAllSum(categoryid :any):Observable<any>{
     return this.http.get(this.apiUrl + `/Asset/GetAllSum?categoryid=${categoryid}`);

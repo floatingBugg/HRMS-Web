@@ -26,6 +26,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { LogoutValidationComponent } from './components/login/logout-validation/logout-validation.component';
 import { AllEmployeesComponent } from './modules/inventory/components/all-employees/all-employees.component';
 import { AssignComponent } from './modules/inventory/components/assign/assign.component';
+import { LeaveComponent } from './leave/leave.component';
+import { LeaveformComponent } from './leaveform/leaveform.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { AssignComponent } from './modules/inventory/components/assign/assign.co
     LoginValidationComponent,
     SpinnerComponent,
     LogoutValidationComponent,
+    LeaveComponent,
+    LeaveformComponent,
    
  
   ],
@@ -55,6 +60,7 @@ import { AssignComponent } from './modules/inventory/components/assign/assign.co
     MatDialogModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
+    MatTableModule,
   ],
   providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent],

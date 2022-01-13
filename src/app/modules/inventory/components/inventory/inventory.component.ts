@@ -27,7 +27,7 @@ export class InventoryComponent implements OnInit {
   Printers = 'Printers';
   assetID!: string;
   Quantity:Number[] = [];
-  Sum:Number[]=[];
+  Cost:Number[]=[];
   constructor(private router: Router,private inventoryservice:InventoryService) {
 
   }
@@ -35,7 +35,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.getQuantity(1);
-    this.getSum(1);
+    this.getCost(1);
   }
 
  
@@ -89,17 +89,16 @@ getQuantity(categoryid:any ){
       console.log(error);
     });
 }
-
-getSum(categoryid:any ){
-  this.inventoryservice.getAllSum(categoryid).subscribe(
+getCost(categoryid:any ){
+  this.inventoryservice.getLaptopCost(categoryid).subscribe(
     (data: any)=>
     {
-      this.Sum[categoryid-1]=data.data;
+      this.Cost[categoryid-1]=data.data;
       if(categoryid <= 12){
-        this.getSum(++categoryid);
+        this.getCost(++categoryid);
       }
-      if(this.Sum[categoryid-1]==0 ||this.Sum[categoryid-1]==null ){
-        this.Sum[categoryid-1]==0;
+      if(this.Cost[categoryid-1]==0 ||this.Cost[categoryid-1]==null ){
+        this.Cost[categoryid-1]==0;
       }
       console.log(data);
     },
