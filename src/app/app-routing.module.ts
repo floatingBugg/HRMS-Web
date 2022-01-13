@@ -3,6 +3,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
+import { LeaveComponent } from './leave/leave.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -16,6 +17,10 @@ const routes: Routes = [
     {
         path: 'inventory',
         loadChildren: () => import('./modules/inventory/inventory.module').then((m) => m.InventoryModule)
+    },
+    {
+        path:'leave',
+        component:LeaveComponent, 
     }
 ];
 
