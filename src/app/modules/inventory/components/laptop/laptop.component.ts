@@ -24,7 +24,6 @@ export class LaptopComponent implements OnInit {
 ) { }
 
   ngOnInit(): void {
-    debugger;
     this.createForm();
 
   }
