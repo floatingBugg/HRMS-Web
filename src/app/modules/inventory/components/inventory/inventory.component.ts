@@ -36,6 +36,7 @@ export class InventoryComponent implements OnInit {
     this.getQuantity(1);
   }
 
+ 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.assets.filter = filterValue.trim().toLowerCase();
