@@ -86,9 +86,6 @@ getAssignedData(){
  
 }
 
-
-
- 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.assetData.filter = filterValue.trim().toLowerCase();

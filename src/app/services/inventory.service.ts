@@ -30,4 +30,8 @@ export class InventoryService {
     return this.http.get(this.apiUrl + `/Asset/GetAllQuantity?categoryid=${categoryid}`);
   }
 
+  getAllSum(categoryid :any):Observable<any>{
+    return this.http.get(this.apiUrl + `/Asset/GetAllSum?categoryid=${categoryid}`);
+  }
+
 }

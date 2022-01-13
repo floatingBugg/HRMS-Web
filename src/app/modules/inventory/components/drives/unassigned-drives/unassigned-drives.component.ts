@@ -2,11 +2,13 @@ import {DeleteEmployeeComponent} from '../../../../dashboard/components/delete-e
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
-import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
-import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ActivatedRoute } from '@angular/router';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
 
 @Component({
   selector: 'app-unassigned-drives',
@@ -17,10 +19,13 @@ export class UnassignedDrivesComponent implements OnInit {
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
+  itacCategoryId=3;
+  public categoryId:any;
+
   displayedColumns: string[] = [
-    'empID',
-    'fullName',
-    'empDesignation',
+    'assetID',
+    'name',
+    'company',
     'quantity',
     'actions',
   ];
@@ -28,18 +33,30 @@ export class UnassignedDrivesComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
+  rowId= 1;
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private inventory: InventoryService,public route: ActivatedRoute, public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
-    this.getEmployeeData();
-    this.initializeSorting();
+    this.getAssetByCategoryID(this.itacCategoryId);
+ 
   }
-  initializeSorting(): void{
-    setTimeout(() => {
-      this.employeeData.sort = this.sort;
-    },1000);
+
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetData(itacCategoryId)
+      .subscribe((data: any) => {
+      
+        this.assetData = new MatTableDataSource<NetworkGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
   }
+
+
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -58,15 +75,7 @@ export class UnassignedDrivesComponent implements OnInit {
   //   });
   // }
   
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-  
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
-  
-    });
-  }
+ 
   // onRowClicked(row: any) {}
  
 
