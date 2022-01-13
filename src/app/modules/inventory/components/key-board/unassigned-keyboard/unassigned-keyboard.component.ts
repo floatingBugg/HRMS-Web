@@ -7,8 +7,11 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-
-
+import { ActivatedRoute } from '@angular/router';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-unassigned-keyboard',
@@ -18,6 +21,9 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
 export class UnassignedKeyboardComponent implements OnInit {
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
+
+  itacCategoryId=7;
+  public categoryId:any;
 
   displayedColumns: string[] = [
     'assetID',
@@ -29,14 +35,30 @@ export class UnassignedKeyboardComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
+  rowId= 1;
 
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService,private inventory: InventoryService,public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
     this.getEmployeeData();
     this.initializeSorting();
+    this.getAssetByCategoryID(this.itacCategoryId);
   }
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetData(itacCategoryId)
+      .subscribe((data: any) => {
+     
+        this.assetData = new MatTableDataSource<InventoryGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
+
   initializeSorting(): void{
     setTimeout(() => {
       this.employeeData.sort = this.sort;

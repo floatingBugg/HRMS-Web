@@ -7,7 +7,11 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-
+import { InventoryService } from 'src/app/services/inventory.service';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { ActivatedRoute } from '@angular/router';
+import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
 
 @Component({
   selector: 'app-unassigned-printers',
@@ -17,6 +21,11 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
 export class UnassignedPrintersComponent implements OnInit {
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
+
+
+  
+  itacCategoryId=6;
+  public categoryId:any;
 
   displayedColumns: string[] = [
     'assetID',
@@ -29,14 +38,30 @@ export class UnassignedPrintersComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
+  rowId= 1;
 
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService,private inventory: InventoryService,public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
+    this.getAssetByCategoryID(this.itacCategoryId);
     this.getEmployeeData();
     this.initializeSorting();
   }
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetData(itacCategoryId)
+      .subscribe((data: any) => {
+   
+        this.assetData = new MatTableDataSource<NetworkGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
+
   initializeSorting(): void{
     setTimeout(() => {
       this.employeeData.sort = this.sort;
