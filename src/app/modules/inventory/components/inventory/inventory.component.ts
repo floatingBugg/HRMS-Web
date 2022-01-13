@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-inventory',
@@ -25,9 +26,15 @@ export class InventoryComponent implements OnInit {
   AC = 'AC';
   Printers = 'Printers';
   assetID!: string;
-  constructor(private router: Router) {}
+  Quantity:Number[] = [];
+  constructor(private router: Router,private inventoryservice:InventoryService) {
 
-  ngOnInit(): void {}
+  }
+  
+
+  ngOnInit(): void {
+    this.getQuantity(1);
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -62,4 +69,22 @@ export class InventoryComponent implements OnInit {
       this.router.navigate([`/inventory/asset-reserve/${this.assetID}`]);
     }
   }
+getQuantity(categoryid:any ){
+  this.inventoryservice.getLaptopQuantity(categoryid).subscribe(
+    (data: any)=>
+    {
+      this.Quantity[categoryid-1]=data.data;
+      if(categoryid <= 12){
+        this.getQuantity(++categoryid);
+      }
+      if(this.Quantity[categoryid-1]==0 ||this.Quantity[categoryid-1]==null ){
+        this.Quantity[categoryid-1]==0;
+      }
+      console.log(data);
+    },
+    error => {
+      console.log(error);
+    });
+}
+  
 }

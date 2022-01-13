@@ -9,7 +9,7 @@ export class PersonalDetailsService {
   _userId = localStorage.getItem('loggedIn_UserId');
   _userName = localStorage.getItem('loggedIn_UserName');
   _responseMessage: any = '';
-  apiUrl = 'http://hamzaashiq467-001-site1.itempurl.com';
+  apiUrl = 'https://localhost:44324';
   get responseMessage() {
     return this._responseMessage;
   }

@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class InventoryService {
+  _userId = localStorage.getItem('loggedIn_UserId');
+  _userName = localStorage.getItem('loggedIn_UserName');
   _responseMessage: any = '';
-  apiUrl = 'http://hamzaashiq467-001-site1.itempurl.com';
+  apiUrl = 'https://localhost:44324';
   get responseMessage() {
     return this._responseMessage;
   }
@@ -24,5 +26,8 @@ export class InventoryService {
     return this.http.get(this.apiUrl + `/Asset/DisplayAssetUnassign?type=${id}`);
   }
 
+  getLaptopQuantity(categoryid :any):Observable<any>{
+    return this.http.get(this.apiUrl + `/Asset/GetAllQuantity?categoryid=${categoryid}`);
+  }
 
 }
