@@ -7,7 +7,10 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ActivatedRoute } from '@angular/router';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 
 @Component({
   selector: 'app-unassigned-furniture',
@@ -18,6 +21,8 @@ export class UnassignedFurnitureComponent implements OnInit {
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
+  itacCategoryId=12;
+  public categoryId:any;
   displayedColumns: string[] = [
     'assetID',
     'name',
@@ -29,11 +34,15 @@ export class UnassignedFurnitureComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
+  rowId= 1;
 
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService,private inventory: InventoryService,public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
     this.getEmployeeData();
+    this.getAssetByCategoryID(this.itacCategoryId);
     this.initializeSorting();
   }
   initializeSorting(): void{
@@ -42,6 +51,30 @@ export class UnassignedFurnitureComponent implements OnInit {
     },1000);
   }
 
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetData(itacCategoryId)
+      .subscribe((data: any) => {
+        // if (data.success) {
+        //   let oneAssetData = data.data;
+        //  this.categoryId = oneAssetData[0].itacCategoryId
+        //   this.assetID = oneAssetData[0].itaAssetId;
+        //   this.assetName = oneAssetData[0].itaAssetName;
+        //   this.company = oneAssetData[0].itaCompanyName;
+        //   this.ram = oneAssetData[0].itaRam;
+        //   this.processor = oneAssetData[0].itaProcessor;
+        //   this.storage = oneAssetData[0].itaStorage;
+        //   this.generation = oneAssetData[0].itaGeneration;
+      
+        // } else {
+        // }
+        this.assetData = new MatTableDataSource<InventoryGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
+  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();

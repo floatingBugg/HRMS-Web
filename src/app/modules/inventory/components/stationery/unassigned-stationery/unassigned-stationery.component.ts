@@ -7,7 +7,11 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ActivatedRoute } from '@angular/router';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
 
 @Component({
   selector: 'app-unassigned-stationery',
@@ -18,6 +22,9 @@ export class UnassignedStationeryComponent implements OnInit {
 
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
+
+  itacCategoryId=10;
+  public categoryId:any;
 
   displayedColumns: string[] = [
     'assetID',
@@ -30,14 +37,29 @@ export class UnassignedStationeryComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;
+  rowId=1;
 
-
-  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService) { }
+  constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService,private inventory: InventoryService,public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
     this.getEmployeeData();
+    this.getAssetByCategoryID(this.itacCategoryId);
     this.initializeSorting();
   }
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetData(itacCategoryId)
+      .subscribe((data: any) => {
+        
+        this.assetData = new MatTableDataSource<NetworkGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
+
   initializeSorting(): void{
     setTimeout(() => {
       this.employeeData.sort = this.sort;
