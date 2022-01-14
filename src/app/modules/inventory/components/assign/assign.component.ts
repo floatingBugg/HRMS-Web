@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormArray,Validators,FormGroup,
-  FormBuilder,AbstractControl,RequiredValidator} from '@angular/forms';
+import {FormControl,FormArray,Validators,FormGroup,FormBuilder,AbstractControl,RequiredValidator} from '@angular/forms';
 import { Router } from '@angular/router';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import {MatDialog,MatDialogRef,MAT_DIALOG_DATA,} from '@angular/material/dialog';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { SuccessDialogComponent } from 'src/app/modules/dashboard/components/add-employee/success-dialog/success-dialog.component';
 import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
