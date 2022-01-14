@@ -1,9 +1,10 @@
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LeaveComponent } from './leave/leave.component';
+import { LeaveformComponent } from './leaveform/leaveform.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -21,7 +22,11 @@ const routes: Routes = [
     {
         path:'leave',
         component:LeaveComponent, 
-    }
+    },
+    {
+        path:'leaveform',
+        component:LeaveformComponent,
+    },
 ];
 
 @NgModule({
