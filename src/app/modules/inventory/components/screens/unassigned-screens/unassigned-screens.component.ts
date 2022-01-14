@@ -41,7 +41,9 @@ export class UnassignedScreensComponent implements OnInit {
   public assetData:any;// new MatTableDataSource<employeeGrid>();
   rowId= 1;
 
-  constructor(public dialog: MatDialog,private inventory: InventoryService,public route: ActivatedRoute,
+  constructor(public dialog: MatDialog,
+    private inventory: InventoryService,
+    public route: ActivatedRoute,
     public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
@@ -77,16 +79,7 @@ export class UnassignedScreensComponent implements OnInit {
   getAssignedData(){
  
 }
-onCreate(assetId: number){
-    
-  const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
-    dialogConfig.autoFocus = true;
-    dialogConfig.width = "40%"
-    this.inventory._assetId = assetId;
-    this.inventory._catagoryId = this.itacCategoryId;
-    this.dialog.open(AllEmployeesComponent);
-}
+
 
 
   applyFilter(event: Event) {
@@ -108,6 +101,15 @@ onCreate(assetId: number){
   
  
   // onRowClicked(row: any) {}
-  
+  onCreate(assetId: number){
+    
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%"
+      this.inventory._assetId = assetId;
+      this.inventory._catagoryId = this.itacCategoryId;
+      this.dialog.open(AllEmployeesComponent);
+  }
 
 }

@@ -1,11 +1,12 @@
 import {DeleteEmployeeComponent} from '../../../../dashboard/components/delete-employee/delete-employee.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { AllEmployeesComponent } from '../../all-employees/all-employees.component';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
@@ -62,6 +63,20 @@ export class UnassignedDrivesComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
   }
+  onCreate(assetId: number){
+    
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%"
+      this.inventory._assetId = assetId;
+      this.inventory._catagoryId = this.itacCategoryId;
+      this.dialog.open(AllEmployeesComponent);
+  }
+
+
+
+
   // deleteEmployeeById(id: any) {
   //   const dialogRef = this.dialog.open(DeleteEmployeeComponent);
   //   dialogRef.afterClosed().subscribe((res: any) => {
