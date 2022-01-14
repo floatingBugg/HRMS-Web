@@ -40,7 +40,7 @@
           <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
             <mat-icon>remove_red_eye</mat-icon>
           </button>
-          <button  title="Assign Asset" mat-raised-button  color="primary" (click)="onCreate()">
+          <button  title="Assign Asset" mat-raised-button  color="primary" (click)="onCreate(employee.empID)">
            Assign
           </button>
         

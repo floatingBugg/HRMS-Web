@@ -29,6 +29,7 @@ export class UnassignedLaptopsComponent implements OnInit {
   // public storage: any;
   // public generation: any;
   itacCategoryId=1;
+  count: number = 1;
   public categoryId:any;
 
   displayedColumns: string[] = [
@@ -91,12 +92,14 @@ getAssignedData(){
     this.assetData.filter = filterValue.trim().toLowerCase();
   }
  
-  onCreate(){
+  onCreate(assetId: number){
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
-   this.dialog.open(AllEmployeesComponent);
+      this.inventory._assetId = assetId;
+      this.inventory._catagoryId = this.itacCategoryId;
+      this.dialog.open(AllEmployeesComponent);
   }
   
   }

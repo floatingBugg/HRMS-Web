@@ -8,6 +8,9 @@ import { Observable } from 'rxjs';
 export class InventoryService {
   _userId = localStorage.getItem('loggedIn_UserId');
   _userName = localStorage.getItem('loggedIn_UserName');
+  _catagoryId = 0;
+  _assetId = 0;
+  _employeeId = 0;
   _responseMessage: any = '';
   apiUrl = 'https://localhost:44324';
   get responseMessage() {
@@ -15,7 +18,15 @@ export class InventoryService {
   }
   constructor(private http: HttpClient) { }
 
-
+  get assetId(){
+    return this._assetId;
+  }
+  get catagoryId(){
+    return this._catagoryId;
+  }
+  get employeeId(){
+    return this._employeeId;
+  }
   
   postAssets(data: any): Observable<any> {
 

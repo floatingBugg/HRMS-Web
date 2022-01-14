@@ -20,6 +20,9 @@ import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/com
 export class AssignComponent implements OnInit {
   assignForm: any = FormGroup;
   errorMsg: any;
+  catagoryId: number = 0;
+  empId: number = 0;
+  assetId: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +32,11 @@ export class AssignComponent implements OnInit {
     public dialogRef: MatDialogRef<any>,
    
     
-  ) { }
+  ) { 
+    this.empId = this.inventory.employeeId;
+    this.catagoryId = this.inventory.catagoryId;
+    this.assetId = this.inventory.assetId;
+  }
 
   ngOnInit(): void {
     this.createForm();
@@ -49,8 +56,9 @@ export class AssignComponent implements OnInit {
     this.assignForm = this.fb.group({
       itasQuantity: ['', Validators.required],
       itasAssignedDate: ['', Validators.required],
-      itasitaccategoryid:1,
-
+      itasitaccategoryid: this.catagoryId,
+      itasItaAssetId: this.assetId,
+      itasEtedEmployeeId: this.empId
     
     });
   }

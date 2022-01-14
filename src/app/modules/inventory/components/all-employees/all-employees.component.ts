@@ -7,6 +7,7 @@ import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { AssignComponent } from '../assign/assign.component';
+import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
   selector: 'app-all-employees',
@@ -31,7 +32,7 @@ export class AllEmployeesComponent implements OnInit {
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
-  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
+  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService, private inventory: InventoryService,
     public empDataService: EmployeeDataService) { }
 
     ngOnInit(): void {
@@ -61,11 +62,12 @@ export class AllEmployeesComponent implements OnInit {
       });
     }
     // onRowClicked(row: any) {}
-    onCreate(){
+    onCreate(empId: number){
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
+      this.inventory._employeeId = empId;
       this.dialog.open(AssignComponent);
      }
 }

@@ -15,10 +15,10 @@
                 <mat-label>Type</mat-label>
                 <mat-select formControlName="itaType" name="itaType">
                   <mat-option [value]=""> ---Select One---</mat-option>
-                  <mat-option value="tables">Tables</mat-option>
-                  <mat-option value="chairs">Chairs</mat-option>
-                  <mat-option value="drawers">Drawers</mat-option>
-                  <mat-option value="sofas">Sofas</mat-option>
+                  <mat-option value="Table">Table</mat-option>
+                  <mat-option value="Chair">Chair</mat-option>
+                  <mat-option value="Drawer">Drawer</mat-option>
+                  <mat-option value="Sofa">Sofa</mat-option>
                 </mat-select>
                 <mat-error *ngIf="furnitureForm.controls['itaType'].errors?.['required'] ">
                   <strong>Required</strong></mat-error>
