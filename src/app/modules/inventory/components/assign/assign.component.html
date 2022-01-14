@@ -27,7 +27,7 @@
           <div class="text-align-right">
             <button class="setPositionRight5em"  mat-raised-button color="warn" (click)="onNoClick()">Close</button>
             <button class="setPositionRight4em" [disabled]="assignForm.invalid" mat-raised-button type="submit"
-              color="primary">Submit</button>
+            (click)="submitData()" color="primary">Submit</button>
           </div>
       </div>
       </div>

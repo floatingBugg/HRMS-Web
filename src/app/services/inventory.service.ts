@@ -37,4 +37,9 @@ export class InventoryService {
     return this.http.get(this.apiUrl + `/Asset/GetAllSum?categoryid=${categoryid}`);
   }
 
+  postAssetsAssign(data: any): Observable<any> {
+
+    return this.http.post(this.apiUrl + '/Asset/AssignAsset', data);
+  }
+
 }

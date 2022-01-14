@@ -9,7 +9,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-
+import { InventoryService } from 'src/app/services/inventory.service';
+import { SuccessDialogComponent } from 'src/app/modules/dashboard/components/add-employee/success-dialog/success-dialog.component';
+import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 @Component({
   selector: 'app-assign',
   templateUrl: './assign.component.html',
@@ -17,12 +19,13 @@ import {
 })
 export class AssignComponent implements OnInit {
   assignForm: any = FormGroup;
-
+  errorMsg: any;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     public dialog: MatDialog,
+    private inventory: InventoryService,
     public dialogRef: MatDialogRef<any>,
    
     
@@ -46,9 +49,31 @@ export class AssignComponent implements OnInit {
     this.assignForm = this.fb.group({
       itasQuantity: ['', Validators.required],
       itasAssignedDate: ['', Validators.required],
+      itasitaccategoryid:1,
+
     
     });
   }
 
+  submitData() {
+    console.log(this.assignForm.value);
+    this.inventory
+      .postAssets(this.assignForm.value)
+      .subscribe((result) => {
+        if (result.success) {
+          this.dialog.open(SuccessDialogComponent);
+          console.log(result.message);
+        } else {
+          this.errorMsg = result.message;
+          console.log('error Msgggg', this.errorMsg);
+          localStorage.setItem('errorMessage', this.errorMsg);
+          this.inventory._responseMessage = this.errorMsg;
+          this.dialog.open(AddEmployeeFailureDialogComponent, {
+            width: '600px',
+         });
+          console.log(result.message);
+        }
+      });
+  }
 
 }
