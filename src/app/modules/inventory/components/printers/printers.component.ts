@@ -6,6 +6,7 @@ import { SuccessDialogComponent } from 'src/app/modules/dashboard/components/add
 import { AddEmployeeFailureDialogComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { InventoryService } from 'src/app/services/inventory.service';
 import Swal from 'sweetalert2';
+import { SweetAlertGrow } from 'sweetalert2';
 
 @Component({
   selector: 'app-printers',
