@@ -53,16 +53,28 @@ export class FansComponent implements OnInit {
       .postAssets(this.fansForm.value)
       .subscribe((result) => {
         if (result.success) {
-          this.dialog.open(SuccessDialogComponent);
-          console.log(result.message);
-        } else {
+          Swal.fire({
+            title: 'Added!',
+            text: 'Record added successfully',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Thank You',
+            //cancelButtonText: 'No, keep it'
+          }).then((res) => {
+            this.router.navigate(["inventory/unassigned-fans"])
+          })
+        } 
+        else
+         {
           this.errorMsg = result.message;
-          console.log('error Msgggg', this.errorMsg);
-          localStorage.setItem('errorMessage', this.errorMsg);
-          this.inventory._responseMessage = this.errorMsg;
-          this.dialog.open(AddEmployeeFailureDialogComponent, {
-            width: '600px',
-         });
+          Swal.fire({
+            title: 'ERROR!',
+            text: this.errorMsg,
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonText: 'Okay',
+            //cancelButtonText: 'No, keep it'
+          })
           console.log(result.message);
         }
       });

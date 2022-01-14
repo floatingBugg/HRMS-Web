@@ -22,9 +22,9 @@
                     <mat-label>Type</mat-label>
                     <mat-select formControlName="itaType" name="itaType">
                       <mat-option [value]=""> ---Select One---</mat-option>
-                      <mat-option value="wallMounted">Wall Mounted</mat-option>
-                      <mat-option value="roofMounted">Roof Mounted</mat-option>
-                      <mat-option value="stand">Stand</mat-option>
+                      <mat-option value="Wall-Mounted">Wall Mounted</mat-option>
+                      <mat-option value="Roof-Mounted">Roof Mounted</mat-option>
+                      <mat-option value="Stand">Stand</mat-option>
                     </mat-select>
                     <mat-error *ngIf="fansForm.controls['itaType'].errors?.['required'] ">
                       <strong>Required</strong></mat-error>
