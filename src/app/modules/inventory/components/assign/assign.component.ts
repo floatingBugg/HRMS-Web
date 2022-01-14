@@ -66,7 +66,7 @@ export class AssignComponent implements OnInit {
   submitData() {
     console.log(this.assignForm.value);
     this.inventory
-      .postAssets(this.assignForm.value)
+      .postAssetsAssign(this.assignForm.value)
       .subscribe((result) => {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);

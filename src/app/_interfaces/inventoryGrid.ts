@@ -1,5 +1,5 @@
 export interface InventoryGrid {
-    assetID:number,
+    assetid:number,
     name:string,
     quantity:any,
     serialno:any,
