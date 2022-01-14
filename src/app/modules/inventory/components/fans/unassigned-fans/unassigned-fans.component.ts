@@ -1,7 +1,7 @@
 import {DeleteEmployeeComponent} from '../../../../dashboard/components/delete-employee/delete-employee.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
@@ -11,6 +11,7 @@ import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { AllEmployeesComponent } from '../../all-employees/all-employees.component';
 
 @Component({
   selector: 'app-unassigned-fans',
@@ -58,6 +59,18 @@ export class UnassignedFansComponent implements OnInit {
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
   }
+
+  onCreate(assetId: number){
+    
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%";
+      this.inventory._assetId = assetId;
+      this.inventory._catagoryId = this.itacCategoryId;
+      this.dialog.open(AllEmployeesComponent);
+  }
+  
 
   initializeSorting(): void{
     setTimeout(() => {

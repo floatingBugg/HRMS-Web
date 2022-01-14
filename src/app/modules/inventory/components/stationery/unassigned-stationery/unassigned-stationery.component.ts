@@ -1,7 +1,7 @@
 import {DeleteEmployeeComponent} from '../../../../dashboard/components/delete-employee/delete-employee.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { NetworkGrid } from 'src/app/_interfaces/Network-Grid';
+import { AllEmployeesComponent } from '../../all-employees/all-employees.component';
 
 @Component({
   selector: 'app-unassigned-stationery',
@@ -60,6 +61,17 @@ export class UnassignedStationeryComponent implements OnInit {
       });
   }
 
+  onCreate(assetId: number){
+    
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "40%";
+      this.inventory._assetId = assetId;
+      this.inventory._catagoryId = this.itacCategoryId;
+      this.dialog.open(AllEmployeesComponent);
+  }
+  
   initializeSorting(): void{
     setTimeout(() => {
       this.employeeData.sort = this.sort;
