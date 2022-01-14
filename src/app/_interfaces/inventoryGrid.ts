@@ -8,6 +8,7 @@ export interface InventoryGrid {
     type:string,
     size:string,
     condition:string,
+    cost:string,
 
    
    

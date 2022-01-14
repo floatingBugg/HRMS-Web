@@ -16,6 +16,8 @@ export class AssignComponent implements OnInit {
   catagoryId: number = 0;
   empId: number = 0;
   assetId: number = 0;
+  userId = localStorage.getItem('loggedIn_UserId');
+  userName = localStorage.getItem('loggedIn_UserName');
 
   constructor(
     private fb: FormBuilder,
@@ -51,6 +53,8 @@ export class AssignComponent implements OnInit {
       itasAssignedDate: ['', Validators.required],
       itasitaccategoryid: this.catagoryId,
       itasItaAssetId: this.assetId,
+      itascreatedby: this.userId,
+      itascreatedbyname:this.userName,
       itasEtedEmployeeId: this.empId
     
     });

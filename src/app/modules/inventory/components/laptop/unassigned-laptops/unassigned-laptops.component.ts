@@ -31,6 +31,7 @@ export class UnassignedLaptopsComponent implements OnInit {
   itacCategoryId=1;
   count: number = 1;
   public categoryId:any;
+  
 
   displayedColumns: string[] = [
     'assetID',
@@ -97,7 +98,8 @@ getAssignedData(){
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.width = "40%"
+      dialogConfig.width = "40%";
+    
       this.inventory._assetId = assetId;
       this.inventory._catagoryId = this.itacCategoryId;
       this.dialog.open(AllEmployeesComponent);
