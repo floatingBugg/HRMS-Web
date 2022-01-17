@@ -4,8 +4,9 @@ export interface AssetassignGrid {
     companyname:string,
     quantity:any,
     assignedto:any,
+    model:string,
+    size:any,
     ram:string,
-    size:string,
     processor:string,
     storage:string,
     generation:string
