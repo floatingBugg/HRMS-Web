@@ -7,12 +7,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatRippleModule } from '@angular/material/core';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { LoginComponent } from './components/login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { HomeComponent } from './components/home/home.component';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
@@ -30,6 +29,7 @@ import { LeaveComponent } from './leave/leave.component';
 import { LeaveformComponent } from './leaveform/leaveform.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatInputModule,
     MatCheckboxModule,
     MatRippleModule,
-    MatDatepickerModule,
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
@@ -62,11 +61,14 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatTableModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule
+
   ],
   providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent],
-  entryComponents:[AllEmployeesComponent, AssignComponent],
+  entryComponents:[AllEmployeesComponent, AssignComponent,LeaveformComponent],
   
 })
 export class AppModule { }

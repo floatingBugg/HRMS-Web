@@ -32,12 +32,19 @@
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-     
+
+      <mat-form-field appearance="outline">
+        <mat-label>Duration</mat-label>
+        <input matInput placeholder=>
+    </mat-form-field>
+    
         
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Reason</mat-label>
         <textarea matInput placeholder=""></textarea>
       </mat-form-field>
-      
-
+      <div class="btnsubmit">
+        <button routerLink="" mat-raised-button color color="primary">Submit</button>
+        
+</div>
 </div>
