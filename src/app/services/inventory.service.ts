@@ -52,5 +52,9 @@ export class InventoryService {
 
     return this.http.post(this.apiUrl + '/Asset/AssignAsset', data);
   }
-
+ 
+  getAssetAssign(type: any):  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/DisplayAssignAsset?type=${type}`);
+  }
 }
