@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService} from 'src/app/services/save-assigned-data.service';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-laptops',
@@ -26,7 +27,7 @@ export class AssignedLaptopsComponent implements OnInit {
   public categoryId:any;
 
   displayedColumns: string[] = [
-    'assetID',
+    'assignID',
     'nameModel',
     'company',
     'ram',
@@ -51,7 +52,6 @@ export class AssignedLaptopsComponent implements OnInit {
     public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
-    this.getEmployeeData();
     this.initializeSorting();
     this.getAssetByCategoryID(this.itacCategoryId);
   }
@@ -87,17 +87,19 @@ export class AssignedLaptopsComponent implements OnInit {
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
   }
-
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
-
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
     });
   }
-  // onRowClicked(row: any) {}
+
 
   }
 
