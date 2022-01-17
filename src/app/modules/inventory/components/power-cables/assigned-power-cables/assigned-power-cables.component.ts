@@ -8,6 +8,10 @@ import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { Router } from '@angular/router';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ActivatedRoute } from '@angular/router';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
 
 
 @Component({
@@ -26,49 +30,41 @@ export class AssignedPowerCablesComponent implements OnInit {
     'assignedTo',
     'actions',
   ];
-
+  itacCategoryId=9;
+  public categoryId:any;
 
   pageSizeOptions: number[] = [ 10, 25, 100];
-  public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor(
     public dialog: MatDialog,private personalDetails: PersonalDetailsService,
-    public empDataService: EmployeeDataService) { }
+    public empDataService: EmployeeDataService,private inventory: InventoryService,
+    public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
-    this.getEmployeeData();
+    this.getAssetByCategoryID(this.itacCategoryId);
     this.initializeSorting();
   }
   initializeSorting(): void{
     setTimeout(() => {
-      this.employeeData.sort = this.sort;
+      this.assetData.sort = this.sort;
     },1000);
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.employeeData.filter = filterValue.trim().toLowerCase();
+    this.assetData.filter = filterValue.trim().toLowerCase();
   }
-  // deleteEmployeeById(id: any) {
-  //   const dialogRef = this.dialog.open(DeleteEmployeeComponent);
-  //   dialogRef.afterClosed().subscribe((res: any) => {
-  //     if (res == true) {
-  //       this.personalDetails.deleteEmployeeData(id).subscribe((data) => {
-  //         if(data){
-  //           this.getEmployeeData();
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetAssign(itacCategoryId)
+      .subscribe((data: any) => {
+      
+        this.assetData = new MatTableDataSource<AssetassignGrid>(data.data);
 
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
-
-    });
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
   }
-  // onRowClicked(row: any) {}
+ 
 }
