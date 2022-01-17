@@ -17,11 +17,7 @@ export class LeaveformComponent implements OnInit {
     { value: 'Annual', viewValue: 'Annual' },
     { value: 'Casual', viewValue: 'Casual' },
   ];
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl(),
-  });
-  
+
   constructor() { }
 
   ngOnInit(): void {

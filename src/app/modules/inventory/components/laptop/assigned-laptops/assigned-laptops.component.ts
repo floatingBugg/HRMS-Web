@@ -34,6 +34,7 @@ export class AssignedLaptopsComponent implements OnInit {
     'storage',
     'generation',
     'assignedTo',
+    'quantity',
     'actions',
   ];
 

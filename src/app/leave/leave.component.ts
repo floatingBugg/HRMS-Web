@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LeaveComponent implements OnInit {
   ID!: any;
   Name!: string;
-  Designation!: string;
+  Designation!:string;
   Sick!: number;
   Casual!: number;
   Annual!:number;
