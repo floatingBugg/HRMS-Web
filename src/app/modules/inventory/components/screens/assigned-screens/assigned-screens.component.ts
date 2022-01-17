@@ -30,7 +30,7 @@ export class AssignedScreensComponent implements OnInit {
 
 
   pageSizeOptions: number[] = [ 10, 25, 100];
-  public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public assetData:any;// new MatTableDataSource<employeeGrid>();
 
 
   constructor(
@@ -47,12 +47,12 @@ export class AssignedScreensComponent implements OnInit {
   }
   initializeSorting(): void{
     setTimeout(() => {
-      this.employeeData.sort = this.sort;
+      this.assetData.sort = this.sort;
     },1000);
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.employeeData.filter = filterValue.trim().toLowerCase();
+    this.assetData.filter = filterValue.trim().toLowerCase();
   }
   // deleteEmployeeById(id: any) {
   //   const dialogRef = this.dialog.open(DeleteEmployeeComponent);
@@ -70,9 +70,9 @@ export class AssignedScreensComponent implements OnInit {
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
 
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      this.assetData = new MatTableDataSource<employeeGrid>(data.data);
      // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
+      this.assetData.paginator = this.paginator;
 
     });
   }
