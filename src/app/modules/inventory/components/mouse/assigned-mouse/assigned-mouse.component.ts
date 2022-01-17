@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-mouse',
@@ -26,7 +27,7 @@ export class AssignedMouseComponent implements OnInit {
   itacCategoryId=8;
   public categoryId:any;
   displayedColumns: string[] = [
-    'assetID',
+    'assignid',
     'name',
     'type',
     'assignedTo',
@@ -67,6 +68,18 @@ export class AssignedMouseComponent implements OnInit {
         this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
+  }
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

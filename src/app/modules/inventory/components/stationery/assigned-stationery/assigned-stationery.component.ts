@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-stationery',
@@ -24,7 +25,7 @@ export class AssignedStationeryComponent implements OnInit {
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
   displayedColumns: string[] = [
-    'assetID',
+    'assignid',
     'name',
     'type',
     'quantity',
@@ -51,6 +52,18 @@ export class AssignedStationeryComponent implements OnInit {
     setTimeout(() => {
       this.assetData.sort = this.sort;
     },1000);
+  }
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
   }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

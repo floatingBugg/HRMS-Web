@@ -11,8 +11,8 @@ import { Router } from '@angular/router';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
-import { AssetassignGrid
- } from 'src/app/_interfaces/Assetassign-Grid';
+import { AssetassignGrid} from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 @Component({
   selector: 'app-assigned-ac',
   templateUrl: './assigned-ac.component.html',
@@ -24,7 +24,7 @@ export class AssignedAcComponent implements OnInit {@ViewChild('employeeDataPage
 itacCategoryId=5;
 public categoryId:any;
 displayedColumns: string[] = [
-  'assetID',
+  'assignid',
   'name',
   'company',
   'size',
@@ -66,6 +66,19 @@ getAssetByCategoryID(itacCategoryId: any) {
       this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
       console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
     });
+}
+
+unAssignAssetById(assignid: any) {
+  const dialogRef = this.dialog.open(UnassignAssetComponent);
+  dialogRef.afterClosed().subscribe((res: any) => {
+    if (res == true) {
+      this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+        if(data){
+          this.getAssetByCategoryID(this.itacCategoryId);
+        }
+      });
+    }
+  });
 }
 
 applyFilter(event: Event) {

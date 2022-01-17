@@ -39,6 +39,7 @@ export class UnassignedMouseComponent implements OnInit {
   rowId= 1;
 
 
+  
   constructor(public dialog: MatDialog,private personalDetails: PersonalDetailsService,public empDataService: EmployeeDataService,private inventory: InventoryService,public route: ActivatedRoute,
     public saveAssignedData:SaveAssignedDataService) { }
 
@@ -46,8 +47,11 @@ export class UnassignedMouseComponent implements OnInit {
     this.getEmployeeData();
     this.getAssetByCategoryID(this.itacCategoryId);
     this.initializeSorting();
+    
+    
   }
 
+  
   getAssetByCategoryID(itacCategoryId: any) {
     this.inventory
       .getAssetData(itacCategoryId)
@@ -59,6 +63,7 @@ export class UnassignedMouseComponent implements OnInit {
       });
   }
 
+  
   onCreate(assetId: number){
     
     const dialogConfig = new MatDialogConfig();
