@@ -13,14 +13,27 @@
         <input matInput placeholder="write your name..">
     </mat-form-field>
     
-     <mat-select>
-        <option selected value="1">Sick</option>
-        <option value="2">Casual</option>
-        <option value="3">Annual</option>
-      </mat-select>
+
+      <mat-form-field appearance="outline">
+        <mat-label >Leave Type</mat-label>
+        <select matNativeControl required>
+          <option selected value="Sick">Sick</option>
+          <option value="Casual">Casual</option>
+          <option value="Annual">Annual</option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Enter a date range</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date">
+          <input matEndDate placeholder="End date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
      
         
-    
       <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Reason</mat-label>
         <textarea matInput placeholder=""></textarea>
