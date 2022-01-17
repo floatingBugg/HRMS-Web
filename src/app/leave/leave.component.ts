@@ -13,11 +13,12 @@ export class LeaveComponent implements OnInit {
   Casual!: number;
   Annual!:number;
   Total!:number;
+  Action!:any;
 
 
 
 
-  displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total'];
+  displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total','Action'];
   constructor() { }
 
   ngOnInit(): void {
