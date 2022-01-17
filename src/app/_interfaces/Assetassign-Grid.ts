@@ -5,6 +5,7 @@ export interface AssetassignGrid {
     quantity:any,
     assignedto:any,
     ram:string,
+    size:string,
     processor:string,
     storage:string,
     generation:string

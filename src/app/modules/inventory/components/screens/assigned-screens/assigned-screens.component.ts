@@ -8,6 +8,10 @@ import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { Router } from '@angular/router';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { ActivatedRoute } from '@angular/router';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
 
 @Component({
  
@@ -27,15 +31,19 @@ export class AssignedScreensComponent implements OnInit {
     'assignedTo',
     'actions',
   ];
-
+  itacCategoryId=2;
+  public categoryId:any;
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public assetData:any;// new MatTableDataSource<employeeGrid>();
+  rowId= 1;
 
 
   constructor(
     public dialog: MatDialog,private personalDetails: PersonalDetailsService,
-    public empDataService: EmployeeDataService
+    public empDataService: EmployeeDataService,private inventory: InventoryService,
+    public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService
    
   ) { }
    
@@ -44,6 +52,7 @@ export class AssignedScreensComponent implements OnInit {
   ngOnInit(): void {
     this.getEmployeeData();
     this.initializeSorting();
+    this.getAssetByCategoryID(this.itacCategoryId);
   }
   initializeSorting(): void{
     setTimeout(() => {
@@ -54,18 +63,7 @@ export class AssignedScreensComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.assetData.filter = filterValue.trim().toLowerCase();
   }
-  // deleteEmployeeById(id: any) {
-  //   const dialogRef = this.dialog.open(DeleteEmployeeComponent);
-  //   dialogRef.afterClosed().subscribe((res: any) => {
-  //     if (res == true) {
-  //       this.personalDetails.deleteEmployeeData(id).subscribe((data) => {
-  //         if(data){
-  //           this.getEmployeeData();
-  //         }
-  //       });
-  //     }
-  //   });
-  // }
+  
 
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
@@ -77,6 +75,16 @@ export class AssignedScreensComponent implements OnInit {
     });
   }
   // onRowClicked(row: any) {}
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetAssign(itacCategoryId)
+      .subscribe((data: any) => {
+      
+        this.assetData = new MatTableDataSource<AssetassignGrid>(data.data);
 
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
 
 }
