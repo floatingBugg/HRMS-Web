@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-printers',
@@ -26,7 +27,7 @@ export class AssignedPrintersComponent implements OnInit {
   itacCategoryId=6;
   public categoryId:any;
   displayedColumns: string[] = [
-    'assetID',
+    'assignid',
     'name',
     'company',
     'type',
@@ -56,6 +57,19 @@ export class AssignedPrintersComponent implements OnInit {
       this.employeeData.sort = this.sort;
     },1000);
   }
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();

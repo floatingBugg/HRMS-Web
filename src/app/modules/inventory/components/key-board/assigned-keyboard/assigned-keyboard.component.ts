@@ -12,6 +12,7 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-keyboard',
@@ -26,7 +27,7 @@ export class AssignedKeyboardComponent implements OnInit {
   itacCategoryId=7;
   public categoryId:any;
   displayedColumns: string[] = [
-    'assetID',
+    'assignid',
     'name',
     'type',
     'assignedTo',
@@ -67,6 +68,19 @@ export class AssignedKeyboardComponent implements OnInit {
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
   }
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();

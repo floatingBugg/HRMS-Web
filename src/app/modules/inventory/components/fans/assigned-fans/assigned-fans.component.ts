@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { InventoryService } from 'src/app/services/inventory.service';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { UnassignAssetComponent } from '../../unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'app-assigned-fans',
@@ -25,7 +26,7 @@ export class AssignedFansComponent implements OnInit {
   itacCategoryId=11;
   public categoryId:any;
   displayedColumns: string[] = [
-    'assetID',
+    'assignid',
     'assetname',
     'model',
     'type',
@@ -67,6 +68,18 @@ export class AssignedFansComponent implements OnInit {
       });
   }
 
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
+  }
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
