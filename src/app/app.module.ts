@@ -29,6 +29,7 @@ import { AssignComponent } from './modules/inventory/components/assign/assign.co
 import { LeaveComponent } from './leave/leave.component';
 import { LeaveformComponent } from './leaveform/leaveform.component';
 import { MatTableModule } from '@angular/material/table';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { MatTableModule } from '@angular/material/table';
     MatProgressSpinnerModule,
     MatProgressBarModule,
     MatTableModule,
+    MatFormFieldModule
   ],
   providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }, AuthGuard],
   bootstrap: [AppComponent],

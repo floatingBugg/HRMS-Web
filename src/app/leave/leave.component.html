@@ -15,39 +15,36 @@
   
  
 </div>
-<div class="buttonassign" ><button routerLink="/leaveform"  type="button" class="btn btn-outline-primary">Assign Leave</button></div>
+<div class="buttonassign" ><button width="30%" routerLink="/leaveform"  type="button" class="btn btn-outline-primary">Apply Leave</button></div>
 <div class="container m-0 screenMaxWidth">
   <div class="row">
     <div class="mt-4 col-lg-6">
       <h2 class="leaveh2">Leave</h2>
-
     </div>
 
   </div>
 <div  class = "table1" class="full-width-div">
   <table mat-table  class="mat-elevation-z8" >
-
-    
     <ng-container matColumnDef="ID">
-      <th mat-header-cell *matHeaderCellDef>ID </th>
-    
+      <th width="12%"mat-header-cell *matHeaderCellDef>ID </th>
     </ng-container>
-  
-   
     <ng-container matColumnDef="Name">
-      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <th width="12%" mat-header-cell *matHeaderCellDef>Name</th>
+    </ng-container>
+    <ng-container matColumnDef="Designation">
+     <th width="12%" mat-header-cell *matHeaderCellDef>Designation</th>
     </ng-container>
     <ng-container matColumnDef="Sick">
-      <th mat-header-cell *matHeaderCellDef> Sick </th>
+      <th width="12%" mat-header-cell *matHeaderCellDef>Sick</th>
     </ng-container>
     <ng-container matColumnDef="Casual">
-      <th mat-header-cell *matHeaderCellDef> Casual </th>
+      <th width="12%" mat-header-cell *matHeaderCellDef>Casual</th>
     </ng-container>
     <ng-container matColumnDef="Annual">
-        <th mat-header-cell *matHeaderCellDef> Annual </th>
+        <th width="12%" mat-header-cell *matHeaderCellDef>Annual </th>
       </ng-container>
       <ng-container matColumnDef="Total">
-        <th mat-header-cell *matHeaderCellDef> Total </th>
+        <th width="12%" mat-header-cell *matHeaderCellDef> Total </th>
       </ng-container>
   
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

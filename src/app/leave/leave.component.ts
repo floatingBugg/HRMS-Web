@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LeaveComponent implements OnInit {
   ID!: any;
   Name!: string;
+  Designation!: string;
   Sick!: number;
   Casual!: number;
   Annual!:number;
@@ -16,7 +17,7 @@ export class LeaveComponent implements OnInit {
 
 
 
-  displayedColumns: string[] = ['ID','Name','Sick','Casual','Annual','Total'];
+  displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total'];
   constructor() { }
 
   ngOnInit(): void {
