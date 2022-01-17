@@ -17,7 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { LoginInterceptor } from './interceptor/login.interceptor'
 import { AuthGuard } from './guards/auth.guard';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule ,MatDialogConfig} from '@angular/material/dialog';
 import { LoginValidationComponent } from './components/login/login-validation/login-validation/login-validation.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -63,7 +63,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatTableModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    // MatDialogConfig
+
 
   ],
   providers: [LoginService, { provide: HTTP_INTERCEPTORS, useClass: LoginInterceptor, multi: true }, AuthGuard],
