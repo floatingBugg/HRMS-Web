@@ -55,6 +55,7 @@ import { UnassignedFurnitureComponent } from './components/furniture/unassigned-
 import { MatDialogModule } from '@angular/material/dialog';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 import { AssignComponent } from './components/assign/assign.component';
+import { UnassignAssetComponent } from './components/unassign-asset/unassign-asset.component';
 
 
 
@@ -101,6 +102,7 @@ import { AssignComponent } from './components/assign/assign.component';
     UnassignedFurnitureComponent,
     AllEmployeesComponent,
     AssignComponent,
+    UnassignAssetComponent,
    
 
   ],

@@ -28,6 +28,7 @@ export class AssignedScreensComponent implements OnInit {
     'name',
     'company',
     'size',
+    'quantity',
     'assignedTo',
     'actions',
   ];
@@ -50,7 +51,6 @@ export class AssignedScreensComponent implements OnInit {
   selectedId!:number;
 
   ngOnInit(): void {
-    this.getEmployeeData();
     this.initializeSorting();
     this.getAssetByCategoryID(this.itacCategoryId);
   }
@@ -64,16 +64,6 @@ export class AssignedScreensComponent implements OnInit {
     this.assetData.filter = filterValue.trim().toLowerCase();
   }
   
-
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-
-      this.assetData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.assetData.paginator = this.paginator;
-
-    });
-  }
   // onRowClicked(row: any) {}
   getAssetByCategoryID(itacCategoryId: any) {
     this.inventory

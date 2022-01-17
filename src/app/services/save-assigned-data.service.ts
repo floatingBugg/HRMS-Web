@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 })
 export class SaveAssignedDataService {
  assignedData={
-  itasItaAssetId:[''],
+  itasAssigntId:[''],
   itaAssetName:[''],
+  itasRam:[''],
   itasEtedEmployeeId:[''],
   itasItacCategoryId:[''],
   itasQuantity:[''],

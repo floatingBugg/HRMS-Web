@@ -12,7 +12,7 @@ export class InventoryService {
   _assetId = 0;
   _employeeId = 0;
   _responseMessage: any = '';
-  apiUrl = 'http://hamzaashiq467-001-site1.itempurl.com';
+  apiUrl = 'https://localhost:44324';
   get responseMessage() {
     return this._responseMessage;
   }
@@ -56,5 +56,10 @@ export class InventoryService {
   getAssetAssign(type: any):  Observable<any> {
     
     return this.http.get(this.apiUrl + `/Asset/DisplayAssignAsset?type=${type}`);
+  }
+
+  deleteAssetAssign(assignid: any):  Observable<any> {
+    
+    return this.http.delete(this.apiUrl + `/Asset/DeleteAssignedAsset?assignid=${assignid}`);
   }
 }
