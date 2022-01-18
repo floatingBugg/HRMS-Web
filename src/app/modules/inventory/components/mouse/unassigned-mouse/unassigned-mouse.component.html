@@ -29,7 +29,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions </th>
         <td mat-cell *matCellDef="let asset">
-          <button mat-icon-button [routerLink]="" title="View Employee Record">
+          <button mat-icon-button [routerLink]="[ '../viewasset',asset.assetid]" title="View Asset Record">
             <mat-icon>remove_red_eye</mat-icon>
           </button>
           <button mat-icon-button [routerLink]="" title="Edit Employee Record">

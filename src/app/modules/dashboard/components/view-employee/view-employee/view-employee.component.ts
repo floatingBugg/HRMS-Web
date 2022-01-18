@@ -126,12 +126,14 @@ export class ViewEmployeeComponent implements OnInit {
           this.profDetails =
             oneEmployeeData[0].emsTblEmployeeProfessionalDetails;
           /////// Academic Qualification/////////
+          
           this.academicQualification =
             oneEmployeeData[0].emsTblAcademicQualification;
             for (let i = 0; i < oneEmployeeData[0].emsTblAcademicQualification.length; i++) {
             this.Acadname[i]=this.personalDetailService.apiUrl + oneEmployeeData[0].emsTblAcademicQualification[i].etaqUploadDocuments;
             let splitedPath = this.Acadname[i].split("/");
             let fileName = splitedPath[(splitedPath.length-1)];
+            
             this.Acadname[i]=fileName;
             }
           //////// Professional Qualification///////
@@ -143,6 +145,8 @@ export class ViewEmployeeComponent implements OnInit {
             let fileNameProf = splitedPathProf[(splitedPathProf.length-1)];
             this.profQualName[i]=fileNameProf;
             }
+
+                
           //////Working History/////////
           this.workHistory = oneEmployeeData[0].emsTblWorkingHistory;
           for (let i = 0; i < oneEmployeeData[0].emsTblWorkingHistory.length; i++) {
@@ -151,9 +155,11 @@ export class ViewEmployeeComponent implements OnInit {
           let splitedPathWork = this.workHistoryName[i].split("/");
           let fileNameWork = splitedPathWork[(splitedPathWork.length-1)];
           this.workHistoryName[i]=fileNameWork;
+          }
 
+          
 
-        } 
+        
       }
         else 
         {
