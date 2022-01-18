@@ -41,7 +41,6 @@ export class ViewAssetComponent implements OnInit {
       .subscribe((data: any) => {
         if (data.success) {
           let oneAssetData = data.data;
-          debugger;
           this.assetname=oneAssetData[0].itaAssetName;
           this.companyname=oneAssetData[0].itaCompanyName;
           this.generation=oneAssetData[0].itaGeneration;
@@ -53,10 +52,10 @@ export class ViewAssetComponent implements OnInit {
           this.storage=oneAssetData[0].itaStorage;
           this.hardtype=oneAssetData[0].itaHardriveType;
           this.size=oneAssetData[0].itaSize;
-          this.remaining=oneAssetData[0].ItaRemaining;
-          this.purchasedate=oneAssetData[0].ItaPurchaseDate;
-          this.cost=oneAssetData[0].ItaCost;
-          this.quantity=oneAssetData[0].ItaQuantity;
+          this.remaining=oneAssetData[0].itaRemaining;
+          this.purchasedate=oneAssetData[0].itaPurchaseDate;
+          this.cost=oneAssetData[0].itaCost;
+          this.quantity=oneAssetData[0].itaQuantity;
           
           
       }

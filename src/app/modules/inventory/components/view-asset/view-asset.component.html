@@ -5,66 +5,66 @@
           <div label="Asset Details">
             <div class="container">
               <div class="row">
-                <mat-label class="col-lg-6 col-md-6 ml-5"><b>Asset ID:</b>
+                <mat-label *ngIf="this.assetid!=null" class="col-lg-6 col-md-6 ml-5"><b>Asset ID:</b>
                   {{assetid}}
                 </mat-label>
-                <mat-label class="col-lg-6 col-md-6"><b>Asset Name:</b>
+                <mat-label *ngIf="this.assetname!=null" class="col-lg-6 col-md-6"><b>Asset Name:</b>
                   {{assetname}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company Name:</b>
+                <mat-label *ngIf="this.companyname!=null" class="col-lg-6 col-md-6 ml-5"><b>Company Name:</b>
                   {{companyname}}
                 </mat-label>
-                <mat-label class="col-lg-6 col-md-6"><b>Serial No</b>
+                <mat-label *ngIf="this.serialno!=null" class="col-lg-6 col-md-6"><b>Serial No :</b>
                   {{serialno}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class="col-lg-6 col-md-6 ml-5"><b>Model</b>
+                <mat-label *ngIf="this.model!=null" class="col-lg-6 col-md-6 ml-5"><b>Model :</b>
                   {{model}}
                 </mat-label>
-                <mat-label class="col-lg-6 col-md-6"><b>Generation</b>
+                <mat-label *ngIf="this.generation!=null" class="col-lg-6 col-md-6"><b>Generation :</b>
                   {{generation}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class="col-lg-6 col-md-6 ml-5"><b>Processor</b>
+                <mat-label *ngIf="this.processor!=null" class="col-lg-6 col-md-6 ml-5"><b>Processor :</b>
                   {{processor}}
                 </mat-label>
-                <mat-label class=" col-lg-6 col-md-6"><b>Ram :</b>
+                <mat-label *ngIf="this.ram!=null" class=" col-lg-6 col-md-6"><b>Ram :</b>
                   {{ram}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Storage :</b>
+                <mat-label *ngIf="this.storage!=null" class=" col-lg-6 col-md-6 ml-5"><b>Storage :</b>
                   {{storage}}
                 </mat-label>
-                <mat-label class=" col-lg-6 col-md-6"><b>Hard Type:</b>
+                <mat-label *ngIf="this.hardtype!=null" class=" col-lg-6 col-md-6"><b>Hard Type:</b>
                   {{hardtype}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Cost :</b>
+                <mat-label *ngIf="this.cost!=null" class=" col-lg-6 col-md-6 ml-5"><b>Cost :</b>
                   {{cost}}
                 </mat-label>
-                <mat-label class=" col-lg-6 col-md-6"><b>Quantity</b>
+                <mat-label *ngIf="this.quantity!=null" class=" col-lg-6 col-md-6"><b>Quantity :</b>
                   {{quantity}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Purchase Date :</b>
+                <mat-label *ngIf="this.purchasedate!=null" class=" col-lg-6 col-md-6 ml-5"><b>Purchase Date :</b>
                   {{purchasedate}}
                 </mat-label>
-                <mat-label class=" col-lg-6 col-md-6"><b>Remaining Quantity </b>
+                <mat-label *ngIf="this.remaining!=null" class=" col-lg-6 col-md-6"><b>Remaining Quantity  :</b>
                   {{remaining}}
                 </mat-label>
               </div>
               <div class="row mt-2">
-                <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Size:</b>
+                <mat-label *ngIf="this.size!=null" class=" col-lg-6 col-md-6 ml-5"><b>Size:</b>
                   {{size}}
                 </mat-label>
-                <mat-label class=" col-lg-6 col-md-6"><b>Type:</b>
+                <mat-label *ngIf="this.type!=null" class=" col-lg-6 col-md-6"><b>Type:</b>
                   {{type}}
                 </mat-label>
               </div>              
