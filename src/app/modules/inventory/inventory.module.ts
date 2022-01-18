@@ -56,6 +56,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AllEmployeesComponent } from './components/all-employees/all-employees.component';
 import { AssignComponent } from './components/assign/assign.component';
 import { UnassignAssetComponent } from './components/unassign-asset/unassign-asset.component';
+import { ViewAssetComponent } from './components/view-asset/view-asset.component';
 
 
 
@@ -103,6 +104,7 @@ import { UnassignAssetComponent } from './components/unassign-asset/unassign-ass
     AllEmployeesComponent,
     AssignComponent,
     UnassignAssetComponent,
+    ViewAssetComponent,
    
 
   ],
