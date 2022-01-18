@@ -62,4 +62,9 @@ export class InventoryService {
     
     return this.http.delete(this.apiUrl + `/Asset/DeleteAssignedAsset?assignid=${assignid}`);
   }
+
+  getAssetById(type: any):  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/DisplayAssetById?type=${type}`);
+  }
 }

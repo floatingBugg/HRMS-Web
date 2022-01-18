@@ -43,6 +43,7 @@ import { UnassignedScreensComponent } from './components/screens/unassigned-scre
 import { AssignedStationeryComponent } from './components/stationery/assigned-stationery/assigned-stationery.component';
 import { StationeryComponent } from './components/stationery/stationery.component';
 import { UnassignedStationeryComponent } from './components/stationery/unassigned-stationery/unassigned-stationery.component';
+import { ViewAssetComponent } from './components/view-asset/view-asset.component';
 
 const routes: Routes = [
   {
@@ -90,6 +91,7 @@ const routes: Routes = [
       { path: 'unassigned-stationery',component: UnassignedStationeryComponent},
       { path: 'all-employees',component: AllEmployeesComponent},
       { path: 'assign',component: AssignComponent},
+      { path: 'viewasset/:id',component: ViewAssetComponent},
      
       
     ],

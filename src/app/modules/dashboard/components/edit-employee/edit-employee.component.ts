@@ -370,10 +370,10 @@ export class EditEmployeeComponent implements OnInit {
   addemsTblProfessionalQualification(): FormGroup {
     return this.fb.group({
       etpqPqId: [0, Validators.required],
-      etpqCertification: ['', Validators.required],
-      etpqStratDate: [null, Validators.required],
-      etpqEndDate: [null, Validators.required],
-      etpqInstituteName: ['', Validators.required],
+      etpqCertification: [''],
+      etpqStratDate: [null],
+      etpqEndDate: [null],
+      etpqInstituteName: [''],
       etpqDocuments: [''],
     });
   }
@@ -391,11 +391,11 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       etwhWhId: [0],
       etwhExperienceLetter: [''],
-      etwhCompanyName: ['', Validators.required],
-      etwhDesignation: ['', Validators.required],
-      etwhStratDate: [null, Validators.required],
-      etwhEndDate: [null, Validators.required],
-      etwhDuration: ['', Validators.required],
+      etwhCompanyName: [''],
+      etwhDesignation: [''],
+      etwhStratDate: [null],
+      etwhEndDate: [null],
+      etwhDuration: [''],
     });
   }
   addWorkingHistory(): void {
