@@ -1,16 +1,14 @@
-
-
-<div class="leave">
     <h3>Leave Form</h3>
+    <div [formGroup]="leaveform">
     <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="">
+        <input matInput placeholder="" formControlName="name">
     </mat-form-field>
     
 
       <mat-form-field appearance="outline">
         <mat-label >Leave Type</mat-label>
-        <select matNativeControl required>
+        <select matNativeControl formControlName="leaveType" required>
           <option selected value="Sick">Sick</option>
           <option value="Casual">Casual</option>
           <option value="Annual">Annual</option>
@@ -19,9 +17,9 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate placeholder="Start date" >
-          <input matEndDate placeholder="End date" >
+        <mat-date-range-input [rangePicker]="picker" >
+          <input matStartDate name="start-date" formControlName="startDate" (dateChange)="compareDates($event)"   placeholder="Start date" required >
+          <input matEndDate name="end-date" formControlName="endDate" (dateChange)="compareDates($event)" placeholder="End date" required>
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
@@ -29,14 +27,14 @@
 
       <mat-form-field appearance="outline">
         <mat-label>Duration</mat-label>
-        <input matInput placeholder=>
+        <input matInput readonly  placeholder="" formControlName="duration">
     </mat-form-field>
         <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Reason</mat-label>
-        <textarea matInput placeholder=""></textarea>
+        <textarea matInput placeholder="" formControlName="reason"></textarea>
       </mat-form-field>
+    </div>
       <div class="btnsubmit">
         <button mat-raised-button color color="primary">Submit</button>
         
-</div>
 </div>
