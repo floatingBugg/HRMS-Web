@@ -20,7 +20,7 @@ export class LeaveComponent implements OnInit {
   dummydata:any=[];
 
   displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total','Action'];
-  dataSource :any;
+  // dataSource :any;
 
 constructor(public dialog: MatDialog)
 {
