@@ -6,8 +6,15 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 export class PersonalDetailsService {
   constructor(private http: HttpClient) {}
+  
   _userId = localStorage.getItem('loggedIn_UserId');
   _userName = localStorage.getItem('loggedIn_UserName');
+  _roleId = localStorage.getItem('loggedIn_roleId');
+  
+  
+  
+  
+
   _responseMessage: any = '';
   apiUrl = 'https://localhost:44324';
   get responseMessage() {

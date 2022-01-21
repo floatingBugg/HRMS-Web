@@ -15,6 +15,8 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
 })
 export class EmployeeComponent implements OnInit {
 
+  roleId = localStorage.getItem('loggedIn_roleId');
+  userName = localStorage.getItem('loggedIn_UserName');
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -64,10 +66,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployeeData() {
+    debugger;
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
      // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
+      console.log(this.roleId);
+      console.log(this.userName)
 
     });
   }

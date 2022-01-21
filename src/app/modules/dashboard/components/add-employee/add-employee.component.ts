@@ -6,6 +6,7 @@ import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
+import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 
 @Component({
   selector: 'app-add-employee',
