@@ -112,6 +112,7 @@ getPermissions(){
   this._insert = permissions.insert;
   this._view = permissions.view;
 }
+
   getEmployeeDataByID(rowId: any) {
     this.personalDetailService
       .viewEmployeeData(rowId)

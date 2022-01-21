@@ -7,6 +7,7 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 
 @Component({
   selector: 'app-employee',
@@ -28,17 +29,21 @@ export class EmployeeComponent implements OnInit {
     'emailAddress',
     'actions',
   ];
-
-
+  _update:boolean=false
+  _delete:boolean=false
+  _insert:boolean=false
+  _view:boolean=false
+  _roleId = localStorage.getItem('loggedIn_RoleId');
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
-    public empDataService: EmployeeDataService) {}
+    public empDataService: EmployeeDataService,private permissionService: PermissionsService) {}
 
   ngOnInit(): void {
     this.getEmployeeData();
     this.initializeSorting();
+    this.getPermissions();
   }
 
  initializeSorting(): void{
@@ -66,16 +71,22 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployeeData() {
-    debugger;
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
      // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
-      console.log(this.roleId);
+      console.log(this._roleId);
       console.log(this.userName)
 
     });
   }
   // onRowClicked(row: any) {}
-
+  getPermissions(){
+    debugger;
+    const permissions = this.permissionService.gerPermissionsByRole(this._roleId);
+    this._update = permissions.update;
+    this._delete = permissions.delete;
+    this._insert = permissions.insert;
+    this._view = permissions.view;
+  }
 }

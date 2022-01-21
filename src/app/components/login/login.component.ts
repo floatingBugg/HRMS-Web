@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);
-          localStorage.setItem('loggedIn_RoleId', result.data.roleId);
+          localStorage.setItem('loggedIn_RoleId', result.data.roleid);
 
           console.log(result);
           // this.remember();
