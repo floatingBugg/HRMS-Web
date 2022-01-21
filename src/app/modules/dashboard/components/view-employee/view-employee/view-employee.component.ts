@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
+import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
@@ -86,16 +87,31 @@ export class ViewEmployeeComponent implements OnInit {
     },
   ];
   rowId: any;
+
+  _update:boolean=false
+  _delete:boolean=false
+  _insert:boolean=false
+  _view:boolean=false
   constructor(
     public personalDetailService: PersonalDetailsService,
-    public route: ActivatedRoute
-  ) {}
+    public route: ActivatedRoute,
+    private permissionService: PermissionsService
+  ) {
+  }
 
   ngOnInit() {
     this.rowId = this.route.snapshot.paramMap.get('id');
     this.getEmployeeDataByID(this.rowId);
-  }
+   this.getPermissions();
 
+  }
+getPermissions(){
+  const permissions = this.permissionService.gerPermissionsByRole(1);
+  this._update = permissions.update;
+  this._delete = permissions.delete;
+  this._insert = permissions.insert;
+  this._view = permissions.view;
+}
   getEmployeeDataByID(rowId: any) {
     this.personalDetailService
       .viewEmployeeData(rowId)
