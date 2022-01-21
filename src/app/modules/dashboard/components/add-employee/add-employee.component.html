@@ -81,6 +81,26 @@
                 Gender is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Role</mat-label>
+             <mat-select formControlName="etrethuroleid" name="etrethuroleid">
+                <mat-option [value]=""> ---Select One---</mat-option>
+                <mat-option value="1">Super Admin</mat-option>
+                <mat-option value="2">Admin</mat-option>
+                <mat-option value="3">Team Lead/Line Manager</mat-option>
+                <mat-option value="4">Employee</mat-option>
+              </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etrethuroleid'].errors?.['required'] ">
+                Role is <strong>required</strong></mat-error>
+            </mat-form-field> 
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Password</mat-label>
+              <input formControlName="ethupassword" name="ethupassword" matInput placeholder="Password"
+                maxlength="20">
+              <mat-error *ngIf="personalDetailsForm.controls['ethupassword'].errors?.['required'] ">
+                Password is <strong>required</strong></mat-error>
+            </mat-form-field>
+           
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
                 <mat-option [value]=""> ---Select One---</mat-option>

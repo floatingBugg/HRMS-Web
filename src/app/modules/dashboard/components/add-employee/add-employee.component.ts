@@ -178,6 +178,8 @@ export class AddEmployeeComponent implements OnInit {
       etedOfficialEmailAddress: ['', [Validators.required, Validators.email]],
       etedAddress: ['', Validators.required],
       etedDob: ['', Validators.required],
+      etrethuroleid:['',Validators.required],
+      ethupassword:['',Validators.required],
       etedGender: ['', Validators.required],
       etedMaritalStatus: ['', Validators.required],
       etedStatus: ['', Validators.required],
