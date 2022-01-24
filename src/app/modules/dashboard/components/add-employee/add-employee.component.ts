@@ -4,10 +4,10 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
-
+import { AllEmployeesComponent } from 'src/app/modules/inventory/components/all-employees/all-employees.component';
 
 
 @Component({
@@ -204,6 +204,16 @@ var abc = valueFilter[0].desName;
     ) as FormArray;
     this.emsTblEmergencyContact.push(this.addemsTblEmergencyContact());
   }
+
+  onCreate(){
+    
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "60%"
+      this.dialog.open(AllEmployeesComponent);
+  }
+
 
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {

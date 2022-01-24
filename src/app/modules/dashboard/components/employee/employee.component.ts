@@ -36,7 +36,7 @@ export class EmployeeComponent implements OnInit {
   _insert:boolean=false
   _view:boolean=false
   _roleId = localStorage.getItem('loggedIn_RoleId');
-  
+ 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;
   public personalData:any;// new MatTableDataSource<employeeGrid>();
@@ -87,10 +87,8 @@ export class EmployeeComponent implements OnInit {
   }
   // onRowClicked(row: any) {}
   getPermissions(){
-
     debugger;
     const permissions = this.permissionService.getPermissionsByRole(this._roleId);
-
     this._update = permissions.update;
     this._delete = permissions.delete;
     this._insert = permissions.insert;
