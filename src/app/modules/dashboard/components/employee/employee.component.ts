@@ -18,6 +18,7 @@ export class EmployeeComponent implements OnInit {
 
   roleId = localStorage.getItem('loggedIn_roleId');
   userName = localStorage.getItem('loggedIn_UserName');
+  empid = localStorage.getItem('loggedIn_empid');
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -34,6 +35,7 @@ export class EmployeeComponent implements OnInit {
   _insert:boolean=false
   _view:boolean=false
   _roleId = localStorage.getItem('loggedIn_RoleId');
+  
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
@@ -76,14 +78,15 @@ export class EmployeeComponent implements OnInit {
      // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
       console.log(this._roleId);
-      console.log(this.userName)
+      console.log(this.userName);
+      console.log(this.empid)
 
     });
   }
   // onRowClicked(row: any) {}
   getPermissions(){
     debugger;
-    const permissions = this.permissionService.gerPermissionsByRole(this._roleId);
+    const permissions = this.permissionService.getPermissionsByRole(this._roleId);
     this._update = permissions.update;
     this._delete = permissions.delete;
     this._insert = permissions.insert;

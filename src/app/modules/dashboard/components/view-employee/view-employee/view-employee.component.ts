@@ -106,7 +106,7 @@ export class ViewEmployeeComponent implements OnInit {
 
   }
 getPermissions(){
-  const permissions = this.permissionService.gerPermissionsByRole(1);
+  const permissions = this.permissionService.getPermissionsByRole(1);
   this._update = permissions.update;
   this._delete = permissions.delete;
   this._insert = permissions.insert;

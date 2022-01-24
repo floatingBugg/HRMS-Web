@@ -10,6 +10,7 @@ export class PersonalDetailsService {
   _userId = localStorage.getItem('loggedIn_UserId');
   _userName = localStorage.getItem('loggedIn_UserName');
   _roleId = localStorage.getItem('loggedIn_roleId');
+  _empid = localStorage.getItem('loggedIn_empid');
   
   
   

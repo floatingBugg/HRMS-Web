@@ -18,7 +18,7 @@ export class PermissionsService {
 
 
  
-gerPermissionsByRole(roleId:any){
+getPermissionsByRole(roleId:any){
     if(roleId ==1){
       this._permissions.delete = true;
       this._permissions.update = true;
