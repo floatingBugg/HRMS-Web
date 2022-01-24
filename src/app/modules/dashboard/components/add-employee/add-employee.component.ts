@@ -1,5 +1,5 @@
 import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, VERSION, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
@@ -8,12 +8,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 
+
+
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
+  public toggleButton: boolean = false;
+  name = 'Angular ' + VERSION.major;
+  userForm: FormGroup | undefined;
+  users: FormArray | undefined;
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
@@ -22,9 +28,11 @@ export class AddEmployeeComponent implements OnInit {
   emsTblEmergencyContact: any = FormArray;
   whStartDate: any;
   whStartDates: any;
+  enum : any;
   whEndDate: any;
   startDate: any;
   day: any;
+  showAddNewDropDownField:boolean=false;
   diff: any;
   profDetailsJoiningDate: any;
   noOfDays: any;
@@ -46,18 +54,102 @@ export class AddEmployeeComponent implements OnInit {
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   isFileChanged!: boolean;
+  array2: any;
+  array1: any;
+  newDropDownValue: any;
+  isDisabled: boolean | undefined;
+  Designation:any=[];
+  Degree:any=[];
+  degName!:any;
+  desName!: string;
+  displayedColumns: string[] = ['DesName','degName'];
+ 
   constructor(
+    
+    // private fb: FormBuilder,
     public employeeData: EmployeeDataService,
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog
-  ) {}
+    public dialog: MatDialog,
+   
+  
+  ) 
+  {
+   
+    // this.Designation = [
+    //   { desName: 'HR Manager'},
+    //   { desName: 'HR Officer'},
+    //   { desName: 'Sr. Software Engineer' },
+    //   { desName: 'Jr. Software Engineer'},
+    //   { desName: 'SQA Engineer Intern'},
+    //   { desName: 'Angular Intern' },
+    //   { desName: '.NET Intern' },
+    //   { desName: 'Sr. SQA Engineer' },
+    //   { desName: 'Jr. SQA Engineer' },
+    //   { desName: 'Project Manager' },
+    //   { desName: 'System Administrator'},
+    //   { desName: 'Receptionist' },
+    //   { desName: 'Accountant' },
+    //   { desName: 'Office Boy' },
+    //   { desName: 'Guard' },
+      
+     
+    // ];
+  
+    this.Degree=[
+      {degName:'Matriculation/O-Levels'},
+      {degName:'Intermediate/A-Levels'},
+      {degName:'Bachelors'},
+      {degName:'BS Software Enginneering'},
+      {degName:'BS Computer Science'},
+      {degName:'BS Information Technology'},
+      {degName:'BS Buisness Administraion'},
+      {degName:'Masters/MSc'},
+      {degName:'Ms Software Engineering'},
+      {degName:'Ms Information Technology'},
+      {degName:'Ms Computer Science'},
+      {degName:'Ms Buisness Administration'},
+      {degName:'MPhil/MS'},
+      {degName:'Ms Computer Science'},
+      {degName:'Doctrate/PHD'},
+
+    ];
+  }
   ngOnInit() {
+    this.userForm = this.fb.group({
+      users: this.fb.array([])
+    })
     this.createForm();
   }
+  showField(){
+    this.showAddNewDropDownField = true;
+  }
+  pushValue(event:any){
+    // debugger
+   this.Designation.push({desName:event.value});
+    // this.Designation.desName=true
+    this.showAddNewDropDownField = false
+    var valueFilter = this.Designation.filter((t: any)=>t.desName ==event.value);
+var abc = valueFilter[0].desName;
+    // debugger
+    let control = this.personalDetailsForm.controls[
+      'emsTblEmployeeProfessionalDetails'
+    ]['controls'][0]['controls'];
 
-  ////////Academic Qualification/////////////
+    control['etepdDesignation'].setValue(
+      abc
+    );
+    // control.controls['etepdDesignation'].pushValue(abc);
+// 
+    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+    // debugger
+    
+   
+  }
+  
+  //////Academic Qualification/////////////
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
@@ -68,6 +160,18 @@ export class AddEmployeeComponent implements OnInit {
       etaqInstituteName: ['', Validators.required],
     });
   }
+//   enable(){
+//     this.isDisabled = false
+//  }
+ 
+//  disable(){
+//     this.isDisabled = true
+//  }
+  // addFunction(item: { type: any; year: any; }) {
+  //   let index = this.array2.findIndex((x: { type: any; year: any; }) => x.type == item.type  && x.year == item.year)
+  //   this.array1.push(this.array2[index])
+  //   this.array2.splice(index,1)
+  // }
 
   addAcademicQualification(): void {
     this.emsTblAcademicQualification = this.personalDetailsForm.get(
@@ -463,3 +567,11 @@ export class AddEmployeeComponent implements OnInit {
     }
   }
 }
+function disable() {
+  throw new Error('Function not implemented.');
+}
+
+function enable() {
+  throw new Error('Function not implemented.');
+}
+
