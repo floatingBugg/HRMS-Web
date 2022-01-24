@@ -540,6 +540,10 @@
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
                   </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Manager </mat-label>
+                    <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
+                  </mat-form-field>
                 </div>
               </div>
               <div class="row mt-3">
