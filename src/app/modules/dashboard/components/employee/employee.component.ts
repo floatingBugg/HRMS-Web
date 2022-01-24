@@ -17,9 +17,9 @@ import { PermissionsService } from 'src/app/services/permissionsService/permissi
 })
 export class EmployeeComponent implements OnInit {
 
-  roleId = localStorage.getItem('loggedIn_roleId');
+  roleid = localStorage.getItem('loggedIn_RoleId');
+  empid=localStorage.getItem('loggedIn_empid');
   userName = localStorage.getItem('loggedIn_UserName');
-  empid = localStorage.getItem('loggedIn_empid');
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -77,7 +77,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployeeData() {
-    this.personalDetails.getEmployeeData1(this.roleId,this.empid).subscribe( (data:any) => {
+    this.personalDetails.getEmployeeData1(this.roleid,this.empid).subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       this.personalData= new MatTableDataSource<PersonalGrid>(data.data2);
      // this.employeeData.sort = this.sort;
