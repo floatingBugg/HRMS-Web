@@ -7,7 +7,7 @@
     </div>
     <div class="col-lg-6 text-align-right">
   
-      <button *ngif='this._insert' routerLink="../addemployee" mat-raised-button color color="primary">Add Employee</button>
+      <button *ngIf='this._insert' routerLink="../addemployee" mat-raised-button color color="primary">Add Employee</button>
       <mat-form-field class="ml-20" appearance="standard">
         <mat-label>Search keyword</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
@@ -40,15 +40,15 @@
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef>Actions </th>
       <td mat-cell *matCellDef="let employee">
-        <button mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
+        <button *ngIf='this._view' mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
           <mat-icon>remove_red_eye</mat-icon>
         </button>
-        <button *ngif='this._update' mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
+        <button *ngIf='this._update' mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
           <mat-icon>edit</mat-icon>
         </button>
         
         
-        <button *ngif='this._view' mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)" title="Delete Employee Record">
+        <button *ngIf='this._delete' mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)" title="Delete Employee Record">
           <!-- <mat-icon>delete_outlint</mat-icon> -->
           <span class="material-icons">delete_outline</span>
 
