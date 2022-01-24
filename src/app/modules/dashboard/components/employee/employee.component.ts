@@ -77,7 +77,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
+    this.personalDetails.getEmployeeData1(this.roleId,this.empid).subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       this.personalData= new MatTableDataSource<PersonalGrid>(data.data2);
      // this.employeeData.sort = this.sort;

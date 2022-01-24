@@ -29,6 +29,9 @@ export class PersonalDetailsService {
     let url = this.apiUrl + '/Employee/DisplayAllEmployees';
     return this.http.get(url);
   }
+  getEmployeeData1(roleid:any,empid:any,) {
+    return this.http.get(this.apiUrl + `/Employee/DisplayAllEmployeesbyRoles?roleid=${roleid}&empid=${empid}`);
+  }
   deleteEmployeeData(empid: any) {
     return this.http.delete(this.apiUrl + `/Employee/DeleteEmployee?empid=${empid}`);
   }
