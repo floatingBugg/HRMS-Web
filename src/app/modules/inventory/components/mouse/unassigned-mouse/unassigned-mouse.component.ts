@@ -44,7 +44,6 @@ export class UnassignedMouseComponent implements OnInit {
     public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
-    this.getEmployeeData();
     this.getAssetByCategoryID(this.itacCategoryId);
     this.initializeSorting();
     
@@ -99,15 +98,7 @@ export class UnassignedMouseComponent implements OnInit {
   //   });
   // }
   
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
-  
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
-  
-    });
-  }
+
   // onRowClicked(row: any) {}
 
 }

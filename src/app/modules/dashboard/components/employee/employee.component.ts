@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
+import { PersonalGrid } from 'src/app/_interfaces/personal-grid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
@@ -37,7 +38,8 @@ export class EmployeeComponent implements OnInit {
   _roleId = localStorage.getItem('loggedIn_RoleId');
   
   pageSizeOptions: number[] = [ 10, 25, 100];
-  public employeeData:any;// new MatTableDataSource<employeeGrid>();
+  public employeeData:any;
+  public personalData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
     public empDataService: EmployeeDataService,private permissionService: PermissionsService) {}
@@ -51,12 +53,14 @@ export class EmployeeComponent implements OnInit {
  initializeSorting(): void{
   setTimeout(() => {
     this.employeeData.sort = this.sort;
+    this.personalData.sort=this.sort;
   },1000);
  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
+    this.personalData.filter = filterValue.trim().toLowerCase();
   }
 
   deleteEmployeeById(id: any) {
@@ -75,11 +79,9 @@ export class EmployeeComponent implements OnInit {
   getEmployeeData() {
     this.personalDetails.getEmployeeData().subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      this.personalData= new MatTableDataSource<PersonalGrid>(data.data2);
      // this.employeeData.sort = this.sort;
       this.employeeData.paginator = this.paginator;
-      console.log(this._roleId);
-      console.log(this.userName);
-      console.log(this.empid)
 
     });
   }

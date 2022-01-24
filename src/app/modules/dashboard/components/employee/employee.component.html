@@ -2,6 +2,60 @@
 <div class="container m-0 screenMaxWidth">
   <div class="row">
     <div class="mt-4 col-lg-6">
+  <h3>Personal Details</h3>
+</div>
+  </div>
+  <table mat-table [dataSource]="personalData" class="mat-elevation-z8" matSort>
+    <ng-container matColumnDef="empID">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Emp ID</th>
+      <td mat-cell *matCellDef="let Personal"> {{Personal.empID}} </td>
+    </ng-container>
+    <ng-container matColumnDef="fullName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name </th>
+      <td mat-cell *matCellDef="let Personal"> {{Personal.fullName}} </td>
+    </ng-container>
+    <ng-container matColumnDef="emailAddress">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Email Address</th>
+      <td mat-cell *matCellDef="let Personal"> {{Personal.emailAddress}} </td>
+    </ng-container>
+    <ng-container matColumnDef="contactNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mobile # </th>
+      <td mat-cell *matCellDef="let Personal"> {{Personal.contactNumber}} </td>
+    </ng-container>
+    <ng-container matColumnDef="empDesignation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Designation </th>
+      <td mat-cell *matCellDef="let Personal"> {{Personal.empDesignation}} </td>
+    </ng-container>
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions </th>
+      <td mat-cell *matCellDef="let employee">
+        <button *ngIf='this._view' mat-icon-button [routerLink]="[ '../viewemp',employee.empID]" title="View Employee Record">
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button *ngIf='this._update' mat-icon-button [routerLink]="[ '../editemployee',employee.empID]" title="Edit Employee Record">
+          <mat-icon>edit</mat-icon>
+        </button>
+        
+        
+        <button *ngIf='this._delete' mat-icon-button color="warn" (click)="deleteEmployeeById(employee.empID)" title="Delete Employee Record">
+          <!-- <mat-icon>delete_outlint</mat-icon> -->
+          <span class="material-icons">delete_outline</span>
+
+        </button>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
+  </table>
+<span> 
+  
+
+
+</span>
+
+  <div class="row">
+    <div class="mt-4 col-lg-6">
       <h3>Employees</h3>
 
     </div>
@@ -61,4 +115,6 @@
   </table>
   <mat-paginator class="mb-1" #employeeDataPage [pageSizeOptions]="pageSizeOptions" showFirstLastButtons>
   </mat-paginator>
+
+  
 </div>

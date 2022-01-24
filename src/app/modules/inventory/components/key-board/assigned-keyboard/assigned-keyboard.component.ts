@@ -47,7 +47,6 @@ export class AssignedKeyboardComponent implements OnInit {
     public saveAssignedData:SaveAssignedDataService) { }
 
   ngOnInit(): void {
-    this.getEmployeeData();
     this.initializeSorting();
     this.getAssetByCategoryID(this.itacCategoryId);
   }
@@ -98,15 +97,7 @@ export class AssignedKeyboardComponent implements OnInit {
   //   });
   // }
 
-  getEmployeeData() {
-    this.personalDetails.getEmployeeData().subscribe( (data:any) => {
 
-      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-     // this.employeeData.sort = this.sort;
-      this.employeeData.paginator = this.paginator;
-
-    });
-  }
   // onRowClicked(row: any) {}
 
 }
