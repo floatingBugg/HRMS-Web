@@ -55,7 +55,7 @@ export class AllEmployeesComponent implements OnInit {
     getEmployeeData() {
       this.personalDetails.getEmployeeData().subscribe( (data:any) => {
   
-        this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+        this.employeeData = new MatTableDataSource<employeeGrid>(data.data2);
        // this.employeeData.sort = this.sort;
         this.employeeData.paginator = this.paginator;
   
