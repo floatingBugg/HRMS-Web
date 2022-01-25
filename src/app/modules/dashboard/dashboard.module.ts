@@ -34,6 +34,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoginInterceptor } from 'src/app/interceptor/login.interceptor';
 import { AddEmployeeFailureDialogComponent } from './components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { AssignManagerComponent } from './components/assign-manager/assign-manager.component';
+import { AssignAssetComponent } from './components/assign-asset/assign-asset.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AssignManagerComponent } from './components/assign-manager/assign-manag
     SuccessDialogComponent,
     ViewEmployeeComponent,
     AddEmployeeFailureDialogComponent,
-    AssignManagerComponent
+    AssignManagerComponent,
+    AssignAssetComponent
   ],
   imports: [
     CommonModule,

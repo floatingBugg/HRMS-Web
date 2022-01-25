@@ -231,6 +231,7 @@ var abc = valueFilter[0].desName;
           controlProfessionalDetails['etedManagerId'].setValue(
             this.managerid
           );
+        this.personalDetailsForm.etedManagerId=this.managerid;
       //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
   }
   
@@ -242,7 +243,7 @@ var abc = valueFilter[0].desName;
       etepdProbation: [this.newDate, Validators.required],
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
-      etedManagerId: [''],
+     
     });
   }
   addProfessionalDetails(): void {
@@ -322,6 +323,7 @@ var abc = valueFilter[0].desName;
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
+      etedManagerId: [''],
       etedCreatedBy: [this.userId],
       etedCreatedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
