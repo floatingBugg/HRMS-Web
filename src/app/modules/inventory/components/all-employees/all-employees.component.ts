@@ -8,6 +8,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { AssignComponent } from '../assign/assign.component';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { AddEmployeeComponent } from 'src/app/modules/dashboard/components/add-employee/add-employee.component';
 
 @Component({
   selector: 'app-all-employees',
@@ -33,7 +34,7 @@ export class AllEmployeesComponent implements OnInit {
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService, private inventory: InventoryService,
-    public empDataService: EmployeeDataService) { }
+    public empDataService: EmployeeDataService , private addemployee :AddEmployeeComponent) { }
 
     ngOnInit(): void {
       this.getEmployeeData();
@@ -68,6 +69,7 @@ export class AllEmployeesComponent implements OnInit {
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
       this.inventory._employeeId = empId;
-      this.dialog.open(AssignComponent);
+      this.addemployee.getmanagerid(empId);      
+      this.dialog.closeAll()
      }
 }
