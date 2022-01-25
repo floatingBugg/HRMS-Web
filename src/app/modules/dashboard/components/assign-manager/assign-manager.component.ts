@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
@@ -6,16 +6,14 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
-import { AssignComponent } from '../assign/assign.component';
-import { InventoryService } from 'src/app/services/inventory.service';
 
 @Component({
-  selector: 'app-all-employees',
-  templateUrl: './all-employees.component.html',
-  styleUrls: ['./all-employees.component.scss']
+  selector: 'app-assign-manager',
+  templateUrl: './assign-manager.component.html',
+  styleUrls: ['./assign-manager.component.scss']
 })
-export class AllEmployeesComponent implements OnInit {
-  
+export class AssignManagerComponent implements OnInit {
+
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 
@@ -32,7 +30,7 @@ export class AllEmployeesComponent implements OnInit {
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
-  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService, private inventory: InventoryService,
+  constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
     public empDataService: EmployeeDataService) { }
 
     ngOnInit(): void {
@@ -55,7 +53,7 @@ export class AllEmployeesComponent implements OnInit {
     getEmployeeData() {
       this.personalDetails.getEmployeeData().subscribe( (data:any) => {
   
-        this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+        this.employeeData = new MatTableDataSource<employeeGrid>(data.data2);
        // this.employeeData.sort = this.sort;
         this.employeeData.paginator = this.paginator;
   
@@ -67,7 +65,8 @@ export class AllEmployeesComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
-      this.inventory._employeeId = empId;
-      this.dialog.open(AssignComponent);
+      this.employeeData._employeeId = empId;
+      
      }
+
 }

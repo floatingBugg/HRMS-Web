@@ -8,6 +8,7 @@ import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 import { AllEmployeesComponent } from 'src/app/modules/inventory/components/all-employees/all-employees.component';
+import { AssignManagerComponent } from '../assign-manager/assign-manager.component';
 
 
 @Component({
@@ -210,8 +211,8 @@ var abc = valueFilter[0].desName;
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
-      dialogConfig.width = "60%"
-      this.dialog.open(AllEmployeesComponent);
+      dialogConfig.width = "80%"
+      this.dialog.open(AssignManagerComponent);
   }
 
 
