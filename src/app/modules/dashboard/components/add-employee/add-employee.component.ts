@@ -62,6 +62,7 @@ export class AddEmployeeComponent implements OnInit {
   Degree:any=[];
   degName!:any;
   desName!: string;
+  managerid:any;
   displayedColumns: string[] = ['DesName','degName'];
  
   constructor(
@@ -214,6 +215,10 @@ var abc = valueFilter[0].desName;
       this.dialog.open(AllEmployeesComponent);
   }
 
+  getmanagerid(empid:any){
+      this.managerid=empid;
+  }
+  
 
   ///////Professional Details/////////////
   addEmsTblEmployeeProfessionalDetails(): FormGroup {
@@ -577,6 +582,8 @@ var abc = valueFilter[0].desName;
     }
   }
 }
+
+
 function disable() {
   throw new Error('Function not implemented.');
 }
