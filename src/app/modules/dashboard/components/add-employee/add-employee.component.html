@@ -540,6 +540,12 @@
                     <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
                       Probation is <strong>required</strong></mat-error>
                   </mat-form-field>
+                  <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Manager ID</mat-label>
+                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedManagerId" name="etedManagerId"
+                      matInput placeholder="Manager ID">
+                  </mat-form-field>
+
                   <button mat-raised-button title="Assign Teamlead" color="primary" (click)="onCreate()" >Assign Teamlead</button>
                   
                 </div>

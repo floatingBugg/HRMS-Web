@@ -30,9 +30,9 @@ export class AssignManagerComponent implements OnInit {
 
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
-
+  managerId: number = 0;
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
-    public empDataService: EmployeeDataService,private addManager :AddEmployeeComponent) { }
+    public empDataService: EmployeeDataService) { }
 
     ngOnInit(): void {
       this.getEmployeeData();
@@ -62,13 +62,13 @@ export class AssignManagerComponent implements OnInit {
     }
     // onRowClicked(row: any) {}
     onCreate(empId: number){
-      const dialogConfig = new MatDialogConfig();
-      dialogConfig.disableClose = true;
-      dialogConfig.autoFocus = true;
-      dialogConfig.width = "40%"
-      this.employeeData._employeeId = empId;
-      this.addManager.getmanagerid(empId);
+      // const dialogConfig = new MatDialogConfig();
+      // dialogConfig.disableClose = true;
+      // dialogConfig.autoFocus = true;
+      // dialogConfig.width = "40%"
       
+      this.personalDetails._managerId = empId;
+      this.dialog.closeAll();
      }
 
 }

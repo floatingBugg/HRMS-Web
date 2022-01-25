@@ -12,13 +12,16 @@ export class PersonalDetailsService {
   _roleId = localStorage.getItem('loggedIn_roleId');
   _empid = localStorage.getItem('loggedIn_empid');
   
-  
+  _managerId: number = 0;
   
 
   _responseMessage: any = '';
   apiUrl = 'https://localhost:44324';
   get responseMessage() {
     return this._responseMessage;
+  }
+  get managerId(){
+    return this._managerId;
   }
   personalDetails(data: any): Observable<any> {
 

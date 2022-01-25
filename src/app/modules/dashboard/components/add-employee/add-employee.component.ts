@@ -214,12 +214,24 @@ var abc = valueFilter[0].desName;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "80%"
       this.dialog.open(AssignManagerComponent);
+
+     this.dialog.afterAllClosed.subscribe((res: any) => {
+       this.getmanagerid();
+     })
   }
 
-  getmanagerid(empid:any){
-      this.managerid=empid;
+  getmanagerid(){
+   
+      this.managerid= this.personaldetails.managerId;
       debugger
-      this.emsTblEmployeeProfessionalDetails['etepdProbation'].setValue("hello world");
+      let controlProfessionalDetails =
+          this.personalDetailsForm.controls[
+            'emsTblEmployeeProfessionalDetails'
+          ]['controls'][0]['controls'];
+          controlProfessionalDetails['etedManagerId'].setValue(
+            this.managerid
+          );
+      //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
   }
   
 
@@ -230,6 +242,7 @@ var abc = valueFilter[0].desName;
       etepdProbation: [this.newDate, Validators.required],
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
+      etedManagerId: [''],
     });
   }
   addProfessionalDetails(): void {
