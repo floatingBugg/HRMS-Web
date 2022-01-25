@@ -208,7 +208,6 @@ var abc = valueFilter[0].desName;
   }
 
   onCreate(){
-    debugger
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -223,7 +222,6 @@ var abc = valueFilter[0].desName;
   getmanagerid(){
    
       this.managerid= this.personaldetails.managerId;
-      debugger
       let controlProfessionalDetails =
           this.personalDetailsForm.controls[
             'emsTblEmployeeProfessionalDetails'
