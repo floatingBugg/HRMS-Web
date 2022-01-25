@@ -52,6 +52,6 @@ export class PersonalDetailsService {
 
   getDropdownValue(id: any): Observable<any> {
 
-    return this.http.get(this.apiUrl + `/Dropdown/GetDropdownValuebyID${id}` );
+    return this.http.get(this.apiUrl + `/Dropdown/GetDropdownValuebyID?id=${id}` );
   }
 }
