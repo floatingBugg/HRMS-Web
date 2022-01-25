@@ -44,4 +44,14 @@ export class PersonalDetailsService {
   updateEmployeeData(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/Employee/UpdateEmployee', data);
   }
+
+  addDropdownValue(data: any): Observable<any> {
+
+    return this.http.post(this.apiUrl + '/Dropdown/AddDropdownValue', data);
+  }
+
+  getDropdownValue(id: any): Observable<any> {
+
+    return this.http.get(this.apiUrl + `/Dropdown/GetDropdownValuebyID${id}` );
+  }
 }
