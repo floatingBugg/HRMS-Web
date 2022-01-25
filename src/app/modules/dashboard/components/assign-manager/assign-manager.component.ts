@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 import { MatPaginator } from '@angular/material/paginator';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
+import { AddEmployeeComponent } from '../add-employee/add-employee.component';
 
 @Component({
   selector: 'app-assign-manager',
@@ -31,7 +32,7 @@ export class AssignManagerComponent implements OnInit {
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
-    public empDataService: EmployeeDataService) { }
+    public empDataService: EmployeeDataService,private addManager :AddEmployeeComponent) { }
 
     ngOnInit(): void {
       this.getEmployeeData();
@@ -66,6 +67,7 @@ export class AssignManagerComponent implements OnInit {
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
       this.employeeData._employeeId = empId;
+      this.addManager.getmanagerid(empId);
       
      }
 

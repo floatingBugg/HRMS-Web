@@ -69,7 +69,7 @@ export class AllEmployeesComponent implements OnInit {
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%"
       this.inventory._employeeId = empId;
-      this.addemployee.getmanagerid(empId);      
-      this.dialog.closeAll()
+           
+      this.dialog.open(AssignComponent);
      }
 }

@@ -208,7 +208,7 @@ var abc = valueFilter[0].desName;
   }
 
   onCreate(){
-    
+    debugger
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -218,6 +218,8 @@ var abc = valueFilter[0].desName;
 
   getmanagerid(empid:any){
       this.managerid=empid;
+      debugger
+      this.emsTblEmployeeProfessionalDetails['etepdProbation'].setValue("hello world");
   }
   
 
@@ -410,8 +412,8 @@ var abc = valueFilter[0].desName;
     this.newDate = new Date(probationDate);
     this.probationDate = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
-    }).format(this.newDate);
-    control['etepdProbation'].setValue(this.probationDate);
+    }).format(this.newDate);control
+    ['etepdProbation'].setValue(this.probationDate);
   }
 
   checkEmergencyInput(emergencyFirstName: any) {
