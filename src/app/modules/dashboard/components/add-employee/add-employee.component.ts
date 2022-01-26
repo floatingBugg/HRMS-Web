@@ -220,7 +220,7 @@ var abc = valueFilter[0].desName;
   }
 
   getmanagerid(){
-   
+   debugger
       this.managerid= this.personaldetails.managerId;
       let controlProfessionalDetails =
           this.personalDetailsForm.controls[
@@ -229,7 +229,7 @@ var abc = valueFilter[0].desName;
           controlProfessionalDetails['etedManagerId'].setValue(
             this.managerid
           );
-        this.personalDetailsForm.etedManagerId=this.managerid;
+        this.personalDetailsForm.controls['etedManagerId'].setValue(this.managerid);
       //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
   }
   
@@ -241,6 +241,9 @@ var abc = valueFilter[0].desName;
       etepdProbation: [this.newDate, Validators.required],
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
+      etedManagerId: [''],
+     
+      
      
     });
   }
@@ -289,6 +292,7 @@ var abc = valueFilter[0].desName;
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
   createForm() {
+    debugger
     this.personalDetailsForm = this.fb.group({
       etedPhotograph: [''],
       etedFirstName: ['', Validators.required],
