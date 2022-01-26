@@ -6,5 +6,6 @@ export interface PermissionsModel{
     isSuperadmin:boolean,
     isAdmin:boolean,
     isTeamLead:boolean,
-    isUser:boolean
+    isUser:boolean,
+    employeeView:boolean,
 }

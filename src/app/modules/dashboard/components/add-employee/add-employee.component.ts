@@ -242,9 +242,6 @@ var abc = valueFilter[0].desName;
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
-     
-      
-     
     });
   }
   addProfessionalDetails(): void {
@@ -325,7 +322,6 @@ var abc = valueFilter[0].desName;
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
       etedNationality: ['', Validators.required],
-      etedManagerId: [''],
       etedCreatedBy: [this.userId],
       etedCreatedByName: [this.userName],
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),

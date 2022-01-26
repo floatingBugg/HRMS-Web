@@ -4,4 +4,6 @@ export interface PersonalGrid {
   emailAddress: string;
   contactNumber: string;
   empDesignation: string;
+  empStatus:string;
+  manager:string;
 }

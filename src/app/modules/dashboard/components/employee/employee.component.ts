@@ -29,12 +29,15 @@ export class EmployeeComponent implements OnInit {
     'empDesignation',
     'contactNumber',
     'emailAddress',
+    'empStatus',
+    'manager',
     'actions',
   ];
   _update:boolean=false
   _delete:boolean=false
   _insert:boolean=false
   _view:boolean=false
+  _employeeView:boolean=false
   _roleId = localStorage.getItem('loggedIn_RoleId');
  
   pageSizeOptions: number[] = [ 10, 25, 100];
@@ -93,5 +96,6 @@ export class EmployeeComponent implements OnInit {
     this._delete = permissions.delete;
     this._insert = permissions.insert;
     this._view = permissions.view;
+    this._employeeView=permissions.employeeView;
   }
 }

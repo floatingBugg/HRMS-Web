@@ -16,7 +16,8 @@ export class PermissionsService {
       isSuperadmin:false,
       isAdmin:false,
       isTeamLead:false,
-      isUser:false
+      isUser:false,
+      employeeView:false
     }
   }
 
@@ -29,6 +30,7 @@ getPermissionsByRole(roleId:any){
       this._permissions.insert = true;
       this._permissions.view = true;
       this._permissions.isSuperadmin=true;
+      this._permissions.employeeView=true;
     }
     else if(roleId==2){
       this._permissions.delete = false;
@@ -36,6 +38,7 @@ getPermissionsByRole(roleId:any){
       this._permissions.insert = true;
       this._permissions.view = true;
       this._permissions.isAdmin=true;
+      this._permissions.employeeView=true;
     }
     else if(roleId==3){
       this._permissions.delete = false;
@@ -43,6 +46,7 @@ getPermissionsByRole(roleId:any){
       this._permissions.insert = false;
       this._permissions.view = true;
       this._permissions.isTeamLead=true;
+      this._permissions.employeeView=true;
     }
     else if(roleId==4){
       this._permissions.delete = false;
@@ -50,6 +54,7 @@ getPermissionsByRole(roleId:any){
       this._permissions.insert = false;
       this._permissions.view = true;
       this._permissions.isUser=true;
+      this._permissions.employeeView=false;
     }
     return this._permissions;
   }
