@@ -34,7 +34,7 @@ export class AllEmployeesComponent implements OnInit {
   public employeeData:any;// new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService, private inventory: InventoryService,
-    public empDataService: EmployeeDataService , private addemployee :AddEmployeeComponent) { }
+    public empDataService: EmployeeDataService ) { }
 
     ngOnInit(): void {
       this.getEmployeeData();
@@ -54,6 +54,7 @@ export class AllEmployeesComponent implements OnInit {
   
   
     getEmployeeData() {
+      
       this.personalDetails.getEmployeeData().subscribe( (data:any) => {
   
         this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
