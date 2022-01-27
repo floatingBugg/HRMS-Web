@@ -1,5 +1,5 @@
 export interface UnassignAssetEmployeeGrid {
     assetid:number,
-    name:string,
+    assetname:string,
     category:string,
 }

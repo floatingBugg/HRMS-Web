@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { UnassignAssetEmployeeGrid } from 'src/app/_interfaces/unassign-asset-employee-grid';
+import { MatPaginator } from '@angular/material/paginator';
+import { AssignComponent } from 'src/app/modules/inventory/components/assign/assign.component';
 
 @Component({
   selector: 'app-assign-asset',
@@ -13,6 +15,12 @@ import { UnassignAssetEmployeeGrid } from 'src/app/_interfaces/unassign-asset-em
   styleUrls: ['./assign-asset.component.scss']
 })
 export class AssignAssetComponent implements OnInit {
+empId:any;
+categoryid:any;
+assetid:any;
+quantity:any;
+assigndate:any;
+
 
   constructor( public dialog: MatDialog,
     private inventory: InventoryService,
@@ -20,13 +28,15 @@ export class AssignAssetComponent implements OnInit {
     public saveAssignedData:SaveAssignedDataService ) { }
 
   ngOnInit(): void {
+    this.getAssetByCategoryID();
   }
   public assetData:any;
+  @ViewChild('assetDataPage') paginator!: MatPaginator;
 
-  pageSizeOptions: number[] = [ 10, 25, 100];
+  pageSizeOptions: number[] = [ 5, 10, 15];
   displayedColumns: string[] = [
-    'assetID',
-    'name',
+    'assetid',
+    'assetname',
     'category',
     'actions',
   ];
@@ -43,7 +53,7 @@ export class AssignAssetComponent implements OnInit {
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%";
       this.inventory._employeeId=empid;
-      this.dialog.closeAll();
+      this.dialog.open(AssignComponent);
   }
 
   getAssetByCategoryID() {
@@ -64,7 +74,7 @@ export class AssignAssetComponent implements OnInit {
         // } else {
         // }
         this.assetData = new MatTableDataSource<UnassignAssetEmployeeGrid>(data.data);
-
+        this.assetData.paginator=this.paginator;
         this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });

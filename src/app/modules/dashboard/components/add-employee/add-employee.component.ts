@@ -14,6 +14,7 @@ import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.ser
 import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
 import { MatTableDataSource } from '@angular/material/table';
 import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
+import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 
 
 @Component({
@@ -195,7 +196,14 @@ var abc = valueFilter[0].desName;
     
    
   }
-  
+  onCreateAssign(){
+    const dialogConfig = new MatDialogConfig();
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.width = "80%"
+      this.dialog.open(AssignAssetComponent);
+
+  }  
   //////Academic Qualification/////////////
 
   addAcademicQualificationList(): FormGroup {
