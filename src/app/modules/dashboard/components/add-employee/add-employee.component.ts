@@ -73,14 +73,9 @@ export class AddEmployeeComponent implements OnInit {
   displayedColumns: string[] = ['DesName','degName'];
   itacCategoryId=1;
   displayedColumns1: string[] = [
-    'assignID',
+    'assetid',
     'nameModel',
-    'company',
-    'ram',
-    'processor',
-    'storage',
-    'generation',
-    'assignedTo',
+    'category',
     'quantity',
     'actions',
   ];
