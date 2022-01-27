@@ -1,7 +1,7 @@
 import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { Component, Input, OnInit, VERSION, ViewChild } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
@@ -9,6 +9,11 @@ import { SuccessDialogComponent } from './success-dialog/success-dialog.componen
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 import { AllEmployeesComponent } from 'src/app/modules/inventory/components/all-employees/all-employees.component';
 import { AssignManagerComponent } from '../assign-manager/assign-manager.component';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.service';
+import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
+import { MatTableDataSource } from '@angular/material/table';
+import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
 
 
 @Component({
@@ -65,7 +70,20 @@ export class AddEmployeeComponent implements OnInit {
   desName!: string;
   managerid:any;
   displayedColumns: string[] = ['DesName','degName'];
- 
+  itacCategoryId=1;
+  displayedColumns1: string[] = [
+    'assignID',
+    'nameModel',
+    'company',
+    'ram',
+    'processor',
+    'storage',
+    'generation',
+    'assignedTo',
+    'quantity',
+    'actions',
+  ];
+  public assetData:any;
   constructor(
     
     // private fb: FormBuilder,
@@ -73,7 +91,9 @@ export class AddEmployeeComponent implements OnInit {
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog,
+    public dialog: MatDialog,private inventory: InventoryService,
+    public route: ActivatedRoute,
+    public saveAssignedData:SaveAssignedDataService
    
   
   ) 
@@ -123,6 +143,31 @@ export class AddEmployeeComponent implements OnInit {
       users: this.fb.array([])
     })
     this.createForm();
+    this.getAssetByCategoryID(this.itacCategoryId);
+  }
+
+  getAssetByCategoryID(itacCategoryId: any) {
+    this.inventory
+      .getAssetAssign(itacCategoryId)
+      .subscribe((data: any) => {
+      
+        this.assetData = new MatTableDataSource<AssetassignGrid>(data.data);
+
+        this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
+        console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
+      });
+  }
+  unAssignAssetById(assignid: any) {
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+    dialogRef.afterClosed().subscribe((res: any) => {
+      if (res == true) {
+        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
+      }
+    });
   }
   showField(){
     this.showAddNewDropDownField = true;

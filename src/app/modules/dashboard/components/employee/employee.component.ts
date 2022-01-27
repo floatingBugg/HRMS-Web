@@ -20,6 +20,7 @@ export class EmployeeComponent implements OnInit {
   roleid = localStorage.getItem('loggedIn_RoleId');
   empid=localStorage.getItem('loggedIn_empid');
   userName = localStorage.getItem('loggedIn_UserName');
+  
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
 

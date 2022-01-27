@@ -16,7 +16,7 @@ export class PersonalDetailsService {
   
 
   _responseMessage: any = '';
-  apiUrl = 'https://localhost:44324';
+  apiUrl = 'http://localhost:57208';
   get responseMessage() {
     return this._responseMessage;
   }

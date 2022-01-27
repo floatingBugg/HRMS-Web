@@ -12,7 +12,7 @@ export class InventoryService {
   _assetId = 0;
   _employeeId = 0;
   _responseMessage: any = '';
-  apiUrl = 'https://localhost:44324';
+  apiUrl = 'http://localhost:57208';
   get responseMessage() {
     return this._responseMessage;
   }
