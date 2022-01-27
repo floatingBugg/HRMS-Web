@@ -321,6 +321,7 @@ var abc = valueFilter[0].desName;
       etedStatus: ['', Validators.required],
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
+      etedManagerId:[],
       etedNationality: ['', Validators.required],
       etedCreatedBy: [this.userId],
       etedCreatedByName: [this.userName],
