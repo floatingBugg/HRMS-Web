@@ -23,6 +23,8 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
   styleUrls: ['./add-employee.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
+  assetdatatable:any[]=[];
+  assigndatatable:any[]=[];
   public toggleButton: boolean = false;
   name = 'Angular ' + VERSION.major;
   userForm: FormGroup | undefined;
@@ -87,7 +89,8 @@ export class AddEmployeeComponent implements OnInit {
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
-    public dialog: MatDialog,private inventory: InventoryService,
+    public dialog: MatDialog,
+    private inventory: InventoryService,
     public route: ActivatedRoute,
     public saveAssignedData:SaveAssignedDataService
    
@@ -198,7 +201,18 @@ var abc = valueFilter[0].desName;
       dialogConfig.width = "80%"
       this.dialog.open(AssignAssetComponent);
 
+      this.dialog.afterAllClosed.subscribe((res: any)=>{
+        this.tempTable()
+      })
   }  
+
+  tempTable()
+  {
+    
+       this.assigndatatable= this.inventory.assignObj;
+       this.assetdatatable = this.inventory.assetObj;
+  }
+
   //////Academic Qualification/////////////
 
   addAcademicQualificationList(): FormGroup {

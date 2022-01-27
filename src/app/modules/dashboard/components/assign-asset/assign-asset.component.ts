@@ -46,8 +46,9 @@ assigndate:any;
     this.assetData.filter = filterValue.trim().toLowerCase();
   }
 
-  onCreate(){
-    
+  onCreate(asset: any)
+  {
+    this.inventory._assetObj[this.inventory.assetObj.length] = asset;  
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -78,4 +79,5 @@ assigndate:any;
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
   }
+
 }

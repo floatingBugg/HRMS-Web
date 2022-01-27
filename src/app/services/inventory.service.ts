@@ -12,6 +12,9 @@ export class InventoryService {
   _assetId = 0;
   _employeeId = 0;
   _responseMessage: any = '';
+  _assetObj: any[] = [];
+  _assignObj: any[] = [];
+
   apiUrl = 'http://localhost:57208';
   get responseMessage() {
     return this._responseMessage;
@@ -26,6 +29,16 @@ export class InventoryService {
   }
   get employeeId(){
     return this._employeeId;
+  }
+
+  get assetObj()
+  {
+    return this._assetObj;
+  }
+
+  get assignObj()
+  {
+    return this._assignObj;
   }
   
   postAssets(data: any): Observable<any> {

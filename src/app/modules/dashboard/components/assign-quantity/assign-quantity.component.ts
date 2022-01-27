@@ -64,34 +64,36 @@ export class AssignQuantityComponent implements OnInit {
 
   submitData() {
     console.log(this.assignForm.value);
-    this.inventory
-      .postAssetsAssign(this.assignForm.value)
-      .subscribe((result) => {
-        if (result.success) {
-          Swal.fire({
-            title: 'Added!',
-            text: 'Record added successfully',
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'Thank You',
-            //cancelButtonText: 'No, keep it'
-          }).then((res) => {
-            this.dialog.closeAll();
-          })
-        }   else 
-        {
-          this.errorMsg = result.message;
-          Swal.fire({
-            title: 'ERROR!',
-            text: this.errorMsg,
-            icon: 'error',
-            showCancelButton: false,
-            confirmButtonText: 'Okay',
-            //cancelButtonText: 'No, keep it'
-          })
-          console.log(result.message);
-        }
-      });
+    this.inventory._assignObj[this.inventory.assetObj.length-1] = this.assignForm.value;
+    this.dialog.closeAll();
+    // this.inventory
+    //   .postAssetsAssign(this.assignForm.value)
+    //   .subscribe((result) => {
+    //     if (result.success) {
+    //       Swal.fire({
+    //         title: 'Added!',
+    //         text: 'Record added successfully',
+    //         icon: 'success',
+    //         showCancelButton: false,
+    //         confirmButtonText: 'Thank You',
+    //         //cancelButtonText: 'No, keep it'
+    //       }).then((res) => {
+    //         this.dialog.closeAll();
+    //       })
+    //     }   else 
+    //     {
+    //       this.errorMsg = result.message;
+    //       Swal.fire({
+    //         title: 'ERROR!',
+    //         text: this.errorMsg,
+    //         icon: 'error',
+    //         showCancelButton: false,
+    //         confirmButtonText: 'Okay',
+    //         //cancelButtonText: 'No, keep it'
+    //       })
+    //       console.log(result.message);
+    //     }
+    //   });
   }
 
 }
