@@ -7,7 +7,7 @@ import { SaveAssignedDataService } from 'src/app/services/save-assigned-data.ser
 import { MatTableDataSource } from '@angular/material/table';
 import { UnassignAssetEmployeeGrid } from 'src/app/_interfaces/unassign-asset-employee-grid';
 import { MatPaginator } from '@angular/material/paginator';
-import { AssignComponent } from 'src/app/modules/inventory/components/assign/assign.component';
+import { AssignQuantityComponent } from '../assign-quantity/assign-quantity.component';
 
 @Component({
   selector: 'app-assign-asset',
@@ -46,14 +46,13 @@ assigndate:any;
     this.assetData.filter = filterValue.trim().toLowerCase();
   }
 
-  onCreate(empid: number){
+  onCreate(){
     
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "40%";
-      this.inventory._employeeId=empid;
-      this.dialog.open(AssignComponent);
+      this.dialog.open(AssignQuantityComponent);
   }
 
   getAssetByCategoryID() {
