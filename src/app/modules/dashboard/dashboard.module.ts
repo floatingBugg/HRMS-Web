@@ -35,6 +35,7 @@ import { LoginInterceptor } from 'src/app/interceptor/login.interceptor';
 import { AddEmployeeFailureDialogComponent } from './components/add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { AssignManagerComponent } from './components/assign-manager/assign-manager.component';
 import { AssignAssetComponent } from './components/assign-asset/assign-asset.component';
+import { AssignQuantityComponent } from './components/assign-quantity/assign-quantity.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { AssignAssetComponent } from './components/assign-asset/assign-asset.com
     ViewEmployeeComponent,
     AddEmployeeFailureDialogComponent,
     AssignManagerComponent,
-    AssignAssetComponent
+    AssignAssetComponent,
+    AssignQuantityComponent
   ],
   imports: [
     CommonModule,

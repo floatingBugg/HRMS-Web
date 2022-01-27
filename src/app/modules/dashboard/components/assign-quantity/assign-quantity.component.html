@@ -1,0 +1,33 @@
+<div class="assign-container container m-0">
+    <div class="row">
+      <h4 class="mt-4">Assign</h4>
+      <form [formGroup]="assignForm">
+        <div class="container">
+            <mat-form-field class="col-lg-6 col-md-6 input">
+                <mat-label>Quantity</mat-label>
+                <input formControlName="itasQuantity"  (keypress)="onlyNumbersAllowed($event)" name="itasQuantity" matInput placeholder=""
+                  maxlength="20">
+                  <mat-error *ngIf="assignForm.controls['itasQuantity'].errors?.['required'] ">
+                    <strong>Required</strong></mat-error>
+              </mat-form-field>
+             <mat-form-field class="col-lg-6 col-md-6 input">
+                      <mat-label>Assign Date</mat-label> 
+                       <input formControlName="itasAssignedDate" name="itasAssignedDate" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                        maxlength="20"> 
+                        <mat-error *ngIf="assignForm.controls['itasAssignedDate'].errors?.['required'] ">
+                          <strong>Required</strong></mat-error>
+                      <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+                      <mat-datepicker #dob></mat-datepicker>
+
+                    </mat-form-field>
+                     
+                       
+</div>
+          </form>
+          <div class="text-align-right">
+            <button class="setPositionRight5em"  mat-raised-button color="warn" (click)="onNoClick()">Close</button>
+            <button class="setPositionRight4em" [disabled]="assignForm.invalid" mat-raised-button type="submit"
+            (click)="submitData()" color="primary">Submit</button>
+          </div>
+      </div>
+    </div>
