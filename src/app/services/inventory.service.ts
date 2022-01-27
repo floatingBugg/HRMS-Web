@@ -67,4 +67,10 @@ export class InventoryService {
     
     return this.http.get(this.apiUrl + `/Asset/DisplayAssetById?type=${type}`);
   }
+
+  getAllUnAsset():  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/GetAllUnAsset`);
+  }
+
 }
