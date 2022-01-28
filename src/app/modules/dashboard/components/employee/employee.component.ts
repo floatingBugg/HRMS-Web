@@ -12,7 +12,7 @@ import { PermissionsService } from 'src/app/services/permissionsService/permissi
 
 @Component({
   selector: 'app-employee',
-  
+
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
@@ -40,6 +40,7 @@ export class EmployeeComponent implements OnInit {
   _insert:boolean=false
   _view:boolean=false
   _employeeView:boolean=false
+  
   _roleId = localStorage.getItem('loggedIn_RoleId');
  
   pageSizeOptions: number[] = [ 10, 25, 100];
