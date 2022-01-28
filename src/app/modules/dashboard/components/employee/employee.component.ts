@@ -12,6 +12,7 @@ import { PermissionsService } from 'src/app/services/permissionsService/permissi
 
 @Component({
   selector: 'app-employee',
+  
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.scss'],
 })
