@@ -1,5 +1,5 @@
 import { DeleteEmployeeComponent } from './../delete-employee/delete-employee.component';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component,OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
@@ -12,12 +12,10 @@ import { PermissionsService } from 'src/app/services/permissionsService/permissi
 
 @Component({
   selector: 'app-employee',
-
   templateUrl: './employee.component.html',
-  styleUrls: ['./employee.component.scss'],
+  styleUrls: ['./employee.component.scss']
 })
 export class EmployeeComponent implements OnInit {
-
   roleid = localStorage.getItem('loggedIn_RoleId');
   empid=localStorage.getItem('loggedIn_empid');
   userName = localStorage.getItem('loggedIn_UserName');
@@ -45,7 +43,8 @@ export class EmployeeComponent implements OnInit {
  
   pageSizeOptions: number[] = [ 10, 25, 100];
   public employeeData:any;
-  public personalData:any;// new MatTableDataSource<employeeGrid>();
+  public personalData:any;
+   // new MatTableDataSource<employeeGrid>();
 
   constructor( public dialog: MatDialog,private personalDetails: PersonalDetailsService,
     public empDataService: EmployeeDataService,private permissionService: PermissionsService) {}

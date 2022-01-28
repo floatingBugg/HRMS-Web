@@ -27,8 +27,8 @@ export class AddEmployeeComponent implements OnInit {
   public assetdata:any;
   assetdatatable:any[]=[];
   assigndatatable:any[]=[];
-  assigntable: any = {assignArray: [], assetArray: []};
-  
+  assetAssignObj: any = {itasItaAssetId: 0, assetName: '', itasItacCategoryId: 0, assetCatagoryName: '', itasQuantity: 0, itasAssignedDate: new Date()};
+  assetAssignDT: any[] =[];
   invern!: InventoryGrid;
 
   public toggleButton: boolean = false;
@@ -215,8 +215,24 @@ var abc = valueFilter[0].desName;
 
   tempTable()
   {
+    let a =0;
       debugger;
-      this.assetData=[...this.inventory.assetObj,...this.inventory.assignObj];
+      // this.inventory.assetObj.map((ItasQuantity ,a )=>{
+      //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
+      //    this.assetData.push(b);
+      // });
+
+      this.inventory.assetObj.forEach((elem: any, index: any) => {
+           this.assetAssignObj.itasItaAssetId = elem.assetid;
+           this.assetAssignObj.assetName = elem.assetname;
+           this.assetAssignObj.itasItacCategoryId = elem.categoryid;
+           this.assetAssignObj.assetCatagoryName = elem.catagory;
+           this.assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
+           this.assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+
+           this.assetAssignDT.push(this.assetAssignObj);
+      })
+      
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
 
   }
