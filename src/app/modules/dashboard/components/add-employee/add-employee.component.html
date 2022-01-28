@@ -712,22 +712,22 @@
                 </button>
               </div>
              
-    <table mat-table  [dataSource]="assetdatatable" class="mat-elevation-z8" matSort>
+    <table mat-table  [dataSource]="assigntable" class="mat-elevation-z8" matSort>
       <ng-container matColumnDef="assetid">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
-        <td mat-cell *matCellDef="let assetdata"> {{assetdata.assetid}} </td>
+        <td mat-cell *matCellDef="let assign.assignArray"> {{assigntable.assignArray.assetid}} </td>
       </ng-container>
       <ng-container matColumnDef="nameModel"> 
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
         <td mat-cell *matCellDef="let asset">{{asset.assetname}} </td>
       </ng-container>
-      <ng-container matColumnDef="quantity">
+      <ng-container matColumnDef="quantity" >
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
-        <td mat-cell *matCellDef="let asset">  </td>
+        <td mat-cell *matCellDef="let asset"> {{asset.itasQuantity}} </td>
       </ng-container>   
       <ng-container matColumnDef="category">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-        <td mat-cell *matCellDef="let asset">  </td>
+        <td mat-cell *matCellDef="let asset"> {{asset.category}} </td>
       </ng-container>
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions </th>

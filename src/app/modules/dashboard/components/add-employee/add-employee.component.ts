@@ -25,6 +25,7 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 export class AddEmployeeComponent implements OnInit {
   assetdatatable:any[]=[];
   assigndatatable:any[]=[];
+  assigntable: any = {assignArray: [], assetArray: []};
   public toggleButton: boolean = false;
   name = 'Angular ' + VERSION.major;
   userForm: FormGroup | undefined;
@@ -208,9 +209,9 @@ var abc = valueFilter[0].desName;
 
   tempTable()
   {
-    
-       this.assigndatatable= this.inventory.assignObj;
-       this.assetdatatable = this.inventory.assetObj;
+      debugger;
+      this.assigntable.assignArray = this.inventory.assignObj ;
+       this.assigntable.assetArray = this.inventory.assetObj;
   }
 
   //////Academic Qualification/////////////
@@ -351,7 +352,6 @@ var abc = valueFilter[0].desName;
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
   createForm() {
-    debugger
     this.personalDetailsForm = this.fb.group({
       etedPhotograph: [''],
       etedFirstName: ['', Validators.required],
