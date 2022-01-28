@@ -216,7 +216,7 @@ var abc = valueFilter[0].desName;
   tempTable()
   {
       debugger;
-      this.assetData=this.inventory.assetObj.concat(this.inventory.assignObj);
+      this.assetData=[...this.inventory.assetObj,...this.inventory.assignObj];
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
 
   }
