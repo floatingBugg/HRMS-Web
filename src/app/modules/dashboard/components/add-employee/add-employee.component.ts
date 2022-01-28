@@ -15,6 +15,7 @@ import { AssetassignGrid } from 'src/app/_interfaces/Assetassign-Grid';
 import { MatTableDataSource } from '@angular/material/table';
 import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 
 
 @Component({
@@ -23,9 +24,13 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
   styleUrls: ['./add-employee.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
+  public assetdata:any;
   assetdatatable:any[]=[];
   assigndatatable:any[]=[];
   assigntable: any = {assignArray: [], assetArray: []};
+  
+  invern!: InventoryGrid;
+
   public toggleButton: boolean = false;
   name = 'Angular ' + VERSION.major;
   userForm: FormGroup | undefined;
@@ -81,6 +86,7 @@ export class AddEmployeeComponent implements OnInit {
     'category',
     'quantity',
     'actions',
+
   ];
   public assetData:any;
   constructor(
@@ -210,8 +216,9 @@ var abc = valueFilter[0].desName;
   tempTable()
   {
       debugger;
-      this.assigntable.assignArray = this.inventory.assignObj ;
-       this.assigntable.assetArray = this.inventory.assetObj;
+      this.assetData=this.inventory.assetObj.concat(this.inventory.assignObj);
+      //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
+
   }
 
   //////Academic Qualification/////////////

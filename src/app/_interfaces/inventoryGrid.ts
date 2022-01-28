@@ -9,7 +9,6 @@ export interface InventoryGrid {
     size:string,
     condition:string,
     cost:string,
-
-   
-   
+    assetdatatable:any[],
+    assigndatatable:any[],
 }
