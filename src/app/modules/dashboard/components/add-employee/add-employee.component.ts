@@ -41,6 +41,7 @@ export class AddEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
+  imsAssetAssign:any=FormArray;
   whStartDate: any;
   whStartDates: any;
   enum : any;
@@ -179,13 +180,13 @@ export class AddEmployeeComponent implements OnInit {
     this.showAddNewDropDownField = true;
   }
   pushValue(event:any){
-    // debugger
+    
    this.Designation.push({desName:event.value});
     // this.Designation.desName=true
     this.showAddNewDropDownField = false
     var valueFilter = this.Designation.filter((t: any)=>t.desName ==event.value);
 var abc = valueFilter[0].desName;
-    // debugger
+   
     let control = this.personalDetailsForm.controls[
       'emsTblEmployeeProfessionalDetails'
     ]['controls'][0]['controls'];
@@ -197,7 +198,7 @@ var abc = valueFilter[0].desName;
 // 
     // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
     // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-    // debugger
+    
     
    
   }
@@ -216,7 +217,7 @@ var abc = valueFilter[0].desName;
   tempTable()
   {
     let a =0;
-      debugger;
+      
       // this.inventory.assetObj.map((ItasQuantity ,a )=>{
       //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
       //    this.assetData.push(b);
@@ -236,7 +237,7 @@ var abc = valueFilter[0].desName;
            this.assetAssignDT.push(assetAssignObj);
            
       })
-      debugger
+
       this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
       
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
@@ -274,6 +275,13 @@ var abc = valueFilter[0].desName;
     this.emsTblAcademicQualification.push(this.addAcademicQualificationList());
   }
 
+  addImsAssign(): void {
+    this.imsAssetAssign = this.personalDetailsForm.get(
+      'ImsAsset'
+    ) as FormArray;
+    this.imsAssetAssign.push(this.assetData);
+  
+    }
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
@@ -312,7 +320,6 @@ var abc = valueFilter[0].desName;
   }
 
   getmanagerid(){
-   debugger
       this.managerid= this.personaldetails.managerId;
       let controlProfessionalDetails =
           this.personalDetailsForm.controls[
@@ -423,6 +430,7 @@ var abc = valueFilter[0].desName;
       ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
+      imsAssetAssign:this.fb.array([])
     });
   }
   submitData() {
@@ -608,14 +616,14 @@ var abc = valueFilter[0].desName;
   }
 
   onFileChange(event: any, i: any): void {
-    debugger;
+    
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        debugger;
+       
         if (this.currentIndexAcademic >= 0) {
           this.imageUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
@@ -648,14 +656,14 @@ var abc = valueFilter[0].desName;
 
   ////////// Professional Qualification////////
   professionalQualificationUpload(event: any, i: any): void {
-    debugger;
+   
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        debugger;
+        
         if (this.currentIndexProfessionalQ >= 0) {
           this.profQualificationUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
