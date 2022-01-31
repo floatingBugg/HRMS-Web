@@ -1,4 +1,12 @@
 export interface InventoryGrid {
+   
+    itasItacCategoryId:any,
+    assetCatagoryName:any,
+    itasQuantity:any,
+    itasAssignedDate:any,
+    itasItaAssetId:any,
+    assetName:any,
+   
     assetid:number,
     name:string,
     quantity:any,

@@ -221,17 +221,23 @@ var abc = valueFilter[0].desName;
       //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
       //    this.assetData.push(b);
       // });
-
+      this.assetAssignDT = [];
       this.inventory.assetObj.forEach((elem: any, index: any) => {
-           this.assetAssignObj.itasItaAssetId = elem.assetid;
-           this.assetAssignObj.assetName = elem.assetname;
-           this.assetAssignObj.itasItacCategoryId = elem.categoryid;
-           this.assetAssignObj.assetCatagoryName = elem.catagory;
-           this.assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
-           this.assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
 
-           this.assetAssignDT.push(this.assetAssignObj);
+        let assetAssignObj = elem;
+
+           assetAssignObj.itasItaAssetId = elem.assetid;
+           assetAssignObj.assetName = elem.assetname;
+           assetAssignObj.itasItacCategoryId = elem.categoryid;
+           assetAssignObj.assetCatagoryName = elem.category;
+           assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
+           assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+
+           this.assetAssignDT.push(assetAssignObj);
+           
       })
+      debugger
+      this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
       
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
 
