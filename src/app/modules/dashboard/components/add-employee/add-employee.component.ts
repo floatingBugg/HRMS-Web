@@ -239,9 +239,31 @@ var abc = valueFilter[0].desName;
       })
 
       this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
-      
+      this.addAssetAssignList().setValue(this.assetAssignDT);
+      this.addImsAssign();
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
 
+  }
+
+  addImsAssign(): void {
+    debugger
+    this.imsAssetAssign = this.personalDetailsForm.get(
+      'imsAssetAssign'
+    ) as FormArray;
+    let assignForm = this.addAssetAssignList();
+    this.imsAssetAssign.push(assignForm);
+  
+    }
+
+  addAssetAssignList(): FormGroup{
+    return this.fb.group({
+      itasItaAssetId: [''],
+      assetName: [''],
+      itasItacCategoryId: [''],
+      assetCatagoryName: [''],
+      itasQuantity: [''],
+      itasAssignedDate: [''],
+    });
   }
 
   //////Academic Qualification/////////////
@@ -275,13 +297,7 @@ var abc = valueFilter[0].desName;
     this.emsTblAcademicQualification.push(this.addAcademicQualificationList());
   }
 
-  addImsAssign(): void {
-    this.imsAssetAssign = this.personalDetailsForm.get(
-      'ImsAsset'
-    ) as FormArray;
-    this.imsAssetAssign.push(this.assetData);
   
-    }
   ///////Emergency Contact//////////////
   addemsTblEmergencyContact(): FormGroup {
     return this.fb.group({
@@ -435,6 +451,7 @@ var abc = valueFilter[0].desName;
   }
   submitData() {
     console.log(this.personalDetailsForm.value);
+    debugger
     this.personaldetails
       .personalDetails(this.personalDetailsForm.value)
       .subscribe((result) => {
