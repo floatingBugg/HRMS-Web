@@ -41,7 +41,7 @@ export class AddEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
-  imsAssetAssign:any=FormArray;
+  imsAssign:any=FormArray;
   whStartDate: any;
   whStartDates: any;
   enum : any;
@@ -236,17 +236,17 @@ var abc = valueFilter[0].desName;
 
            this.assetAssignDT.push(assetAssignObj);
 
-           let imsAssetAssign =
+           let imsAssign =
            this.personalDetailsForm.controls[
-             'imsAssetAssign'
+             'imsAssign'
            ]['controls'][index] = this.addAssetAssignList();
            
-           imsAssetAssign.controls['itasItaAssetId'].setValue(assetAssignObj.itasItaAssetId);
-           imsAssetAssign.controls['assetName'].setValue(assetAssignObj.assetName);
+           imsAssign.controls['itasItaAssetId'].setValue(assetAssignObj.itasItaAssetId);
+           imsAssign.controls['assetName'].setValue(assetAssignObj.assetName);
 
            this.personalDetailsForm.controls[
-            'imsAssetAssign'
-          ]['controls'][index].patchValue(imsAssetAssign);
+            'imsAssign'
+          ]['controls'][index].patchValue(imsAssign);
       })
       
       this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
@@ -258,11 +258,11 @@ var abc = valueFilter[0].desName;
 
   addImsAssign(): void {
     debugger
-    this.imsAssetAssign = this.personalDetailsForm.get(
-      'imsAssetAssign'
+    this.imsAssign = this.personalDetailsForm.get(
+      'imsAssign'
     ) as FormArray;
     let assignForm = this.addAssetAssignList();
-    this.imsAssetAssign.push(this.addAssetAssignList());
+    this.imsAssign.push(this.addAssetAssignList());
   
     }
 
@@ -457,7 +457,7 @@ var abc = valueFilter[0].desName;
       ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
-      imsAssetAssign:this.fb.array([])
+      imsAssign:this.fb.array([])
     });
   }
   submitData() {
@@ -467,7 +467,7 @@ var abc = valueFilter[0].desName;
     let form = this.personalDetailsForm.value;
     
     this.assetAssignDT.forEach((elem: any, index: any) => {
-      form.imsAssetAssign[index] = elem;
+      form.imsAssign[index] = elem;
     });
     
     console.log(this.personalDetailsForm.value);
