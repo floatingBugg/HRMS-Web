@@ -223,8 +223,8 @@ var abc = valueFilter[0].desName;
       //    this.assetData.push(b);
       // });
       this.assetAssignDT = [];
+      debugger;
       this.inventory.assetObj.forEach((elem: any, index: any) => {
-
         let assetAssignObj = elem;
 
            assetAssignObj.itasItaAssetId = elem.assetid;
@@ -235,12 +235,23 @@ var abc = valueFilter[0].desName;
            assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
 
            this.assetAssignDT.push(assetAssignObj);
-           
-      })
 
+           let imsAssetAssign =
+           this.personalDetailsForm.controls[
+             'imsAssetAssign'
+           ]['controls'][index] = this.addAssetAssignList();
+           
+           imsAssetAssign.controls['itasItaAssetId'].setValue(assetAssignObj.itasItaAssetId);
+           imsAssetAssign.controls['assetName'].setValue(assetAssignObj.assetName);
+
+           this.personalDetailsForm.controls[
+            'imsAssetAssign'
+          ]['controls'][index].patchValue(imsAssetAssign);
+      })
+      
       this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
-      this.addAssetAssignList().setValue(this.assetAssignDT);
-      this.addImsAssign();
+      // this.addAssetAssignList().setValue(this.assetAssignDT);
+      // this.addImsAssign();
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
 
   }
@@ -251,7 +262,7 @@ var abc = valueFilter[0].desName;
       'imsAssetAssign'
     ) as FormArray;
     let assignForm = this.addAssetAssignList();
-    this.imsAssetAssign.push(assignForm);
+    this.imsAssetAssign.push(this.addAssetAssignList());
   
     }
 
@@ -278,8 +289,8 @@ var abc = valueFilter[0].desName;
     });
   }
 //   enable(){
-//     this.isDisabled = false
-//  }
+//     this.isDisabled = false 
+//   }
  
 //  disable(){
 //     this.isDisabled = true
@@ -450,10 +461,19 @@ var abc = valueFilter[0].desName;
     });
   }
   submitData() {
-    console.log(this.personalDetailsForm.value);
+    
     debugger
+
+    let form = this.personalDetailsForm.value;
+    
+    this.assetAssignDT.forEach((elem: any, index: any) => {
+      form.imsAssetAssign[index] = elem;
+    });
+    
+    console.log(this.personalDetailsForm.value);
+    
     this.personaldetails
-      .personalDetails(this.personalDetailsForm.value)
+      .personalDetails(form)
       .subscribe((result) => {
         if (result.success) {
           this.dialog.open(SuccessDialogComponent);
