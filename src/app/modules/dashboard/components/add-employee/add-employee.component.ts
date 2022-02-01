@@ -233,11 +233,11 @@ export class AddEmployeeComponent implements OnInit {
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
       });
   }
-  unAssignAssetById(assignid: any) {
+  unAssignAssetById(itasItaAssetId: any) {
     const dialogRef = this.dialog.open(UnassignAssetComponent);
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res == true) {
-        this.inventory.deleteAssetAssign(assignid).subscribe((data) => {
+        this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
           if(data){
             this.getAssetByCategoryID(this.itacCategoryId);
           }
@@ -302,6 +302,7 @@ export class AddEmployeeComponent implements OnInit {
            assetAssignObj.assetCatagoryName = elem.category;
            assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
            assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+           assetAssignObj.itasCreatedBy = 
 
            this.assetAssignDT.push(assetAssignObj);
 
@@ -343,6 +344,8 @@ export class AddEmployeeComponent implements OnInit {
       assetCatagoryName: [''],
       itasQuantity: [''],
       itasAssignedDate: [''],
+      itasCreatedBy:[this.userId],
+      itasCreatedByName:[this.userName]
     });
   }
 
