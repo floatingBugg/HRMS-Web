@@ -81,6 +81,9 @@ export class AddEmployeeComponent implements OnInit {
   managerid:any;
   displayedColumns: string[] = ['DesName','degName'];
   itacCategoryId=1;
+  dasignationdDdlVal: any;
+  hdvdegreeName: any;
+  Id: any;
   displayedColumns1: string[] = [
     'assetid',
     'nameModel',
@@ -90,6 +93,7 @@ export class AddEmployeeComponent implements OnInit {
 
   ];
   public assetData:any;
+ ;
   constructor(
     
     // private fb: FormBuilder,
@@ -126,33 +130,98 @@ export class AddEmployeeComponent implements OnInit {
      
     // ];
   
-    this.Degree=[
-      {degName:'Matriculation/O-Levels'},
-      {degName:'Intermediate/A-Levels'},
-      {degName:'Bachelors'},
-      {degName:'BS Software Enginneering'},
-      {degName:'BS Computer Science'},
-      {degName:'BS Information Technology'},
-      {degName:'BS Buisness Administraion'},
-      {degName:'Masters/MSc'},
-      {degName:'Ms Software Engineering'},
-      {degName:'Ms Information Technology'},
-      {degName:'Ms Computer Science'},
-      {degName:'Ms Buisness Administration'},
-      {degName:'MPhil/MS'},
-      {degName:'Ms Computer Science'},
-      {degName:'Doctrate/PHD'},
+    // this.Degree=[
+    //   {degName:'Matriculation/O-Levels'},
+    //   {degName:'Intermediate/A-Levels'},
+    //   {degName:'Bachelors'},
+    //   {degName:'BS Software Enginneering'},
+    //   {degName:'BS Computer Science'},
+    //   {degName:'BS Information Technology'},
+    //   {degName:'BS Buisness Administraion'},
+    //   {degName:'Masters/MSc'},
+    //   {degName:'Ms Software Engineering'},
+    //   {degName:'Ms Information Technology'},
+    //   {degName:'Ms Computer Science'},
+    //   {degName:'Ms Buisness Administration'},
+    //   {degName:'MPhil/MS'},
+    //   {degName:'Ms Computer Science'},
+    //   {degName:'Doctrate/PHD'},
 
-    ];
+    // ];
   }
+
   ngOnInit() {
+    
     this.userForm = this.fb.group({
       users: this.fb.array([])
     })
     this.createForm();
-    this.getAssetByCategoryID(this.itacCategoryId);
+    this.getDropdownValue();
+    this.getDropdownValue2();
   }
 
+  showField(){
+    this.showAddNewDropDownField = true;
+  }
+
+  pushValue(event:any){
+    this.showAddNewDropDownField = false;
+    this.dasignationdDdlVal= event.value;
+   
+    var obj  = {
+      hdvHdDropdownId : 1,
+      hdvValueName : this.dasignationdDdlVal,
+      // HdvCreatedBy:this.userId,
+      // HdvCreatedByName:this.userName,
+      
+    }
+    this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+      if(res.success == true){
+        this.getDropdownValue()
+      }
+    })
+  }
+
+//     control['etepdDesignation'].setValue(
+//       abc
+//     );
+    // control.controls['etepdDesignation'].pushValue(abc);
+// 
+    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+    // debugger 
+  
+  pushValue2(event:any){
+    this.showAddNewDropDownField = false;
+    this.hdvdegreeName= event.value;
+    var obj  = {
+      hdvHdDropdownId : 2,
+      hdvValueName : this.hdvdegreeName,
+      // HdvCreatedBy:this.userId,
+      // HdvCreatedByName:this.userName,
+      
+    }
+    this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+      if(res.success == true){
+        this.getDropdownValue2()
+      }
+    })
+  }
+  getDropdownValue(){
+    this.Id=1;
+   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+    this.Designation=res.data;
+    })
+    
+  }
+  getDropdownValue2(){
+    this.Id=2;
+   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+    this.Degree=res.data;
+    })
+    
+  }
+ 
   getAssetByCategoryID(itacCategoryId: any) {
     this.inventory
       .getAssetAssign(itacCategoryId)
@@ -176,32 +245,32 @@ export class AddEmployeeComponent implements OnInit {
       }
     });
   }
-  showField(){
-    this.showAddNewDropDownField = true;
-  }
-  pushValue(event:any){
+//   showField(){
+//     this.showAddNewDropDownField = true;
+//   }
+//   pushValue(event:any){
     
-   this.Designation.push({desName:event.value});
-    // this.Designation.desName=true
-    this.showAddNewDropDownField = false
-    var valueFilter = this.Designation.filter((t: any)=>t.desName ==event.value);
-var abc = valueFilter[0].desName;
+//    this.Designation.push({desName:event.value});
+//     // this.Designation.desName=true
+//     this.showAddNewDropDownField = false
+//     var valueFilter = this.Designation.filter((t: any)=>t.desName ==event.value);
+// var abc = valueFilter[0].desName;
    
-    let control = this.personalDetailsForm.controls[
-      'emsTblEmployeeProfessionalDetails'
-    ]['controls'][0]['controls'];
+//     let control = this.personalDetailsForm.controls[
+//       'emsTblEmployeeProfessionalDetails'
+//     ]['controls'][0]['controls'];
 
-    control['etepdDesignation'].setValue(
-      abc
-    );
-    // control.controls['etepdDesignation'].pushValue(abc);
-// 
-    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+//     control['etepdDesignation'].setValue(
+//       abc
+//     );
+//     // control.controls['etepdDesignation'].pushValue(abc);
+// // 
+//     // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+//     // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
     
     
    
-  }
+//   }
   onCreateAssign(){
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
@@ -223,7 +292,7 @@ var abc = valueFilter[0].desName;
       //    this.assetData.push(b);
       // });
       this.assetAssignDT = [];
-      debugger;
+   
       this.inventory.assetObj.forEach((elem: any, index: any) => {
         let assetAssignObj = elem;
 
@@ -257,7 +326,7 @@ var abc = valueFilter[0].desName;
   }
 
   addImsAssign(): void {
-    debugger
+    // debugger
     this.imsAssign = this.personalDetailsForm.get(
       'imsAssign'
     ) as FormArray;
@@ -461,9 +530,6 @@ var abc = valueFilter[0].desName;
     });
   }
   submitData() {
-    
-    debugger
-
     let form = this.personalDetailsForm.value;
     
     this.assetAssignDT.forEach((elem: any, index: any) => {

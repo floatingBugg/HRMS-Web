@@ -434,11 +434,22 @@
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Degree Title</mat-label>
                   <mat-select formControlName="etaqQualification" name="etaqQualification">
-                    <mat-option *ngFor="let deg of Degree" [value]="deg.degName">{{deg.degName}} </mat-option>
+                    <mat-option *ngFor="let deg of Degree" [value]="deg">{{deg}} </mat-option>
                   </mat-select>
+                 
                   <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
                     Degree Title is <strong>required</strong></mat-error>
                 </mat-form-field>
+                <div>
+                  <button  id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button color="primary">Add Degree</button>
+                </div>
+                <div *ngIf="showAddNewDropDownField">
+                <mat-form-field id="inputvalue" appearance="fill">
+                  <input matInput  placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"  (keyup.enter)="pushValue2($event.target)" >
+                </mat-form-field>
+                <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
+  
+                </div>
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Passing Year</mat-label>
                   <input type="text" pattern="\d*" maxlength="4" (keypress)="onlyNumbersAllowed($event)" matInput
@@ -460,6 +471,7 @@
                     Institute Name is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
+              
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="imageUrl[i]">
                   <img [src]="imageUrl[i]" class="Image">
@@ -497,7 +509,7 @@
                       name="etepdDesignation"> -->
                     <mat-label>Designation</mat-label>
                     <mat-select formControlName="etepdDesignation" name="etepdDesignation"  >
-                      <mat-option  *ngFor="let des of Designation" [value]="des.desName">{{des.desName}}</mat-option>
+                      <mat-option  *ngFor="let des of Designation" [value]="des">{{des}}</mat-option>
                     </mat-select>
                     
                     <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
