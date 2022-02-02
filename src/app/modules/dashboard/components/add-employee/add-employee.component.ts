@@ -16,6 +16,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 
 @Component({
@@ -80,20 +81,24 @@ export class AddEmployeeComponent implements OnInit {
   desName!: string;
   managerid:any;
   displayedColumns: string[] = ['DesName','degName'];
-  itacCategoryId=1;
   dasignationdDdlVal: any;
   hdvdegreeName: any;
-  Id: any;
-  displayedColumns1: string[] = [
+  Id:any;
+  displayedColumns1:string[]=[
     'assetid',
     'nameModel',
     'category',
     'quantity',
-    'actions',
+    'actions'
 
   ];
+  hide = true;
+  loading$ = this.loader.loading$;
   public assetData:any;
- ;
+  
+  
+  
+ 
   constructor(
     
     // private fb: FormBuilder,
@@ -104,7 +109,8 @@ export class AddEmployeeComponent implements OnInit {
     public dialog: MatDialog,
     private inventory: InventoryService,
     public route: ActivatedRoute,
-    public saveAssignedData:SaveAssignedDataService
+    public saveAssignedData:SaveAssignedDataService,
+    private loader: SpinnerService
    
   
   ) 
@@ -146,8 +152,9 @@ export class AddEmployeeComponent implements OnInit {
     //   {degName:'MPhil/MS'},
     //   {degName:'Ms Computer Science'},
     //   {degName:'Doctrate/PHD'},
-
     // ];
+    
+
   }
 
   ngOnInit() {
@@ -227,7 +234,7 @@ export class AddEmployeeComponent implements OnInit {
       .getAssetAssign(itacCategoryId)
       .subscribe((data: any) => {
       
-        this.assetData = new MatTableDataSource<AssetassignGrid>(data.data);
+        this.assetdata = new MatTableDataSource<AssetassignGrid>(data.data);
 
         this.saveAssignedData.assignedData['itaAssetName']= data.itaAssetName;
         console.log( 'hello',this.saveAssignedData.assignedData['itaAssetName'])
@@ -244,6 +251,9 @@ export class AddEmployeeComponent implements OnInit {
         });
       }
     });
+  }
+  itacCategoryId(itacCategoryId: any) {
+    throw new Error('Method not implemented.');
   }
 //   showField(){
 //     this.showAddNewDropDownField = true;
@@ -319,7 +329,7 @@ export class AddEmployeeComponent implements OnInit {
           ]['controls'][index].patchValue(imsAssign);
       })
       
-      this.assetData= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+      this.assetdata= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
       // this.addAssetAssignList().setValue(this.assetAssignDT);
       // this.addImsAssign();
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
@@ -350,6 +360,8 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   //////Academic Qualification/////////////
+  
+  
 
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({

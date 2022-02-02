@@ -79,7 +79,7 @@ createForm(){
     console.log(this.endDate);
     let start: any = new Date(this.startdate);
     let end: any = new Date(this.endDate);
-    this.diff = end - start;
+    this.diff = (end - start)  ;
     let msInDay = 1000 * 3600 * 24;
     this.noOfDays = this.diff / msInDay;
     console.log('new Date ', this.diff / msInDay);
@@ -92,7 +92,7 @@ createForm(){
   getDuration(index: any) {
     var years = Math.floor(this.noOfDays / 365);
     var months = Math.floor((this.noOfDays % 365) / 30);
-    var days = Math.floor((this.noOfDays % 365) % 30);
+    var days = Math.floor((this.noOfDays % 365) % 30) + 1;
 
     if (years == 0 && months == 0) {
       this.whDuration = String([days, ' days '].join(''));

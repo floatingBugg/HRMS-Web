@@ -82,7 +82,7 @@
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Role</mat-label>
-             <mat-select formControlName="etrethuroleid" name="etrethuroleid">
+              <mat-select formControlName="etrethuroleid" name="etrethuroleid">
                 <mat-option [value]=""> ---Select One---</mat-option>
                 <mat-option value="1">Super Admin</mat-option>
                 <mat-option value="2">Admin</mat-option>
@@ -91,15 +91,14 @@
               </mat-select>
               <mat-error *ngIf="personalDetailsForm.controls['etrethuroleid'].errors?.['required'] ">
                 Role is <strong>required</strong></mat-error>
-            </mat-form-field> 
+            </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Password</mat-label>
-              <input formControlName="ethupassword" name="ethupassword" matInput placeholder="Password"
-                maxlength="20">
+              <input formControlName="ethupassword" name="ethupassword" matInput placeholder="Password" maxlength="20">
               <mat-error *ngIf="personalDetailsForm.controls['ethupassword'].errors?.['required'] ">
                 Password is <strong>required</strong></mat-error>
             </mat-form-field>
-           
+
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
@@ -430,48 +429,61 @@
               *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
               {{setCurrentIndexAcademicQualification(i)}}
               <div [formGroupName]="i">
+
                 <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Degree Title</mat-label>
-                  <mat-select formControlName="etaqQualification" name="etaqQualification">
-                    <mat-option *ngFor="let deg of Degree" [value]="deg">{{deg}} </mat-option>
-                  </mat-select>
-                 
-                  <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
-                    Degree Title is <strong>required</strong></mat-error>
-                </mat-form-field>
-                <div>
-                  <button  id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button color="primary">Add Degree</button>
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <mat-form-field class="col-lg-12 col-md-12 input" style="width:520px">
+                      <mat-label>Degree Title</mat-label>
+                      <mat-select formControlName="etaqQualification" name="etaqQualification">
+                        <mat-option *ngFor="let deg of Degree" [value]="deg">{{deg}} </mat-option>
+                      </mat-select>
+
+                      <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
+                        Degree Title is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-lg-2 col-md-2 off-set-4">
+                    <div class="button2">
+                      <button id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
+                        color="primary">Add Degree</button>
+                    </div>
+                  </div>
                 </div>
+
+
                 <div *ngIf="showAddNewDropDownField">
-                <mat-form-field id="inputvalue" appearance="fill">
-                  <input matInput  placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"  (keyup.enter)="pushValue2($event.target)" >
-                </mat-form-field>
-                <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
-  
+                  <mat-form-field id="inputvalue" appearance="legacy" style="width:520px">
+                    <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
+                      (keyup.enter)="pushValue2($event.target)">
+                  </mat-form-field>
+                  <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
+
                 </div>
-                <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-form-field class="col-lg-5 col-md-5 input" style="width:520px">
                   <mat-label>Passing Year</mat-label>
                   <input type="text" pattern="\d*" maxlength="4" (keypress)="onlyNumbersAllowed($event)" matInput
                     placeholder="Passing Year" formControlName="etaqPassingYear">
                   <mat-error *ngIf="item.controls['etaqPassingYear'].errors?.['required']">
                     Passing Year is <strong>required</strong></mat-error>
                 </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Grade/CGPA</mat-label>
-                  <input type="number" min="0" value="0" step=0.00392156863 matInput placeholder="Grade/CGPA"
-                    formControlName="etaqCgpa">
-                  <mat-error *ngIf="item.controls['etaqCgpa'].errors?.['required']">
-                    CGPA/Grade is <strong>required</strong></mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-5 input">
+                <div>
+                  <mat-form-field class="col-lg-5 col-md-5 input" style="width:520px">
+                    <mat-label>Grade/CGPA</mat-label>
+                    <input type="number" min="0" value="0" step=0.00392156863 matInput placeholder="Grade/CGPA"
+                      formControlName="etaqCgpa">
+                    <mat-error *ngIf="item.controls['etaqCgpa'].errors?.['required']">
+                      CGPA/Grade is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                </div>
+                <mat-form-field class="col-lg-5 col-md-5 input" style="width:520px">
                   <mat-label>Institute Name</mat-label>
                   <input matInput placeholder="Institute Name" formControlName="etaqInstituteName">
                   <mat-error *ngIf="item.controls['etaqInstituteName'].errors?.['required']">
                     Institute Name is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
-              
+
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="imageUrl[i]">
                   <img [src]="imageUrl[i]" class="Image">
@@ -497,42 +509,54 @@
             </div>
           </div>
         </mat-step>
+
         <mat-step label="Professional Details">
           <div class="container">
             <div class="form-group">
               <div formArrayName="emsTblEmployeeProfessionalDetails"
                 *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
                 <div [formGroupName]="i">
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <!-- <mat-label>Designation</mat-label>
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <mat-form-field class="col-lg-12 col-md-12 input">
+                        <!-- <mat-label>Designation</mat-label>
                     <input matInput placeholder="Designation" formControlName="etepdDesignation"
                       name="etepdDesignation"> -->
-                    <mat-label>Designation</mat-label>
-                    <mat-select formControlName="etepdDesignation" name="etepdDesignation"  >
-                      <mat-option  *ngFor="let des of Designation" [value]="des">{{des}}</mat-option>
-                    </mat-select>
-                    
-                    <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
-                      Designation is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <div>
-                    <button  id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button color="primary">Add Designation</button>
+                        <mat-label>Designation</mat-label>
+                        <mat-select formControlName="etepdDesignation" name="etepdDesignation">
+                          <mat-option *ngFor="let des of Designation" [value]="des.desName">{{des.desName}}
+                          </mat-option>
+                        </mat-select>
+
+                        <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
+                          Designation is <strong>required</strong></mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="col-lg-2 col-md-2 off-set-4 ">
+                      <div class="button1">
+                        <button id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
+                          color="primary">Add Designation</button>
+                      </div>
+                    </div>
                   </div>
-                  <div *ngIf="showAddNewDropDownField">
-                  <mat-form-field id="inputvalue" appearance="fill">
-                    <input matInput  placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"  (keyup.enter)="pushValue($event.target)" >
-                  </mat-form-field>
-                  <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
+                  <div id="input1 inputss" *ngIf="showAddNewDropDownField">
+                    <mat-form-field id="inputvalue" appearance="legacy" style="width:608px">
+                      <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
+                        (keyup.enter)="pushValue($event.target)">
+                    </mat-form-field>
+                    <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
 
                   </div>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Salary</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
-                      matInput placeholder="Salary">
-                    <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
-                      Salary is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
+                  <div>
+                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                      <mat-label>Salary</mat-label>
+                      <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
+                        matInput placeholder="Salary">
+                      <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
+                        Salary is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                  </div>
+                  <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
                     <mat-label>Joining Date</mat-label>
                     <input readonly matInput formControlName="etepdJoiningDate" name="etepdJoiningDate"
                       [matDatepicker]="picker" (dateChange)="getJoiningDate(i)">
@@ -541,25 +565,22 @@
                     <mat-error *ngIf="item.controls['etepdJoiningDate'].errors?.['required']">
                       Joining Date is <strong>required</strong></mat-error>
                   </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Probation Period</mat-label>
-                    <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Probation</mat-label>
-                    <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
-                      formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
-                    <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
-                      Probation is <strong>required</strong></mat-error>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Manager ID</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedManagerId" name="etedManagerId"
-                      matInput placeholder="Manager ID">
-                  </mat-form-field>
+                  <div class="prob">
+                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                      <mat-label>Probation Period</mat-label>
+                      <input value="3" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
 
-                  <button mat-raised-button title="Assign Teamlead" color="primary" (click)="onCreate()" >Assign Teamlead</button>
-                  
+                    </mat-form-field>
+                    <div>
+                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                        <mat-label>Probation</mat-label>
+                        <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
+                          formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+                        <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
+                          Probation is <strong>required</strong></mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="row mt-3">
@@ -580,7 +601,7 @@
             </div>
           </div>
         </mat-step>
-        
+
         <mat-step label="Professional Qualification">
           <div class="form-group">
             <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
@@ -624,7 +645,7 @@
               </div>
               <div class="field col-12 md:col-6">
                 <div class="circle" *ngIf="profQualificationUrl[i]">
-                  <img  [src]="profQualificationUrl[i]" class="Image">
+                  <img [src]="profQualificationUrl[i]" class="Image">
                 </div>
                 <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
               </div>
@@ -641,9 +662,8 @@
                   [disabled]="isProfessionalQualificationDisabled()" matStepperNext>Next</button>
                 <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
                   matStepperPrevious>Back</button>
-                <button style="float: right;" class="setPositionRight4em"
-                   mat-raised-button type="submit" color="primary"
-                  (click)="submitData()">Save</button>
+                <button style="float: right;" class="setPositionRight4em" mat-raised-button type="submit"
+                  color="primary" (click)="submitData()">Save</button>
               </div>
             </div>
           </div>
@@ -667,6 +687,7 @@
                   <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
                     Designation is <strong>required</strong></mat-error>
                 </mat-form-field>
+
                 <mat-form-field class="col-lg-5 col-md-5 input">
                   <mat-label>Start date</mat-label>
                   <input formControlName="etwhStratDate" (dateChange)="compareDates(i)" matInput
@@ -716,43 +737,44 @@
         </mat-step>
         <mat-step label="Asset">
           <div class="form-group" formArrayName="imsAssetAssign">
-            
+
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" (click)="onCreateAssign()" >
+                <button type="button" class="btn btn-primary" (click)="onCreateAssign()">
                   Assign Asset
                 </button>
               </div>
-             
-    <table mat-table  [dataSource]="assetData" class="mat-elevation-z8" matSort>
-      <ng-container matColumnDef="assetid">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
-        <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>
-      </ng-container>
-      <ng-container matColumnDef="nameModel"> 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
-        <td mat-cell *matCellDef="let asset">{{asset.assetName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="quantity" >
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
-        <td mat-cell *matCellDef="let asset"> {{asset.itasQuantity}} </td>
-      </ng-container>   
-      <ng-container matColumnDef="category">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-        <td mat-cell *matCellDef="let asset"> {{asset.assetCatagoryName}} </td>
-      </ng-container>
-      <ng-container matColumnDef="actions">
-        <th mat-header-cell *matHeaderCellDef>Actions </th>
-        <td mat-cell *matCellDef="let asset">
-           
-          <button mat-raised-button title="Unassign Asset" (click)="unAssignAssetById(asset.itasItaAssetId)" color="primary" >Unassign</button>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-      <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
-    </table>
-          
+
+              <table mat-table [dataSource]="assetData" class="mat-elevation-z8" matSort>
+                <ng-container matColumnDef="assetid">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
+                  <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>
+                </ng-container>
+                <ng-container matColumnDef="nameModel">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
+                  <td mat-cell *matCellDef="let asset">{{asset.assetName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="quantity">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
+                  <td mat-cell *matCellDef="let asset"> {{asset.itasQuantity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="category">
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+                  <td mat-cell *matCellDef="let asset"> {{asset.assetCatagoryName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef>Actions </th>
+                  <td mat-cell *matCellDef="let asset">
+
+                    <button mat-raised-button title="Unassign Asset" (click)="unAssignAssetById(asset.itasItaAssetId)"
+                      color="primary">Unassign</button>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
+              </table>
+
             </div>
           </div>
         </mat-step>
@@ -764,4 +786,5 @@
         color="primary" (click)="submitData()">Save</button>
     </div>
   </div>
+
 </div>

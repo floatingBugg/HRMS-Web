@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
   providedIn: 'root',
 })
 export class PersonalDetailsService {
+  users1: any;
   constructor(private http: HttpClient) {}
   
   _userId = localStorage.getItem('loggedIn_UserId');
@@ -44,14 +45,10 @@ export class PersonalDetailsService {
   updateEmployeeData(data: any): Observable<any> {
     return this.http.post(this.apiUrl + '/Employee/UpdateEmployee', data);
   }
-
   addDropdownValue(data: any): Observable<any> {
-
-    return this.http.post(this.apiUrl + '/Dropdown/AddDropdownValue', data);
+   return this.http.post(this.apiUrl + "/Dropdown/AddDropdownValue", data);
   }
-
-  getDropdownValue(id: any): Observable<any> {
-
-    return this.http.get(this.apiUrl + `/Employee/GetEmployeeDesignationbyID?id=${id}` );
+  getDropdownValue(id:any): Observable<any> {
+   return this.http.get(this.apiUrl + `/Dropdown/GetEmployeeDesignationbyID?id=${id}`);
   }
 }

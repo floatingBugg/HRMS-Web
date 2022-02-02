@@ -18,7 +18,7 @@
         </mat-form-field>
         <mat-form-field class="login-full-width">
           <mat-label>Enter your password</mat-label>
-          <input #password matInput id="password" type="password" formControlName='password' name="password"
+          <input #password matInput  (keyup.enter)="loginUser()" id="password" type="password" formControlName='password' name="password"
             [type]="hide ? 'password' : 'text'" placeholder="Password">
           <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
             [attr.aria-pressed]="hide">
@@ -37,7 +37,7 @@
         </div>
         <div class="row mx-auto" style="justify-content: center;">
           <button id="submit-btn" mat-raised-button type="reset"
-            class="login-btn"  (click)="loginUser()" [disabled]="loginForm.invalid" color="primary">Login</button>
+            class="login-btn"  (click)="loginUser()"  [disabled]="loginForm.invalid" color="primary">Login</button>
         </div>
       </form>
     </div>

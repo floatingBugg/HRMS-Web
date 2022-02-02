@@ -52,6 +52,7 @@ export class LoginComponent implements OnInit {
       });
     }
   }
+  
 
   remember() {
     this.rememberMe = true;
