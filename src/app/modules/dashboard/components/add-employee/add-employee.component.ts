@@ -18,11 +18,11 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { SpinnerService } from 'src/app/services/spinner.service';
 
-
 @Component({
   selector: 'app-add-employee',
   templateUrl: './add-employee.component.html',
   styleUrls: ['./add-employee.component.scss'],
+  providers:[SpinnerService]
 })
 export class AddEmployeeComponent implements OnInit {
   public assetdata:any;
@@ -50,6 +50,7 @@ export class AddEmployeeComponent implements OnInit {
   startDate: any;
   day: any;
   showAddNewDropDownField:boolean=false;
+  assignleavestep:boolean=false;
   diff: any;
   profDetailsJoiningDate: any;
   noOfDays: any;
@@ -77,8 +78,8 @@ export class AddEmployeeComponent implements OnInit {
   isDisabled: boolean | undefined;
   Designation:any=[];
   Degree:any=[];
-  degName!:any;
-  desName!: string;
+  deg!:any;
+  des!: string;
   managerid:any;
   displayedColumns: string[] = ['DesName','degName'];
   dasignationdDdlVal: any;
@@ -170,11 +171,17 @@ export class AddEmployeeComponent implements OnInit {
   showField(){
     this.showAddNewDropDownField = true;
   }
+  leaveassign(){
+    this.assignleavestep=true;
+  }
+  leaveassign2(){
+    this.assignleavestep=false;
+  }
 
   pushValue(event:any){
     this.showAddNewDropDownField = false;
     this.dasignationdDdlVal= event.value;
-   
+  
     var obj  = {
       hdvHdDropdownId : 1,
       hdvValueName : this.dasignationdDdlVal,
@@ -189,18 +196,10 @@ export class AddEmployeeComponent implements OnInit {
     })
   }
 
-//     control['etepdDesignation'].setValue(
-//       abc
-//     );
-    // control.controls['etepdDesignation'].pushValue(abc);
-// 
-    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-    // debugger 
-  
   pushValue2(event:any){
     this.showAddNewDropDownField = false;
     this.hdvdegreeName= event.value;
+
     var obj  = {
       hdvHdDropdownId : 2,
       hdvValueName : this.hdvdegreeName,
@@ -214,6 +213,7 @@ export class AddEmployeeComponent implements OnInit {
       }
     })
   }
+  
   getDropdownValue(){
     this.Id=1;
    this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
@@ -337,7 +337,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addImsAssign(): void {
-    // debugger
+    
     this.imsAssign = this.personalDetailsForm.get(
       'imsAssign'
     ) as FormArray;

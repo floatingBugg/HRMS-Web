@@ -113,11 +113,11 @@
               <mat-label>Employment Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus">
                 <mat-option [value]="">---Select One---</mat-option>
-                <mat-option value="Active">Active</mat-option>
-                <mat-option value="Inactive">Inactive</mat-option>
-                <mat-option value="Probation">Probation</mat-option>
-                <mat-option value="Released">Released</mat-option>
-                <mat-option value="Resigned">Resigned</mat-option>
+                <mat-option (click)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option>
+                <mat-option (click)="leaveassign2()" value="Inactive">Inactive</mat-option>
+                <mat-option (click)="leaveassign2()" value="Probation">Probation</mat-option>
+                <mat-option (click)="leaveassign2()" value="Released">Released</mat-option>
+                <mat-option (click)="leaveassign2()" value="Resigned">Resigned</mat-option>
               </mat-select>
               <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
                 Employment Status is <strong>required</strong></mat-error>
@@ -428,6 +428,7 @@
             <div class="mt-5 container" formArrayName="emsTblAcademicQualification"
               *ngFor="let item of personalDetailsForm.get('emsTblAcademicQualification')['controls']; let i = index;">
               {{setCurrentIndexAcademicQualification(i)}}
+              
               <div [formGroupName]="i">
 
                 <p class="mb-3"><b>Academic Qualification: {{i+1}}</b></p>
@@ -454,11 +455,9 @@
 
                 <div *ngIf="showAddNewDropDownField">
                   <mat-form-field id="inputvalue" appearance="legacy" style="width:520px">
-                    <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
-                      (keyup.enter)="pushValue2($event.target)">
+                  <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}" (keyup.enter)="pushValue2($event.target)">
                   </mat-form-field>
                   <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
-
                 </div>
                 <mat-form-field class="col-lg-5 col-md-5 input" style="width:520px">
                   <mat-label>Passing Year</mat-label>
@@ -524,7 +523,7 @@
                       name="etepdDesignation"> -->
                         <mat-label>Designation</mat-label>
                         <mat-select formControlName="etepdDesignation" name="etepdDesignation">
-                          <mat-option *ngFor="let des of Designation" [value]="des.desName">{{des.desName}}
+                          <mat-option *ngFor="let des of Designation" [value]="des">{{des}}
                           </mat-option>
                         </mat-select>
 
@@ -777,14 +776,40 @@
 
             </div>
           </div>
+        </mat-step >
+        <div *ngIf="assignleavestep">
+        <mat-step label="Assign Leaves">
+          <mat-form-field style="width: 250px;" class="col-lg-5 col-md-5 input">
+            <mat-label>Start Date</mat-label>
+            <input formControlName="etwhStratDate"  matInput
+              [matDatepicker]="prevstartDate" readonly>
+            <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+            <mat-datepicker #prevstartDate></mat-datepicker>
+           </mat-form-field>
+          <!-- <mat-form-field class="col-lg-5 col-md-5 input">
+            <mat-label>Casual Leaves</mat-label>
+                  <input readonly  name="Casualleaves" placeholder="Casual leaves">
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-5 input">
+            <mat-label>Annual Leaves</mat-label>
+                  <input readonly  name="Anuualleaves" placeholder="Annual leaves">
+          </mat-form-field>
+          <mat-form-field class="col-lg-5 col-md-5 input">
+            <mat-label>Sick Leaves</mat-label>
+                  <input readonly  name="Sickleaves" placeholder="Sick leaves">
+          </mat-form-field> -->
         </mat-step>
+      </div>
       </form>
     </mat-vertical-stepper>
     <div class="text-align-right">
       <button class="setPositionRight5em" routerLink="../employee" mat-raised-button color="warn">Cancel</button>
-      <button class="setPositionRight4em" [disabled]="isProfessionalDetailsDisabled()" mat-raised-button type="submit"
+      <button class="setPositionRight4em" [disabled]="isProfessionalDetailsDisabled()" [disabled]="personalDetailsForm.invalid" mat-raised-button type="submit"
         color="primary" (click)="submitData()">Save</button>
     </div>
   </div>
-
 </div>
+<ng-container *ngIf="loading$ |async">
+  <div class="overlay"></div>
+  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
+</ng-container>

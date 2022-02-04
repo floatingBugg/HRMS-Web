@@ -64,6 +64,13 @@ export class EditEmployeeComponent implements OnInit {
   academicQualification: any;
   professionalQualification: any;
   workingHistory: any;
+  Degree:any;
+  dasignationdDdlVal:any;
+  hdvdegreeName:any;
+  Id:any;
+  des:any;
+  deg:any;
+  Designation:any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
 
@@ -77,6 +84,8 @@ export class EditEmployeeComponent implements OnInit {
     this.updateForm();
   }
   ngOnInit() {
+    this.getDropdownValue();
+    this.getDropdownValue2();
     this.id = this.route.snapshot.paramMap.get('id');
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
@@ -298,6 +307,55 @@ export class EditEmployeeComponent implements OnInit {
         }
       }
     });
+  }
+  pushValue(event:any){
+    this.dasignationdDdlVal= event.value;
+  
+    var obj  = {
+      hdvHdDropdownId : 1,
+      hdvValueName : this.dasignationdDdlVal,
+      // HdvCreatedBy:this.userId,
+      // HdvCreatedByName:this.userName,
+      
+    }
+    this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+      if(res.success == true){
+        this.getDropdownValue()
+      }
+    })
+  }
+
+  pushValue2(event:any){
+    this.hdvdegreeName= event.value;
+
+    var obj  = {
+      hdvHdDropdownId : 2,
+      hdvValueName : this.hdvdegreeName,
+      // HdvCreatedBy:this.userId,
+      // HdvCreatedByName:this.userName,
+      
+    }
+    this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+      if(res.success == true){
+        this.getDropdownValue2()
+      }
+    })
+  }
+  
+  getDropdownValue(){
+    
+    this.Id=1;
+   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+    this.Designation=res.data;
+    })
+    
+  }
+  getDropdownValue2(){
+    this.Id=2;
+   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+    this.Degree=res.data;
+    })
+    
   }
 
   ////////Academic Qualification/////////////
