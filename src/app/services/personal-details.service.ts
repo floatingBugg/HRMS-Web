@@ -49,6 +49,6 @@ export class PersonalDetailsService {
    return this.http.post(this.apiUrl + "/Dropdown/AddDropdownValue", data);
   }
   getDropdownValue(id:any): Observable<any> {
-   return this.http.get(this.apiUrl + `/Employee/GetEmployeeDesignationbyID?id=${id}`);
+   return this.http.get(this.apiUrl + `/Dropdown/GetEmployeeDesignationbyID?id=${id}`);
   }
 }

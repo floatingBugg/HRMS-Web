@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);
           localStorage.setItem('loggedIn_RoleId', result.data.roleId);
-          localStorage.setItem('loggedIn_empid',result.data.empid);
+          localStorage.setItem('loggedIn_empid',result.data.empid)
+
           console.log(result);
           // this.remember();
           this.router.navigate(['/home']);

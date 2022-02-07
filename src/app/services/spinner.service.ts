@@ -20,7 +20,7 @@ export class SpinnerService {
   // }
 
   // requestEnded(){
-  //   if(this.count === 0 || --this.count === 0 ){s
+  //   if(this.count === 0 || --this.count === 0 ){
   //     this.spinner$.next('stop')
   //   }
   // }
