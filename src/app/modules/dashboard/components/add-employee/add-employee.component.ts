@@ -826,11 +826,3 @@ export class AddEmployeeComponent implements OnInit {
 }
 
 
-function disable() {
-  throw new Error('Function not implemented.');
-}
-
-function enable() {
-  throw new Error('Function not implemented.');
-}
-

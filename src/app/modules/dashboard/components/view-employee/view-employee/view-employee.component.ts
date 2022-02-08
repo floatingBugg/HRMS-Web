@@ -4,6 +4,7 @@ import { PersonalDetailsService } from 'src/app/services/personal-details.servic
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
+import { InventoryService } from 'src/app/services/inventory.service';
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
@@ -30,6 +31,7 @@ export class ViewEmployeeComponent implements OnInit {
   public workHistoryName : any[] = [];
   public profQualName : any[] = [];
   public Acadname : any[] = [];
+  public assetData:any
   profilePicUrl: any;
   //////Emergency Contact /////
   public emergencyContact = [
@@ -95,7 +97,8 @@ export class ViewEmployeeComponent implements OnInit {
   constructor(
     public personalDetailService: PersonalDetailsService,
     public route: ActivatedRoute,
-    private permissionService: PermissionsService
+    private permissionService: PermissionsService,
+    public inventoryservice:InventoryService
   ) {
   }
 
@@ -112,7 +115,14 @@ getPermissions(){
   this._insert = permissions.insert;
   this._view = permissions.view;
 }
+// getEmployeeData() {
+//   this.inventoryservice.getAssetAssign(this.empid).subscribe( (data:any) => {
+//     this.assetData = new MatTableDataSource<employeeGrid>(data.data);
+//    // this.employeeData.sort = this.sort;
+//     this.assetData.paginator = this.paginator;
 
+//   });
+// }
   getEmployeeDataByID(rowId: any) {
     this.personalDetailService
       .viewEmployeeData(rowId)

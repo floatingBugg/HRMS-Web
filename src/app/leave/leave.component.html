@@ -27,35 +27,35 @@
 
   </div>
 <div  class = "table1" class="full-width-div">
-  <table mat-table  class="mat-elevation-z8" [dataSource]="dummydata">
+  <table mat-table  class="mat-elevation-z8" [dataSource]="employeeData">
     <ng-container matColumnDef="ID">
       <th width="10%"mat-header-cell *matHeaderCellDef>ID </th>
-      <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.ID}} </td>
+      <td width="10%" mat-cell *matCellDef="let employee"> {{employee.lmslrRecordId}} </td>
       <!-- <td width="10%" >1 </td> -->
     </ng-container>
     <ng-container matColumnDef="Name">
       <th width="10%" mat-header-cell *matHeaderCellDef>Name</th>
-      <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Name}} </td>
+      <td width="10%" mat-cell *matCellDef="let employee"> {{employee.lmslrEtedEmployeeName}} </td>
     </ng-container>
     <ng-container matColumnDef="Designation">
      <th width="10%" mat-header-cell *matHeaderCellDef>Designation</th>
-     <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Designation}} </td>
+     <td width="10%" mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
     </ng-container>
     <ng-container matColumnDef="Sick">
       <th width="10%" mat-header-cell *matHeaderCellDef>Sick</th>
-      <td  width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Sick}} </td>
+      <td  width="10%" mat-cell *matCellDef="let employee" ><b> {{employee.lmslrSickAssign}}</b>/{{employee.lmslrSickTaken}} </td>
     </ng-container>
     <ng-container matColumnDef="Casual">
       <th width="10%" mat-header-cell *matHeaderCellDef>Casual</th>
-      <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Casual}} </td>
+      <td width="10%" mat-cell *matCellDef="let employee"> <b> {{employee.lmslrCasualAssign}}</b>/{{employee.lmslrCasualTaken}}</td>
     </ng-container>
     <ng-container matColumnDef="Annual">
         <th width="10%" mat-header-cell *matHeaderCellDef>Annual </th>
-        <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Annual}} </td>
+        <td width="10%" mat-cell *matCellDef="let employee"> <b> {{employee.lmslrAnnualAssign}}</b>/{{employee.lmslrAnnualTaken}}</td>
       </ng-container>
       <ng-container matColumnDef="Total">
         <th width="10%" mat-header-cell *matHeaderCellDef>Total</th>
-        <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Total}} </td>
+        <td width="10%" mat-cell *matCellDef="let employee"> <b> {{employee.lmslrTotalAssign}}</b>/{{employee.lmslrTotalTaken}}</td>
       </ng-container>
       <ng-container matColumnDef="Action">
         <th width="10%" mat-header-cell *matHeaderCellDef>Action</th>

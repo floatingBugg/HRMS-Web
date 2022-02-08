@@ -1,9 +1,13 @@
 export interface employeeGrid{
-  empID: string;
-  fullName: string;
-  emailAddress: string;
-  contactNumber: string;
+  LmslrRecordId: string;
+  LmslrEtedEmployeeName: string;
   empDesignation: string;
-  empStatus:string;
-  manager:string;
+  LmslrCasualTaken:number;
+  LmslrAnnualTaken:number;
+  LmslrSickTaken:number;
+  LmslrTotalTaken:number;
+  LmslrCasualAssign:number;
+  LmslrAnnuaAssign:number;
+  LmslrSickAssign:number;
+  LmslrTotalAssign:number;
 }
