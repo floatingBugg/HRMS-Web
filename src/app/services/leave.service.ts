@@ -16,7 +16,7 @@ export class LeaveService {
 
 
   
-  getEmployeeLeaveData(roleid:any,empid:any,) {
-    return this.http.get(this.apiUrl + `/Leave/DisplayAllEmployeesbyRoles?roleid=${roleid}&empid=${empid}`);
+  getEmployeeLeaveData() {
+    return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord`);
   }
 }

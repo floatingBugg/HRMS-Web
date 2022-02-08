@@ -58,7 +58,7 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
  this.dialog.open(LeaveformComponent)
   }
   getEmployeeData() {
-    this.leave.getEmployeeLeaveData(this.roleid,this.empid).subscribe( (data:any) => {
+    this.leave.getEmployeeLeaveData().subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       
      // this.employeeData.sort = this.sort;

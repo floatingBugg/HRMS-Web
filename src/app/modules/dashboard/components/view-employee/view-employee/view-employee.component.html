@@ -224,6 +224,27 @@
           </div>
         </mat-step>
       </form>
+        <mat-step label="Asset">
+          <table mat-table   class="mat-elevation-z8" matSort>
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
+              <td mat-cell *matCellDef="">  </td>
+            </ng-container>
+            <ng-container matColumnDef=""> 
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
+              <td mat-cell *matCellDef=""> </td>
+            </ng-container>
+            <ng-container matColumnDef="" >
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
+              <td mat-cell *matCellDef="">  </td>
+            </ng-container>   
+            <ng-container matColumnDef="">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+              <td mat-cell *matCellDef="">  </td>
+            </ng-container>
+          </table>
+          </mat-step>
+      
     </mat-vertical-stepper>
     <div class="text-align-right marginBottom6em">
       <button class="setPositionRight5em" routerLink="./employee" mat-raised-button color="warn">Back</button>
