@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { LeaveformComponent } from '../leaveform/leaveform.component';
+import { LeaveService } from '../services/leave.service';
+import { PermissionsService } from '../services/permissionsService/permissions.service';
+import { employeeGrid } from '../_interfaces/employeeGrid';
 
 
 @Component({
@@ -9,6 +14,13 @@ import { LeaveformComponent } from '../leaveform/leaveform.component';
   styleUrls: ['./leave.component.scss']
 })
 export class LeaveComponent implements OnInit {
+  @ViewChild('employeeDataPage') paginator!: MatPaginator;
+
+
+  roleid = localStorage.getItem('loggedIn_RoleId');
+  empid=localStorage.getItem('loggedIn_empid');
+  userName = localStorage.getItem('loggedIn_UserName');
+  _roleId = localStorage.getItem('loggedIn_RoleId');
   ID!: any;
   Name!: string;
   Designation!:string;
@@ -18,11 +30,13 @@ export class LeaveComponent implements OnInit {
   Total!:string;
   Action!:any;
   dummydata:any=[];
+  public employeeData:any;
+  pageSizeOptions: number[] = [ 10, 25, 100];
 
   displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total','Action'];
   // dataSource :any;
 
-constructor(public dialog: MatDialog)
+constructor(public dialog: MatDialog,private leave:LeaveService,private permission:PermissionsService)
 {
   this.dummydata = [
     {ID: 1, Name: 'Hamza Ashiq', Designation: 'Internee', Sick: '2',Casual:'3',Annual:'18',Total:'5',Action:''},
@@ -36,11 +50,21 @@ constructor(public dialog: MatDialog)
 }
   ngOnInit(): void {
     // debugger
-this.dummydata = this.dummydata;
+    this.getEmployeeData();
+ this.dummydata = this.dummydata;
   }
   openDilog(){
     
  this.dialog.open(LeaveformComponent)
+  }
+  getEmployeeData() {
+    this.leave.getEmployeeLeaveData(this.roleid,this.empid).subscribe( (data:any) => {
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      
+     // this.employeeData.sort = this.sort;
+      this.employeeData.paginator = this.paginator;
+
+    });
   }
 
 }

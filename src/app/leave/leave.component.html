@@ -27,19 +27,19 @@
 
   </div>
 <div  class = "table1" class="full-width-div">
-  <table mat-table  class="mat-elevation-z8" [dataSource]="dummydata">
+  <table mat-table  class="mat-elevation-z8" [dataSource]="employeeData">
     <ng-container matColumnDef="ID">
       <th width="10%"mat-header-cell *matHeaderCellDef>ID </th>
-      <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.ID}} </td>
+      <td width="10%" mat-cell *matCellDef="let employee"> {{employee.empID}} </td>
       <!-- <td width="10%" >1 </td> -->
     </ng-container>
     <ng-container matColumnDef="Name">
       <th width="10%" mat-header-cell *matHeaderCellDef>Name</th>
-      <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Name}} </td>
+      <td width="10%" mat-cell *matCellDef="let employee"> {{employee.fullName}} </td>
     </ng-container>
     <ng-container matColumnDef="Designation">
      <th width="10%" mat-header-cell *matHeaderCellDef>Designation</th>
-     <td width="10%" mat-cell *matCellDef="let dummydata"> {{dummydata.Designation}} </td>
+     <td width="10%" mat-cell *matCellDef="let employee"> {{employee.empDesignation}} </td>
     </ng-container>
     <ng-container matColumnDef="Sick">
       <th width="10%" mat-header-cell *matHeaderCellDef>Sick</th>
