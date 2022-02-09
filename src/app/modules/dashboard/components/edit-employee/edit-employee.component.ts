@@ -161,6 +161,7 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etedReligion'].setValue(
           oneEmployeeData.etedReligion
         );
+       
 
         ///////Professional Details//////
         this.professionalDetails =
@@ -183,6 +184,9 @@ export class EditEmployeeComponent implements OnInit {
         );
         controlProfessionalDetails['etepdProbation'].setValue(
           this.professionalDetails[0]['etepdProbation']
+        );
+        controlProfessionalDetails['etedManagerId'].setValue(
+          this.professionalDetails[0]['etedManagerId']
         );
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
