@@ -436,7 +436,7 @@
                     <mat-form-field class="col-lg-12 col-md-12 input" style="width:520px">
                       <mat-label>Degree Title</mat-label>
                       <mat-select formControlName="etaqQualification" name="etaqQualification">
-                        <mat-option *ngFor="let deg of Degree" [value]="deg">{{deg}} </mat-option>
+                        <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}} </mat-option>
                       </mat-select>
 
                       <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
@@ -455,7 +455,7 @@
                 <div *ngIf="showAddNewDropDownField">
                   <mat-form-field id="inputvalue" appearance="legacy" style="width:520px">
                     <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
-                      (keyup.enter)="pushValue2($event.target)">
+                      (keyup.enter)="pushValue($event.target,2)">
                   </mat-form-field>
                   <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
 
@@ -524,7 +524,7 @@
                       name="etepdDesignation"> -->
                         <mat-label>Designation</mat-label>
                         <mat-select formControlName="etepdDesignation" name="etepdDesignation">
-                          <mat-option *ngFor="let des of Designation" [value]="des">{{des}}
+                          <mat-option *ngFor="let des of value" [value]="des">{{des}}
                           </mat-option>
                         </mat-select>
 
@@ -542,7 +542,7 @@
                   <div id="input1 inputss" *ngIf="showAddNewDropDownField">
                     <mat-form-field id="inputvalue" appearance="legacy" style="width:608px">
                       <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
-                        (keyup.enter)="pushValue($event.target)">
+                        (keyup.enter)="pushValue($event.target,1)">
                     </mat-form-field>
                     <!-- <button  id="addvalue" (click)="pushValue()" ng-init="addvalue= true" mat-raised-button color="primary"> $event.taget.value Add Value</button> -->
 

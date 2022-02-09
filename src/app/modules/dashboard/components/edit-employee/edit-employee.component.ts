@@ -7,6 +7,10 @@ import { AddEmployeeFailureDialogComponent } from '../add-employee/add-employee-
 import { SuccessDialogComponent } from '../add-employee/success-dialog/success-dialog.component';
 import { saveAs } from 'file-saver';
 import { AssignManagerComponent } from '../assign-manager/assign-manager.component';
+import { InventoryService } from 'src/app/services/inventory.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-edit-employee',
@@ -78,19 +82,30 @@ export class EditEmployeeComponent implements OnInit {
   workingHistory: any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
+  displayedColumns1:string[]=[
+    'assetid',
+    'nameModel',
+    'category',
+    'quantity',
+    'actions'
+
+  ];
   
+  assetData:any
 
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
     public route: ActivatedRoute,
     private fb: FormBuilder,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public inventoryservice:InventoryService
   ) {
     this.updateForm();
   }
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
+    this.getEmployeeAsset(this.id);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
         let oneEmployeeData = data.data[0];
@@ -823,6 +838,16 @@ export class EditEmployeeComponent implements OnInit {
       };
     }
   }
+  getEmployeeAsset(empID:any){
+    this.inventoryservice.getAllAssetbyEmpID(empID)
+    .subscribe((data:any)=>{
+      if (data.success) {
+         this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
+      }
+    });
+  }
+
+
 DownloadFile(path:any){
 saveAs(path)
 }
