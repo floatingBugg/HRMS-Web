@@ -223,6 +223,7 @@ export class AddEmployeeComponent implements OnInit {
     })
   }
   getDropdownValue(){
+    debugger
     this.Id=1;
    this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
     this.Designation=res.data;
@@ -230,6 +231,7 @@ export class AddEmployeeComponent implements OnInit {
     
   }
   getDropdownValue2(){
+    
     this.Id=2;
    this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
     this.Degree=res.data;
