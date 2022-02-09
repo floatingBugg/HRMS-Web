@@ -83,6 +83,8 @@ export class AddEmployeeComponent implements OnInit {
   displayedColumns: string[] = ['DesName','degName'];
   dasignationdDdlVal: any;
   hdvdegreeName: any;
+  value:any;
+  value1:any;
   Id:any;
   displayedColumns1:string[]=[
     'assetid',
@@ -164,8 +166,8 @@ export class AddEmployeeComponent implements OnInit {
       users: this.fb.array([])
     })
     this.createForm();
-    this.getDropdownValue();
-    this.getDropdownValue2();
+    this.getDropdownValue(1);
+    this.getDropdownValue(2);
   }
   leaveassign(event:any){  
     console.log(event); 
@@ -179,12 +181,12 @@ export class AddEmployeeComponent implements OnInit {
     this.showAddNewDropDownField = true;
   }
 
-  pushValue(event:any){
+  pushValue(event:any,dropdownid:number){
     this.showAddNewDropDownField = false;
     this.dasignationdDdlVal= event.value;
    
     var obj  = {
-      hdvHdDropdownId : 1,
+      hdvHdDropdownId : dropdownid,
       hdvValueName : this.dasignationdDdlVal,
       // HdvCreatedBy:this.userId,
       // HdvCreatedByName:this.userName,
@@ -192,7 +194,7 @@ export class AddEmployeeComponent implements OnInit {
     }
     this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
       if(res.success == true){
-        this.getDropdownValue()
+        this.getDropdownValue(dropdownid);
       }
     })
   }
@@ -206,37 +208,18 @@ export class AddEmployeeComponent implements OnInit {
     // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
     // debugger 
   
-  pushValue2(event:any){
-    this.showAddNewDropDownField = false;
-    this.hdvdegreeName= event.value;
-    var obj  = {
-      hdvHdDropdownId : 2,
-      hdvValueName : this.hdvdegreeName,
-      // HdvCreatedBy:this.userId,
-      // HdvCreatedByName:this.userName,
-      
-    }
-    this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
-      if(res.success == true){
-        this.getDropdownValue2()
-      }
+  getDropdownValue(id:number){
+    this.Id=id;
+    if(this.Id==1){
+   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+    this.value=res.data;
     })
   }
-  getDropdownValue(){
-    debugger
-    this.Id=1;
-   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-    this.Designation=res.data;
-    })
-    
-  }
-  getDropdownValue2(){
-    
-    this.Id=2;
-   this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-    this.Degree=res.data;
-    })
-    
+   else if(this.Id==2){
+    this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+      this.value1=res.data;
+      })
+   } 
   }
  
   getAssetByCategoryID(itacCategoryId: any) {
