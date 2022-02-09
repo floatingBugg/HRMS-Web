@@ -438,21 +438,7 @@
                     <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
                       <mat-label>Degree Title</mat-label>
                       <mat-select formControlName="etaqQualification" name="etaqQualification">
-                        <mat-option [value]=""> ---Select One---</mat-option>
-                        <mat-option value="Matriculation/O-Levels">Matriculation/O-Levels</mat-option>
-                        <mat-option value="Intermediate/A-Levels">Intermediate/A-Levels</mat-option>
-                        <mat-option value="Bachelors">Bachelors</mat-option>
-                        <mat-option value="BS Software Engineering">BS Software Engineering</mat-option>
-                        <mat-option value="BS Computer Science">BS Computer Science</mat-option>
-                        <mat-option value="Doctorate">BS Information Technology</mat-option>
-                        <mat-option value="BS Business Administration">BS Business Administration</mat-option>
-                        <mat-option value="Masters">Masters/MSc</mat-option>
-                        <mat-option value="MS Software Engineering">MS Software Engineering</mat-option>
-                        <mat-option value="MS Computer Science">MS Computer Science</mat-option>
-                        <mat-option value="MS Information Technology">MS Information Technology</mat-option>
-                        <mat-option value="MS Business Administration">MS Business Administration</mat-option>
-                        <mat-option value="MS/Mphil">MS/Mphil</mat-option>
-                        <mat-option value="Doctorate">Doctorate/PHD</mat-option>
+                        <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}} </mat-option>
                       </mat-select>
                       <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
                         Degree Title is <strong>required</strong></mat-error>
@@ -468,7 +454,7 @@
                 <div *ngIf="showAddNewDropDownField">
                   <mat-form-field id="inputvalue" appearance="legacy" style="width:620px">
                     <input matInput placeholder="Enter Degree here" ngModel [ngModelOptions]="{standalone: true}"
-                      (keyup.enter)="pushValue2($event.target)">
+                    (keyup.enter)="pushValue($event.target,2)">
                   </mat-form-field>
                 </div>
                 <mat-form-field class="col-lg-5 col-md-5 input">
@@ -530,23 +516,8 @@
                       <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
                         <mat-label>Designation</mat-label>
                         <mat-select formControlName="etepdDesignation" name="etepdDesignation">
-                          <mat-option [value]=""> ---Select One---</mat-option>
-                          <mat-option value="HR manager">HR (Manager)</mat-option>
-                          <mat-option value="HR officer">HR (Officer)</mat-option>
-                          <mat-option value="Sr. Software Engineer">Sr. Software Engineer</mat-option>
-                          <mat-option value="Jr. Software Engineer">Jr. Software Engineer</mat-option>
-                          <mat-option value="SQA Engineer Intern">SQA Engineer Intern</mat-option>
-                          <mat-option value="Angular Intern">Angular Intern</mat-option>
-                          <mat-option value=".Net Intern">.Net Intern</mat-option>
-                          <mat-option value="Sr. SQA Engineer">Sr. SQA Engineer</mat-option>
-                          <mat-option value="Jr. SQA Engineer">Jr. SQA Engineer</mat-option>
-                          <mat-option value="Project Manager">Project Manager</mat-option>
-                          <mat-option value="System Administrator">System Administrator</mat-option>
-                          <mat-option value="Database Developer">Database Developer</mat-option>
-                          <mat-option value="Receptionist">Receptionist</mat-option>
-                          <mat-option value="Accountant">Accountant</mat-option>
-                          <mat-option value="Office Boy">Office Boy</mat-option>
-                          <mat-option value="Guard">Guard</mat-option>
+                          <mat-option *ngFor="let des of value" [value]="des">{{des}}
+                          </mat-option>
                         </mat-select>
                         <mat-error *ngIf="item.controls['etepdDesignation'].errors?.['required']">
                           Designation is <strong>required</strong></mat-error>
@@ -562,7 +533,7 @@
                   <div *ngIf="showAddNewDropDownField">
                     <mat-form-field id="inputvalue" appearance="legacy" style="width:620px">
                       <input matInput placeholder="Enter Designation here" ngModel [ngModelOptions]="{standalone: true}"
-                        (keyup.enter)="pushValue2($event.target)">
+                      (keyup.enter)="pushValue($event.target,1)">
                     </mat-form-field>
                   </div>
                   <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
