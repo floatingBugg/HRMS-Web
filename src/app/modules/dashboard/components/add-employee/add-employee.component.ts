@@ -292,6 +292,7 @@ export class AddEmployeeComponent implements OnInit {
    
 //   }
   onCreateAssign(){
+    
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
@@ -305,6 +306,7 @@ export class AddEmployeeComponent implements OnInit {
 
   tempTable()
   {
+    debugger
     let a =0;
       
       // this.inventory.assetObj.map((ItasQuantity ,a )=>{

@@ -48,6 +48,7 @@ assigndate:any;
 
   onCreate(asset: any)
   {
+    
     this.inventory._assetObj[this.inventory.assetObj.length] = asset;  
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
