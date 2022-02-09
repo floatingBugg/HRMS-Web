@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { AddEmployeeFailureDialogComponent } from '../add-employee/add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { SuccessDialogComponent } from '../add-employee/success-dialog/success-dialog.component';
 import { saveAs } from 'file-saver';
+import { AssignManagerComponent } from '../assign-manager/assign-manager.component';
 
 @Component({
   selector: 'app-edit-employee',
@@ -53,6 +54,15 @@ export class EditEmployeeComponent implements OnInit {
   workingHistoryName: any[] = [];
   profilePicUrl: any;
   isFileChanged!: boolean;
+  Designation:any=[];
+  Degree:any=[];
+  degName!:any;
+  desName!: string;
+  managerid:any;
+  displayedColumns: string[] = ['DesName','degName'];
+  dasignationdDdlVal: any;
+  hdvdegreeName: any;
+  Id:any;
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
@@ -63,9 +73,12 @@ export class EditEmployeeComponent implements OnInit {
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
+  assignleavestep:boolean=false;
+  showAddNewDropDownField:boolean=false;
   workingHistory: any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
+  
 
   constructor(
     public empDataService: PersonalDetailsService,
@@ -299,6 +312,99 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
+  Assignleave(event:any){  
+  console.log(event); 
+  if(event.value == 'Active'){
+   this.assignleavestep=true; 
+  }
+   else{ 
+     this.assignleavestep=false; }
+     }
+     showField(){
+      this.showAddNewDropDownField = true;
+    }
+  
+    pushValue(event:any){
+      this.showAddNewDropDownField = false;
+      this.dasignationdDdlVal= event.value;
+     
+      var obj  = {
+        hdvHdDropdownId : 1,
+        hdvValueName : this.dasignationdDdlVal,
+        // HdvCreatedBy:this.userId,
+        // HdvCreatedByName:this.userName,
+        
+      }
+      this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+        if(res.success == true){
+          this.getDropdownValue()
+        }
+      })
+    }
+  
+  //     control['etepdDesignation'].setValue(
+  //       abc
+  //     );
+      // control.controls['etepdDesignation'].pushValue(abc);
+  // 
+      // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+      // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+      // debugger 
+    
+    pushValue2(event:any){
+      this.showAddNewDropDownField = false;
+      this.hdvdegreeName= event.value;
+      var obj  = {
+        hdvHdDropdownId : 2,
+        hdvValueName : this.hdvdegreeName,
+        // HdvCreatedBy:this.userId,
+        // HdvCreatedByName:this.userName,
+        
+      }
+      this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
+        if(res.success == true){
+          this.getDropdownValue2()
+        }
+      })
+    }
+    getDropdownValue(){
+      this.Id=1;
+     this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+      this.Designation=res.data;
+      })
+      
+    }
+    getDropdownValue2(){
+      this.Id=2;
+     this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+      this.Degree=res.data;
+      })
+      
+    }
+    onCreate(){
+      const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.width = "80%"
+        this.dialog.open(AssignManagerComponent);
+  
+       this.dialog.afterAllClosed.subscribe((res: any) => {
+         this.getmanagerid();
+       })
+    }
+  
+    getmanagerid(){
+        this.managerid= this.personaldetails.managerId;
+        let controlProfessionalDetails =
+            this.personalDetailsForm.controls[
+              'emsTblEmployeeProfessionalDetails'
+            ]['controls'][0]['controls'];
+            controlProfessionalDetails['etedManagerId'].setValue(
+              this.managerid
+            );
+          this.personalDetailsForm.controls['etedManagerId'].setValue(this.managerid);
+        //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
+    }
 
   ////////Academic Qualification/////////////
 

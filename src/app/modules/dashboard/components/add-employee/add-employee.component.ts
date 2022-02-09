@@ -95,6 +95,7 @@ export class AddEmployeeComponent implements OnInit {
   hide = true;
   loading$ = this.loader.loading$;
   public assetData:any;
+  assignleavestep:boolean=false;
   
   
   
@@ -166,6 +167,13 @@ export class AddEmployeeComponent implements OnInit {
     this.getDropdownValue();
     this.getDropdownValue2();
   }
+  leaveassign(event:any){  
+    console.log(event); 
+    if(event.value == 'Active'){
+     this.assignleavestep=true; }
+     else{ 
+       this.assignleavestep=false; }
+       }
 
   showField(){
     this.showAddNewDropDownField = true;
