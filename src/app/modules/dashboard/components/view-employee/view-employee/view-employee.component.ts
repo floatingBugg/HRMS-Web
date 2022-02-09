@@ -99,7 +99,7 @@ export class ViewEmployeeComponent implements OnInit {
     'nameModel',
     'category',
     'quantity',
-    'actions'
+  
 
   ];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
@@ -138,6 +138,7 @@ getPermissions(){
 //   });
 // }
 getEmployeeAsset(empID:any){
+  debugger
   this.inventoryservice.getAllAssetbyEmpID(empID)
   .subscribe((data:any)=>{
     if (data.success) {
