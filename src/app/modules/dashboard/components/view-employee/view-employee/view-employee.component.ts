@@ -1,10 +1,15 @@
 import { EmployeeDataService } from '../../../../../services/employee-data.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { ActivatedRoute } from '@angular/router';
 import { saveAs } from 'file-saver';
 import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 import { InventoryService } from 'src/app/services/inventory.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { MatSort } from '@angular/material/sort';
+
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
@@ -89,7 +94,15 @@ export class ViewEmployeeComponent implements OnInit {
     },
   ];
   rowId: any;
+  displayedColumns1:string[]=[
+    'assetid',
+    'nameModel',
+    'category',
+    'quantity',
+    'actions'
 
+  ];
+  @ViewChild(MatSort, {static: false}) sort!: MatSort;
   _update:boolean=false
   _delete:boolean=false
   _insert:boolean=false
@@ -106,6 +119,7 @@ export class ViewEmployeeComponent implements OnInit {
     this.rowId = this.route.snapshot.paramMap.get('id');
     this.getEmployeeDataByID(this.rowId);
    this.getPermissions();
+   this.getEmployeeAsset(this.rowId);
 
   }
 getPermissions(){
@@ -123,6 +137,15 @@ getPermissions(){
 
 //   });
 // }
+getEmployeeAsset(empID:any){
+  this.inventoryservice.getAllAssetbyEmpID(empID)
+  .subscribe((data:any)=>{
+    if (data.success) {
+       this.assetData=new MatTableDataSource<InventoryGrid>(data.data);;
+    }
+  });
+}
+
   getEmployeeDataByID(rowId: any) {
     this.personalDetailService
       .viewEmployeeData(rowId)

@@ -5,8 +5,11 @@ export interface InventoryGrid {
     itasQuantity:any,
     itasAssignedDate:any,
     itasItaAssetId:any,
-    assetName:any,
-   
+
+    assingedDate:any,
+    assetname:any,
+    categoryname:any,
+    assignid:number,
     assetid:number,
     name:string,
     quantity:any,
