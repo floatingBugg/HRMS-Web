@@ -289,12 +289,6 @@ export class AddEmployeeComponent implements OnInit {
 
   tempTable()
   {
-    let a =0;
-      
-      // this.inventory.assetObj.map((ItasQuantity ,a )=>{
-      //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
-      //    this.assetData.push(b);
-      // });
       this.assetAssignDT = [];
    
       this.inventory.assetObj.forEach((elem: any, index: any) => {

@@ -90,7 +90,8 @@ export class EditEmployeeComponent implements OnInit {
     'actions'
 
   ];
-  
+  value:any;
+  value1:any;
   assetData:any
 
   constructor(
@@ -106,6 +107,8 @@ export class EditEmployeeComponent implements OnInit {
   ngOnInit() {
     this.id = this.route.snapshot.paramMap.get('id');
     this.getEmployeeAsset(this.id);
+    this.getDropdownValue(1);
+    this.getDropdownValue(2);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
         let oneEmployeeData = data.data[0];
@@ -339,12 +342,12 @@ export class EditEmployeeComponent implements OnInit {
       this.showAddNewDropDownField = true;
     }
   
-    pushValue(event:any){
+    pushValue(event:any,dropdownid:number){
       this.showAddNewDropDownField = false;
       this.dasignationdDdlVal= event.value;
      
       var obj  = {
-        hdvHdDropdownId : 1,
+        hdvHdDropdownId : dropdownid,
         hdvValueName : this.dasignationdDdlVal,
         // HdvCreatedBy:this.userId,
         // HdvCreatedByName:this.userName,
@@ -352,7 +355,7 @@ export class EditEmployeeComponent implements OnInit {
       }
       this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
         if(res.success == true){
-          this.getDropdownValue()
+          this.getDropdownValue(dropdownid);
         }
       })
     }
@@ -366,37 +369,23 @@ export class EditEmployeeComponent implements OnInit {
       // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
       // debugger 
     
-    pushValue2(event:any){
-      this.showAddNewDropDownField = false;
-      this.hdvdegreeName= event.value;
-      var obj  = {
-        hdvHdDropdownId : 2,
-        hdvValueName : this.hdvdegreeName,
-        // HdvCreatedBy:this.userId,
-        // HdvCreatedByName:this.userName,
-        
-      }
-      this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
-        if(res.success == true){
-          this.getDropdownValue2()
-        }
-      })
-    }
-    getDropdownValue(){
-      this.Id=1;
+    getDropdownValue(id:number){
+      this.Id=id;
+      if(this.Id==1){
      this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-      this.Designation=res.data;
+      this.value=res.data;
       })
-      
     }
-    getDropdownValue2(){
-      this.Id=2;
-     this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-      this.Degree=res.data;
-      })
-      
+     else if(this.Id==2){
+      this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
+        this.value1=res.data;
+        })
+     } 
     }
-    onCreate(){
+
+
+
+     onCreate(){
       const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
