@@ -289,7 +289,6 @@ export class AddEmployeeComponent implements OnInit {
 
   tempTable()
   {
-    debugger
     let a =0;
       
       // this.inventory.assetObj.map((ItasQuantity ,a )=>{
@@ -325,6 +324,7 @@ export class AddEmployeeComponent implements OnInit {
       })
       
       this.assetdata= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+      
       // this.addAssetAssignList().setValue(this.assetAssignDT);
       // this.addImsAssign();
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
@@ -332,7 +332,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addImsAssign(): void {
-    // debugger
+
     this.imsAssign = this.personalDetailsForm.get(
       'imsAssign'
     ) as FormArray;

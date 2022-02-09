@@ -63,7 +63,6 @@ export class AssignQuantityComponent implements OnInit {
   }
 
   submitData() {
-    debugger
     console.log(this.assignForm.value);
     this.inventory._assignObj[this.inventory.assetObj.length-1] = this.assignForm.value;
     this.dialog.closeAll();

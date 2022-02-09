@@ -141,6 +141,7 @@ getEmployeeAsset(empID:any){
   debugger
   this.inventoryservice.getAllAssetbyEmpID(empID)
   .subscribe((data:any)=>{
+    debugger;
     if (data.success) {
        this.assetData=new MatTableDataSource<InventoryGrid>(data.data);;
     }
