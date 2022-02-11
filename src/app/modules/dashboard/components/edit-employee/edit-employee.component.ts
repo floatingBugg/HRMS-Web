@@ -14,7 +14,7 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-edit-employee',
+  selector: 'apFp-edit-employee',
   templateUrl: './edit-employee.component.html',
   styleUrls: ['./edit-employee.component.scss'],
 })
