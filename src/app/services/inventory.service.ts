@@ -90,5 +90,9 @@ export class InventoryService {
     return this.http.get(this.apiUrl + `/Asset/GetAssetbyID?empid=${empid}`);
   }
 
+  getAllAssetAssingedbyEmpID(empid:any):  Observable<any> {
+    
+    return this.http.get(this.apiUrl + `/Asset/GetAssetbyEmpID?empid=${empid}`);
+  }
 
 }
