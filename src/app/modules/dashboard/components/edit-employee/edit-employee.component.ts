@@ -110,7 +110,6 @@ export class EditEmployeeComponent implements OnInit {
   value: any;
   value1: any;
   assetEditData: any;
-
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -868,6 +867,7 @@ export class EditEmployeeComponent implements OnInit {
     this.inventory.getAllAssetAssingedbyEmpID(empID).subscribe((data: any) => {
       if (data.success) {
         this.assetEditData = data.data;
+        this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetEditData);
       }
     });
   }
@@ -885,34 +885,32 @@ export class EditEmployeeComponent implements OnInit {
 
   tempTable() {
     this.assetAssignDT = [];
-    debugger;
     this.assetAssignDT = this.assetEditData;
     this.inventory.assetObj.forEach((elem: any, index: any) => {
-      let assetAssignObj = elem;
+      this.assetAssignObj = elem;
 
-      assetAssignObj.itasItaAssetId = elem.assetid;
-      assetAssignObj.assetName = elem.assetname;
-      assetAssignObj.itasItacCategoryId = elem.categoryid;
-      assetAssignObj.assetCatagoryName = elem.category;
-      assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
-      assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+      this.assetAssignObj.itasItaAssetId = elem.assetid;
+      this.assetAssignObj.assetName = elem.assetname;
+      this.assetAssignObj.itasItacCategoryId = elem.categoryid;
+      this.assetAssignObj.assetCatagoryName = elem.category;
+      this.assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
+      this.assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
       //assetAssignObj.itasCreatedBy =
-
-      this.assetAssignDT =this.assetAssignObj;
 
       let imsAssign = (this.personalDetailsForm.controls['imsAssign'][
         'controls'
       ][index] = this.addAssetAssignList());
 
       imsAssign.controls['itasItaAssetId'].setValue(
-        assetAssignObj.itasItaAssetId
+        this.assetAssignObj.itasItaAssetId
       );
-      imsAssign.controls['assetName'].setValue(assetAssignObj.assetName);
+      imsAssign.controls['assetName'].setValue(this.assetAssignObj.assetName);
 
       this.personalDetailsForm.controls['imsAssign']['controls'][
         index
       ].patchValue(imsAssign);
     });
+    this.assetAssignDT.push(this.assetAssignObj);
     this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
 
     // this.addAssetAssignList().setValue(this.assetAssignDT);
