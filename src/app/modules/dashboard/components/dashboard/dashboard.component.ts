@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/services/login.service';
 import { inject } from '@angular/core/testing';
 import { Location } from '@angular/common';
 import { BaseCdkCell } from '@angular/cdk/table';
+import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,10 +13,18 @@ import { BaseCdkCell } from '@angular/cdk/table';
 })
 export class DashboardComponent implements OnInit {
   router: any;
-  constructor(  private location:Location , public spinnerService: SpinnerService, public loginService: LoginService) {
+  constructor(  private location:Location , public spinnerService: SpinnerService, public loginService: LoginService,private permissionService: PermissionsService) {
     // inject Location 
    }
+   roleid = localStorage.getItem('loggedIn_RoleId');
+   empid=localStorage.getItem('loggedIn_empid');
+   userName = localStorage.getItem('loggedIn_UserName');
 
+   _update:boolean=false
+   _delete:boolean=false
+   _insert:boolean=false
+   _view:boolean=false
+   _employeeView:boolean=false
   ngOnInit(): void {
   }
   logout(){
@@ -27,4 +36,5 @@ export class DashboardComponent implements OnInit {
 // goForward() {
 //   this.location.forward();
 // }
+
 }
