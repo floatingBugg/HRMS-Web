@@ -94,7 +94,7 @@ getAssignedData(){
   }
  
   onCreate(assetId: number){
-    debugger
+  
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
