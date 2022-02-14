@@ -364,15 +364,6 @@ export class EditEmployeeComponent implements OnInit {
       })
     }
   
-  //     control['etepdDesignation'].setValue(
-  //       abc
-  //     );
-      // control.controls['etepdDesignation'].pushValue(abc);
-  // 
-      // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-      // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-      // debugger 
-    
     getDropdownValue(id:number){
       this.Id=id;
       if(this.Id==1){
@@ -386,6 +377,15 @@ export class EditEmployeeComponent implements OnInit {
         })
      } 
     }
+  //     control['etepdDesignation'].setValue(
+  //       abc
+  //     );
+      // control.controls['etepdDesignation'].pushValue(abc);
+  // 
+      // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+      // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+      // debugger 
+    
 
 
 
