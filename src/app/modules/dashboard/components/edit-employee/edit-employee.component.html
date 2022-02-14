@@ -732,11 +732,11 @@
         </mat-step>
 
         <mat-step label="Asset">
-          <div class="form-group" formArrayName="imsAssetAssign">
+          <div class="form-group" formArrayName="imsAssign">
 
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" >
+                <button type="button" class="btn btn-primary" (click)="onCreateAssign()" >
                   Assign Asset
                 </button>
               </div>
