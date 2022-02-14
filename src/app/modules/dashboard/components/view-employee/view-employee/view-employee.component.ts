@@ -32,6 +32,9 @@ export class ViewEmployeeComponent implements OnInit {
   public bloodGroup: any;
   public religion: any;
   public nationality: any;
+  public password: any;
+  public roleid: any;
+  public role: any;
   public apiURL = this.personalDetailService.apiUrl;
   public workHistoryName : any[] = [];
   public profQualName : any[] = [];
@@ -151,6 +154,26 @@ getEmployeeAsset(empID:any){
       .viewEmployeeData(rowId)
       .subscribe((data: any) => {
         if (data.success) {
+          let userdata =data.data2;
+          this.password=userdata[0].ethuPassword
+          this.roleid=userdata[0].etrEthuRoleId
+          if(this.roleid==1)
+          {
+             this.role="Super-Admin";
+          }
+          else if(this.roleid==2)
+          {
+             this.role="Admin";
+          }
+          else if(this.roleid==3)
+          {
+             this.role="Team-Lead";
+          }
+          else
+          {
+            this.role="User";
+          }
+
           let oneEmployeeData = data.data;
           this.profilePicUrl =
             this.personalDetailService.apiUrl +
