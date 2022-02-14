@@ -92,6 +92,7 @@ export class EmployeeComponent implements OnInit {
   }
   // onRowClicked(row: any) {}
   getPermissions(){
+    debugger;
     const permissions = this.permissionService.getPermissionsByRole(this._roleId);
     this._update = permissions.update;
     this._delete = permissions.delete;

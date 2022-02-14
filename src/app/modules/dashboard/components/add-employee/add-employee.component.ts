@@ -1,12 +1,12 @@
 import { AddEmployeeFailureDialogComponent } from './add-employee-failure-dialog/add-employee-failure-dialog.component';
 import { Component, Input, OnInit, VERSION, ViewChild } from '@angular/core';
-import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormGroup, FormBuilder, Validators, FormControlName } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeDataService } from 'src/app/services/employee-data.service';
 import { PersonalDetailsService } from 'src/app/services/personal-details.service';
 import { MatDialog,MatDialogConfig } from '@angular/material/dialog';
 import { SuccessDialogComponent } from './success-dialog/success-dialog.component';
-import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
+// import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 import { AllEmployeesComponent } from 'src/app/modules/inventory/components/all-employees/all-employees.component';
 import { AssignManagerComponent } from '../assign-manager/assign-manager.component';
 import { InventoryService } from 'src/app/services/inventory.service';
@@ -17,6 +17,7 @@ import { UnassignAssetComponent } from 'src/app/modules/inventory/components/una
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { SpinnerService } from 'src/app/services/spinner.service';
+import { PermissionsService } from 'src/app/services/permissionsService/permissions.service';
 
 
 @Component({
@@ -25,6 +26,7 @@ import { SpinnerService } from 'src/app/services/spinner.service';
   styleUrls: ['./add-employee.component.scss'],
 })
 export class AddEmployeeComponent implements OnInit {
+  [x: string]: any;
   public assetdata:any;
   assetdatatable:any[]=[];
   assigndatatable:any[]=[];
@@ -43,6 +45,7 @@ export class AddEmployeeComponent implements OnInit {
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
   imsAssign:any=FormArray;
+  empleaveassign: any=FormArray;
   whStartDate: any;
   whStartDates: any;
   enum : any;
@@ -50,6 +53,7 @@ export class AddEmployeeComponent implements OnInit {
   startDate: any;
   day: any;
   showAddNewDropDownField:boolean=false;
+  assignleavestep:boolean=false;
   diff: any;
   profDetailsJoiningDate: any;
   noOfDays: any;
@@ -68,24 +72,28 @@ export class AddEmployeeComponent implements OnInit {
   public currentIndexProfessionalDetails: any = 0;
   public currentIndexProfessionalQ: any = -1;
   public currentIndexWorkingHistory: any = -1;
+  public assignleave:any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   isFileChanged!: boolean;
   array2: any;
   array1: any;
-  newDropDownValue: any;
-  isDisabled: boolean | undefined;
-  Designation:any=[];
-  Degree:any=[];
-  degName!:any;
-  desName!: string;
-  managerid:any;
-  displayedColumns: string[] = ['DesName','degName'];
-  dasignationdDdlVal: any;
-  hdvdegreeName: any;
   value:any;
   value1:any;
+  newDropDownValue: any;
+  isDisabled: boolean | undefined;
+  Designation:any;
+  Degree:any;
+  hdvHdDropdownId:any;
+  deg:any;
+  des:any;
+  managerid:any;
+  mon:any;
+  Month: any[] = ['mtId','degMonth'];
+  dasignationdDdlVal: any;
+  hdvdegreeName: any;
   Id:any;
+  id:any;
   displayedColumns1:string[]=[
     'assetid',
     'nameModel',
@@ -97,7 +105,6 @@ export class AddEmployeeComponent implements OnInit {
   hide = true;
   loading$ = this.loader.loading$;
   public assetData:any;
-  assignleavestep:boolean=false;
   
   
   
@@ -114,11 +121,27 @@ export class AddEmployeeComponent implements OnInit {
     public route: ActivatedRoute,
     public saveAssignedData:SaveAssignedDataService,
     private loader: SpinnerService
+
    
   
-  ) 
+  )
+  
   {
-   
+    this.Month=[
+      {mtId:1,degMonth:"January"},
+      {mtId:2,degMonth:"Febrauary"},
+      {mtId:3,degMonth:"March"},
+      {mtId:4,degMonth:"April"},
+      {mtId:5,degMonth:"May"},
+      {mtId:6,degMonth:"June"},
+      {mtId:7,degMonth:"July"},
+      {mtId:8,degMonth:"August"},
+      {mtId:9,degMonth:"September"},
+      {mtId:10,degMonth:"October"},
+      {mtId:11,degMonth:"November"},
+      {mtId:12,degMonth:"Decemeber"},
+    ];
+
     // this.Designation = [
     //   { desName: 'HR Manager'},
     //   { desName: 'HR Officer'},
@@ -135,32 +158,10 @@ export class AddEmployeeComponent implements OnInit {
     //   { desName: 'Accountant' },
     //   { desName: 'Office Boy' },
     //   { desName: 'Guard' },
-      
-     
-    // ];
-  
-    // this.Degree=[
-    //   {degName:'Matriculation/O-Levels'},
-    //   {degName:'Intermediate/A-Levels'},
-    //   {degName:'Bachelors'},
-    //   {degName:'BS Software Enginneering'},
-    //   {degName:'BS Computer Science'},
-    //   {degName:'BS Information Technology'},
-    //   {degName:'BS Buisness Administraion'},
-    //   {degName:'Masters/MSc'},
-    //   {degName:'Ms Software Engineering'},
-    //   {degName:'Ms Information Technology'},
-    //   {degName:'Ms Computer Science'},
-    //   {degName:'Ms Buisness Administration'},
-    //   {degName:'MPhil/MS'},
-    //   {degName:'Ms Computer Science'},
-    //   {degName:'Doctrate/PHD'},
-    // ];
-    
-
+      //];
   }
 
-  ngOnInit() {
+  ngOnInit(){
     
     this.userForm = this.fb.group({
       users: this.fb.array([])
@@ -168,19 +169,19 @@ export class AddEmployeeComponent implements OnInit {
     this.createForm();
     this.getDropdownValue(1);
     this.getDropdownValue(2);
+    
   }
-  leaveassign(event:any){  
-    console.log(event); 
-    if(event.value == 'Active'){
-     this.assignleavestep=true; }
-     else{ 
-       this.assignleavestep=false; }
-       }
+  getPermissions(){
+    const permissions = this['permissionService'].getPermissionsByRole(this['_roleId']);
+    this['_update'] = permissions.update;
+    this['_delete'] = permissions.delete;
+  }
 
+  
   showField(){
     this.showAddNewDropDownField = true;
   }
-
+  /////pushing and sending dropdown values////
   pushValue(event:any,dropdownid:number){
     this.showAddNewDropDownField = false;
     this.dasignationdDdlVal= event.value;
@@ -199,15 +200,6 @@ export class AddEmployeeComponent implements OnInit {
     })
   }
 
-//     control['etepdDesignation'].setValue(
-//       abc
-//     );
-    // control.controls['etepdDesignation'].pushValue(abc);
-// 
-    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-    // debugger 
-  
   getDropdownValue(id:number){
     this.Id=id;
     if(this.Id==1){
@@ -221,6 +213,16 @@ export class AddEmployeeComponent implements OnInit {
       })
    } 
   }
+
+//     control['etepdDesignation'].setValue(
+//       abc
+//     );
+    // control.controls['etepdDesignation'].pushValue(abc);
+// 
+    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+  
+  
  
   getAssetByCategoryID(itacCategoryId: any) {
     this.inventory
@@ -237,19 +239,11 @@ export class AddEmployeeComponent implements OnInit {
     const dialogRef = this.dialog.open(UnassignAssetComponent);
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res == true) {
-        
-       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
-       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
-       this.tempTable();
-        // let objToRemove = this.assetAssignDT.find((x:any) => x.itasItaAssetId == itasItaAssetId);
-        // let objToRemoveFromTable = this.assetdata._data._value.find((x:any) => x.itasItaAssetId == itasItaAssetId);
-        // this.assetAssignDT.splice(this.assetAssignDT.indexOf(objToRemove),1);
-        // this.assetdata._data._value.splice(this.assetdata._data._value.indexOf(objToRemoveFromTable),1);
-        // this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
-        //   if(data){
-        //     this.getAssetByCategoryID(this.itacCategoryId);
-        //   }
-        // });
+        this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
+          if(data){
+            this.getAssetByCategoryID(this.itacCategoryId);
+          }
+        });
       }
     });
   }
@@ -283,20 +277,25 @@ export class AddEmployeeComponent implements OnInit {
    
 //   }
   onCreateAssign(){
-    
     const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "80%"
-      let dialogRef = this.dialog.open(AssignAssetComponent);
+      this.dialog.open(AssignAssetComponent);
 
-      dialogRef.afterClosed().subscribe((res: any)=>{
+      this.dialog.afterAllClosed.subscribe((res: any)=>{
         this.tempTable()
       })
   }  
 
   tempTable()
   {
+    let a =0;
+      
+      // this.inventory.assetObj.map((ItasQuantity ,a )=>{
+      //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
+      //    this.assetData.push(b);
+      // });
       this.assetAssignDT = [];
    
       this.inventory.assetObj.forEach((elem: any, index: any) => {
@@ -326,7 +325,6 @@ export class AddEmployeeComponent implements OnInit {
       })
       
       this.assetdata= new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
-      
       // this.addAssetAssignList().setValue(this.assetAssignDT);
       // this.addImsAssign();
       //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
@@ -334,7 +332,6 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   addImsAssign(): void {
-
     this.imsAssign = this.personalDetailsForm.get(
       'imsAssign'
     ) as FormArray;
@@ -354,6 +351,14 @@ export class AddEmployeeComponent implements OnInit {
       itasCreatedBy:[this.userId],
       itasCreatedByName:[this.userName]
     });
+  }
+
+  /////Assign Leave/////////
+  assignLeave():FormGroup{
+    return this.fb.group({
+      
+
+    })
   }
 
   //////Academic Qualification/////////////
@@ -469,6 +474,8 @@ export class AddEmployeeComponent implements OnInit {
       etpqInstituteName: [''],
     });
   }
+
+
   addProfessionalQualification(): void {
     this.emsTblProfessionalQualification = this.personalDetailsForm.get(
       'emsTblProfessionalQualification'
@@ -495,6 +502,52 @@ export class AddEmployeeComponent implements OnInit {
     ) as FormArray;
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
+    ////Assign Leave////
+    /////On active enabling/////{
+    leaveassign(event:any){
+      console.log(event);
+      if(event.value == 'Active'){
+        this.assignleavestep=true;
+      }else{
+        this.assignleavestep=false;
+      }
+    }
+//////////////leave from array////////
+    addempleaveassign():FormGroup{
+      return this.fb.group({
+        etpMonth:['',Validators.required],
+        lmslrAnnualAssign:[''],
+        lmslrSickAssign:[''],
+        lmslrCasualAssign:['']
+      });
+    }
+    /////adding leave to personaldetail from///
+  addleave(): void{
+    this.empleaveassign=this.personalDetailsForm.get(
+      'empleaveassign'
+    )as FormArray;
+    this.empleaveassign.push(this.addempleaveassign());
+  }
+///////leave cal//////////////
+  leavecal(event:any){
+    var casualLeave = (12/12)*(13-event.value);
+    var anualLeave = (6/12)*(13-event.value);
+    var sickLeave = (6/12)*(13-event.value);
+
+
+   var control =  this.personalDetailsForm.controls[
+      'empleaveassign'
+    ]['controls'][0]['controls'];
+
+    control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
+    control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
+    control['lmslrSickAssign'].setValue(Math.round(sickLeave));
+   
+
+  }
+   ////////////////////////////////////
+  //////////createform//////////////
+
   createForm() {
     this.personalDetailsForm = this.fb.group({
       etedPhotograph: [''],
@@ -538,7 +591,13 @@ export class AddEmployeeComponent implements OnInit {
       ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
-      imsAssign:this.fb.array([])
+      imsAssign:this.fb.array([]),
+      empleaveassign:this.fb.array([this.addempleaveassign(),
+      ]),
+
+
+
+      
     });
   }
   submitData() {
@@ -729,6 +788,9 @@ export class AddEmployeeComponent implements OnInit {
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
   }
+  setassignleave(index:any){
+    this.assignleave=index;
+  }
 
   onFileChange(event: any, i: any): void {
     
@@ -812,6 +874,19 @@ export class AddEmployeeComponent implements OnInit {
       };
     }
   }
+
+  onDateChange(event: any){
+    debugger
+  }
 }
 
+
+
+function disable() {
+  throw new Error('Function not implemented.');
+}
+
+function enable() {
+  throw new Error('Function not implemented.');
+}
 
