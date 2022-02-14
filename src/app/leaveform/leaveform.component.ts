@@ -4,6 +4,7 @@ import { MatStartDate } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EmployeeDataService } from '../services/employee-data.service';
+import { LeaveService } from '../services/leave.service';
 import { PersonalDetailsService } from '../services/personal-details.service';
 
 
@@ -18,9 +19,17 @@ interface Leavetype {
   styleUrls: ['./leaveform.component.scss']
 
 })
+
 // export class DateRangePickerOverviewExample {}
 export class LeaveformComponent implements OnInit {
   
+  _update:boolean=false
+  _delete:boolean=false
+  _insert:boolean=false
+  _view:boolean=false
+  _employeeView:boolean=false
+  
+  _roleId = localStorage.getItem('loggedIn_RoleId');
   LeaveType: Leavetype[] = [
     { value: 'Sick', viewValue: 'Sick' },
     { value: 'Annual', viewValue: 'Annual' },
@@ -48,11 +57,13 @@ export class LeaveformComponent implements OnInit {
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
+    private leave:LeaveService
   ) { 
     this.createForm();
   }
 
   ngOnInit(): void {
+    this.leaveform.controls['name'].setValue(this.leave.name)
   }
 createForm(){
   this.leaveform = this.fb.group({
@@ -64,6 +75,8 @@ createForm(){
     reason:[]
   })
 }
+
+
   onKeypressEvent(event: any, i: any) {
     this.startdate = event.target.value;
     console.log(this.startdate);
@@ -108,6 +121,11 @@ createForm(){
     this.leaveform.controls['duration'].setValue(this.whDuration);
     return console.log(this.whDuration);
   }
+  // applyFilter(event: Event) {
+  //   const filterValue = (event.target as HTMLInputElement).value;
+  //   this.employeeData.filter = filterValue.trim().toLowerCase();
+  //   this.personalData.filter = filterValue.trim().toLowerCase();
+  // }
 }
 
   

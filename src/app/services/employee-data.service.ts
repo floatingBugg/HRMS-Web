@@ -15,11 +15,12 @@ import { Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class EmployeeDataService {
+  // [x: string]: string;
  
   constructor(
     private personalDetails: PersonalDetailsService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
   ) {}
   ngOnInit() {}
 

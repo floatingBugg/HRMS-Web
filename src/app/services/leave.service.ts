@@ -13,10 +13,13 @@ export class LeaveService {
   constructor(private http: HttpClient) { }
 
   apiUrl = 'http://localhost:57208';
-
+name:any;
 
   
   getEmployeeLeaveData() {
     return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord`);
+  }
+  getempName(){
+    return this.name;
   }
 }
