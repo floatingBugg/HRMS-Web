@@ -97,6 +97,13 @@
             </mat-form-field>
             
             <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Password</mat-label>
+              <input formControlName="ethupassword" name="ethupassword" matInput placeholder="Password" maxlength="20">
+              <mat-error *ngIf="personalDetailsForm.controls['ethupassword'].errors?.['required'] ">
+                Password is <strong>required</strong></mat-error> 
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
                 <mat-option [value]="">-- select one --</mat-option>
@@ -106,6 +113,20 @@
               <mat-error *ngIf="personalDetailsForm.controls['etedContactNumber'].errors?.['required'] ">
                 Marital Status is <strong>required</strong></mat-error>
             </mat-form-field>
+
+            <mat-form-field class="col-lg-5 col-md-5 input">
+              <mat-label>Role</mat-label>
+              <mat-select formControlName="etrethuroleid" name="etrethuroleid">
+                <mat-option [value]=""> ---Select One---</mat-option>
+                <mat-option value="1">Super Admin</mat-option>
+                <mat-option value="2">Admin</mat-option>
+                <mat-option value="3">Team Lead/Line Manager</mat-option>
+                <mat-option value="4">Employee</mat-option>
+              </mat-select>
+              <mat-error *ngIf="personalDetailsForm.controls['etrethuroleid'].errors?.['required'] ">
+                Role is <strong>required</strong></mat-error>
+            </mat-form-field>
+
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employment Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus" (selectionChange)="Assignleave($event)">
@@ -732,16 +753,16 @@
         </mat-step>
 
         <mat-step label="Asset">
-          <div class="form-group" formArrayName="imsAssetAssign">
+          <div class="form-group" formArrayName="imsAssign">
 
             <div class="row  mt-3">
               <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" >
+                <button type="button" class="btn btn-primary" (click)="onCreateAssign()">
                   Assign Asset
                 </button>
               </div>
 
-              <table mat-table [dataSource]="assetData" class="mat-elevation-z8" matSort>
+              <table mat-table [dataSource]="assetdata" class="mat-elevation-z8" matSort>
                 <ng-container matColumnDef="assetid">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
                   <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>

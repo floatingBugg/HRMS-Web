@@ -10,21 +10,36 @@ import { AssignManagerComponent } from '../assign-manager/assign-manager.compone
 import { InventoryService } from 'src/app/services/inventory.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
+import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
-  selector: 'app-edit-employee',
+  selector: 'apFp-edit-employee',
   templateUrl: './edit-employee.component.html',
   styleUrls: ['./edit-employee.component.scss'],
 })
 export class EditEmployeeComponent implements OnInit {
   id: any;
+  public assetdata: any;
+  assetdatatable: any[] = [];
+  assigndatatable: any[] = [];
+  assetAssignObj: any = {
+    itasItaAssetId: 0,
+    assetName: '',
+    itasItacCategoryId: 0,
+    assetCatagoryName: '',
+    itasQuantity: 0,
+    itasAssignedDate: new Date(),
+  };
+  assetAssignDT: any[] = [];
+
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
+  imsAssign: any = FormArray;
   public editDataArray: any = FormArray;
   public empID: any;
   public firstName: any;
@@ -41,6 +56,9 @@ export class EditEmployeeComponent implements OnInit {
   public bloodGroup: any;
   public religion: any;
   public nationality: any;
+  public password: any;
+  public roleid: any;
+  public role: any;
   probationDate: any;
   monthval: any = 3;
   newDate: any;
@@ -58,15 +76,15 @@ export class EditEmployeeComponent implements OnInit {
   workingHistoryName: any[] = [];
   profilePicUrl: any;
   isFileChanged!: boolean;
-  Designation:any=[];
-  Degree:any=[];
-  degName!:any;
+  Designation: any = [];
+  Degree: any = [];
+  degName!: any;
   desName!: string;
-  managerid:any;
-  displayedColumns: string[] = ['DesName','degName'];
+  managerid: any;
+  displayedColumns: string[] = ['DesName', 'degName'];
   dasignationdDdlVal: any;
   hdvdegreeName: any;
-  Id:any;
+  Id: any;
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
@@ -77,30 +95,29 @@ export class EditEmployeeComponent implements OnInit {
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
-  assignleavestep:boolean=false;
-  showAddNewDropDownField:boolean=false;
+  assignleavestep: boolean = false;
+  showAddNewDropDownField: boolean = false;
   workingHistory: any;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
-  displayedColumns1:string[]=[
+  displayedColumns1: string[] = [
     'assetid',
     'nameModel',
     'category',
     'quantity',
-    'actions'
-
+    'actions',
   ];
-  value:any;
-  value1:any;
-  assetData:any
-
+  value: any;
+  value1: any;
+  assetEditData: any;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
+    private inventory: InventoryService,
     public route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public inventoryservice:InventoryService
+    public inventoryservice: InventoryService
   ) {
     this.updateForm();
   }
@@ -111,13 +128,26 @@ export class EditEmployeeComponent implements OnInit {
     this.getDropdownValue(2);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
+        let userdata = data.data2;
+        this.password = userdata[0].ethuPassword;
+        this.roleid = userdata[0].etrEthuRoleId;
+        if (this.roleid == 1) {
+          this.role = 'Super-Admin';
+        } else if (this.roleid == 2) {
+          this.role = 'Admin';
+        } else if (this.roleid == 3) {
+          this.role = 'Team-Lead';
+        } else {
+          this.role = 'Employee';
+        }
+
         let oneEmployeeData = data.data[0];
         console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
         console.log('edit array', this.editDataArray);
         console.log('Personal Form', this.personalDetailsForm);
         this.profilePicUrl =
-         this.personaldetails.apiUrl +  oneEmployeeData.etedPhotograph;
+          this.personaldetails.apiUrl + oneEmployeeData.etedPhotograph;
         this.empID = oneEmployeeData.etedEmployeeId;
         this.personalDetailsForm.controls['etedEmployeeId'].setValue(
           oneEmployeeData.etedEmployeeId
@@ -164,7 +194,12 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etedReligion'].setValue(
           oneEmployeeData.etedReligion
         );
-
+        this.personalDetailsForm.controls['ethupassword'].setValue(
+          userdata[0].ethuPassword
+        );
+        this.personalDetailsForm.controls['etrethuroleid'].setValue(
+          this.roleid.toString()
+        );
         ///////Professional Details//////
         this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
@@ -186,6 +221,9 @@ export class EditEmployeeComponent implements OnInit {
         );
         controlProfessionalDetails['etepdProbation'].setValue(
           this.professionalDetails[0]['etepdProbation']
+        );
+        controlProfessionalDetails['etedManagerId'].setValue(
+          oneEmployeeData.etedManagerId
         );
         //////Emergency Contact /////
         this.emergencyContact = oneEmployeeData.emsTblEmergencyContact;
@@ -219,14 +257,17 @@ export class EditEmployeeComponent implements OnInit {
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
         for (let i = 0; i < this.academicQualification.length; i++) {
-          if(this.academicQualification[i].etaqUploadDocuments!="" && this.academicQualification[i].etaqUploadDocuments!=null){
-          this.imageUrl[i] =
-            this.personaldetails.apiUrl +
-            this.academicQualification[i].etaqUploadDocuments;
-            let splitedPath = this.imageUrl[i].split("/");
-            let fileName = splitedPath[(splitedPath.length-1)];
-            this.acadImageUrl[i]= fileName;
-          }else{
+          if (
+            this.academicQualification[i].etaqUploadDocuments != '' &&
+            this.academicQualification[i].etaqUploadDocuments != null
+          ) {
+            this.imageUrl[i] =
+              this.personaldetails.apiUrl +
+              this.academicQualification[i].etaqUploadDocuments;
+            let splitedPath = this.imageUrl[i].split('/');
+            let fileName = splitedPath[splitedPath.length - 1];
+            this.acadImageUrl[i] = fileName;
+          } else {
             this.imageUrl[i] = null;
           }
           this.addAcademicQualification();
@@ -255,16 +296,18 @@ export class EditEmployeeComponent implements OnInit {
         this.professionalQualification =
           oneEmployeeData.emsTblProfessionalQualification;
         for (let i = 0; i < this.professionalQualification.length; i++) {
-          if(this.professionalQualification[i].etpqDocuments!="" && this.professionalQualification[i].etpqDocuments!=null){
-          this.profQualificationUrl[i] =
-            this.personaldetails.apiUrl +
-            this.professionalQualification[i].etpqDocuments;
-            let splitedPath = this.imageUrl[i].split("/");
-            let fileName = splitedPath[(splitedPath.length-1)];
-            this.profQualificationName[i]=fileName;
-          }
-          else{
-            this.profQualificationUrl[i]=null;
+          if (
+            this.professionalQualification[i].etpqDocuments != '' &&
+            this.professionalQualification[i].etpqDocuments != null
+          ) {
+            this.profQualificationUrl[i] =
+              this.personaldetails.apiUrl +
+              this.professionalQualification[i].etpqDocuments;
+            let splitedPath = this.imageUrl[i].split('/');
+            let fileName = splitedPath[splitedPath.length - 1];
+            this.profQualificationName[i] = fileName;
+          } else {
+            this.profQualificationUrl[i] = null;
           }
           this.addProfessionalQualification();
           let controlProfessionalQualification =
@@ -292,16 +335,18 @@ export class EditEmployeeComponent implements OnInit {
         /////Working History////
         this.workingHistory = oneEmployeeData.emsTblWorkingHistory;
         for (let i = 0; i < this.workingHistory.length; i++) {
-          if(this.workingHistory[i].etwhExperienceLetter!="" && this.workingHistory[i].etwhExperienceLetter!=null){
-          this.workingHistoryUrl[i] =
-            this.personaldetails.apiUrl +
-            this.workingHistory[i].etwhExperienceLetter;
-            let splitedPath = this.workingHistoryUrl[i].split("/");
-            let fileName = splitedPath[(splitedPath.length-1)];
-            this.workingHistoryName[i]=fileName;
-          }
-          else{
-            this.workingHistoryUrl[i]=null;
+          if (
+            this.workingHistory[i].etwhExperienceLetter != '' &&
+            this.workingHistory[i].etwhExperienceLetter != null
+          ) {
+            this.workingHistoryUrl[i] =
+              this.personaldetails.apiUrl +
+              this.workingHistory[i].etwhExperienceLetter;
+            let splitedPath = this.workingHistoryUrl[i].split('/');
+            let fileName = splitedPath[splitedPath.length - 1];
+            this.workingHistoryName[i] = fileName;
+          } else {
+            this.workingHistoryUrl[i] = null;
           }
           this.addWorkingHistory();
           let controlWorkingHistory =
@@ -330,85 +375,79 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
-  Assignleave(event:any){  
-  console.log(event); 
-  if(event.value == 'Active'){
-   this.assignleavestep=true; 
+  Assignleave(event: any) {
+    console.log(event);
+    if (event.value == 'Active') {
+      this.assignleavestep = true;
+    } else {
+      this.assignleavestep = false;
+    }
   }
-   else{ 
-     this.assignleavestep=false; }
-     }
-     showField(){
-      this.showAddNewDropDownField = true;
-    }
-  
-    pushValue(event:any,dropdownid:number){
-      this.showAddNewDropDownField = false;
-      this.dasignationdDdlVal= event.value;
-     
-      var obj  = {
-        hdvHdDropdownId : dropdownid,
-        hdvValueName : this.dasignationdDdlVal,
-        // HdvCreatedBy:this.userId,
-        // HdvCreatedByName:this.userName,
-        
+  showField() {
+    this.showAddNewDropDownField = true;
+  }
+
+  pushValue(event: any, dropdownid: number) {
+    this.showAddNewDropDownField = false;
+    this.dasignationdDdlVal = event.value;
+
+    var obj = {
+      hdvHdDropdownId: dropdownid,
+      hdvValueName: this.dasignationdDdlVal,
+      // HdvCreatedBy:this.userId,
+      // HdvCreatedByName:this.userName,
+    };
+    this.personaldetails.addDropdownValue(obj).subscribe((res: any) => {
+      if (res.success == true) {
+        this.getDropdownValue(dropdownid);
       }
-      this.personaldetails.addDropdownValue(obj).subscribe((res:any)=>{
-        if(res.success == true){
-          this.getDropdownValue(dropdownid);
-        }
-      })
-    }
-  
+    });
+  }
+
   //     control['etepdDesignation'].setValue(
   //       abc
   //     );
-      // control.controls['etepdDesignation'].pushValue(abc);
-  // 
-      // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-      // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-      // debugger 
-    
-    getDropdownValue(id:number){
-      this.Id=id;
-      if(this.Id==1){
-     this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-      this.value=res.data;
-      })
-    }
-     else if(this.Id==2){
-      this.personaldetails.getDropdownValue(this.Id).subscribe((res:any)=>{
-        this.value1=res.data;
-        })
-     } 
-    }
+  // control.controls['etepdDesignation'].pushValue(abc);
+  //
+  // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
+  // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
+  // debugger
 
-
-
-     onCreate(){
-      const dialogConfig = new MatDialogConfig();
-        dialogConfig.disableClose = true;
-        dialogConfig.autoFocus = true;
-        dialogConfig.width = "80%"
-        this.dialog.open(AssignManagerComponent);
-  
-       this.dialog.afterAllClosed.subscribe((res: any) => {
-         this.getmanagerid();
-       })
+  getDropdownValue(id: number) {
+    this.Id = id;
+    if (this.Id == 1) {
+      this.personaldetails.getDropdownValue(this.Id).subscribe((res: any) => {
+        this.value = res.data;
+      });
+    } else if (this.Id == 2) {
+      this.personaldetails.getDropdownValue(this.Id).subscribe((res: any) => {
+        this.value1 = res.data;
+      });
     }
-  
-    getmanagerid(){
-        this.managerid= this.personaldetails.managerId;
-        let controlProfessionalDetails =
-            this.personalDetailsForm.controls[
-              'emsTblEmployeeProfessionalDetails'
-            ]['controls'][0]['controls'];
-            controlProfessionalDetails['etedManagerId'].setValue(
-              this.managerid
-            );
-          this.personalDetailsForm.controls['etedManagerId'].setValue(this.managerid);
-        //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
-    }
+  }
+
+  onCreate() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    this.dialog.open(AssignManagerComponent);
+
+    this.dialog.afterAllClosed.subscribe((res: any) => {
+      this.getmanagerid();
+    });
+  }
+
+  getmanagerid() {
+    this.managerid = this.personaldetails.managerId;
+    let controlProfessionalDetails =
+      this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails'][
+        'controls'
+      ][0]['controls'];
+    controlProfessionalDetails['etedManagerId'].setValue(this.managerid);
+    this.personalDetailsForm.controls['etedManagerId'].setValue(this.managerid);
+    //this.emsTblEmployeeProfessionalDetails[0].controls["etepdSalary"].setValue(this.managerid);
+  }
 
   ////////Academic Qualification/////////////
 
@@ -420,8 +459,6 @@ export class EditEmployeeComponent implements OnInit {
       etaqCgpa: [, Validators.required],
       etaqInstituteName: ['', Validators.required],
       etaqUploadDocuments: [''],
-
-
     });
   }
 
@@ -466,6 +503,7 @@ export class EditEmployeeComponent implements OnInit {
       etepdProbation: [this.newDate, Validators.required],
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
+      etedManagerId: [''],
     });
   }
   addProfessionalDetails(): void {
@@ -545,7 +583,10 @@ export class EditEmployeeComponent implements OnInit {
       etedStatus: ['', Validators.required],
       etedBloodGroup: ['', Validators.required],
       etedReligion: ['', Validators.required],
+      etrethuroleid: ['', Validators.required],
+      ethupassword: ['', Validators.required],
       etedNationality: ['', Validators.required],
+      etedManagerId: [],
       emsTblEmergencyContact: this.fb.array([]),
       emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
@@ -553,13 +594,19 @@ export class EditEmployeeComponent implements OnInit {
       ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
+      imsAssign: this.fb.array([]),
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
     });
   }
 
   updateData() {
+    let form = this.personalDetailsForm.value;
+    this.assetAssignDT.forEach((elem: any, index: any) => {
+      form.imsAssign[index] = elem;
+    });
     console.log(this.personalDetailsForm.value);
+    
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
       .subscribe((result) => {
@@ -743,15 +790,14 @@ export class EditEmployeeComponent implements OnInit {
     this.currentIndexWorkingHistory = index;
   }
 
-   ///////Profile pic Upload///////
-   employeePicUpload(event: any): void {
-     debugger;
+  ///////Profile pic Upload///////
+  employeePicUpload(event: any): void {
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
-      debugger;
+
       reader.onload = () => {
         this.profilePicUrl = reader.result;
         this.isFileChanged = reader.result ? true : false;
@@ -784,14 +830,12 @@ export class EditEmployeeComponent implements OnInit {
 
   ////////// Professional Qualification////////
   professionalQualificationUpload(event: any, i: any): void {
-   
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        
         if (this.currentIndexProfessionalQ >= 0) {
           this.profQualificationUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
@@ -806,15 +850,12 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   onFileChange(event: any, i: any): void {
-    
-    debugger
     let reader = new FileReader(); // HTML5 FileReader API
     let file = event.target.files[0];
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(file);
       // When file uploads set it to file formcontrol
       reader.onload = () => {
-        
         if (this.currentIndexAcademic >= 0) {
           this.imageUrl[i] = reader.result;
           this.isFileChanged = reader.result ? true : false;
@@ -827,18 +868,81 @@ export class EditEmployeeComponent implements OnInit {
       };
     }
   }
-  getEmployeeAsset(empID:any){
-    this.inventoryservice.getAllAssetbyEmpID(empID)
-    .subscribe((data:any)=>{
+  getEmployeeAsset(empID: any) {
+    this.inventory.getAllAssetAssingedbyEmpID(empID).subscribe((data: any) => {
       if (data.success) {
-         this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
+        this.assetEditData = data.data;
+        this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetEditData);
       }
     });
   }
+  onCreateAssign() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    let dialogRef = this.dialog.open(AssignAssetComponent);
 
+    dialogRef.afterClosed().subscribe((res: any) => {
+      this.tempTable();
+    });
+  }
 
-DownloadFile(path:any){
-saveAs(path)
-}
+  tempTable() {
+    this.assetAssignDT = [];
+    this.assetAssignDT = this.assetEditData;
+    this.inventory.assetObj.forEach((elem: any, index: any) => {
+      this.assetAssignObj = elem;
 
+      this.assetAssignObj.itasItaAssetId = elem.assetid;
+      this.assetAssignObj.assetName = elem.assetname;
+      this.assetAssignObj.itasItacCategoryId = elem.categoryid;
+      this.assetAssignObj.assetCatagoryName = elem.category;
+      this.assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
+      this.assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+      //assetAssignObj.itasCreatedBy =
+
+      let imsAssign = (this.personalDetailsForm.controls['imsAssign'][
+        'controls'
+      ][index] = this.addAssetAssignList());
+
+      imsAssign.controls['itasItaAssetId'].setValue(
+        this.assetAssignObj.itasItaAssetId
+      );
+      imsAssign.controls['assetName'].setValue(this.assetAssignObj.assetName);
+
+      this.personalDetailsForm.controls['imsAssign']['controls'][
+        index
+      ].patchValue(imsAssign);
+    });
+    this.assetAssignDT.push(this.assetAssignObj);
+    this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+
+    // this.addAssetAssignList().setValue(this.assetAssignDT);
+    // this.addImsAssign();
+    //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
+  }
+
+  addImsAssign(): void {
+    this.imsAssign = this.personalDetailsForm.get('imsAssign') as FormArray;
+    let assignForm = this.addAssetAssignList();
+    this.imsAssign.push(this.addAssetAssignList());
+  }
+
+  addAssetAssignList(): FormGroup {
+    return this.fb.group({
+      itasItaAssetId: [''],
+      assetName: [''],
+      itasItacCategoryId: [''],
+      assetCatagoryName: [''],
+      itasQuantity: [''],
+      itasAssignedDate: [''],
+      itasCreatedBy: [this.userId],
+      itasCreatedByName: [this.userName],
+    });
+  }
+
+  DownloadFile(path: any) {
+    saveAs(path);
+  }
 }

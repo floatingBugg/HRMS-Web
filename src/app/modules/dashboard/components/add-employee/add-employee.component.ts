@@ -237,11 +237,19 @@ export class AddEmployeeComponent implements OnInit {
     const dialogRef = this.dialog.open(UnassignAssetComponent);
     dialogRef.afterClosed().subscribe((res: any) => {
       if (res == true) {
-        this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
-          if(data){
-            this.getAssetByCategoryID(this.itacCategoryId);
-          }
-        });
+        
+       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
+       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
+       this.tempTable();
+        // let objToRemove = this.assetAssignDT.find((x:any) => x.itasItaAssetId == itasItaAssetId);
+        // let objToRemoveFromTable = this.assetdata._data._value.find((x:any) => x.itasItaAssetId == itasItaAssetId);
+        // this.assetAssignDT.splice(this.assetAssignDT.indexOf(objToRemove),1);
+        // this.assetdata._data._value.splice(this.assetdata._data._value.indexOf(objToRemoveFromTable),1);
+        // this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
+        //   if(data){
+        //     this.getAssetByCategoryID(this.itacCategoryId);
+        //   }
+        // });
       }
     });
   }
@@ -280,9 +288,9 @@ export class AddEmployeeComponent implements OnInit {
       dialogConfig.disableClose = true;
       dialogConfig.autoFocus = true;
       dialogConfig.width = "80%"
-      this.dialog.open(AssignAssetComponent);
+      let dialogRef = this.dialog.open(AssignAssetComponent);
 
-      this.dialog.afterAllClosed.subscribe((res: any)=>{
+      dialogRef.afterClosed().subscribe((res: any)=>{
         this.tempTable()
       })
   }  
