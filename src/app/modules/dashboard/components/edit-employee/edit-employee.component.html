@@ -14,7 +14,7 @@
               <input id="file" type="file" (change)="employeePicUpload($event)" />
             </div>
           </div>
-          <div class="screenMaxWidth">
+          <div class="screenMaxWidth mt-3">
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Employee ID</mat-label>
               <input name="etedEmployeeId" formControlName="etedEmployeeId" readonly type="number" matInput
@@ -60,6 +60,7 @@
               <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['email'] ">
                 Enter a valid email</mat-error>
             </mat-form-field>
+            
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Professional Email Address</mat-label>
               <input matInput formControlName="etedOfficialEmailAddress" name="etedOfficialEmailAddress"
@@ -69,7 +70,7 @@
               <mat-error *ngIf="personalDetailsForm.controls['etedEmailAddress'].errors?.['email'] ">
                 Enter a valid email</mat-error>
             </mat-form-field>
-            <mat-form-field class=" col-lg-5 col-md-5 input">
+             <mat-form-field class=" col-lg-5 col-md-5 input">
               <mat-label>Address</mat-label>
               <textarea formControlName="etedAddress" name="etedAddress" matInput placeholder="Address"></textarea>
               <mat-error *ngIf="personalDetailsForm.controls['etedAddress'].errors?.['required'] ">
@@ -94,6 +95,7 @@
               <mat-error *ngIf="personalDetailsForm.controls['etedGender'].errors?.['required'] ">
                 Gender is <strong>required</strong></mat-error>
             </mat-form-field>
+            
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Marital Status</mat-label>
               <mat-select formControlName="etedMaritalStatus" name="etedMaritalStatus">
@@ -343,6 +345,7 @@
               <mat-error *ngIf="personalDetailsForm.controls['etedNationality'].errors?.['required'] ">
                 Nationality is <strong>required</strong></mat-error>
             </mat-form-field>
+            
             <h4 class="mt-5">Emergency Contact Person</h4>
             <div formArrayName="emsTblEmergencyContact"
               *ngFor="let item of personalDetailsForm.get('emsTblEmergencyContact')['controls'];  let i = index;">
@@ -438,7 +441,7 @@
                     <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
                       <mat-label>Degree Title</mat-label>
                       <mat-select formControlName="etaqQualification" name="etaqQualification">
-                        <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}} </mat-option>
+                        <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}}</mat-option>
                       </mat-select>
                       <mat-error *ngIf="item.controls['etaqQualification'].errors?.['required']">
                         Degree Title is <strong>required</strong></mat-error>
@@ -778,13 +781,25 @@
 
         <div *ngIf="assignleavestep">
           <mat-step label="Assign Leave">
-            <div class="mt-3">
-              <mat-form-field color="primary" appearance="legacy" style="width:250px">
-                <mat-label>Select Date </mat-label>
-                <input matInput [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2 color="primary"></mat-datepicker>
-              </mat-form-field>
+            <div class="container-fluid">
+              <div class="mt-4">
+                
+                <div>
+                  <mat-form-field color="primary" appearance="legacy" style="width:500px">
+                    <mat-label>Enter Joining Date</mat-label>
+                    <input matInput [matDatepicker]="picker2">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2 color="primary"></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <mat-form-field appearance="legacy" style="width:500px">
+                    <mat-label>Total Leaves</mat-label>
+                    <input matInput readonly placeholder="" formControlName="duration">
+                  </mat-form-field>
+                </div>
+
+              </div>
             </div>
           </mat-step>
         </div>
