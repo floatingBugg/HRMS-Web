@@ -236,16 +236,26 @@ export class AddEmployeeComponent implements OnInit {
       });
   }
   unAssignAssetById(itasItaAssetId: any) {
+
     const dialogRef = this.dialog.open(UnassignAssetComponent);
+
     dialogRef.afterClosed().subscribe((res: any) => {
+
       if (res == true) {
-        this.inventory.deleteAssetAssign(itasItaAssetId).subscribe((data) => {
-          if(data){
-            this.getAssetByCategoryID(this.itacCategoryId);
-          }
-        });
+
+       
+
+       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
+
+       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
+
+       this.tempTable();
+
+
       }
+
     });
+
   }
   itacCategoryId(itacCategoryId: any) {
     throw new Error('Method not implemented.');
@@ -290,12 +300,7 @@ export class AddEmployeeComponent implements OnInit {
 
   tempTable()
   {
-    let a =0;
-      
-      // this.inventory.assetObj.map((ItasQuantity ,a )=>{
-      //    let b={[ItasQuantity] : this.inventory.assignObj[a]}
-      //    this.assetData.push(b);
-      // });
+    
       this.assetAssignDT = [];
    
       this.inventory.assetObj.forEach((elem: any, index: any) => {
@@ -307,7 +312,6 @@ export class AddEmployeeComponent implements OnInit {
            assetAssignObj.assetCatagoryName = elem.category;
            assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
            assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
-           assetAssignObj.itasCreatedBy = 
 
            this.assetAssignDT.push(assetAssignObj);
 
