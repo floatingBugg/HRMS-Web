@@ -601,6 +601,8 @@ export class AddEmployeeComponent implements OnInit {
     });
   }
   submitData() {
+
+    
     let form = this.personalDetailsForm.value;
     
     this.assetAssignDT.forEach((elem: any, index: any) => {
