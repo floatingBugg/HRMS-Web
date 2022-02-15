@@ -3,9 +3,11 @@ import {FormGroup, FormControl, FormBuilder, FormArray, Validators} from '@angul
 import { MatStartDate } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { EmployeeDataService } from '../services/employee-data.service';
 import { LeaveService } from '../services/leave.service';
 import { PersonalDetailsService } from '../services/personal-details.service';
+
 
 
 interface Leavetype {
@@ -36,7 +38,7 @@ export class LeaveformComponent implements OnInit {
     { value: 'Casual', viewValue: 'Casual' },
     
   ];
-  emsTblWorkingHistory: any = FormArray;
+  
   leaveform: any = FormGroup;
   startdate:any;
   endDate:any;
@@ -50,6 +52,9 @@ export class LeaveformComponent implements OnInit {
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
+  dialog: any;
+  public LeaveFormDetails:any = -1;
+  
 
 
   constructor(
@@ -59,18 +64,19 @@ export class LeaveformComponent implements OnInit {
     private router: Router,
     private leave:LeaveService
   ) { 
-    this.createForm();
+    this.createleaveForm();
   }
 
   ngOnInit(): void {
+    this.createleaveForm();
     this.leaveform.controls['name'].setValue(this.leave.name)
   }
-createForm(){
+createleaveForm(){
   this.leaveform = this.fb.group({
     name:['',Validators.required],
     leaveType:['',Validators.required],
-    startDate:[],
-    endDate:[],
+    startDate:['',Validators.required],
+    endDate:['',Validators.required],
     duration:[],
     reason:[]
   })
@@ -101,6 +107,17 @@ createForm(){
       this.getDuration(index);
     }
   }
+  isleaveFormDisabled() {
+    if (this.LeaveFormDetails >= 0) {
+      let result =
+        this.LeaveFormDetails.controls['leaveform'][
+          'controls'
+        ][0].valid;
+      return !result;
+    } else {
+      return false;
+    }
+  }
 
   getDuration(index: any) {
     var years = Math.floor(this.noOfDays / 365);
@@ -126,8 +143,83 @@ createForm(){
   //   this.employeeData.filter = filterValue.trim().toLowerCase();
   //   this.personalData.filter = filterValue.trim().toLowerCase();
   // }
+
+
+
+  submitData() {
+    debugger
+    console.log(this.leaveform.value);
+    this.leave
+      .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
+        if (result.success) {
+          Swal.fire({
+            title:'Leave Assigned!',
+            text:'Leave Assigned Successfully',
+            icon:'success',
+            showCancelButton:false,
+            confirmButtonText: 'Thank You',
+            cancelButtonText: 'No, keep it'
+          }).then((res) => {
+            this.router.navigate(["/home/leaveform"])
+          })
+        }
+        else
+        {
+          this.errorMsg= result.message;
+          Swal.fire({
+           title: 'ERROR!',
+           text: this.errorMsg,
+           icon: 'error',
+           showCancelButton: false,
+           confirmButtonText: 'Okay',
+           cancelButtonText: 'No, keep it'
+            })
+            console.log(result.message);
+                  }
+                });
+            }
+          //   applyFilter(event: Event) {
+          //     const filterValue = (event.target as HTMLInputElement).value;
+          //     this.employeeData.filter = filterValue.trim().toLowerCase();
+          //   }
+          
 }
 
+  // submitData() {
+  //   console.log(this.screensForm.value);
+  //   this.inventory
+  //     .postAssets(this.screensForm.value)
+  //     .subscribe((result) => {
+  //       if (result.success) {
+  //         Swal.fire({
+  //           title: 'Added!',
+  //           text: 'Record added successfully',
+  //           icon: 'success',
+  //           showCancelButton: false,
+  //           confirmButtonText: 'Thank You',
+  //           //cancelButtonText: 'No, keep it'
+  //         }).then((res) => {
+  //           this.router.navigate(["inventory/unassigned-screens"])
+  //         })
+  //       } 
+  //       else
+  //        {
+  //         this.errorMsg = result.message;
+  //         Swal.fire({
+  //           title: 'ERROR!',
+  //           text: this.errorMsg,
+  //           icon: 'error',
+  //           showCancelButton: false,
+  //           confirmButtonText: 'Okay',
+  //           //cancelButtonText: 'No, keep it'
+  //         })
+  //         console.log(result.message);
+  //       }
+  //     });
+  // }
+
+
+  
   
 
 

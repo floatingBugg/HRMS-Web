@@ -2,7 +2,7 @@
     <div [formGroup]="leaveform">
     <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input readonly formControlName="" matInput placeholder="" formControlName="name">
+        <input  matInput placeholder="" formControlName="name">
     </mat-form-field>
     
 
@@ -35,6 +35,8 @@
       </mat-form-field>
     </div>
       <div class="btnsubmit">
-        <button mat-raised-button color color="primary">Submit</button>
+        <button mat-raised-button color color="primary"
+        [disabled]="leaveform.invalid" mat-raised-button type="submit" color="primary"
+        (click)="submitData()">Save</button>
         
 </div>

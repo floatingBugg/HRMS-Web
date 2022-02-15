@@ -603,6 +603,135 @@
           </div>
         </mat-step>
 
+
+        <mat-step label="Employment Status">
+          <div class="form-group">
+            <div class="mt-3">
+            <ng-container  class=" mt-5 container">
+              <mat-form-field class="col-lg-5 col-md-5 input">
+                <mat-label>Employment Status</mat-label>
+                <mat-select formControlName="etedempStatus" name="etedEmpStatus" (selectionChange)="permanentEmpstatus($event)" >
+                  <mat-option [value]="">---Select One---</mat-option>
+                  <!-- <mat-option (onSelectionChange)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option> -->
+                  <mat-option value="Permanent">Permanent</mat-option>
+                  <mat-option value="Contract">Contract
+                  </mat-option>
+                  <mat-option value="Released">Released
+                  </mat-option>
+                  <mat-option value="Resigned">Resigned
+                  </mat-option>
+                  <mat-option value="PartTime">Part-Time
+                  </mat-option>
+                  <mat-option value="Internship">Internship
+
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
+                  Employment Status is <strong>required</strong></mat-error>
+              </mat-form-field>
+
+            </ng-container>
+          </div>
+          </div>
+         </mat-step>
+         
+         <div *ngIf="permanentEmp">
+           <mat-step label="Permanent Employee">
+             <div class="container">
+             <div class="form-group">
+               <div formArrayName="EemsTblPermanentEmployee">
+                *ngFor="let item of personalDetailsForm.get('EemsTblPermanentEmployee')['controls']; let i = index;">
+                <div >
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+
+                  <!-- <div>
+                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                      <mat-label>Salary</mat-label>
+                      <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
+                        matInput placeholder="Salary">
+                      <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
+                        Salary is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                  </div> -->
+                  <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                    <mat-label>Start Date</mat-label>
+                    <input readonly matInput formControlName="etepdPermanentJoiningDate" name="etepdPermanentJoiningDate"
+                      [matDatepicker]="picker" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="item.controls['etepdPermanentJoiningDate'].errors?.['required']">
+                      Joining Date is <strong>required</strong></mat-error>
+                  </mat-form-field>
+                  <div class="prob">
+                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                      <mat-label>Probation Period</mat-label>
+                      <input value="1" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
+
+                    </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                        <mat-label>Probation</mat-label>
+                        <input readonly id="probation" (keypress)="onlyNumbersAllowed($event)" [value]=probationDate
+                          formControlName="etepdProbation" name="etepdProbation" matInput placeholder="Probation">
+                        <mat-error *ngIf="item.controls['etepdProbation'].errors?.['required']">
+                          Probation is <strong>required</strong></mat-error>
+                      </mat-form-field>
+                    </div>
+
+</div>
+</div>
+</div>
+               </div>
+              </div>
+              
+             </div>
+            </div>
+           </mat-step>
+         </div>
+
+         <div *ngIf="contractEmp">
+          <mat-step label="Contarct Employee">
+            <div class="form-group">
+
+            </div>
+
+          </mat-step>
+        </div>
+        <div *ngIf="releasedEmp">
+          <mat-step label="Released Employee">
+            <div class="form-group">
+
+            </div>
+
+          </mat-step>
+        </div>
+        <div *ngIf="resignedEmp">
+          <mat-step label="Resigned Employee">
+            <div class="form-group">
+
+            </div>
+
+          </mat-step>
+        </div>
+        <div *ngIf="parttimeEmp">
+          <mat-step label="Part-Time Employee">
+            <div class="form-group">
+
+            </div>
+
+          </mat-step>
+        </div>
+        <div *ngIf="interEmp">
+          <mat-step label="Internee">
+            <div class="form-group">
+
+            </div>
+
+          </mat-step>
+        </div>
+
         <mat-step label="Professional Qualification">
           <div class="form-group">
             <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"

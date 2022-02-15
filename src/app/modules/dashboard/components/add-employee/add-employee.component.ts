@@ -52,6 +52,12 @@ export class AddEmployeeComponent implements OnInit {
   whEndDate: any;
   startDate: any;
   day: any;
+  permanentEmp:boolean=false;
+  contractEmp:boolean=false;
+  releasedEmp:boolean=false;
+  resignedEmp:boolean=false;
+  parttimeEmp:boolean=false;
+  interEmp:boolean=false;
   showAddNewDropDownField:boolean=false;
   assignleavestep:boolean=false;
   diff: any;
@@ -506,6 +512,44 @@ export class AddEmployeeComponent implements OnInit {
     ) as FormArray;
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
+  /////////////permanent emp/////////
+
+  permanentEmpstatus(event:any){
+    console.log(event);
+    if(event.value == 'Permanent'){
+      this.permanentEmp=true;
+    }else{
+      this.permanentEmp=false;
+    }
+    if(event.value == 'Contract'){
+      this.contractEmp=true;
+    }else{
+      this.contractEmp=false;
+    }
+    if(event.value == 'Released'){
+      this.releasedEmp=true;
+    }else{
+      this.releasedEmp=false;
+    }
+    if(event.value == 'Resigned'){
+      this.resignedEmp=true;
+    }else{
+      this.resignedEmp=false;
+    }
+    if(event.value == 'PartTime'){
+      this.parttimeEmp=true;
+    }else{
+      this.parttimeEmp=false;
+    }
+    if(event.value == 'Internship'){
+      this.interEmp=true;
+    }else{
+      this.interEmp=false;
+    }
+
+      
+    }
+  
     ////Assign Leave////
     /////On active enabling/////{
     leaveassign(event:any){

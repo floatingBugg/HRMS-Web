@@ -82,10 +82,7 @@ export class UnassignedScreensComponent implements OnInit {
 
 
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.employeeData.filter = filterValue.trim().toLowerCase();
-  }
+ 
   // deleteEmployeeById(id: any) {
   //   const dialogRef = this.dialog.open(DeleteEmployeeComponent);
   //   dialogRef.afterClosed().subscribe((res: any) => {
@@ -101,6 +98,10 @@ export class UnassignedScreensComponent implements OnInit {
   
  
   // onRowClicked(row: any) {}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.employeeData.filter = filterValue.trim().toLowerCase();
+  }
   onCreate(assetId: number){
     
     const dialogConfig = new MatDialogConfig();
