@@ -35,12 +35,20 @@ export class EditEmployeeComponent implements OnInit {
 
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
+  emsTblPermanentEmployee:any=FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
   imsAssign: any = FormArray;
+  permanentEmp:boolean=false;
+  contractEmp:boolean=false;
+  releasedEmp:boolean=false;
+  resignedEmp:boolean=false;
+  parttimeEmp:boolean=false;
+  interEmp:boolean=false;
   public editDataArray: any = FormArray;
+  publicemsTblpermanent:any=FormArray;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -67,6 +75,7 @@ export class EditEmployeeComponent implements OnInit {
   whStartDates: any;
   whEndDate: any;
   diff: any;
+  perprobDate1:any;
   noOfDays: any;
   imageUrl: any[] = [];
   acadImageUrl: any[] = [];
@@ -253,6 +262,7 @@ export class EditEmployeeComponent implements OnInit {
             this.emergencyContact[i]['etecAddress']
           );
         }
+
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -291,6 +301,7 @@ export class EditEmployeeComponent implements OnInit {
             this.academicQualification[i]['etaqInstituteName']
           );
         }
+        
 
         ////////Professional Qualification////////
         this.professionalQualification =
@@ -372,8 +383,11 @@ export class EditEmployeeComponent implements OnInit {
             this.workingHistory[i]['etwhDuration']
           );
         }
+        
       }
+      
     });
+            /////////employe status//////////
   }
   Assignleave(event: any) {
     console.log(event);
@@ -597,6 +611,8 @@ export class EditEmployeeComponent implements OnInit {
       imsAssign: this.fb.array([]),
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
+      emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
+      
     });
   }
 
@@ -673,7 +689,7 @@ export class EditEmployeeComponent implements OnInit {
     }).format(this.newDate);
     control['etepdProbation'].setValue(this.probationDate);
   }
-
+///////////working history///////////////////
   compareDates(index: any) {
     let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
       'controls'
@@ -941,6 +957,76 @@ export class EditEmployeeComponent implements OnInit {
       itasCreatedByName: [this.userName],
     });
   }
+  permanentEmpstatus(event:any){
+    console.log(event);
+    if(event.value == 'Permanent'){
+      this.permanentEmp=true;
+    }else{
+      this.permanentEmp=false;
+    }
+    if(event.value == 'Contract'){
+      this.contractEmp=true;
+    }else{
+      this.contractEmp=false;
+    }
+    if(event.value == 'Released'){
+      this.releasedEmp=true;
+    }else{
+      this.releasedEmp=false;
+    }
+    if(event.value == 'Resigned'){
+      this.resignedEmp=true;
+    }else{
+      this.resignedEmp=false;
+    }
+    if(event.value == 'PartTime'){
+      this.parttimeEmp=true;
+    }else{
+      this.parttimeEmp=false;
+    }
+    if(event.value == 'Internship'){
+      this.interEmp=true;
+    }else{
+      this.interEmp=false;
+    }
+
+      
+  }
+//////Permanent Employee array/////
+addemsTblPermanentEmployee():FormGroup{
+  return this.fb.group({
+    etepdPermJoinDate:['',Validators.required],
+    etepdEmpProb:[''],
+    etperEmpDuration:['']
+
+  })
+}
+//////////////addpermannetemploye/////
+addPerEmp():void{
+  this.emsTblPermanentEmployee=this.personalDetailsForm.get(
+    'emsTblPermanentEmployee'
+  )as FormArray;
+  this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
+}
+
+getPerDate(index: any) {
+  debugger
+  let control = this.personalDetailsForm.get(
+    'emsTblPermanentEmployee'
+  )['controls'][index]['controls'];
+  let pdjoinDate = control['etepdPermJoinDate'].value;
+  let d = new Date(pdjoinDate);
+  this.monthval = (<HTMLInputElement>(
+    document.getElementById('monthVal1')
+  )).value;
+  let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
+  this.newDate = new Date(perprobDate1);
+  this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'full',
+  }).format(this.newDate);control
+  ['etepdEmpProb'].setValue(this.perprobDate1);
+}
+
 
   DownloadFile(path: any) {
     saveAs(path);
