@@ -202,7 +202,7 @@
               <p class="mb-3 mt-3"><b>Working History: {{i+1}}</b></p>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
               <div class="circle" *ngIf="apiURL+workHistory[i].etwhExperienceLetter">
-                <button *ngif='workHistory[i].etwhExperienceLetter!=null' (click)="DownloadFile(apiURL+workHistory[i].etwhExperienceLetter)">Download Here</button>{{this.workHistoryName[i]}}
+                <button  (click)="DownloadFile(apiURL+workHistory[i].etwhExperienceLetter)">Download Here</button>{{this.workHistoryName[i]}}
               </div>
               <div class="row mt-2">
                 <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company:</b>
@@ -250,6 +250,7 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
             <td mat-cell *matCellDef="let asset"> {{asset.categoryname}} </td>
           </ng-container>
+          
           <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
           <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->

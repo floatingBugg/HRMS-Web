@@ -141,10 +141,12 @@ getPermissions(){
 //   });
 // }
 getEmployeeAsset(empID:any){
+  
   this.inventoryservice.getAllAssetbyEmpID(empID)
   .subscribe((data:any)=>{
     if (data.success) {
-       this.assetData=new MatTableDataSource<InventoryGrid>(data.data);;
+       this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
+       debugger;
     }
   });
 }

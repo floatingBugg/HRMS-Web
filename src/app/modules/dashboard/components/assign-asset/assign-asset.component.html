@@ -29,10 +29,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions </th>
         <td mat-cell *matCellDef="let asset">
-          <button mat-icon-button color="warn" 
-            title="Delete Employee Record">
-            <mat-icon>delete_outlint</mat-icon>
-          </button>
+          
           <button mat-raised-button  color="primary" (click)="onCreate(asset)">Assign</button>
         </td>
       </ng-container>
