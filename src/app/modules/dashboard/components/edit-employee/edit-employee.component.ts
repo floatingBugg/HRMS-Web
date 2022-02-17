@@ -11,7 +11,6 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
-import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'apFp-edit-employee',
@@ -40,6 +39,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
+  empreleaseddata:any=  FormArray;
   imsAssign: any = FormArray;
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
@@ -47,6 +47,8 @@ export class EditEmployeeComponent implements OnInit {
   resignedEmp:boolean=false;
   parttimeEmp:boolean=false;
   interEmp:boolean=false;
+  startdateemp:any;
+  endDateemp:any;
   public editDataArray: any = FormArray;
   publicemsTblpermanent:any=FormArray;
   public empID: any;
@@ -119,6 +121,8 @@ export class EditEmployeeComponent implements OnInit {
   value: any;
   value1: any;
   assetEditData: any;
+  whDuration1: any;
+  diff2: any;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -427,6 +431,25 @@ export class EditEmployeeComponent implements OnInit {
   // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
   // debugger
 
+          /////////////Released//////////////
+          addempreleaseddata(): FormGroup {
+            return this.fb.group({
+              relstartdate: ['', Validators.required],
+              relenddate: ['',Validators.required],
+              relservicedays: ['' ],
+              relclrdate: [''],
+              relremarks: [''],
+              
+            });
+          }
+        
+          addrelempdata(): void {
+            this.empreleaseddata = this.personalDetailsForm.get(
+              'empreleaseddata'
+            ) as FormArray;
+            this.empreleaseddata.push(this.addempreleaseddata());
+          }    
+
   getDropdownValue(id: number) {
     this.Id = id;
     if (this.Id == 1) {
@@ -612,6 +635,7 @@ export class EditEmployeeComponent implements OnInit {
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
       emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
+      empreleaseddata:this.fb.array([this.addempreleaseddata()])
       
     });
   }
@@ -1001,6 +1025,69 @@ addemsTblPermanentEmployee():FormGroup{
 
   })
 }
+///////////////Released Employee Duration Cal//////////////
+onKeypressEvent(event: any, i: any) {
+  this.startdateemp = event.target.value;
+  console.log(this.startdateemp);
+}
+onKeypressEvent2(event: any, i: any) {
+  this.endDateemp = event.target.value;
+  console.log(this.endDateemp);
+}
+compareDates2(index: any) {
+  index=0
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  this.startdateemp = control['relstartdate'].value;
+  this.endDateemp = control['relenddate'].value;
+  console.log(this.startdateemp);
+  console.log(this.endDateemp);
+  let start: any = new Date(this.startdateemp);
+  let end: any = new Date(this.endDateemp);
+  this.diff = (end - start)  ;
+  let msInDay = 1000 * 3600 * 24;
+  this.noOfDays = this.diff / msInDay;
+  console.log('new Date ', this.diff / msInDay);
+debugger
+  if (this.startdateemp != null && this.endDateemp != null && this.endDateemp!= "") {
+    this.getDurationrelemp(index);
+  }
+}
+getDurationrelemp(index: any) {
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  var years = Math.floor(this.noOfDays / 365);
+  var months = Math.floor((this.noOfDays % 365) / 30);
+  var days = Math.floor((this.noOfDays % 365) % 30);
+
+  if (years == 0 && months == 0) {
+    this.whDuration1 = String([days, ' days '].join(''));
+  } else if (months == 0) {
+    this.whDuration1 = String([years, ` years `, days, ' days '].join(''));
+  } else if (years == 0) {
+    this.whDuration1 = String([months, ' months ', days, ' days '].join(''));
+  } else {
+    this.whDuration1 = String(
+      [years, ` years `, months, ' months ', days, ' days '].join('')
+    );
+  }
+  control['relservicedays'].setValue(this.whDuration1);
+  return console.log(this.whDuration1);
+}
+clearancedate(index:any=0){
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  var someDate = control['relenddate'].value;
+var numberOfDaysToAdd = 15;
+var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+console.log(new Date(result))
+  control['relclrdate'].setValue(this.whDuration1);
+  return console.log(this.whDuration1);
+}
+
 //////////////addpermannetemploye/////
 addPerEmp():void{
   this.emsTblPermanentEmployee=this.personalDetailsForm.get(
