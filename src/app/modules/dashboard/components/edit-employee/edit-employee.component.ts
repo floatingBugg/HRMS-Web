@@ -641,12 +641,13 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateData() {
+
     let form = this.personalDetailsForm.value;
-    this.assetAssignDT.forEach((elem: any, index: any) => {
+    this.assetdata._data._value.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
     console.log(this.personalDetailsForm.value);
-    
+    debugger;
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
       .subscribe((result) => {
@@ -1097,7 +1098,6 @@ addPerEmp():void{
 }
 
 getPerDate(index: any) {
-  debugger
   let control = this.personalDetailsForm.get(
     'emsTblPermanentEmployee'
   )['controls'][index]['controls'];
