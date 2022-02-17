@@ -44,13 +44,14 @@ export class EditEmployeeComponent implements OnInit {
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
   releasedEmp:boolean=false;
+  validdate:any;
   resignedEmp:boolean=false;
   parttimeEmp:boolean=false;
   interEmp:boolean=false;
   startdateemp:any;
   endDateemp:any;
   public editDataArray: any = FormArray;
-  publicemsTblpermanent:any=FormArray;
+  public emsTblpermanent:any=FormArray;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -99,13 +100,16 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
+  public currentIndexPermanentEmp:any =-1;
   public currentIndexWorkingHistory: any = -1;
   public currentIndexProfessionalDetails: any = 0;
+  public employeeData:any;
   ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
+  permannetEmployee:any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
   workingHistory: any;
@@ -130,11 +134,13 @@ export class EditEmployeeComponent implements OnInit {
     public route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public inventoryservice: InventoryService
+    public inventoryservice: InventoryService,    
   ) {
     this.updateForm();
   }
   ngOnInit() {
+    // this.leaveform.controls['name'].setValue(this.leave.name)
+    
     this.id = this.route.snapshot.paramMap.get('id');
     this.getEmployeeAsset(this.id);
     this.getDropdownValue(1);
@@ -213,6 +219,8 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etrethuroleid'].setValue(
           this.roleid.toString()
         );
+      
+        
         ///////Professional Details//////
         this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
@@ -267,6 +275,43 @@ export class EditEmployeeComponent implements OnInit {
           );
         }
 
+        //////////////permannet Employe////////
+
+        this.permannetEmployee = oneEmployeeData.emsTblPermanentEmployee;
+        for (let i = 0; i < this.permannetEmployee.length; i++) {
+          this.addPerEmp();
+          let controlPermanentEmployee =
+            this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+              'controls'
+            ][i]['controls'];
+
+            controlPermanentEmployee['etepdPermJoinDate'].setValue(
+            this.permannetEmployee[i]['etepdPermJoinDate']
+          );
+          controlPermanentEmployee['etepdEmpProb'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb']
+          );
+          controlPermanentEmployee['etepdPermIncDate'].setValue(
+            this.permannetEmployee[i]['etepdPermIncDate']
+          );
+          controlPermanentEmployee['etepdEmpProb1'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb1']
+          );
+          controlPermanentEmployee['etperEmpDuration'].setValue(
+            this.permannetEmployee[i]['etperEmpDuration']
+          );
+          controlPermanentEmployee['etepdEmpInc'].setValue(
+            this.permannetEmployee[i]['etepdEmpInc']
+          );
+          controlPermanentEmployee['etedperremarks'].setValue(
+            this.permannetEmployee[i]['etedperremarks']
+          );
+          debugger
+          controlPermanentEmployee['etepdPerSalary'].setValue(
+            this.professionalDetails[0]['etepdSalary']
+          );
+        }
+
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -305,7 +350,9 @@ export class EditEmployeeComponent implements OnInit {
             this.academicQualification[i]['etaqInstituteName']
           );
         }
-        
+        this.personalDetailsForm.controls[
+          'emsTblPermanentEmployee'
+        ]['controls'][0]['controls'].setValue(this.personaldetails,1);
 
         ////////Professional Qualification////////
         this.professionalQualification =
@@ -393,6 +440,15 @@ export class EditEmployeeComponent implements OnInit {
     });
             /////////employe status//////////
   }
+  getEmployeeData() {
+    this.empDataService.getEmployeeData().subscribe( (data:any) => {
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      var salary = this.employeeData.filteredData[0].etepdSalary;
+     // this.employeeData.sort = this.sort;
+      this.empDataService.salary = salary;
+
+    });
+  }
   Assignleave(event: any) {
     console.log(event);
     if (event.value == 'Active') {
@@ -421,6 +477,8 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
+
+  
 
   //     control['etepdDesignation'].setValue(
   //       abc
@@ -541,6 +599,7 @@ export class EditEmployeeComponent implements OnInit {
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
+      etedempStatus:['']
     });
   }
   addProfessionalDetails(): void {
@@ -814,6 +873,18 @@ export class EditEmployeeComponent implements OnInit {
       return false;
     }
   }
+
+  isPermanentEmployeeDisabled() {
+    if (this.currentIndexPermanentEmp >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+          'controls'
+        ][this.currentIndexPermanentEmp].valid;
+      return !result;
+    } else {
+      return false;
+    }
+  }
   //Current Index Setter Emergency
   setCurrentIndexEmergency(index: any) {
     this.currentIndexEmergency = index;
@@ -825,6 +896,9 @@ export class EditEmployeeComponent implements OnInit {
   //Current Index Setter Professional Qualification
   setCurrentIndexProfessionalQualification(index: any) {
     this.currentIndexProfessionalQ = index;
+  }
+  setCurrentIndexPermannetEmployee(index:any){
+    this.currentIndexPermanentEmp = index;
   }
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
@@ -1022,10 +1096,18 @@ addemsTblPermanentEmployee():FormGroup{
   return this.fb.group({
     etepdPermJoinDate:['',Validators.required],
     etepdEmpProb:[''],
-    etperEmpDuration:['']
+    etepdPermIncDate:[''],
+    etepdEmpProb1:[''],
+    // etepdEmpProb:[''],
+    etperEmpDuration:[''],
+    etepdEmpInc:[''],
+    etedperremarks:[''],
+    etepdPerSalary:['']
+
 
   })
 }
+<<<<<<< Updated upstream
 ///////////////Released Employee Duration Cal//////////////
 onKeypressEvent(event: any, i: any) {
   this.startdateemp = event.target.value;
@@ -1089,6 +1171,15 @@ console.log(new Date(result))
   return console.log(this.whDuration1);
 }
 
+=======
+///////////////change date///////////
+setDate(event:any){
+let control = this.personalDetailsForm.get(
+  'emsTblPermanentEmployee'
+)['controls'][0]['controls'];
+control['etepdPermIncDate'].setValue(new Date(event))
+}
+>>>>>>> Stashed changes
 //////////////addpermannetemploye/////
 addPerEmp():void{
   this.emsTblPermanentEmployee=this.personalDetailsForm.get(
@@ -1113,7 +1204,15 @@ getPerDate(index: any) {
   }).format(this.newDate);control
   ['etepdEmpProb'].setValue(this.perprobDate1);
 }
+// perdate(){
+//   var validdate = this.newDate;
+  
+//   var control =  this.personalDetailsForm.controls[
+//     'emsTblPermanentEmployee'
+//   ]['controls'][0]['controls'];
 
+//   control['etepdEmpProb1'].setValue(this.validdate);
+// }
 
   DownloadFile(path: any) {
     saveAs(path);

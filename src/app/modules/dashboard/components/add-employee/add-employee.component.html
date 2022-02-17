@@ -591,7 +591,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="row mt-3">
                 <div class="col-md-offset-2 col-lg-5 col-md-4">
 
@@ -611,11 +611,19 @@
           </div>
         </mat-step>
 
+<<<<<<< Updated upstream
       
 
         <div *ngIf="permanentEmp">
           <mat-step label="Permanent Employee">
             <div class="container">
+=======
+        <mat-step label="Professional Qualification">
+          <div class="form-group">
+            <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
+              *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
+              {{setCurrentIndexProfessionalQualification(i)}}
+>>>>>>> Stashed changes
               <div class="form-group">
                 <div formArrayName="EemsTblPermanentEmployee"
                   *ngFor="let item of personalDetailsForm.get('EemsTblPermanentEmployee')['controls']; let i = index;">
