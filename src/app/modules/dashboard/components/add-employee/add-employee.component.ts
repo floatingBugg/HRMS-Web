@@ -759,6 +759,9 @@ export class AddEmployeeComponent implements OnInit {
     ['etepdProbation'].setValue(this.probationDate);
   }
 
+
+
+
   checkEmergencyInput(emergencyFirstName: any) {
     let btn = <HTMLInputElement>document.getElementById('emergencyBtn');
     emergencyFirstName = <HTMLInputElement>(

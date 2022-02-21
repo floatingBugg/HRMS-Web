@@ -611,46 +611,6 @@
           </div>
         </mat-step>
 
-      
-
-        <div *ngIf="permanentEmp">
-          <mat-step label="Permanent Employee">
-            <div class="container">
-              <div class="form-group">
-                <div formArrayName="EemsTblPermanentEmployee"
-                  *ngFor="let item of personalDetailsForm.get('EemsTblPermanentEmployee')['controls']; let i = index;">
-
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
-                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
-                        <mat-label>Start Date</mat-label>
-                        <input readonly matInput formControlName="etepdPermanentJoiningDate"
-                          name="etepdPermanentJoiningDate" [matDatepicker]="picker">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="item.controls['etepdPermanentJoiningDate'].errors?.['required']">
-                          Joining Date is <strong>required</strong></mat-error>
-                      </mat-form-field>
-                    </div>
-                  </div>
-                  <div class="prob">
-                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
-                      <mat-label>Probation Period</mat-label>
-                      <input value="1" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
-
-                    </mat-form-field>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </mat-step>
-          </div>
-
-
-
-
-
           <mat-step label="Professional Qualification">
             <div class="form-group">
               <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"

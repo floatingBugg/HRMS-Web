@@ -40,6 +40,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
   empreleaseddata:any=  FormArray;
+  empresigneddata:any=FormArray;
   imsAssign: any = FormArray;
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
@@ -71,6 +72,7 @@ export class EditEmployeeComponent implements OnInit {
   public role: any;
   probationDate: any;
   monthval: any = 3;
+  daysvalue:any=15;
   newDate: any;
   whDuration: any;
   whStartDate: any;
@@ -123,6 +125,7 @@ export class EditEmployeeComponent implements OnInit {
   assetEditData: any;
   whDuration1: any;
   diff2: any;
+  noticeperiod: any=1;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -449,6 +452,58 @@ export class EditEmployeeComponent implements OnInit {
             ) as FormArray;
             this.empreleaseddata.push(this.addempreleaseddata());
           }    
+          /////////////Resigned employee/////////////////
+          addempresigneddata(): FormGroup {
+            return this.fb.group({
+              Resigndate: ['', Validators.required],
+              Resignperiod: [''],
+              Resignreldate: ['' ],
+              Resignclrdate: [''],
+              Resignremarks: [''],
+              
+            });
+          }
+        
+          addresignempdata(): void {
+            this.empresigneddata = this.personalDetailsForm.get(
+              'empresigneddata'
+            ) as FormArray;
+            this.empresigneddata.push(this.addempresigneddata());
+          }    
+Resignednoticeperiod(index:any){
+  let control = this.personalDetailsForm.get(
+    'empresigneddata'
+  )['controls'][index]['controls'];
+  let pdjoinDate = control['Resigndate'].value;
+  let d = new Date(pdjoinDate);
+  this.noticeperiod = (<HTMLInputElement>(
+    document.getElementById('noticeperiod')
+  )).value;
+  debugger
+  let probationDate = d.setMonth(d.getMonth() + parseInt(this.noticeperiod));
+  this.newDate = new Date(probationDate);
+  this.probationDate = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'full',
+  }).format(this.newDate);control
+  ['Resignreldate'].setValue(this.probationDate);
+}
+
+resignclearancedate(index:any){
+  index=0;
+  let control = this.personalDetailsForm.get('empresigneddata')[
+    'controls'
+  ][index]['controls'];
+  debugger
+  let pdjoinDate1 = control['Resignreldate'].value;
+    let d = new Date(pdjoinDate1);
+    let probationDate1 = d.setDate(d.getDate()+15);
+    this.newDate = new Date(probationDate1);
+    var probationDate2 = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate);
+    control['Resignclrdate'].setValue(probationDate2);
+}
+
 
   getDropdownValue(id: number) {
     this.Id = id;
@@ -635,19 +690,19 @@ export class EditEmployeeComponent implements OnInit {
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
       emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
-      empreleaseddata:this.fb.array([this.addempreleaseddata()])
+      empreleaseddata:this.fb.array([this.addempreleaseddata()]),
+      empresigneddata:this.fb.array([this.addempresigneddata()])
       
     });
   }
 
   updateData() {
-
     let form = this.personalDetailsForm.value;
-    this.assetdata._data._value.forEach((elem: any, index: any) => {
+    this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
     console.log(this.personalDetailsForm.value);
-    debugger;
+    
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
       .subscribe((result) => {
@@ -1081,12 +1136,15 @@ clearancedate(index:any=0){
   let control = this.personalDetailsForm.get('empreleaseddata')[
     'controls'
   ][index]['controls'];
-  var someDate = control['relenddate'].value;
-var numberOfDaysToAdd = 15;
-var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
-console.log(new Date(result))
-  control['relclrdate'].setValue(this.whDuration1);
-  return console.log(this.whDuration1);
+  debugger
+  let pdjoinDate1 = control['relenddate'].value;
+    let d = new Date(pdjoinDate1);
+    let probationDate = d.setDate(d.getDate() + 15);
+    this.newDate = new Date(probationDate);
+    this.probationDate = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate);
+    control['relclrdate'].setValue(this.probationDate);
 }
 
 //////////////addpermannetemploye/////
@@ -1098,6 +1156,7 @@ addPerEmp():void{
 }
 
 getPerDate(index: any) {
+  debugger
   let control = this.personalDetailsForm.get(
     'emsTblPermanentEmployee'
   )['controls'][index]['controls'];
