@@ -12,6 +12,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { MatSort } from '@angular/material/sort';
+import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
 
 @Component({
   selector: 'apFp-edit-employee',
@@ -621,7 +622,8 @@ export class EditEmployeeComponent implements OnInit {
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
-    console.log(this.personalDetailsForm.value);
+    console.log(form.imsAssign);
+    console.log(this.assetAssignDT);
     
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
@@ -905,6 +907,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   tempTable() {
+    debugger;
     this.assetAssignDT = [];
     this.assetAssignDT = this.assetEditData;
     this.inventory.assetObj.forEach((elem: any, index: any) => {
@@ -933,12 +936,14 @@ export class EditEmployeeComponent implements OnInit {
     });
     this.assetAssignDT.push(this.assetAssignObj);
     this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+    
 
     // this.addAssetAssignList().setValue(this.assetAssignDT);
     // this.addImsAssign();
     //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
   }
 
+  
   addImsAssign(): void {
     this.imsAssign = this.personalDetailsForm.get('imsAssign') as FormArray;
     let assignForm = this.addAssetAssignList();
@@ -1027,6 +1032,27 @@ getPerDate(index: any) {
   ['etepdEmpProb'].setValue(this.perprobDate1);
 }
 
+
+  unAssignAssetById(itasItaAssetId: any) {
+
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+
+      if (res == true) {
+
+       
+
+       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
+
+       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
+
+       this.tempTable();
+
+
+      }
+    });
+  }
 
   DownloadFile(path: any) {
     saveAs(path);
