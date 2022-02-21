@@ -46,28 +46,26 @@ export class AddEmployeeComponent implements OnInit {
   emsTblEmergencyContact: any = FormArray;
   imsAssign:any=FormArray;
   empleaveassign: any=FormArray;
-  emsTblPermanentEmployee:any=FormArray;
   whStartDate: any;
   whStartDates: any;
   enum : any;
   whEndDate: any;
   startDate: any;
   day: any;
+  showAddNewDropDownField:boolean=false;
+  assignleavestep:boolean=false;
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
   releasedEmp:boolean=false;
   resignedEmp:boolean=false;
   parttimeEmp:boolean=false;
   interEmp:boolean=false;
-  showAddNewDropDownField:boolean=false;
-  assignleavestep:boolean=false;
   diff: any;
   profDetailsJoiningDate: any;
   noOfDays: any;
   monthValue: any;
   newDate: any;
   probationDate: any;
-  probationDate1:any;
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
@@ -96,7 +94,6 @@ export class AddEmployeeComponent implements OnInit {
   deg:any;
   des:any;
   managerid:any;
-  perprobDate:any;
   mon:any;
   Month: any[] = ['mtId','degMonth'];
   dasignationdDdlVal: any;
@@ -467,8 +464,6 @@ export class AddEmployeeComponent implements OnInit {
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
-      
-
     });
   }
   addProfessionalDetails(): void {
@@ -517,8 +512,6 @@ export class AddEmployeeComponent implements OnInit {
     ) as FormArray;
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
-  /////////////permanent emp/////////
-
   permanentEmpstatus(event:any){
     console.log(event);
     if(event.value == 'Permanent'){
@@ -554,8 +547,6 @@ export class AddEmployeeComponent implements OnInit {
 
       
     }
-    
-  
     ////Assign Leave////
     /////On active enabling/////{
     leaveassign(event:any){
@@ -566,14 +557,24 @@ export class AddEmployeeComponent implements OnInit {
         this.assignleavestep=false;
       }
     }
-    
+    leav(event:any){
+      console.log(event);
+      if(event.value == 'Active'){
+        this.assignleavestep=true;
+      }else{
+        this.assignleavestep=false;
+      }
+    }
 //////////////leave from array////////
     addempleaveassign():FormGroup{
       return this.fb.group({
         etpMonth:['',Validators.required],
         lmslrAnnualAssign:[''],
         lmslrSickAssign:[''],
-        lmslrCasualAssign:['']
+        lmslrCasualAssign:[''],
+        lmslrAnnualTaken:[''],
+        lmslrSicktaken:[''],
+        lmslrCasualTaken:['']
       });
     }
     /////adding leave to personaldetail from///
@@ -597,9 +598,14 @@ export class AddEmployeeComponent implements OnInit {
     control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
     control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
     control['lmslrSickAssign'].setValue(Math.round(sickLeave));
+    control['lmslrCasualTaken'].setValue(Math.round(casualLeave));
+    control['lmslrAnnualTaken'].setValue(Math.round(anualLeave));
+    control['lmslrSickTaken'].setValue(Math.round(sickLeave));
    
 
   }
+
+  
    ////////////////////////////////////
   //////////createform//////////////
 
@@ -684,10 +690,8 @@ export class AddEmployeeComponent implements OnInit {
           console.log(result.message);
         }
       });
+   
   }
-
-
-  //////////only Numbers Allowed/////////
   onlyNumbersAllowed(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -695,7 +699,6 @@ export class AddEmployeeComponent implements OnInit {
     }
     return true;
   }
-  ////////start & end Date///////////////
   onKeypressEvent(event: any, i: any) {
     this.whStartDate = event.target.value;
     console.log(this.whStartDate);
@@ -705,7 +708,6 @@ export class AddEmployeeComponent implements OnInit {
     console.log(this.whEndDate);
   }
 
-  //////////comparing both dates//////////////
   compareDates(index: any) {
     let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
       'controls'
@@ -725,7 +727,7 @@ export class AddEmployeeComponent implements OnInit {
       this.getDuration(index);
     }
   }
-////////////////counting dates between 2 dates////////////////
+
   getDuration(index: any) {
     let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
       'controls'
@@ -766,35 +768,6 @@ export class AddEmployeeComponent implements OnInit {
     ['etepdProbation'].setValue(this.probationDate);
   }
 
-  
-  //////////////permannet EMp Duration///////
-
-  // getPermanentDuration(index: any) {
-  //   debugger
-  //   let control = this.personalDetailsForm.get('emsTblPermanentEmployee')[
-  //     'controls'
-  //   ][index]['controls'];
-  //   var years = Math.floor(this.noOfDays / 365);
-  //   var months = Math.floor((this.noOfDays % 365) / 30);
-  //   var days = Math.floor((this.noOfDays % 365) % 30);
-
-  //   if (years == 0 && months == 0) {
-  //     this.perprobDate = String([days, ' days '].join(''));
-  //   } else if (months == 0) {
-  //     this.perprobDate = String([years, ` years `, days, ' days '].join(''));
-  //   } else if (years == 0) {
-  //     this.perprobDate = String([months, ' months ', days, ' days '].join(''));
-  //   } else {
-  //     this.perprobDate = String(
-  //       [years, ` years `, months, ' months ', days, ' days '].join('')
-  //     );
-  //   }
-  //   control['etepdEmpProb'].setValue(this.perprobDate);
-  //   return console.log(this.perprobDate);
-  // }
-
-  
-/////////////emergency Contact//////////////////
   checkEmergencyInput(emergencyFirstName: any) {
     let btn = <HTMLInputElement>document.getElementById('emergencyBtn');
     emergencyFirstName = <HTMLInputElement>(

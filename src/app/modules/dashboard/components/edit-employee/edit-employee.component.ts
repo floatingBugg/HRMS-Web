@@ -13,6 +13,7 @@ import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { MatSort } from '@angular/material/sort';
 import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
+import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 
 @Component({
   selector: 'apFp-edit-employee',
@@ -41,15 +42,19 @@ export class EditEmployeeComponent implements OnInit {
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
+  empreleaseddata:any=  FormArray;
   imsAssign: any = FormArray;
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
   releasedEmp:boolean=false;
+  validdate:any;
   resignedEmp:boolean=false;
   parttimeEmp:boolean=false;
   interEmp:boolean=false;
+  startdateemp:any;
+  endDateemp:any;
   public editDataArray: any = FormArray;
-  publicemsTblpermanent:any=FormArray;
+  public emsTblpermanent:any=FormArray;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -98,13 +103,16 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
+  public currentIndexPermanentEmp:any =-1;
   public currentIndexWorkingHistory: any = -1;
   public currentIndexProfessionalDetails: any = 0;
+  public employeeData:any;
   ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
+  permannetEmployee:any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
   workingHistory: any;
@@ -120,6 +128,8 @@ export class EditEmployeeComponent implements OnInit {
   value: any;
   value1: any;
   assetEditData: any;
+  whDuration1: any;
+  diff2: any;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -127,11 +137,13 @@ export class EditEmployeeComponent implements OnInit {
     public route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public inventoryservice: InventoryService
+    public inventoryservice: InventoryService,    
   ) {
     this.updateForm();
   }
   ngOnInit() {
+    // this.leaveform.controls['name'].setValue(this.leave.name)
+    
     this.id = this.route.snapshot.paramMap.get('id');
     this.getEmployeeAsset(this.id);
     this.getDropdownValue(1);
@@ -210,6 +222,8 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etrethuroleid'].setValue(
           this.roleid.toString()
         );
+      
+        
         ///////Professional Details//////
         this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
@@ -264,6 +278,43 @@ export class EditEmployeeComponent implements OnInit {
           );
         }
 
+        //////////////permannet Employe////////
+
+        this.permannetEmployee = oneEmployeeData.emsTblPermanentEmployee;
+        for (let i = 0; i < this.permannetEmployee.length; i++) {
+          this.addPerEmp();
+          let controlPermanentEmployee =
+            this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+              'controls'
+            ][i]['controls'];
+
+            controlPermanentEmployee['etepdPermJoinDate'].setValue(
+            this.permannetEmployee[i]['etepdPermJoinDate']
+          );
+          controlPermanentEmployee['etepdEmpProb'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb']
+          );
+          controlPermanentEmployee['etepdPermIncDate'].setValue(
+            this.permannetEmployee[i]['etepdPermIncDate']
+          );
+          controlPermanentEmployee['etepdEmpProb1'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb1']
+          );
+          controlPermanentEmployee['etperEmpDuration'].setValue(
+            this.permannetEmployee[i]['etperEmpDuration']
+          );
+          controlPermanentEmployee['etepdEmpInc'].setValue(
+            this.permannetEmployee[i]['etepdEmpInc']
+          );
+          controlPermanentEmployee['etedperremarks'].setValue(
+            this.permannetEmployee[i]['etedperremarks']
+          );
+          debugger
+          controlPermanentEmployee['etepdPerSalary'].setValue(
+            this.professionalDetails[0]['etepdSalary']
+          );
+        }
+
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -302,7 +353,9 @@ export class EditEmployeeComponent implements OnInit {
             this.academicQualification[i]['etaqInstituteName']
           );
         }
-        
+        this.personalDetailsForm.controls[
+          'emsTblPermanentEmployee'
+        ]['controls'][0]['controls'].setValue(this.personaldetails,1);
 
         ////////Professional Qualification////////
         this.professionalQualification =
@@ -390,6 +443,15 @@ export class EditEmployeeComponent implements OnInit {
     });
             /////////employe status//////////
   }
+  getEmployeeData() {
+    this.empDataService.getEmployeeData().subscribe( (data:any) => {
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      var salary = this.employeeData.filteredData[0].etepdSalary;
+     // this.employeeData.sort = this.sort;
+      this.empDataService.salary = salary;
+
+    });
+  }
   Assignleave(event: any) {
     console.log(event);
     if (event.value == 'Active') {
@@ -419,6 +481,8 @@ export class EditEmployeeComponent implements OnInit {
     });
   }
 
+  
+
   //     control['etepdDesignation'].setValue(
   //       abc
   //     );
@@ -427,6 +491,25 @@ export class EditEmployeeComponent implements OnInit {
   // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
   // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
   // debugger
+
+          /////////////Released//////////////
+          addempreleaseddata(): FormGroup {
+            return this.fb.group({
+              relstartdate: ['', Validators.required],
+              relenddate: ['',Validators.required],
+              relservicedays: ['' ],
+              relclrdate: [''],
+              relremarks: [''],
+              
+            });
+          }
+        
+          addrelempdata(): void {
+            this.empreleaseddata = this.personalDetailsForm.get(
+              'empreleaseddata'
+            ) as FormArray;
+            this.empreleaseddata.push(this.addempreleaseddata());
+          }    
 
   getDropdownValue(id: number) {
     this.Id = id;
@@ -519,6 +602,7 @@ export class EditEmployeeComponent implements OnInit {
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
+      etedempStatus:['']
     });
   }
   addProfessionalDetails(): void {
@@ -613,13 +697,15 @@ export class EditEmployeeComponent implements OnInit {
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
       emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
+      empreleaseddata:this.fb.array([this.addempreleaseddata()])
       
     });
   }
 
   updateData() {
+
     let form = this.personalDetailsForm.value;
-    this.assetAssignDT.forEach((elem: any, index: any) => {
+    this.assetdata._data._value.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
     console.log(form.imsAssign);
@@ -791,6 +877,18 @@ export class EditEmployeeComponent implements OnInit {
       return false;
     }
   }
+
+  isPermanentEmployeeDisabled() {
+    if (this.currentIndexPermanentEmp >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+          'controls'
+        ][this.currentIndexPermanentEmp].valid;
+      return !result;
+    } else {
+      return false;
+    }
+  }
   //Current Index Setter Emergency
   setCurrentIndexEmergency(index: any) {
     this.currentIndexEmergency = index;
@@ -802,6 +900,9 @@ export class EditEmployeeComponent implements OnInit {
   //Current Index Setter Professional Qualification
   setCurrentIndexProfessionalQualification(index: any) {
     this.currentIndexProfessionalQ = index;
+  }
+  setCurrentIndexPermannetEmployee(index:any){
+    this.currentIndexPermanentEmp = index;
   }
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
@@ -1002,9 +1103,86 @@ addemsTblPermanentEmployee():FormGroup{
   return this.fb.group({
     etepdPermJoinDate:['',Validators.required],
     etepdEmpProb:[''],
-    etperEmpDuration:['']
+    etepdPermIncDate:[''],
+    etepdEmpProb1:[''],
+    // etepdEmpProb:[''],
+    etperEmpDuration:[''],
+    etepdEmpInc:[''],
+    etedperremarks:[''],
+    etepdPerSalary:['']
+
 
   })
+}
+///////////////Released Employee Duration Cal//////////////
+onKeypressEvent(event: any, i: any) {
+  this.startdateemp = event.target.value;
+  console.log(this.startdateemp);
+}
+onKeypressEvent2(event: any, i: any) {
+  this.endDateemp = event.target.value;
+  console.log(this.endDateemp);
+}
+compareDates2(index: any) {
+  index=0
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  this.startdateemp = control['relstartdate'].value;
+  this.endDateemp = control['relenddate'].value;
+  console.log(this.startdateemp);
+  console.log(this.endDateemp);
+  let start: any = new Date(this.startdateemp);
+  let end: any = new Date(this.endDateemp);
+  this.diff = (end - start)  ;
+  let msInDay = 1000 * 3600 * 24;
+  this.noOfDays = this.diff / msInDay;
+  console.log('new Date ', this.diff / msInDay);
+debugger
+  if (this.startdateemp != null && this.endDateemp != null && this.endDateemp!= "") {
+    this.getDurationrelemp(index);
+  }
+}
+getDurationrelemp(index: any) {
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  var years = Math.floor(this.noOfDays / 365);
+  var months = Math.floor((this.noOfDays % 365) / 30);
+  var days = Math.floor((this.noOfDays % 365) % 30);
+
+  if (years == 0 && months == 0) {
+    this.whDuration1 = String([days, ' days '].join(''));
+  } else if (months == 0) {
+    this.whDuration1 = String([years, ` years `, days, ' days '].join(''));
+  } else if (years == 0) {
+    this.whDuration1 = String([months, ' months ', days, ' days '].join(''));
+  } else {
+    this.whDuration1 = String(
+      [years, ` years `, months, ' months ', days, ' days '].join('')
+    );
+  }
+  control['relservicedays'].setValue(this.whDuration1);
+  return console.log(this.whDuration1);
+}
+clearancedate(index:any=0){
+  let control = this.personalDetailsForm.get('empreleaseddata')[
+    'controls'
+  ][index]['controls'];
+  var someDate = control['relenddate'].value;
+var numberOfDaysToAdd = 15;
+var result = someDate.setDate(someDate.getDate() + numberOfDaysToAdd);
+console.log(new Date(result))
+  control['relclrdate'].setValue(this.whDuration1);
+  return console.log(this.whDuration1);
+}
+
+///////////////change date///////////
+setDate(event:any){
+let control = this.personalDetailsForm.get(
+  'emsTblPermanentEmployee'
+)['controls'][0]['controls'];
+control['etepdPermIncDate'].setValue(new Date(event))
 }
 //////////////addpermannetemploye/////
 addPerEmp():void{
@@ -1015,7 +1193,6 @@ addPerEmp():void{
 }
 
 getPerDate(index: any) {
-  debugger
   let control = this.personalDetailsForm.get(
     'emsTblPermanentEmployee'
   )['controls'][index]['controls'];
@@ -1031,7 +1208,15 @@ getPerDate(index: any) {
   }).format(this.newDate);control
   ['etepdEmpProb'].setValue(this.perprobDate1);
 }
+// perdate(){
+//   var validdate = this.newDate;
+  
+//   var control =  this.personalDetailsForm.controls[
+//     'emsTblPermanentEmployee'
+//   ]['controls'][0]['controls'];
 
+//   control['etepdEmpProb1'].setValue(this.validdate);
+// }
 
   unAssignAssetById(itasItaAssetId: any) {
 
