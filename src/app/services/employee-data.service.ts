@@ -13,10 +13,11 @@ import { AcademicForm } from '../modules/dashboard/components/add-employee/acade
 import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
+  
 })
 export class EmployeeDataService {
   // [x: string]: string;
- 
+  salary: any;
   constructor(
     private personalDetails: PersonalDetailsService,
     private fb: FormBuilder,
@@ -65,4 +66,5 @@ export class EmployeeDataService {
   //     this.router.navigate(['/dashboard/editemployee']);
   //   });
   // }
+  
 }

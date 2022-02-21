@@ -11,6 +11,9 @@ import { InventoryService } from 'src/app/services/inventory.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
+import { MatSort } from '@angular/material/sort';
+import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
+import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
 
 @Component({
   selector: 'apFp-edit-employee',
@@ -45,13 +48,14 @@ export class EditEmployeeComponent implements OnInit {
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
   releasedEmp:boolean=false;
+  validdate:any;
   resignedEmp:boolean=false;
   parttimeEmp:boolean=false;
   interEmp:boolean=false;
   startdateemp:any;
   endDateemp:any;
   public editDataArray: any = FormArray;
-  publicemsTblpermanent:any=FormArray;
+  public emsTblpermanent:any=FormArray;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -101,13 +105,16 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
+  public currentIndexPermanentEmp:any =-1;
   public currentIndexWorkingHistory: any = -1;
   public currentIndexProfessionalDetails: any = 0;
+  public employeeData:any;
   ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
+  permannetEmployee:any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
   workingHistory: any;
@@ -133,11 +140,13 @@ export class EditEmployeeComponent implements OnInit {
     public route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public inventoryservice: InventoryService
+    public inventoryservice: InventoryService,    
   ) {
     this.updateForm();
   }
   ngOnInit() {
+    // this.leaveform.controls['name'].setValue(this.leave.name)
+    
     this.id = this.route.snapshot.paramMap.get('id');
     this.getEmployeeAsset(this.id);
     this.getDropdownValue(1);
@@ -216,6 +225,8 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etrethuroleid'].setValue(
           this.roleid.toString()
         );
+      
+        
         ///////Professional Details//////
         this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
@@ -270,6 +281,43 @@ export class EditEmployeeComponent implements OnInit {
           );
         }
 
+        //////////////permannet Employe////////
+
+        this.permannetEmployee = oneEmployeeData.emsTblPermanentEmployee;
+        for (let i = 0; i < this.permannetEmployee.length; i++) {
+          this.addPerEmp();
+          let controlPermanentEmployee =
+            this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+              'controls'
+            ][i]['controls'];
+
+            controlPermanentEmployee['etepdPermJoinDate'].setValue(
+            this.permannetEmployee[i]['etepdPermJoinDate']
+          );
+          controlPermanentEmployee['etepdEmpProb'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb']
+          );
+          controlPermanentEmployee['etepdPermIncDate'].setValue(
+            this.permannetEmployee[i]['etepdPermIncDate']
+          );
+          controlPermanentEmployee['etepdEmpProb1'].setValue(
+            this.permannetEmployee[i]['etepdEmpProb1']
+          );
+          controlPermanentEmployee['etperEmpDuration'].setValue(
+            this.permannetEmployee[i]['etperEmpDuration']
+          );
+          controlPermanentEmployee['etepdEmpInc'].setValue(
+            this.permannetEmployee[i]['etepdEmpInc']
+          );
+          controlPermanentEmployee['etedperremarks'].setValue(
+            this.permannetEmployee[i]['etedperremarks']
+          );
+          debugger
+          controlPermanentEmployee['etepdPerSalary'].setValue(
+            this.professionalDetails[0]['etepdSalary']
+          );
+        }
+
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -308,7 +356,9 @@ export class EditEmployeeComponent implements OnInit {
             this.academicQualification[i]['etaqInstituteName']
           );
         }
-        
+        this.personalDetailsForm.controls[
+          'emsTblPermanentEmployee'
+        ]['controls'][0]['controls'].setValue(this.personaldetails,1);
 
         ////////Professional Qualification////////
         this.professionalQualification =
@@ -396,6 +446,15 @@ export class EditEmployeeComponent implements OnInit {
     });
             /////////employe status//////////
   }
+  getEmployeeData() {
+    this.empDataService.getEmployeeData().subscribe( (data:any) => {
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      var salary = this.employeeData.filteredData[0].etepdSalary;
+     // this.employeeData.sort = this.sort;
+      this.empDataService.salary = salary;
+
+    });
+  }
   Assignleave(event: any) {
     console.log(event);
     if (event.value == 'Active') {
@@ -424,6 +483,8 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
+
+  
 
   //     control['etepdDesignation'].setValue(
   //       abc
@@ -596,6 +657,7 @@ resignclearancedate(index:any){
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
+      etedempStatus:['']
     });
   }
   addProfessionalDetails(): void {
@@ -701,7 +763,12 @@ resignclearancedate(index:any){
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
+<<<<<<< HEAD
     console.log(this.personalDetailsForm.value);
+=======
+    console.log(form.imsAssign);
+    console.log(this.assetAssignDT);
+>>>>>>> 74adfb3547ba4eba5a7043b3b433b69a8848fbc7
     
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
@@ -869,6 +936,18 @@ resignclearancedate(index:any){
       return false;
     }
   }
+
+  isPermanentEmployeeDisabled() {
+    if (this.currentIndexPermanentEmp >= 0) {
+      let result =
+        this.personalDetailsForm.controls['emsTblPermanentEmployee'][
+          'controls'
+        ][this.currentIndexPermanentEmp].valid;
+      return !result;
+    } else {
+      return false;
+    }
+  }
   //Current Index Setter Emergency
   setCurrentIndexEmergency(index: any) {
     this.currentIndexEmergency = index;
@@ -880,6 +959,9 @@ resignclearancedate(index:any){
   //Current Index Setter Professional Qualification
   setCurrentIndexProfessionalQualification(index: any) {
     this.currentIndexProfessionalQ = index;
+  }
+  setCurrentIndexPermannetEmployee(index:any){
+    this.currentIndexPermanentEmp = index;
   }
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
@@ -985,6 +1067,7 @@ resignclearancedate(index:any){
   }
 
   tempTable() {
+    debugger;
     this.assetAssignDT = [];
     this.assetAssignDT = this.assetEditData;
     this.inventory.assetObj.forEach((elem: any, index: any) => {
@@ -1013,12 +1096,14 @@ resignclearancedate(index:any){
     });
     this.assetAssignDT.push(this.assetAssignObj);
     this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+    
 
     // this.addAssetAssignList().setValue(this.assetAssignDT);
     // this.addImsAssign();
     //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
   }
 
+  
   addImsAssign(): void {
     this.imsAssign = this.personalDetailsForm.get('imsAssign') as FormArray;
     let assignForm = this.addAssetAssignList();
@@ -1077,7 +1162,14 @@ addemsTblPermanentEmployee():FormGroup{
   return this.fb.group({
     etepdPermJoinDate:['',Validators.required],
     etepdEmpProb:[''],
-    etperEmpDuration:['']
+    etepdPermIncDate:[''],
+    etepdEmpProb1:[''],
+    // etepdEmpProb:[''],
+    etperEmpDuration:[''],
+    etepdEmpInc:[''],
+    etedperremarks:[''],
+    etepdPerSalary:['']
+
 
   })
 }
@@ -1147,6 +1239,13 @@ clearancedate(index:any=0){
     control['relclrdate'].setValue(this.probationDate);
 }
 
+///////////////change date///////////
+setDate(event:any){
+let control = this.personalDetailsForm.get(
+  'emsTblPermanentEmployee'
+)['controls'][0]['controls'];
+control['etepdPermIncDate'].setValue(new Date(event))
+}
 //////////////addpermannetemploye/////
 addPerEmp():void{
   this.emsTblPermanentEmployee=this.personalDetailsForm.get(
@@ -1172,7 +1271,36 @@ getPerDate(index: any) {
   }).format(this.newDate);control
   ['etepdEmpProb'].setValue(this.perprobDate1);
 }
+// perdate(){
+//   var validdate = this.newDate;
+  
+//   var control =  this.personalDetailsForm.controls[
+//     'emsTblPermanentEmployee'
+//   ]['controls'][0]['controls'];
 
+//   control['etepdEmpProb1'].setValue(this.validdate);
+// }
+
+  unAssignAssetById(itasItaAssetId: any) {
+
+    const dialogRef = this.dialog.open(UnassignAssetComponent);
+
+    dialogRef.afterClosed().subscribe((res: any) => {
+
+      if (res == true) {
+
+       
+
+       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
+
+       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
+
+       this.tempTable();
+
+
+      }
+    });
+  }
 
   DownloadFile(path: any) {
     saveAs(path);

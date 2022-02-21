@@ -152,6 +152,7 @@ getEmployeeAsset(empID:any){
 }
 
   getEmployeeDataByID(rowId: any) {
+    debugger;
     this.personalDetailService
       .viewEmployeeData(rowId)
       .subscribe((data: any) => {

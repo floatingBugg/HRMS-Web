@@ -571,7 +571,10 @@ export class AddEmployeeComponent implements OnInit {
         etpMonth:['',Validators.required],
         lmslrAnnualAssign:[''],
         lmslrSickAssign:[''],
-        lmslrCasualAssign:['']
+        lmslrCasualAssign:[''],
+        lmslrAnnualTaken:[''],
+        lmslrSicktaken:[''],
+        lmslrCasualTaken:['']
       });
     }
     /////adding leave to personaldetail from///
@@ -595,9 +598,14 @@ export class AddEmployeeComponent implements OnInit {
     control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
     control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
     control['lmslrSickAssign'].setValue(Math.round(sickLeave));
+    control['lmslrCasualTaken'].setValue(Math.round(casualLeave));
+    control['lmslrAnnualTaken'].setValue(Math.round(anualLeave));
+    control['lmslrSickTaken'].setValue(Math.round(sickLeave));
    
 
   }
+
+  
    ////////////////////////////////////
   //////////createform//////////////
 
@@ -682,6 +690,7 @@ export class AddEmployeeComponent implements OnInit {
           console.log(result.message);
         }
       });
+   
   }
   onlyNumbersAllowed(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;

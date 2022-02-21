@@ -60,7 +60,6 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
   getEmployeeData() {
     this.leave.getEmployeeLeaveData().subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
-      debugger
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
      // this.employeeData.sort = this.sort;
       this.leave.name = name;

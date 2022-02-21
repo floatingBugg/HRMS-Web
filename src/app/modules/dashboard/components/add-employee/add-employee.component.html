@@ -110,22 +110,15 @@
                 Marital Status is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
-              <mat-label>Employment Status</mat-label>
+              <mat-label>User Status</mat-label>
               <mat-select formControlName="etedStatus" name="etedStatus" (selectionChange)="leaveassign($event)">
                 <mat-option [value]="">---Select One---</mat-option>
                 <!-- <mat-option (onSelectionChange)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option> -->
                 <mat-option value="Active">Active</mat-option>
-                <mat-option value="Inactive">Inactive
-                </mat-option>
-                <mat-option value="Probation">Probation
-                </mat-option>
-                <mat-option value="Released">Released
-                </mat-option>
-                <mat-option value="Resigned">Resigned
-                </mat-option>
+                <mat-option value="Inactive">Inactive</mat-option>
               </mat-select>
               <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
-                Employment Status is <strong>required</strong></mat-error>
+                User Status is <strong>required</strong></mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-5 col-md-5 input">
               <mat-label>Blood Group</mat-label>
@@ -591,7 +584,7 @@
                   </div>
                 </div>
               </div>
-              
+
               <div class="row mt-3">
                 <div class="col-md-offset-2 col-lg-5 col-md-4">
 
@@ -611,6 +604,57 @@
           </div>
         </mat-step>
 
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+      
+
+        <div *ngIf="permanentEmp">
+          <mat-step label="Permanent Employee">
+            <div class="container">
+=======
+        <mat-step label="Professional Qualification">
+          <div class="form-group">
+            <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
+              *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
+              {{setCurrentIndexProfessionalQualification(i)}}
+>>>>>>> Stashed changes
+              <div class="form-group">
+                <div formArrayName="EemsTblPermanentEmployee"
+                  *ngFor="let item of personalDetailsForm.get('EemsTblPermanentEmployee')['controls']; let i = index;">
+
+                  <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                        <mat-label>Start Date</mat-label>
+                        <input readonly matInput formControlName="etepdPermanentJoiningDate"
+                          name="etepdPermanentJoiningDate" [matDatepicker]="picker">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="item.controls['etepdPermanentJoiningDate'].errors?.['required']">
+                          Joining Date is <strong>required</strong></mat-error>
+                      </mat-form-field>
+                    </div>
+                  </div>
+                  <div class="prob">
+                    <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
+                      <mat-label>Probation Period</mat-label>
+                      <input value="1" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
+
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </mat-step>
+          </div>
+
+
+
+
+
+>>>>>>> 74adfb3547ba4eba5a7043b3b433b69a8848fbc7
           <mat-step label="Professional Qualification">
             <div class="form-group">
               <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
