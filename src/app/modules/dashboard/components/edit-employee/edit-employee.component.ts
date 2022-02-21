@@ -44,6 +44,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblEmergencyContact: any = FormArray;
   empreleaseddata:any=  FormArray;
   empresigneddata:any=FormArray;
+  interneedata:any=FormArray;
   imsAssign: any = FormArray;
   permanentEmp:boolean=false;
   contractEmp:boolean=false;
@@ -133,6 +134,7 @@ export class EditEmployeeComponent implements OnInit {
   whDuration1: any;
   diff2: any;
   noticeperiod: any=1;
+  internshipPrd:any;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -565,6 +567,40 @@ resignclearancedate(index:any){
     control['Resignclrdate'].setValue(probationDate2);
 }
 
+//////////////// Internship /////////////////
+
+addInternddata(): FormGroup {
+  return this.fb.group({
+    Interndate: ['', Validators.required],
+    Internperiod: [''],
+    Internenddate: ['' ],
+    Internstipent: ['']
+  });
+}
+
+
+addinterneeedata(): void {
+  this.interneedata = this.personalDetailsForm.get(
+    'interneedata'
+  ) as FormArray;
+  this.interneedata.push(this.addInternddata());
+}  
+internshipendDate(index: any) {
+  let control = this.personalDetailsForm.get(
+    'interneedata'
+  )['controls'][index]['controls'];
+  let pdjoinDate = control['Interndate'].value;
+  let d = new Date(pdjoinDate);
+  this.internshipPrd = (<HTMLInputElement>(
+    document.getElementById('internshipPrd')
+  )).value;
+  let internDate1 = d.setMonth(d.getMonth() + parseInt(this.internshipPrd));
+  this.newDate = new Date(internDate1);
+  this.probationDate = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'full',
+  }).format(this.newDate);control
+  ['Internenddate'].setValue(this.probationDate);
+}  
 
   getDropdownValue(id: number) {
     this.Id = id;
@@ -753,7 +789,8 @@ resignclearancedate(index:any){
       etedModifiedByName: [this.userName],
       emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
       empreleaseddata:this.fb.array([this.addempreleaseddata()]),
-      empresigneddata:this.fb.array([this.addempresigneddata()])
+      empresigneddata:this.fb.array([this.addempresigneddata()]),
+      interneedata:this.fb.array([this.addInternddata()])
       
     });
   }
