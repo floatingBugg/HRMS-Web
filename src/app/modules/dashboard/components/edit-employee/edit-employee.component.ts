@@ -763,12 +763,10 @@ resignclearancedate(index:any){
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
-<<<<<<< HEAD
     console.log(this.personalDetailsForm.value);
-=======
     console.log(form.imsAssign);
     console.log(this.assetAssignDT);
->>>>>>> 74adfb3547ba4eba5a7043b3b433b69a8848fbc7
+
     
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
