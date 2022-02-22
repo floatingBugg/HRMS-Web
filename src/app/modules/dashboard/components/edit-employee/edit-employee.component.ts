@@ -38,6 +38,7 @@ export class EditEmployeeComponent implements OnInit {
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
   emsTblPermanentEmployee:any=FormArray;
+  emsTblContractEmployee:any=FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
@@ -78,6 +79,7 @@ export class EditEmployeeComponent implements OnInit {
   probationDate: any;
   probationDate4:any;
   monthval: any = 3;
+  Internval:any;
   daysvalue:any=15;
   newDate: any;
   whDuration: any;
@@ -109,6 +111,7 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexProfessionalQ: any = -1;
   public currentIndexPermanentEmp:any =-1;
   public currentIndexWorkingHistory: any = -1;
+  public currentIndexContractEmp:any=-1;
   public currentIndexProfessionalDetails: any = 0;
   public employeeData:any;
   ///////Arrays To assign Value////////
@@ -117,6 +120,7 @@ export class EditEmployeeComponent implements OnInit {
   academicQualification: any;
   professionalQualification: any;
   permannetEmployee:any;
+  contractEmployee: any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
   workingHistory: any;
@@ -136,6 +140,7 @@ export class EditEmployeeComponent implements OnInit {
   diff2: any;
   noticeperiod: any=1;
   internshipPrd:any=3;
+ 
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -320,6 +325,38 @@ export class EditEmployeeComponent implements OnInit {
             this.professionalDetails[0]['etepdSalary']
           );
         }
+        /////////Contract Employee//////
+          ////////////////Contract Employee//////////////
+
+          this.contractEmployee = oneEmployeeData.emsTblContractEmployee;
+          for (let i = 0; i < this.contractEmployee.length; i++) {
+            this.addContractEmp();
+            let controlContractEmployee =
+              this.personalDetailsForm.controls['emsTblContractEmployee']
+              ['controls'][i]['controls'];
+              controlContractEmployee['etepdContJoinDate'].setValue(
+                this.contractEmployee[i]['etepdContJoinDate']
+              );
+              controlContractEmployee['etepdContEndDate'].setValue(
+                this.contractEmployee[i]['etepdContEndDate']
+                );
+              controlContractEmployee['etepdContperd'].setValue(
+                this.contractEmployee[i]['etepdContperd']
+                  );
+              controlContractEmployee['etepdContrInc'].setValue(
+                this.contractEmployee[i]['etepdContrInc']
+                    );
+              controlContractEmployee['etepdContProb'].setValue(
+                this.contractEmployee[i]['etepdContProb']
+                );
+              controlContractEmployee['etedContremarks'].setValue(
+                this.contractEmployee[i]['etedContremarks']
+                );
+                controlContractEmployee['etepdContSalary'].setValue(
+                  this.contractEmployee[i]['etepdContSalary']
+                  );
+  
+          }
 
         /////Academic Qualification //////
         this.academicQualification =
@@ -609,15 +646,15 @@ getJoiningDate3(index: any) {
   )['controls'][index]['controls'];
   let pdjoinDate = control['Interndate'].value;
   let d = new Date(pdjoinDate);
-  this.monthval = (<HTMLInputElement>(
-    document.getElementById('monthVal')
+  this.Internval = (<HTMLInputElement>(
+    document.getElementById('Internval')
   )).value;
-  let probationDate = d.setMonth(d.getMonth() + parseInt(this.monthval));
-  this.newDate = new Date(probationDate);
-  this.probationDate = new Intl.DateTimeFormat('en-GB', {
+  let probationDate4 = d.setMonth(d.getMonth() + parseInt(this.Internval));
+  this.newDate = new Date(probationDate4);
+  this.probationDate4 = new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'full',
   }).format(this.newDate);control
-  ['Internenddate'].setValue(this.probationDate);
+  ['Internenddate'].setValue(this.probationDate4);
 } 
 
   getDropdownValue(id: number) {
@@ -806,6 +843,7 @@ getJoiningDate3(index: any) {
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
       emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
+      emsTblContractEmployee:this.fb.array([this.addemsTblContractEmployee(),]),
       empreleaseddata:this.fb.array([this.addempreleaseddata()]),
       empresigneddata:this.fb.array([this.addempresigneddata()]),
       interneedata:this.fb.array([this.addInternddata()])
@@ -887,13 +925,16 @@ getJoiningDate3(index: any) {
     }).format(this.newDate);
     control['etepdProbation'].setValue(this.probationDate);
   }
-///////////working history///////////////////
-  compareDates(index: any) {
-    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+
+  ///////////Compare dates and Duration Calculator generic///////////////////
+////////////////////////////////////////////////////////////////////////////  
+  compareDatesGeneric(index: any,formName:any,sartDateControl:any,endDateControl:any,durationControl:any) {
+    debugger
+    let control = this.personalDetailsForm.get(formName)[
       'controls'
     ][index]['controls'];
-    this.whStartDate = control['etwhStratDate'].value;
-    this.whEndDate = control['etwhEndDate'].value;
+    this.whStartDate = control[sartDateControl].value;
+    this.whEndDate = control[endDateControl].value;
     console.log(this.whStartDate);
     console.log(this.whEndDate);
     let start: any = new Date(this.whStartDate);
@@ -904,12 +945,11 @@ getJoiningDate3(index: any) {
     console.log('new Date ', this.diff / msInDay);
 
     if (this.whStartDate != null && this.whEndDate != null) {
-      this.getDuration(index);
+      this.getDurationGeneric(index,formName,durationControl);
     }
   }
-
-  getDuration(index: any) {
-    let control = this.personalDetailsForm.get('emsTblWorkingHistory')[
+  getDurationGeneric(index: any,formName:any,durationControl:any) {
+    let control = this.personalDetailsForm.get(formName)[
       'controls'
     ][index]['controls'];
     var years = Math.floor(this.noOfDays / 365);
@@ -927,7 +967,7 @@ getJoiningDate3(index: any) {
         [years, ` years `, months, ' months ', days, ' days '].join('')
       );
     }
-    control['etwhDuration'].setValue(this.whDuration);
+    control[durationControl].setValue(this.whDuration);
     return console.log(this.whDuration);
   }
 
@@ -987,7 +1027,16 @@ getJoiningDate3(index: any) {
       return false;
     }
   }
-
+  isContractEmployeeDisabled(){
+    if(this.currentIndexContractEmp>=0){
+      let result = this.personalDetailsForm.controls['emsTblContractEmployee']['controls'][
+        this.currentIndexContractEmp
+      ].valid;
+    return !result;
+  } else {
+    return false;
+  }
+    }
   isPermanentEmployeeDisabled() {
     if (this.currentIndexPermanentEmp >= 0) {
       let result =
@@ -1017,6 +1066,10 @@ getJoiningDate3(index: any) {
   //Current Index Setter Working History
   setCurrentIndexWorkingHistory(index: any) {
     this.currentIndexWorkingHistory = index;
+  }
+  //////////////
+  setCurrentIndexContractEmployee(index:any){
+    this.currentIndexContractEmp=index;
   }
 
   ///////Profile pic Upload///////
@@ -1233,48 +1286,6 @@ onKeypressEvent2(event: any, i: any) {
   this.endDateemp = event.target.value;
   console.log(this.endDateemp);
 }
-compareDates2(index: any) {
-  index=0
-  let control = this.personalDetailsForm.get('empreleaseddata')[
-    'controls'
-  ][index]['controls'];
-  this.startdateemp = control['relstartdate'].value;
-  this.endDateemp = control['relenddate'].value;
-  console.log(this.startdateemp);
-  console.log(this.endDateemp);
-  let start: any = new Date(this.startdateemp);
-  let end: any = new Date(this.endDateemp);
-  this.diff = (end - start)  ;
-  let msInDay = 1000 * 3600 * 24;
-  this.noOfDays = this.diff / msInDay;
-  console.log('new Date ', this.diff / msInDay);
-debugger
-  if (this.startdateemp != null && this.endDateemp != null && this.endDateemp!= "") {
-    this.getDurationrelemp(index);
-  }
-}
-getDurationrelemp(index: any) {
-  let control = this.personalDetailsForm.get('empreleaseddata')[
-    'controls'
-  ][index]['controls'];
-  var years = Math.floor(this.noOfDays / 365);
-  var months = Math.floor((this.noOfDays % 365) / 30);
-  var days = Math.floor((this.noOfDays % 365) % 30);
-
-  if (years == 0 && months == 0) {
-    this.whDuration1 = String([days, ' days '].join(''));
-  } else if (months == 0) {
-    this.whDuration1 = String([years, ` years `, days, ' days '].join(''));
-  } else if (years == 0) {
-    this.whDuration1 = String([months, ' months ', days, ' days '].join(''));
-  } else {
-    this.whDuration1 = String(
-      [years, ` years `, months, ' months ', days, ' days '].join('')
-    );
-  }
-  control['relservicedays'].setValue(this.whDuration1);
-  return console.log(this.whDuration1);
-}
 clearancedate(index:any=0){
   let control = this.personalDetailsForm.get('empreleaseddata')[
     'controls'
@@ -1331,7 +1342,26 @@ getPerDate(index: any) {
 
 //   control['etepdEmpProb1'].setValue(this.validdate);
 // }
-
+  //////////Contract Employee//////////
+  addemsTblContractEmployee(): FormGroup {
+    return this.fb.group({
+      etepdContJoinDate: ['', Validators.required],
+      etepdContEndDate: ['', Validators.required],
+      etepdContperd: [''],
+      etepdContrInc: [''],
+      etepdContProb: [''],
+      etepdContSalary: [''],
+      etedContremarks: ['']
+    })
+  }
+//////////value pushing Contract///////
+addContractEmp():void{
+  this.emsTblContractEmployee=this.personalDetailsForm.get(
+    'emsTblContractEmployee'
+  )as FormArray;
+  this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
+}
+//////////////////////////////////////////
   unAssignAssetById(itasItaAssetId: any) {
 
     const dialogRef = this.dialog.open(UnassignAssetComponent);
