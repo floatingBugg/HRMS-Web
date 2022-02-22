@@ -76,6 +76,7 @@ export class EditEmployeeComponent implements OnInit {
   public roleid: any;
   public role: any;
   probationDate: any;
+  probationDate4:any;
   monthval: any = 3;
   daysvalue:any=15;
   newDate: any;
@@ -134,7 +135,7 @@ export class EditEmployeeComponent implements OnInit {
   whDuration1: any;
   diff2: any;
   noticeperiod: any=1;
-  internshipPrd:any;
+  internshipPrd:any=3;
   constructor(
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
@@ -585,22 +586,39 @@ addinterneeedata(): void {
   ) as FormArray;
   this.interneedata.push(this.addInternddata());
 }  
-internshipendDate(index: any) {
+// internshipendDate(index: any) {
+//   debugger
+//   let control = this.personalDetailsForm.get(
+//     'interneedata'
+//   )['controls'][index]['controls'];
+//   let pdjoinDate = control['Interndate'].value;
+//   let d = new Date(pdjoinDate);
+//   this.internshipPrd = (<HTMLInputElement>(
+//     document.getElementById('internshipPrd')
+//   )).value;
+//   let probationDate = d.setMonth(d.getMonth() + parseInt(this.internshipPrd));
+//   this.newDate = new Date(probationDate);
+//   this.probationDate = new Intl.DateTimeFormat('en-GB', {
+//     dateStyle: 'full',
+//   }).format(this.newDate);control
+//   ['Internenddate'].setValue(this.probationDate);
+// } 
+getJoiningDate3(index: any) {
   let control = this.personalDetailsForm.get(
     'interneedata'
   )['controls'][index]['controls'];
   let pdjoinDate = control['Interndate'].value;
   let d = new Date(pdjoinDate);
-  this.internshipPrd = (<HTMLInputElement>(
-    document.getElementById('internshipPrd')
+  this.monthval = (<HTMLInputElement>(
+    document.getElementById('monthVal')
   )).value;
-  let internDate1 = d.setMonth(d.getMonth() + parseInt(this.internshipPrd));
-  this.newDate = new Date(internDate1);
+  let probationDate = d.setMonth(d.getMonth() + parseInt(this.monthval));
+  this.newDate = new Date(probationDate);
   this.probationDate = new Intl.DateTimeFormat('en-GB', {
     dateStyle: 'full',
   }).format(this.newDate);control
   ['Internenddate'].setValue(this.probationDate);
-}  
+} 
 
   getDropdownValue(id: number) {
     this.Id = id;
@@ -800,10 +818,8 @@ internshipendDate(index: any) {
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
     });
-    console.log(this.personalDetailsForm.value);
     console.log(form.imsAssign);
     console.log(this.assetAssignDT);
-
     
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)

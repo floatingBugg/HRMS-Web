@@ -576,8 +576,8 @@
                     </div>
                     <mat-form-field class="col-lg-6 col-md-6 input">
                       <mat-label>Manager ID</mat-label>
-                      <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedManagerId"
-                        name="etedManagerId" matInput placeholder="Manager ID">
+                      <input (keypress)="onlyNumbersAllowed($event)" formControlName="etedManagerId" name="etedManagerId"
+                        matInput placeholder="Manager ID">
                     </mat-form-field>
                     <button mat-raised-button title="Assign Teamlead" color="primary" (click)="onCreate()"
                       style="margin-left: 50px;">Assign Teamlead</button>
@@ -603,256 +603,223 @@
             </div>
           </div>
         </mat-step>
-
-        <div class="container">
+      
+            <div class="container">
           <mat-step label="Professional Qualification">
             <div class="form-group">
               <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
                 *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
                 {{setCurrentIndexProfessionalQualification(i)}}
                 <div class="form-group">
-                  <div formArrayName="EemsTblPermanentEmployee"
-                    *ngFor="let item of personalDetailsForm.get('EemsTblPermanentEmployee')['controls']; let i = index;">
-
-                   
-                      <div class="col-lg-6 col-md-6 col-sm-12">
-                        <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
-                          <mat-label>Start Date</mat-label>
-                          <input readonly matInput formControlName="etepdPermanentJoiningDate"
-                            name="etepdPermanentJoiningDate" [matDatepicker]="picker">
-                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                          <mat-datepicker #picker></mat-datepicker>
-                          <mat-error *ngIf="item.controls['etepdPermanentJoiningDate'].errors?.['required']">
-                            Joining Date is <strong>required</strong></mat-error>
-                        </mat-form-field>
-                      </div>
-                    
-                    <div class="prob">
-                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:608px">
-                        <mat-label>Probation Period</mat-label>
-                        <input value="1" type="number" id="monthVal" matInput (keyup)="getJoiningDate(i)">
-
-                      </mat-form-field>
-                    </div>
+                  <div [formGroupName]="i">
+                    <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Certification title</mat-label>
+                      <input matInput placeholder="Certification" formControlName="etpqCertification"
+                        name="etpqCertification">
+                      <mat-error *ngIf="item.controls['etpqCertification'].errors?.['required']">
+                        Certification is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Start date</mat-label>
+                      <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput
+                        [matDatepicker]="startDate">
+                      <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                      <mat-datepicker #startDate></mat-datepicker>
+                      <mat-error *ngIf="item.controls['etpqStratDate'].errors?.['required']">
+                        Start Date is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>End date</mat-label>
+                      <input readonly formControlName="etpqEndDate" name="etpqEndDate" matInput
+                        [matDatepicker]="endDate">
+                      <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                      <mat-datepicker #endDate></mat-datepicker>
+                      <mat-error *ngIf="item.controls['etpqEndDate'].errors?.['required']">
+                        End Date is <strong>required</strong></mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input">
+                      <mat-label>Institute Name</mat-label>
+                      <input matInput placeholder="Institute Name" formControlName="etpqInstituteName"
+                        name="etpqInstituteName">
+                      <mat-error *ngIf="item.controls['etpqInstituteName'].errors?.['required']">
+                        Institute Name is <strong>required</strong></mat-error>
+                    </mat-form-field>
                   </div>
                 </div>
+                <div class="field col-12 md:col-6">
+                  <div class="circle" *ngIf="profQualificationUrl[i]">
+                    <img [src]="profQualificationUrl[i]" class="Image">
+                  </div>
+                  <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
+                </div>
               </ng-container>
+              <div class="row mt-3">
+                <div class="col-md-offset-2 col-lg-5 col-md-4">
+                  <button type="button" class="btn btn-primary" [disabled]="isProfessionalQualificationDisabled()"
+                    (click)="addProfessionalQualification()">
+                    Add Professional Qualification
+                  </button>
+                </div>
+                <div class=" col-lg-5 col-md-4">
+                  <button class="stepperBtn " mat-flat-button color="primary"
+                    [disabled]="isProfessionalQualificationDisabled()" matStepperNext>Next</button>
+                  <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                    matStepperPrevious>Back</button>
+                  <button style="float: right;" class="setPositionRight4em" mat-raised-button type="submit"
+                    color="primary" (click)="submitData()">Save</button>
+                </div>
+              </div>
             </div>
           </mat-step>
-        </div>
-        <mat-step label="Professional Qualification">
-          <div class="form-group">
-            <ng-container class=" mt-5 container" formArrayName="emsTblProfessionalQualification"
-              *ngFor="let item of personalDetailsForm.get('emsTblProfessionalQualification')['controls']; let i = index;">
-              {{setCurrentIndexProfessionalQualification(i)}}
-              <div class="form-group">
-                <div [formGroupName]="i">
-                  <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
+          </div>
+          <mat-step label="Working History">
+            <div class="form-group">
+              <div formArrayName="emsTblWorkingHistory"
+                *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
+                {{setCurrentIndexWorkingHistory(i)}}
+                <div [formGroupName]=i>
+                  <p class="mb-3"><b>Working History: {{i+1}}</b></p>
                   <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Certification title</mat-label>
-                    <input matInput placeholder="Certification" formControlName="etpqCertification"
-                      name="etpqCertification">
-                    <mat-error *ngIf="item.controls['etpqCertification'].errors?.['required']">
-                      Certification is <strong>required</strong></mat-error>
+                    <mat-label>Company Name</mat-label>
+                    <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
+                    <mat-error *ngIf="item.controls['etwhCompanyName'].errors?.['required']">
+                      Company Name is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
+                    <mat-label>Designation</mat-label>
+                    <input matInput formControlName="etwhDesignation" name="etwhDesignation" placeholder="Designation">
+                    <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
+                      Designation is <strong>required</strong></mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>Start date</mat-label>
-                    <input readonly formControlName="etpqStratDate" name="etpqStratDate" matInput
-                      [matDatepicker]="startDate">
-                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
-                    <mat-datepicker #startDate></mat-datepicker>
-                    <mat-error *ngIf="item.controls['etpqStratDate'].errors?.['required']">
+                    <input formControlName="etwhStratDate" (dateChange)="compareDates(i)" matInput
+                      [matDatepicker]="prevstartDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
+                    <mat-datepicker #prevstartDate></mat-datepicker>
+                    <mat-error *ngIf="item.controls['etwhStratDate'].errors?.['required']">
                       Start Date is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
                     <mat-label>End date</mat-label>
-                    <input readonly formControlName="etpqEndDate" name="etpqEndDate" matInput [matDatepicker]="endDate">
-                    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
-                    <mat-datepicker #endDate></mat-datepicker>
-                    <mat-error *ngIf="item.controls['etpqEndDate'].errors?.['required']">
+                    <input formControlName="etwhEndDate" (dateChange)="compareDates(i)" name="etwhEndDate" matInput
+                      [matDatepicker]="prevendDate" readonly>
+                    <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
+                    <mat-datepicker #prevendDate></mat-datepicker>
+                    <mat-error *ngIf="item.controls['etwhEndDate'].errors?.['required']">
                       End Date is <strong>required</strong></mat-error>
                   </mat-form-field>
                   <mat-form-field class="col-lg-5 col-md-5 input">
-                    <mat-label>Institute Name</mat-label>
-                    <input matInput placeholder="Institute Name" formControlName="etpqInstituteName"
-                      name="etpqInstituteName">
-                    <mat-error *ngIf="item.controls['etpqInstituteName'].errors?.['required']">
-                      Institute Name is <strong>required</strong></mat-error>
+                    <mat-label>Duration</mat-label>
+                    <input readonly [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)" matInput
+                      formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
+                    <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
+                      Duration is <strong>required</strong></mat-error>
                   </mat-form-field>
                 </div>
-              </div>
-              <div class="field col-12 md:col-6">
-                <div class="circle" *ngIf="profQualificationUrl[i]">
-                  <img [src]="profQualificationUrl[i]" class="Image">
+                <div class="field col-12 md:col-6">
+                  <div class="circle" *ngIf="workingHistoryUrl[i]">
+                    <img [src]="workingHistoryUrl[i]" class="Image">
+                  </div>
+                  <input id="file" type="file" (change)="workingHistoryUpload($event,i)" />
                 </div>
-                <input id="file" type="file" (change)="professionalQualificationUpload($event,i)" />
               </div>
-            </ng-container>
-            <div class="row mt-3">
-              <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" [disabled]="isProfessionalQualificationDisabled()"
-                  (click)="addProfessionalQualification()">
-                  Add Professional Qualification
-                </button>
-              </div>
-              <div class=" col-lg-5 col-md-4">
-                <button class="stepperBtn " mat-flat-button color="primary"
-                  [disabled]="isProfessionalQualificationDisabled()" matStepperNext>Next</button>
-                <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
-                  matStepperPrevious>Back</button>
-                <button style="float: right;" class="setPositionRight4em" mat-raised-button type="submit"
-                  color="primary" (click)="submitData()">Save</button>
-              </div>
-            </div>
-          </div>
-        </mat-step>
-        <mat-step label="Working History">
-          <div class="form-group">
-            <div formArrayName="emsTblWorkingHistory"
-              *ngFor="let item of  personalDetailsForm.get('emsTblWorkingHistory')['controls']; let i = index;">
-              {{setCurrentIndexWorkingHistory(i)}}
-              <div [formGroupName]=i>
-                <p class="mb-3"><b>Working History: {{i+1}}</b></p>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Company Name</mat-label>
-                  <input matInput formControlName="etwhCompanyName" name="etwhCompanyName" placeholder="Company Name">
-                  <mat-error *ngIf="item.controls['etwhCompanyName'].errors?.['required']">
-                    Company Name is <strong>required</strong></mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Designation</mat-label>
-                  <input matInput formControlName="etwhDesignation" name="etwhDesignation" placeholder="Designation">
-                  <mat-error *ngIf="item.controls['etwhDesignation'].errors?.['required']">
-                    Designation is <strong>required</strong></mat-error>
-                </mat-form-field>
-
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Start date</mat-label>
-                  <input formControlName="etwhStratDate" (dateChange)="compareDates(i)" matInput
-                    [matDatepicker]="prevstartDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="prevstartDate"></mat-datepicker-toggle>
-                  <mat-datepicker #prevstartDate></mat-datepicker>
-                  <mat-error *ngIf="item.controls['etwhStratDate'].errors?.['required']">
-                    Start Date is <strong>required</strong></mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>End date</mat-label>
-                  <input formControlName="etwhEndDate" (dateChange)="compareDates(i)" name="etwhEndDate" matInput
-                    [matDatepicker]="prevendDate" readonly>
-                  <mat-datepicker-toggle matSuffix [for]="prevendDate"></mat-datepicker-toggle>
-                  <mat-datepicker #prevendDate></mat-datepicker>
-                  <mat-error *ngIf="item.controls['etwhEndDate'].errors?.['required']">
-                    End Date is <strong>required</strong></mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-5 col-md-5 input">
-                  <mat-label>Duration</mat-label>
-                  <input readonly [value]="whDuration" ng-click="dayDiff(firstDate,secondDate)" matInput
-                    formControlName="etwhDuration" name="etwhDuration" placeholder="Duration">
-                  <mat-error *ngIf="item.controls['etwhDuration'].errors?.['required']">
-                    Duration is <strong>required</strong></mat-error>
-                </mat-form-field>
-              </div>
-              <div class="field col-12 md:col-6">
-                <div class="circle" *ngIf="workingHistoryUrl[i]">
-                  <img [src]="workingHistoryUrl[i]" class="Image">
+              <div class="row  mt-3">
+                <div class="col-md-offset-2 col-lg-5 col-md-4">
+                  <button type="button" class="btn btn-primary" [disabled]="isWokringHistoryDisabled()"
+                    (click)="addWorkingHistory()">
+                    Add Work History
+                  </button>
                 </div>
-                <input id="file" type="file" (change)="workingHistoryUpload($event,i)" />
-              </div>
-            </div>
-            <div class="row  mt-3">
-              <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" [disabled]="isWokringHistoryDisabled()"
-                  (click)="addWorkingHistory()">
-                  Add Work History
-                </button>
-              </div>
-              <div class=" col-lg-5 col-md-4">
-                <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
-                  matStepperPrevious>Back</button>
-              </div>
-            </div>
-          </div>
-        </mat-step>
-        <mat-step label="Asset">
-          <div class="form-group" formArrayName="imsAssign">
-
-            <div class="row  mt-3">
-              <div class="col-md-offset-2 col-lg-5 col-md-4">
-                <button type="button" class="btn btn-primary" (click)="onCreateAssign()">
-                  Assign Asset
-                </button>
-              </div>
-
-              <table mat-table [dataSource]="assetdata" class="mat-elevation-z8" matSort>
-                <ng-container matColumnDef="assetid">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
-                  <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>
-                </ng-container>
-                <ng-container matColumnDef="nameModel">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
-                  <td mat-cell *matCellDef="let asset">{{asset.assetName}} </td>
-                </ng-container>
-                <ng-container matColumnDef="quantity">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
-                  <td mat-cell *matCellDef="let asset"> {{asset.itasQuantity}} </td>
-                </ng-container>
-                <ng-container matColumnDef="category">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
-                  <td mat-cell *matCellDef="let asset"> {{asset.assetCatagoryName}} </td>
-                </ng-container>
-                <ng-container matColumnDef="actions">
-                  <th mat-header-cell *matHeaderCellDef>Actions </th>
-                  <td mat-cell *matCellDef="let asset">
-
-                    <button mat-raised-button title="Unassign Asset" (click)="unAssignAssetById(asset.itasItaAssetId)"
-                      color="primary">Unassign</button>
-                  </td>
-                </ng-container>
-                <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-                <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
-              </table>
-
-            </div>
-          </div>
-        </mat-step>
-        <div *ngIf="assignleavestep">
-          <mat-step label="Assign Leaves">
-            <div class="form-group">
-              <div formArrayName="empleaveassign" name="empleaveassign"
-                *ngFor="let item of  personalDetailsForm.get('empleaveassign')['controls']; let i = index;">
-                <div [formGroupName]=i>
-                  <mat-form-field class="col-lg-5 col-md-5 input mt-3" style="width: 250px;">
-                    <mat-label>Select Joining Month</mat-label>
-                    <mat-select matInput formControlName="etpMonth" (selectionChange)="leavecal($event)"
-                      name="etpMonth">
-                      <mat-option [value]=""> ---Select One---</mat-option>
-                      <mat-option *ngFor="let mon of Month" [value]="mon.mtId">{{mon.degMonth}}
-                      </mat-option>
-                      <mat-error *ngIf="item.controls['etpMonth'].errors?.['required']">
-                        Field is <strong>required</strong></mat-error>
-                    </mat-select>
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
-                    <mat-label>Casual Leaves</mat-label>
-                    <input readonly formControlName="lmslrCasualAssign" matInput name="lmslrCasualAssign"
-                      placeholder="Casual leaves">
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
-                    <mat-label>Annual Leaves</mat-label>
-                    <input readonly formControlName="lmslrAnnualAssign" matInput name="lmslrAnnualAssign"
-                      placeholder="Annual leaves">
-                  </mat-form-field>
-                  <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
-                    <mat-label>Sick Leaves</mat-label>
-                    <input readonly formControlName="lmslrSickAssign" matInput name="lmslrSickAssign"
-                      placeholder="Sick leaves">
-                  </mat-form-field>
+                <div class=" col-lg-5 col-md-4">
+                  <button class="stepperBtn " style="margin-right: 10px;" mat-flat-button color="primary"
+                    matStepperPrevious>Back</button>
                 </div>
               </div>
             </div>
           </mat-step>
-        </div>
+          <mat-step label="Asset">
+            <div class="form-group" formArrayName="imsAssign">
+
+              <div class="row  mt-3">
+                <div class="col-md-offset-2 col-lg-5 col-md-4">
+                  <button type="button" class="btn btn-primary" (click)="onCreateAssign()">
+                    Assign Asset
+                  </button>
+                </div>
+
+                <table mat-table [dataSource]="assetdata" class="mat-elevation-z8" matSort>
+                  <ng-container matColumnDef="assetid">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
+                    <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="nameModel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Name/Model </th>
+                    <td mat-cell *matCellDef="let asset">{{asset.assetName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Quantity</th>
+                    <td mat-cell *matCellDef="let asset"> {{asset.itasQuantity}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Category</th>
+                    <td mat-cell *matCellDef="let asset"> {{asset.assetCatagoryName}} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef>Actions </th>
+                    <td mat-cell *matCellDef="let asset">
+
+                      <button mat-raised-button title="Unassign Asset" (click)="unAssignAssetById(asset.itasItaAssetId)"
+                        color="primary">Unassign</button>
+                    </td>
+                  </ng-container>
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+                  <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
+                </table>
+
+              </div>
+            </div>
+          </mat-step>
+          <div *ngIf="assignleavestep">
+            <mat-step label="Assign Leaves">
+              <div class="form-group">
+                <div formArrayName="empleaveassign" name="empleaveassign"
+                  *ngFor="let item of  personalDetailsForm.get('empleaveassign')['controls']; let i = index;">
+                  <div [formGroupName]=i>
+                    <mat-form-field class="col-lg-5 col-md-5 input mt-3" style="width: 250px;">
+                      <mat-label>Select Joining Month</mat-label>
+                      <mat-select matInput formControlName="etpMonth" (selectionChange)="leavecal($event)"
+                        name="etpMonth">
+                        <mat-option [value]=""> ---Select One---</mat-option>
+                        <mat-option *ngFor="let mon of Month" [value]="mon.mtId">{{mon.degMonth}}
+                        </mat-option>
+                        <mat-error *ngIf="item.controls['etpMonth'].errors?.['required']">
+                          Field is <strong>required</strong></mat-error>
+                      </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
+                      <mat-label>Casual Leaves</mat-label>
+                      <input readonly formControlName="lmslrCasualAssign" matInput name="lmslrCasualAssign"
+                        placeholder="Casual leaves">
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
+                      <mat-label>Annual Leaves</mat-label>
+                      <input readonly formControlName="lmslrAnnualAssign" matInput name="lmslrAnnualAssign"
+                        placeholder="Annual leaves">
+                    </mat-form-field>
+                    <mat-form-field class="col-lg-5 col-md-5 input ml-3" style="width: 150px;">
+                      <mat-label>Sick Leaves</mat-label>
+                      <input readonly formControlName="lmslrSickAssign" matInput name="lmslrSickAssign"
+                        placeholder="Sick leaves">
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+            </mat-step>
+          </div>
       </form>
     </mat-vertical-stepper>
     <div class="text-align-right">
