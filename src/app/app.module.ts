@@ -30,6 +30,7 @@ import { LeaveformComponent } from './leaveform/leaveform.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+// import { MatCheckbox } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     LogoutValidationComponent,
     LeaveComponent,
     LeaveformComponent,
+    
    
  
   ],
@@ -64,6 +66,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
+    // MatCheckbox
+    
     // MatDialogConfig
 
 

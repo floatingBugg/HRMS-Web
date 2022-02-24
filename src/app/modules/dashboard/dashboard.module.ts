@@ -36,6 +36,8 @@ import { AddEmployeeFailureDialogComponent } from './components/add-employee/add
 import { AssignManagerComponent } from './components/assign-manager/assign-manager.component';
 import { AssignAssetComponent } from './components/assign-asset/assign-asset.component';
 import { AssignQuantityComponent } from './components/assign-quantity/assign-quantity.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+// import { MatCheckbox } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -50,9 +52,10 @@ import { AssignQuantityComponent } from './components/assign-quantity/assign-qua
     AddEmployeeFailureDialogComponent,
     AssignManagerComponent,
     AssignAssetComponent,
-    AssignQuantityComponent
+    AssignQuantityComponent,
   ],
   imports: [
+    MatCheckboxModule,
     CommonModule,
     DashboardRoutingModule,
     MatToolbarModule,
@@ -76,7 +79,7 @@ import { AssignQuantityComponent } from './components/assign-quantity/assign-qua
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
   ],
   providers: [
     {

@@ -429,6 +429,8 @@
               </div>
             </div>
           </div>
+
+
           <div class="container">
             <mat-step label="Academic Qualification">
               <div class="mt-5" formArrayName="emsTblAcademicQualification"
@@ -519,12 +521,13 @@
             </mat-step>
           </div>
         </mat-step>
+
+
         <mat-step label="Professional Details">
           <div class="form-group">
             <div formArrayName="emsTblEmployeeProfessionalDetails"
               *ngFor="let item of personalDetailsForm.get('emsTblEmployeeProfessionalDetails')['controls']; let i = index;">
               <div [formGroupName]="i">
-
                 <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                   <mat-label>Professional Details Id</mat-label>
                   <input formControlName="etepdPdId" name="etepdPdId" matInput placeholder="Professional Details Id">
@@ -612,18 +615,15 @@
                           <mat-option value="PartTime">Part-Time
                           </mat-option>
                           <mat-option value="Internship">Internship
-
                           </mat-option>
                         </mat-select>
                         <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
                           Employment Status is <strong>required</strong></mat-error>
                       </mat-form-field>
-
                     </ng-container>
                   </div>
                 </div>
               </div>
-
               <div class="row mt-3">
                 <div class=" col-lg-5 col-md-4" style="margin-left: 40vh;">
                   <button style="margin-left: 10px; float: right;" class="  stepperBtn "
@@ -636,6 +636,8 @@
             </div>
           </div>
         </mat-step>
+
+
         <div *ngIf="permanentEmp">
           <mat-step label="Permanent Employee">
             <div class="row">
@@ -731,13 +733,11 @@
             <div class="container">
               <div class="row">
                 <div class="form-group">
-
                   <div formArrayName="emsTblContractEmployee"
                     *ngFor="let item of personalDetailsForm.get('emsTblContractEmployee')['controls']; let i = index;">
                     {{setCurrentIndexContractEmployee(i)}}
                     <div [formGroupName]="i">
                       <p class="mb-3"><b>Contract Employee: {{i+1}}</b></p>
-
                       <div class="col-lg-6 col-md-6 col-sm-12" class="screenMaxWidth">
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract-Start Date</mat-label>
@@ -759,11 +759,18 @@
                           <mat-error *ngIf="item.controls['etepdContEndDate'].errors?.['required']">
                             Contract-End Date is <strong>required</strong></mat-error>
                         </mat-form-field>
+                        <mat-form-field class="col-lg-5 col-md-5 input">
+                          <mat-label>Contract Type</mat-label>
+                          <mat-select formControlName="etedContractEmp" name="etedContractEmp">
+                            <mat-option [value]="">-- select one --</mat-option>
+                            <mat-option value="PerMonth">Per-Month</mat-option>
+                            <mat-option value="PerContract">Per-Project</mat-option>
+                          </mat-select>
+                        </mat-form-field>
 
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract Period</mat-label>
                           <input matInput formControlName="etepdContperd" name="etepdContperd">
-
                         </mat-form-field>
 
                         <mat-form-field class="col-lg-5 col-md-5 input">
@@ -821,6 +828,9 @@
             </div>
           </mat-step>
         </div>
+
+
+
         <div *ngIf="releasedEmp">
           <mat-step label="Released Employee">
             <div class="form-group">
@@ -877,19 +887,18 @@
                       <div class=" col-lg-5 col-md-4">
                         <button class="stepperBtnPer " style="margin-right: 10px;" mat-flat-button color="primary"
                           matStepperPrevious>Back</button>
-                        <button class="stepperBtnPer " mat-flat-button color="primary" (click)="addrelempdata();updateForm()"
-                          matStepperNext>Next</button>
+                        <button class="stepperBtnPer " mat-flat-button color="primary"
+                          (click)="addrelempdata();updateForm()" matStepperNext>Next</button>
                       </div>
                     </div>
-
                   </div>
                 </div>
-
               </div>
             </div>
-
           </mat-step>
         </div>
+
+
         <div *ngIf="resignedEmp">
           <mat-step label="Resigned Employee">
             <div class="form-group mt-3">
@@ -937,10 +946,8 @@
                             placeholder="Write Remarks Here.."></textarea>
 
                         </mat-form-field>
-
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
@@ -949,10 +956,36 @@
         </div>
         <div *ngIf="parttimeEmp">
           <mat-step label="Part-Time Employee">
-            <div class="form-group">
-
+            <div class="row">
+              <div class="form-group">
+                <div formArrayName="emsTblPertTimeEmployee"
+                  *ngFor="let item of personalDetailsForm.get('emsTblPertTimeEmployee')['controls']; let i = index;">
+                  <div [formGroupName]="i">
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-12">
+                        <mat-form-field class="col-lg-5 col-md-5 input" style="width: 300px;">
+                          <mat-label>Part-Time Status</mat-label>
+                          <mat-select formControlName="etedpartTime" name="etedpartTime">
+                            <mat-option [value]="">-- select one --</mat-option>
+                            <mat-option value="Daily">Daily</mat-option>
+                            <mat-option value="Weekly">Weekly</mat-option>
+                            <mat-option value="Biweekly">Bi-Weekly</mat-option>
+                            <mat-option value="Monthly">Monthly</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <section class="example-section">
+                          <mat-checkbox class="example-margin" id="monday" formControlName="monday">Monday </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="tuesday" formControlName="tuesday">Tuesday </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="wednesday" formControlName="wednesday">Wednesday </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="thrusday" formControlName="thrusday">Thrusday </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="friday" formControlName="friday">Friday </mat-checkbox>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-
           </mat-step>
         </div>
         <div *ngIf="interEmp">
@@ -976,8 +1009,8 @@
                         <div class="prob">
                           <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                             <mat-label>Internship Period</mat-label>
-                            <input value="3" type="number" id="Internval"  matInput
-                              placeholder="Internship Period" (keyup)="getJoiningDate3(i)">
+                            <input value="3" type="number" id="Internval" matInput placeholder="Internship Period"
+                              (keyup)="getJoiningDate3(i)">
 
                           </mat-form-field>
                         </div>

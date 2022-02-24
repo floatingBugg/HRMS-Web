@@ -14,13 +14,20 @@ import { AssignAssetComponent } from '../assign-asset/assign-asset.component';
 import { MatSort } from '@angular/material/sort';
 import { UnassignAssetComponent } from 'src/app/modules/inventory/components/unassign-asset/unassign-asset.component';
 import { employeeGrid } from 'src/app/_interfaces/employeeGrid';
-
+import { ThemePalette } from '@angular/material/core';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 @Component({
   selector: 'apFp-edit-employee',
   templateUrl: './edit-employee.component.html',
   styleUrls: ['./edit-employee.component.scss'],
 })
+
 export class EditEmployeeComponent implements OnInit {
+  IsChecked!: boolean ;
+  isselected:boolean | undefined;
+  IsIndeterminate: boolean | undefined;
+  LabelAlign: string | undefined;
+  IsDisabled: boolean | undefined;
   id: any;
   public assetdata: any;
   assetdatatable: any[] = [];
@@ -32,32 +39,33 @@ export class EditEmployeeComponent implements OnInit {
     assetCatagoryName: '',
     itasQuantity: 0,
     itasAssignedDate: new Date(),
-  };
+   };
   assetAssignDT: any[] = [];
 
   personalDetailsForm: any = FormGroup;
   emsTblAcademicQualification: any = FormArray;
-  emsTblPermanentEmployee:any=FormArray;
-  emsTblContractEmployee:any=FormArray;
+  emsTblPermanentEmployee: any = FormArray;
+  emsTblContractEmployee: any = FormArray;
+  emsTblPertTimeEmployee: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
   emsTblEmergencyContact: any = FormArray;
-  empreleaseddata:any=  FormArray;
-  empresigneddata:any=FormArray;
-  interneedata:any=FormArray;
+  empreleaseddata: any = FormArray;
+  empresigneddata: any = FormArray;
+  interneedata: any = FormArray;
   imsAssign: any = FormArray;
-  permanentEmp:boolean=false;
-  contractEmp:boolean=false;
-  releasedEmp:boolean=false;
-  validdate:any;
-  resignedEmp:boolean=false;
-  parttimeEmp:boolean=false;
-  interEmp:boolean=false;
-  startdateemp:any;
-  endDateemp:any;
+  permanentEmp: boolean = false;
+  contractEmp: boolean = false;
+  releasedEmp: boolean = false;
+  validdate: any;
+  resignedEmp: boolean = false;
+  parttimeEmp: boolean = false;
+  interEmp: boolean = false;
+  startdateemp: any;
+  endDateemp: any;
   public editDataArray: any = FormArray;
-  public emsTblpermanent:any=FormArray;
+  public emsTblpermanent: any = FormArray;
   public empID: any;
   public firstName: any;
   public lastname: any;
@@ -77,17 +85,21 @@ export class EditEmployeeComponent implements OnInit {
   public roleid: any;
   public role: any;
   probationDate: any;
-  probationDate4:any;
+  probationDate4: any;
   monthval: any = 3;
-  Internval:any;
-  daysvalue:any=15;
+  Internval: any;
+  daysvalue: any = 15;
   newDate: any;
   whDuration: any;
   whStartDate: any;
   whStartDates: any;
   whEndDate: any;
   diff: any;
-  perprobDate1:any;
+  chkbxname: any;
+  completed2!: boolean;
+  color: ThemePalette;
+  subtasks?: Task[];
+  perprobDate1: any;
   noOfDays: any;
   imageUrl: any[] = [];
   acadImageUrl: any[] = [];
@@ -109,17 +121,17 @@ export class EditEmployeeComponent implements OnInit {
   public currentIndexEmergency: any = -1;
   public currentIndexAcademic: any = -1;
   public currentIndexProfessionalQ: any = -1;
-  public currentIndexPermanentEmp:any =-1;
+  public currentIndexPermanentEmp: any = -1;
   public currentIndexWorkingHistory: any = -1;
-  public currentIndexContractEmp:any=-1;
+  public currentIndexContractEmp: any = -1;
   public currentIndexProfessionalDetails: any = 0;
-  public employeeData:any;
+  public employeeData: any;
   ///////Arrays To assign Value////////
   emergencyContact: any;
   professionalDetails: any;
   academicQualification: any;
   professionalQualification: any;
-  permannetEmployee:any;
+  permannetEmployee: any;
   contractEmployee: any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
@@ -138,30 +150,35 @@ export class EditEmployeeComponent implements OnInit {
   assetEditData: any;
   whDuration1: any;
   diff2: any;
-  noticeperiod: any=1;
-  internshipPrd:any=3;
- 
+  noticeperiod: any = 1;
+  internshipPrd: any = 3;
+  daylist: any[] = ['Id','Name','isselected'];
+
   constructor(
+    // this.IsChecked = false,
+    // this.IsIndeterminate = false,
+    // this.LabelAlign = 'after',
+    // this.IsDisabled = false,
     public empDataService: PersonalDetailsService,
     private personaldetails: PersonalDetailsService,
     private inventory: InventoryService,
     public route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public inventoryservice: InventoryService,    
+    public inventoryservice: InventoryService,
   ) {
     this.updateForm();
   }
   ngOnInit() {
     // this.leaveform.controls['name'].setValue(this.leave.name)
-    
+
     this.id = this.route.snapshot.paramMap.get('id');
     this.getEmployeeAsset(this.id);
     this.getDropdownValue(1);
     this.getDropdownValue(2);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
-        let userdata = data.data2;
+        let userdata = data.data;
         this.password = userdata[0].ethuPassword;
         this.roleid = userdata[0].etrEthuRoleId;
         if (this.roleid == 1) {
@@ -233,14 +250,14 @@ export class EditEmployeeComponent implements OnInit {
         this.personalDetailsForm.controls['etrethuroleid'].setValue(
           this.roleid.toString()
         );
-      
-        
+
+
         ///////Professional Details//////
         this.professionalDetails =
           oneEmployeeData.emsTblEmployeeProfessionalDetails;
         let controlProfessionalDetails =
           this.personalDetailsForm.controls[
-            'emsTblEmployeeProfessionalDetails'
+          'emsTblEmployeeProfessionalDetails'
           ]['controls'][0]['controls'];
         controlProfessionalDetails['etepdPdId'].setValue(
           this.professionalDetails[0]['etepdPdId']
@@ -266,7 +283,7 @@ export class EditEmployeeComponent implements OnInit {
           this.addEmergencyContact();
           let controlEmergencyContact =
             this.personalDetailsForm.controls['emsTblEmergencyContact'][
-              'controls'
+            'controls'
             ][i]['controls'];
 
           controlEmergencyContact['etecEcId'].setValue(
@@ -296,10 +313,10 @@ export class EditEmployeeComponent implements OnInit {
           this.addPerEmp();
           let controlPermanentEmployee =
             this.personalDetailsForm.controls['emsTblPermanentEmployee'][
-              'controls'
+            'controls'
             ][i]['controls'];
 
-            controlPermanentEmployee['etepdPermJoinDate'].setValue(
+          controlPermanentEmployee['etepdPermJoinDate'].setValue(
             this.permannetEmployee[i]['etepdPermJoinDate']
           );
           controlPermanentEmployee['etepdEmpProb'].setValue(
@@ -320,43 +337,45 @@ export class EditEmployeeComponent implements OnInit {
           controlPermanentEmployee['etedperremarks'].setValue(
             this.permannetEmployee[i]['etedperremarks']
           );
-          debugger
           controlPermanentEmployee['etepdPerSalary'].setValue(
             this.professionalDetails[0]['etepdSalary']
           );
         }
         /////////Contract Employee//////
-          ////////////////Contract Employee//////////////
+        ////////////////Contract Employee//////////////
 
-          this.contractEmployee = oneEmployeeData.emsTblContractEmployee;
-          for (let i = 0; i < this.contractEmployee.length; i++) {
-            this.addContractEmp();
-            let controlContractEmployee =
-              this.personalDetailsForm.controls['emsTblContractEmployee']
-              ['controls'][i]['controls'];
-              controlContractEmployee['etepdContJoinDate'].setValue(
-                this.contractEmployee[i]['etepdContJoinDate']
-              );
-              controlContractEmployee['etepdContEndDate'].setValue(
-                this.contractEmployee[i]['etepdContEndDate']
-                );
-              controlContractEmployee['etepdContperd'].setValue(
-                this.contractEmployee[i]['etepdContperd']
-                  );
-              controlContractEmployee['etepdContrInc'].setValue(
-                this.contractEmployee[i]['etepdContrInc']
-                    );
-              controlContractEmployee['etepdContProb'].setValue(
-                this.contractEmployee[i]['etepdContProb']
-                );
-              controlContractEmployee['etedContremarks'].setValue(
-                this.contractEmployee[i]['etedContremarks']
-                );
-                controlContractEmployee['etepdContSalary'].setValue(
-                  this.contractEmployee[i]['etepdContSalary']
-                  );
-  
-          }
+        this.contractEmployee = oneEmployeeData.emsTblContractEmployee;
+        for (let i = 0; i < this.contractEmployee.length; i++) {
+          this.addContractEmp();
+          let controlContractEmployee =
+            this.personalDetailsForm.controls['emsTblContractEmployee']
+            ['controls'][i]['controls'];
+          controlContractEmployee['etepdContJoinDate'].setValue(
+            this.contractEmployee[i]['etepdContJoinDate']
+          );
+          controlContractEmployee['etepdContEndDate'].setValue(
+            this.contractEmployee[i]['etepdContEndDate']
+          );
+          controlContractEmployee['etepdContperd'].setValue(
+            this.contractEmployee[i]['etepdContperd']
+          );
+          controlContractEmployee['etepdContrInc'].setValue(
+            this.contractEmployee[i]['etepdContrInc']
+          );
+          controlContractEmployee['etepdContProb'].setValue(
+            this.contractEmployee[i]['etepdContProb']
+          );
+          controlContractEmployee['etedContremarks'].setValue(
+            this.contractEmployee[i]['etedContremarks']
+          );
+          controlContractEmployee['etepdContSalary'].setValue(
+            this.contractEmployee[i]['etepdContSalary']
+          );
+          controlContractEmployee['etedContractEmp'].setValue(
+            this.contractEmployee[i]['etedContractEmp']
+          );
+
+        }
 
         /////Academic Qualification //////
         this.academicQualification =
@@ -378,7 +397,7 @@ export class EditEmployeeComponent implements OnInit {
           this.addAcademicQualification();
           let controlAcademicQualification =
             this.personalDetailsForm.controls['emsTblAcademicQualification'][
-              'controls'
+            'controls'
             ][i]['controls'];
           controlAcademicQualification['etaqAqId'].setValue(
             this.academicQualification[i]['etaqAqId']
@@ -398,7 +417,7 @@ export class EditEmployeeComponent implements OnInit {
         }
         this.personalDetailsForm.controls[
           'emsTblPermanentEmployee'
-        ]['controls'][0]['controls'].setValue(this.personaldetails,1);
+        ]['controls'][0]['controls'].setValue(this.personaldetails, 1);
 
         ////////Professional Qualification////////
         this.professionalQualification =
@@ -420,7 +439,7 @@ export class EditEmployeeComponent implements OnInit {
           this.addProfessionalQualification();
           let controlProfessionalQualification =
             this.personalDetailsForm.controls[
-              'emsTblProfessionalQualification'
+            'emsTblProfessionalQualification'
             ]['controls'][i]['controls'];
 
           controlProfessionalQualification['etpqCertification'].setValue(
@@ -459,7 +478,7 @@ export class EditEmployeeComponent implements OnInit {
           this.addWorkingHistory();
           let controlWorkingHistory =
             this.personalDetailsForm.controls['emsTblWorkingHistory'][
-              'controls'
+            'controls'
             ][i]['controls'];
           controlWorkingHistory['etwhWhId'].setValue(
             this.workingHistory[i]['etwhWhId']
@@ -480,17 +499,29 @@ export class EditEmployeeComponent implements OnInit {
             this.workingHistory[i]['etwhDuration']
           );
         }
-        
+
       }
-      
+
     });
-            /////////employe status//////////
+    /////////employe status//////////
+  }
+  getdays(){
+  this.daylist=[
+{id:1,Name:"Monday",isselected:false},
+{id:2,Name:"Tuesday",isselected:false},
+{id:3,Name:"Wednesday",isselected:false},
+{id:4,Name:"Thursday",isselected:false},
+{id:5,Name:"Friday",isselected:false},
+  ]
+  }
+  onchange2(){
+    console.log(this.daylist);
   }
   getEmployeeData() {
-    this.empDataService.getEmployeeData().subscribe( (data:any) => {
+    this.empDataService.getEmployeeData().subscribe((data: any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var salary = this.employeeData.filteredData[0].etepdSalary;
-     // this.employeeData.sort = this.sort;
+      // this.employeeData.sort = this.sort;
       this.empDataService.salary = salary;
 
     });
@@ -524,7 +555,7 @@ export class EditEmployeeComponent implements OnInit {
     });
   }
 
-  
+
 
   //     control['etepdDesignation'].setValue(
   //       abc
@@ -535,127 +566,125 @@ export class EditEmployeeComponent implements OnInit {
   // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
   // debugger
 
-          /////////////Released//////////////
-          addempreleaseddata(): FormGroup {
-            return this.fb.group({
-              relstartdate: ['', Validators.required],
-              relenddate: ['',Validators.required],
-              relservicedays: ['' ],
-              relclrdate: [''],
-              relremarks: [''],
-              
-            });
-          }
-        
-          addrelempdata(): void {
-            this.empreleaseddata = this.personalDetailsForm.get(
-              'empreleaseddata'
-            ) as FormArray;
-            this.empreleaseddata.push(this.addempreleaseddata());
-          }    
-          /////////////Resigned employee/////////////////
-          addempresigneddata(): FormGroup {
-            return this.fb.group({
-              Resigndate: ['', Validators.required],
-              Resignperiod: [''],
-              Resignreldate: ['' ],
-              Resignclrdate: [''],
-              Resignremarks: [''],
-              
-            });
-          }
-        
-          addresignempdata(): void {
-            this.empresigneddata = this.personalDetailsForm.get(
-              'empresigneddata'
-            ) as FormArray;
-            this.empresigneddata.push(this.addempresigneddata());
-          }    
-Resignednoticeperiod(index:any){
-  let control = this.personalDetailsForm.get(
-    'empresigneddata'
-  )['controls'][index]['controls'];
-  let pdjoinDate = control['Resigndate'].value;
-  let d = new Date(pdjoinDate);
-  this.noticeperiod = (<HTMLInputElement>(
-    document.getElementById('noticeperiod')
-  )).value;
-  debugger
-  let probationDate = d.setMonth(d.getMonth() + parseInt(this.noticeperiod));
-  this.newDate = new Date(probationDate);
-  this.probationDate = new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full',
-  }).format(this.newDate);control
-  ['Resignreldate'].setValue(this.probationDate);
-}
+  /////////////Released//////////////
+  addempreleaseddata(): FormGroup {
+    return this.fb.group({
+      relstartdate: ['', Validators.required],
+      relenddate: ['', Validators.required],
+      relservicedays: [''],
+      relclrdate: [''],
+      relremarks: [''],
 
-resignclearancedate(index:any){
-  index=0;
-  let control = this.personalDetailsForm.get('empresigneddata')[
-    'controls'
-  ][index]['controls'];
-  debugger
-  let pdjoinDate1 = control['Resignreldate'].value;
+    });
+  }
+
+  addrelempdata(): void {
+    this.empreleaseddata = this.personalDetailsForm.get(
+      'empreleaseddata'
+    ) as FormArray;
+    this.empreleaseddata.push(this.addempreleaseddata());
+  }
+  /////////////Resigned employee/////////////////
+  addempresigneddata(): FormGroup {
+    return this.fb.group({
+      Resigndate: ['', Validators.required],
+      Resignperiod: [''],
+      Resignreldate: [''],
+      Resignclrdate: [''],
+      Resignremarks: [''],
+
+    });
+  }
+
+  addresignempdata(): void {
+    this.empresigneddata = this.personalDetailsForm.get(
+      'empresigneddata'
+    ) as FormArray;
+    this.empresigneddata.push(this.addempresigneddata());
+  }
+  Resignednoticeperiod(index: any) {
+    let control = this.personalDetailsForm.get(
+      'empresigneddata'
+    )['controls'][index]['controls'];
+    let pdjoinDate = control['Resigndate'].value;
+    let d = new Date(pdjoinDate);
+    this.noticeperiod = (<HTMLInputElement>(
+      document.getElementById('noticeperiod')
+    )).value;
+    let probationDate = d.setMonth(d.getMonth() + parseInt(this.noticeperiod));
+    this.newDate = new Date(probationDate);
+    this.probationDate = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate); control
+    ['Resignreldate'].setValue(this.probationDate);
+  }
+
+  resignclearancedate(index: any) {
+    index = 0;
+    let control = this.personalDetailsForm.get('empresigneddata')[
+      'controls'
+    ][index]['controls'];
+    let pdjoinDate1 = control['Resignreldate'].value;
     let d = new Date(pdjoinDate1);
-    let probationDate1 = d.setDate(d.getDate()+15);
+    let probationDate1 = d.setDate(d.getDate() + 15);
     this.newDate = new Date(probationDate1);
     var probationDate2 = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
     }).format(this.newDate);
     control['Resignclrdate'].setValue(probationDate2);
-}
+  }
 
-//////////////// Internship /////////////////
+  //////////////// Internship /////////////////
 
-addInternddata(): FormGroup {
-  return this.fb.group({
-    Interndate: ['', Validators.required],
-    Internperiod: [''],
-    Internenddate: ['' ],
-    Internstipent: ['']
-  });
-}
+  addInternddata(): FormGroup {
+    return this.fb.group({
+      Interndate: ['', Validators.required],
+      Internperiod: [''],
+      Internenddate: [''],
+      Internstipent: ['']
+    });
+  }
 
 
-addinterneeedata(): void {
-  this.interneedata = this.personalDetailsForm.get(
-    'interneedata'
-  ) as FormArray;
-  this.interneedata.push(this.addInternddata());
-}  
-// internshipendDate(index: any) {
-//   debugger
-//   let control = this.personalDetailsForm.get(
-//     'interneedata'
-//   )['controls'][index]['controls'];
-//   let pdjoinDate = control['Interndate'].value;
-//   let d = new Date(pdjoinDate);
-//   this.internshipPrd = (<HTMLInputElement>(
-//     document.getElementById('internshipPrd')
-//   )).value;
-//   let probationDate = d.setMonth(d.getMonth() + parseInt(this.internshipPrd));
-//   this.newDate = new Date(probationDate);
-//   this.probationDate = new Intl.DateTimeFormat('en-GB', {
-//     dateStyle: 'full',
-//   }).format(this.newDate);control
-//   ['Internenddate'].setValue(this.probationDate);
-// } 
-getJoiningDate3(index: any) {
-  let control = this.personalDetailsForm.get(
-    'interneedata'
-  )['controls'][index]['controls'];
-  let pdjoinDate = control['Interndate'].value;
-  let d = new Date(pdjoinDate);
-  this.Internval = (<HTMLInputElement>(
-    document.getElementById('Internval')
-  )).value;
-  let probationDate4 = d.setMonth(d.getMonth() + parseInt(this.Internval));
-  this.newDate = new Date(probationDate4);
-  this.probationDate4 = new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full',
-  }).format(this.newDate);control
-  ['Internenddate'].setValue(this.probationDate4);
-} 
+  addinterneeedata(): void {
+    this.interneedata = this.personalDetailsForm.get(
+      'interneedata'
+    ) as FormArray;
+    this.interneedata.push(this.addInternddata());
+  }
+  // internshipendDate(index: any) {
+  //   debugger
+  //   let control = this.personalDetailsForm.get(
+  //     'interneedata'
+  //   )['controls'][index]['controls'];
+  //   let pdjoinDate = control['Interndate'].value;
+  //   let d = new Date(pdjoinDate);
+  //   this.internshipPrd = (<HTMLInputElement>(
+  //     document.getElementById('internshipPrd')
+  //   )).value;
+  //   let probationDate = d.setMonth(d.getMonth() + parseInt(this.internshipPrd));
+  //   this.newDate = new Date(probationDate);
+  //   this.probationDate = new Intl.DateTimeFormat('en-GB', {
+  //     dateStyle: 'full',
+  //   }).format(this.newDate);control
+  //   ['Internenddate'].setValue(this.probationDate);
+  // } 
+  getJoiningDate3(index: any) {
+    let control = this.personalDetailsForm.get(
+      'interneedata'
+    )['controls'][index]['controls'];
+    let pdjoinDate = control['Interndate'].value;
+    let d = new Date(pdjoinDate);
+    this.Internval = (<HTMLInputElement>(
+      document.getElementById('Internval')
+    )).value;
+    let probationDate4 = d.setMonth(d.getMonth() + parseInt(this.Internval));
+    this.newDate = new Date(probationDate4);
+    this.probationDate4 = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate); control
+    ['Internenddate'].setValue(this.probationDate4);
+  }
 
   getDropdownValue(id: number) {
     this.Id = id;
@@ -686,7 +715,7 @@ getJoiningDate3(index: any) {
     this.managerid = this.personaldetails.managerId;
     let controlProfessionalDetails =
       this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails'][
-        'controls'
+      'controls'
       ][0]['controls'];
     controlProfessionalDetails['etedManagerId'].setValue(this.managerid);
     this.personalDetailsForm.controls['etedManagerId'].setValue(this.managerid);
@@ -748,7 +777,7 @@ getJoiningDate3(index: any) {
       etepdDesignation: ['', Validators.required],
       etepdJoiningDate: [null, Validators.required],
       etedManagerId: [''],
-      etedempStatus:['']
+      etedempStatus: ['']
     });
   }
   addProfessionalDetails(): void {
@@ -842,12 +871,13 @@ getJoiningDate3(index: any) {
       imsAssign: this.fb.array([]),
       etedModifiedBy: [this.userId],
       etedModifiedByName: [this.userName],
-      emsTblPermanentEmployee:this.fb.array([this.addemsTblPermanentEmployee(),]),
-      emsTblContractEmployee:this.fb.array([this.addemsTblContractEmployee(),]),
-      empreleaseddata:this.fb.array([this.addempreleaseddata()]),
-      empresigneddata:this.fb.array([this.addempresigneddata()]),
-      interneedata:this.fb.array([this.addInternddata()])
-      
+      emsTblPermanentEmployee: this.fb.array([this.addemsTblPermanentEmployee(),]),
+      emsTblContractEmployee: this.fb.array([this.addemsTblContractEmployee(),]),
+      empreleaseddata: this.fb.array([this.addempreleaseddata()]),
+      empresigneddata: this.fb.array([this.addempresigneddata()]),
+      interneedata: this.fb.array([this.addInternddata()]),
+      emsTblPertTimeEmployee: this.fb.array([this.addemsTblPertTimeEmployee()])
+
     });
   }
 
@@ -858,7 +888,7 @@ getJoiningDate3(index: any) {
     });
     console.log(form.imsAssign);
     console.log(this.assetAssignDT);
-    
+
     this.personaldetails
       .updateEmployeeData(this.personalDetailsForm.value)
       .subscribe((result) => {
@@ -927,9 +957,8 @@ getJoiningDate3(index: any) {
   }
 
   ///////////Compare dates and Duration Calculator generic///////////////////
-////////////////////////////////////////////////////////////////////////////  
-  compareDatesGeneric(index: any,formName:any,sartDateControl:any,endDateControl:any,durationControl:any) {
-    debugger
+  ////////////////////////////////////////////////////////////////////////////  
+  compareDatesGeneric(index: any, formName: any, sartDateControl: any, endDateControl: any, durationControl: any) {
     let control = this.personalDetailsForm.get(formName)[
       'controls'
     ][index]['controls'];
@@ -945,10 +974,10 @@ getJoiningDate3(index: any) {
     console.log('new Date ', this.diff / msInDay);
 
     if (this.whStartDate != null && this.whEndDate != null) {
-      this.getDurationGeneric(index,formName,durationControl);
+      this.getDurationGeneric(index, formName, durationControl);
     }
   }
-  getDurationGeneric(index: any,formName:any,durationControl:any) {
+  getDurationGeneric(index: any, formName: any, durationControl: any) {
     let control = this.personalDetailsForm.get(formName)[
       'controls'
     ][index]['controls'];
@@ -1027,16 +1056,20 @@ getJoiningDate3(index: any) {
       return false;
     }
   }
-  isContractEmployeeDisabled(){
-    if(this.currentIndexContractEmp>=0){
+  isContractEmployeeDisabled() {
+    if (this.currentIndexContractEmp >= 0) {
       let result = this.personalDetailsForm.controls['emsTblContractEmployee']['controls'][
         this.currentIndexContractEmp
       ].valid;
-    return !result;
-  } else {
-    return false;
-  }
+      return !result;
+    } else {
+      return false;
     }
+  }
+
+  // isPartTimedisabled(){
+  //   if(this)
+  // }
   isPermanentEmployeeDisabled() {
     if (this.currentIndexPermanentEmp >= 0) {
       let result =
@@ -1060,7 +1093,7 @@ getJoiningDate3(index: any) {
   setCurrentIndexProfessionalQualification(index: any) {
     this.currentIndexProfessionalQ = index;
   }
-  setCurrentIndexPermannetEmployee(index:any){
+  setCurrentIndexPermannetEmployee(index: any) {
     this.currentIndexPermanentEmp = index;
   }
   //Current Index Setter Working History
@@ -1068,10 +1101,9 @@ getJoiningDate3(index: any) {
     this.currentIndexWorkingHistory = index;
   }
   //////////////
-  setCurrentIndexContractEmployee(index:any){
-    this.currentIndexContractEmp=index;
+  setCurrentIndexContractEmployee(index: any) {
+    this.currentIndexContractEmp = index;
   }
-
   ///////Profile pic Upload///////
   employeePicUpload(event: any): void {
     let reader = new FileReader(); // HTML5 FileReader API
@@ -1200,14 +1232,14 @@ getJoiningDate3(index: any) {
     });
     this.assetAssignDT.push(this.assetAssignObj);
     this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
-    
+
 
     // this.addAssetAssignList().setValue(this.assetAssignDT);
     // this.addImsAssign();
     //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
   }
 
-  
+
   addImsAssign(): void {
     this.imsAssign = this.personalDetailsForm.get('imsAssign') as FormArray;
     let assignForm = this.addAssetAssignList();
@@ -1226,72 +1258,73 @@ getJoiningDate3(index: any) {
       itasCreatedByName: [this.userName],
     });
   }
-  permanentEmpstatus(event:any){
+  permanentEmpstatus(event: any) {
+    debugger
     console.log(event);
-    if(event.value == 'Permanent'){
-      this.permanentEmp=true;
-    }else{
-      this.permanentEmp=false;
+    if (event.value == 'Permanent') {
+      this.permanentEmp = true;
+    } else {
+      this.permanentEmp = false;
     }
-    if(event.value == 'Contract'){
-      this.contractEmp=true;
-    }else{
-      this.contractEmp=false;
+    if (event.value == 'Contract') {
+      this.contractEmp = true;
+    } else {
+      this.contractEmp = false;
     }
-    if(event.value == 'Released'){
-      this.releasedEmp=true;
-    }else{
-      this.releasedEmp=false;
+    if (event.value == 'Released') {
+      this.releasedEmp = true;
+    } else {
+      this.releasedEmp = false;
     }
-    if(event.value == 'Resigned'){
-      this.resignedEmp=true;
-    }else{
-      this.resignedEmp=false;
+    if (event.value == 'Resigned') {
+      this.resignedEmp = true;
+    } else {
+      this.resignedEmp = false;
     }
-    if(event.value == 'PartTime'){
-      this.parttimeEmp=true;
-    }else{
-      this.parttimeEmp=false;
+    if (event.value == 'PartTime') {
+      this.parttimeEmp = true;
+    } else {
+      this.parttimeEmp = false;
     }
-    if(event.value == 'Internship'){
-      this.interEmp=true;
-    }else{
-      this.interEmp=false;
+    if (event.value == 'Internship') {
+      this.interEmp = true;
+    } else {
+      this.interEmp = false;
     }
 
-      
+
   }
-//////Permanent Employee array/////
-addemsTblPermanentEmployee():FormGroup{
-  return this.fb.group({
-    etepdPermJoinDate:['',Validators.required],
-    etepdEmpProb:[''],
-    etepdPermIncDate:[''],
-    etepdEmpProb1:[''],
-    // etepdEmpProb:[''],
-    etperEmpDuration:[''],
-    etepdEmpInc:[''],
-    etedperremarks:[''],
-    etepdPerSalary:['']
+  //////Permanent Employee array/////
+  addemsTblPermanentEmployee(): FormGroup {
+    return this.fb.group({
+      etepdPermJoinDate: ['', Validators.required],
+      etepdEmpProb: [''],
+      etepdPermIncDate: [''],
+      etepdEmpProb1: [''],
+      // etepdEmpProb:[''],
+      etperEmpDuration: [''],
+      etepdEmpInc: [''],
+      etedperremarks: [''],
+      etepdPerSalary: ['']
 
 
-  })
-}
-///////////////Released Employee Duration Cal//////////////
-onKeypressEvent(event: any, i: any) {
-  this.startdateemp = event.target.value;
-  console.log(this.startdateemp);
-}
-onKeypressEvent2(event: any, i: any) {
-  this.endDateemp = event.target.value;
-  console.log(this.endDateemp);
-}
-clearancedate(index:any=0){
-  let control = this.personalDetailsForm.get('empreleaseddata')[
-    'controls'
-  ][index]['controls'];
-  debugger
-  let pdjoinDate1 = control['relenddate'].value;
+    })
+  }
+  ///////////////Released Employee Duration Cal//////////////
+  onKeypressEvent(event: any, i: any) {
+    this.startdateemp = event.target.value;
+    console.log(this.startdateemp);
+  }
+  onKeypressEvent2(event: any, i: any) {
+    this.endDateemp = event.target.value;
+    console.log(this.endDateemp);
+  }
+  clearancedate(index: any = 0) {
+    let control = this.personalDetailsForm.get('empreleaseddata')[
+      'controls'
+    ][index]['controls'];
+    debugger
+    let pdjoinDate1 = control['relenddate'].value;
     let d = new Date(pdjoinDate1);
     let probationDate = d.setDate(d.getDate() + 15);
     this.newDate = new Date(probationDate);
@@ -1299,69 +1332,90 @@ clearancedate(index:any=0){
       dateStyle: 'full',
     }).format(this.newDate);
     control['relclrdate'].setValue(this.probationDate);
-}
+  }
 
-///////////////change date///////////
-setDate(event:any){
-let control = this.personalDetailsForm.get(
-  'emsTblPermanentEmployee'
-)['controls'][0]['controls'];
-control['etepdPermIncDate'].setValue(new Date(event))
-}
-//////////////addpermannetemploye/////
-addPerEmp():void{
-  this.emsTblPermanentEmployee=this.personalDetailsForm.get(
-    'emsTblPermanentEmployee'
-  )as FormArray;
-  this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
-}
+  ///////////////change date///////////
+  setDate(event: any) {
+    let control = this.personalDetailsForm.get(
+      'emsTblPermanentEmployee'
+    )['controls'][0]['controls'];
+    control['etepdPermIncDate'].setValue(new Date(event))
+  }
+  //////////////addpermannetemploye/////
+  addPerEmp(): void {
+    this.emsTblPermanentEmployee = this.personalDetailsForm.get(
+      'emsTblPermanentEmployee'
+    ) as FormArray;
+    this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
+  }
 
-getPerDate(index: any) {
-  debugger
-  let control = this.personalDetailsForm.get(
-    'emsTblPermanentEmployee'
-  )['controls'][index]['controls'];
-  let pdjoinDate = control['etepdPermJoinDate'].value;
-  let d = new Date(pdjoinDate);
-  this.monthval = (<HTMLInputElement>(
-    document.getElementById('monthVal1')
-  )).value;
-  let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
-  this.newDate = new Date(perprobDate1);
-  this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
-    dateStyle: 'full',
-  }).format(this.newDate);control
-  ['etepdEmpProb'].setValue(this.perprobDate1);
-}
-// perdate(){
-//   var validdate = this.newDate;
-  
-//   var control =  this.personalDetailsForm.controls[
-//     'emsTblPermanentEmployee'
-//   ]['controls'][0]['controls'];
+  getPerDate(index: any) {
+    debugger
+    let control = this.personalDetailsForm.get(
+      'emsTblPermanentEmployee'
+    )['controls'][index]['controls'];
+    let pdjoinDate = control['etepdPermJoinDate'].value;
+    let d = new Date(pdjoinDate);
+    this.monthval = (<HTMLInputElement>(
+      document.getElementById('monthVal1')
+    )).value;
+    let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
+    this.newDate = new Date(perprobDate1);
+    this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+    }).format(this.newDate); control
+    ['etepdEmpProb'].setValue(this.perprobDate1);
+  }
+  // perdate(){
+  //   var validdate = this.newDate;
 
-//   control['etepdEmpProb1'].setValue(this.validdate);
-// }
+  //   var control =  this.personalDetailsForm.controls[
+  //     'emsTblPermanentEmployee'
+  //   ]['controls'][0]['controls'];
+
+  //   control['etepdEmpProb1'].setValue(this.validdate);
+  // }
+
+
+  addPartTime() {
+    this.emsTblPertTimeEmployee = this, this.personalDetailsForm.get(
+      'emsTblPertTimeEmployee'
+    ) as FormArray;
+    this.emsTblPertTimeEmployee.push(this.addemsTblPertTimeEmployee());
+  }
+  ////////////part Time employee///////////////
+  addemsTblPertTimeEmployee(): FormGroup {
+    return this.fb.group({
+      etedpartTime: ['', Validators.required],
+      monday:[false,Validators.required],
+      tuesday:[false,Validators.required],
+      wednesday:[false,Validators.required],
+      thrusday:[false,Validators.required],
+      friday:[false,Validators.required],
+
+    })
+  }
   //////////Contract Employee//////////
   addemsTblContractEmployee(): FormGroup {
     return this.fb.group({
       etepdContJoinDate: ['', Validators.required],
       etepdContEndDate: ['', Validators.required],
-      etepdContperd: [''],
+      etepdContperd: ['', Validators.required],
       etepdContrInc: [''],
       etepdContProb: [''],
       etepdContSalary: [''],
-      etedContremarks: ['']
+      etedContremarks: [''],
+      etedContractEmp: ['']
     })
   }
-//////////value pushing Contract///////
-addContractEmp():void{
-  this.emsTblContractEmployee=this.personalDetailsForm.get(
-    'emsTblContractEmployee'
-  )as FormArray;
-  this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
-}
-//////////////////////////////////////////
+  //////////value pushing Contract///////
+  addContractEmp(): void {
+    this.emsTblContractEmployee = this.personalDetailsForm.get(
+      'emsTblContractEmployee'
+    ) as FormArray;
+    this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
+  }
+  //////////////////////////////////////////
   unAssignAssetById(itasItaAssetId: any) {
 
     const dialogRef = this.dialog.open(UnassignAssetComponent);
@@ -1370,13 +1424,13 @@ addContractEmp():void{
 
       if (res == true) {
 
-       
 
-       let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
 
-       this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
+        let objToRemove = this.inventory.assetObj.find((x: any) => x.assetid == itasItaAssetId);
 
-       this.tempTable();
+        this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove), 1);
+
+        this.tempTable();
 
 
       }
