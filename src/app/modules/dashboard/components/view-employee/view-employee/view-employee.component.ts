@@ -122,7 +122,7 @@ export class ViewEmployeeComponent implements OnInit {
     this.rowId = this.route.snapshot.paramMap.get('id');
     this.getEmployeeDataByID(this.rowId);
    this.getPermissions();
-   this.getEmployeeAsset(this.rowId);
+
 
   }
 getPermissions(){
@@ -152,14 +152,15 @@ getEmployeeAsset(empID:any){
 }
 
   getEmployeeDataByID(rowId: any) {
-    debugger;
     this.personalDetailService
       .viewEmployeeData(rowId)
       .subscribe((data: any) => {
         if (data.success) {
-          let userdata =data.data2;
-          this.password=userdata[0].ethuPassword
-          this.roleid=userdata[0].etrEthuRoleId
+          let oneEmployeeData = data.data;
+          let userdata =oneEmployeeData[0].emsTblHrmsUser;
+          this.password=userdata[0].ethuPassword;
+          this.roleid=userdata.etrEthuRoleId;
+          debugger;
           if(this.roleid==1)
           {
              this.role="Super-Admin";
@@ -177,7 +178,7 @@ getEmployeeAsset(empID:any){
             this.role="User";
           }
 
-          let oneEmployeeData = data.data;
+          
           this.profilePicUrl =
             this.personalDetailService.apiUrl +
             oneEmployeeData[0].etedPhotograph;

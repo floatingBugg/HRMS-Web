@@ -178,7 +178,9 @@ export class EditEmployeeComponent implements OnInit {
     this.getDropdownValue(2);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
-        let userdata = data.data;
+        debugger;
+        let oneEmployeeData = data.data[0];
+        let userdata = oneEmployeeData.emsTblHrmsUser;
         this.password = userdata[0].ethuPassword;
         this.roleid = userdata[0].etrEthuRoleId;
         if (this.roleid == 1) {
@@ -190,12 +192,7 @@ export class EditEmployeeComponent implements OnInit {
         } else {
           this.role = 'Employee';
         }
-
-        let oneEmployeeData = data.data[0];
-        console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
-        console.log('edit array', this.editDataArray);
-        console.log('Personal Form', this.personalDetailsForm);
         this.profilePicUrl =
           this.personaldetails.apiUrl + oneEmployeeData.etedPhotograph;
         this.empID = oneEmployeeData.etedEmployeeId;
