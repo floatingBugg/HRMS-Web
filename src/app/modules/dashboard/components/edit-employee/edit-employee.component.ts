@@ -179,9 +179,8 @@ export class EditEmployeeComponent implements OnInit {
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
         debugger
-        let userdata = data.data;
-        // let oneEmployeeData = data.data[0];
-        // let userdata = oneEmployeeData.emsTblHrmsUser;
+        let oneEmployeeData = data.data[0];
+        let userdata = oneEmployeeData.emsTblHrmsUser;
         this.password = userdata[0].ethuPassword
         this.roleid = userdata[0].etrEthuRoleId
         if (this.roleid == 1) {
@@ -194,7 +193,6 @@ export class EditEmployeeComponent implements OnInit {
           this.role = 'Employee';
         }
 
-        let oneEmployeeData = data.data[0];
         console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
         console.log('edit array', this.editDataArray);

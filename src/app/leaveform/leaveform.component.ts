@@ -69,15 +69,15 @@ export class LeaveformComponent implements OnInit {
 
   ngOnInit(): void {
     this.createleaveForm();
-    this.leaveform.controls['name'].setValue(this.leave.name)
+    this.leaveform.controls['lmselEtedEmployeeName'].setValue(this.leave.name)
   }
 createleaveForm(){
   this.leaveform = this.fb.group({
-    name:['',Validators.required],
-    leaveType:['',Validators.required],
-    startDate:['',Validators.required],
-    endDate:['',Validators.required],
-    duration:[],
+    lmselEtedEmployeeName:['',Validators.required],
+    lmselLeaveType:['',Validators.required],
+    lmselStartDate:['',Validators.required],
+    lmselEndDate:['',Validators.required],
+    lmselDays:[],
     reason:[]
   })
 }
