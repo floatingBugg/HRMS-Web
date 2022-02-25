@@ -605,16 +605,16 @@
                           (selectionChange)="permanentEmpstatus($event)">
                           <mat-option [value]="">---Select One---</mat-option>
                           <!-- <mat-option (onSelectionChange)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option> -->
-                          <mat-option value="Permanent">Permanent</mat-option>
-                          <mat-option value="Contract">Contract
+                          <mat-option value="1">Permanent</mat-option>
+                          <mat-option value="2">Contract
                           </mat-option>
-                          <mat-option value="Released">Released
+                          <mat-option value="3">Released
                           </mat-option>
-                          <mat-option value="Resigned">Resigned
+                          <mat-option value="4">Resigned
                           </mat-option>
-                          <mat-option value="PartTime">Part-Time
+                          <mat-option value="5">Internship
                           </mat-option>
-                          <mat-option value="Internship">Internship
+                          <mat-option value="6">Part-Time
                           </mat-option>
                         </mat-select>
                         <mat-error *ngIf="personalDetailsForm.controls['etedStatus'].errors?.['required'] ">
@@ -651,58 +651,58 @@
                     <div class="col-lg-6 col-md-6 col-sm-12" class="screenMaxWidth">
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Start Date</mat-label>
-                        <input matInput formControlName="etepdPermJoinDate" name="etepdPermJoinDate"
+                        <input matInput formControlName="eesStartDate" name="eesStartDate"
                           [matDatepicker]="picker" (dateChange)="getPerDate(i)" (ngModelChange)="setDate($event)">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
-                        <mat-error *ngIf="item.controls['etepdPermJoinDate'].errors?.['required']">
+                        <mat-error *ngIf="item.controls['eesStartDate'].errors?.['required']">
                           Joining Date is <strong>required</strong></mat-error>
                       </mat-form-field>
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Increment date</mat-label>
-                        <input readonly formControlName="etepdPermIncDate" name="etepdPermIncDate" matInput
+                        <input readonly formControlName="eesDateOfIncrement" name="eesDateOfIncrement" matInput
                           [matDatepicker]="startDate">
                         <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
                         <mat-datepicker #startDate></mat-datepicker>
-                        <mat-error *ngIf="item.controls['etepdPermIncDate'].errors?.['required']">
+                        <mat-error *ngIf="item.controls['eesDateOfIncrement'].errors?.['required']">
                           Increment Date is <strong>required</strong></mat-error>
                       </mat-form-field>
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Probation Period</mat-label>
-                        <input value="12" type="number" id="monthVal1" matInput (keyup)="getPerDate(i)">
+                        <input value="12" type="number" id="monthVal1" formControlName="eesDuration" matInput (keyup)="getPerDate(i)">
 
                       </mat-form-field>
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Increment</mat-label>
-                        <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="etepdEmpInc"
-                          name="etepdEmpInc" matInput placeholder="Increment">
-                        <mat-error *ngIf="item.controls['etepdEmpInc'].errors?.['required']">
+                        <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="eesIncrement"
+                          name="eesIncrement" matInput placeholder="Increment">
+                        <mat-error *ngIf="item.controls['eesIncrement'].errors?.['required']">
                           Increment is <strong>required</strong></mat-error>
                       </mat-form-field>
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Evaluation date</mat-label>
-                        <input readonly id="Perprob" [value]=perprobDate1 formControlName="etepdEmpProb"
-                          name="etepdEmpProb" matInput placeholder="Evaluation">
-                        <mat-error *ngIf="item.controls['etepdEmpProb'].errors?.['required']">
+                        <input readonly id="Perprob" [value]=perprobDate1 formControlName="eesEndDate"
+                          name="eesEndDate" matInput placeholder="Evaluation">
+                        <mat-error *ngIf="item.controls['eesEndDate'].errors?.['required']">
                           End-date is <strong>required</strong></mat-error>
                       </mat-form-field>
 
 
                       <mat-form-field class=" col-lg-5 col-md-5 input">
                         <mat-label>Remarks</mat-label>
-                        <textarea formControlName="etedperremarks" name="etedperremarks" matInput
+                        <textarea formControlName="eesRemarks" name="eesRemarks" matInput
                           placeholder="Remarks"></textarea>
 
                       </mat-form-field>
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Current Salary</mat-label>
-                        <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="etepdPerSalary"
-                          name="etepdPerSalary" matInput placeholder="Current Salary">
-                        <mat-error *ngIf="item.controls['etepdPerSalary'].errors?.['required']">
+                        <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="eesSalary"
+                          name="eesSalary" matInput placeholder="Current Salary">
+                        <mat-error *ngIf="item.controls['eesSalary'].errors?.['required']">
                           Increment is <strong>required</strong></mat-error>
                       </mat-form-field>
                       <div class="row mt-3">
@@ -776,40 +776,22 @@
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract Amount</mat-label>
                           <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="etepdContrInc"
-                            name="etepdContrInc" matInput placeholder="Increment">
+                            name="etepdContrInc" matInput >
                           <mat-error *ngIf="item.controls['etepdContrInc'].errors?.['required']">
                             Contract-Amount is <strong>required</strong></mat-error>
                         </mat-form-field>
 
-                        <mat-form-field class="col-lg-5 col-md-5 input">
-                          <mat-label>Evaluation date</mat-label>
-                          <input readonly id="Perprob" formControlName="etepdContProb" name="etepdContProb" matInput
-                            placeholder="Evaluation">
-                          <mat-error *ngIf="item.controls['etepdContProb'].errors?.['required']">
-                            End-date is <strong>required</strong></mat-error>
-                        </mat-form-field>
-
-
                         <mat-form-field class=" col-lg-5 col-md-5 input">
                           <mat-label>Remarks</mat-label>
                           <textarea formControlName="etedContremarks" name="etedContremarks" matInput
-                            placeholder="Remarks"></textarea>
-
-                        </mat-form-field>
-
-                        <mat-form-field class="col-lg-5 col-md-5 input">
-                          <mat-label>Current Salary</mat-label>
-                          <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="etepdContSalary"
-                            name="etepdContSalary" matInput placeholder="Current Salary">
-                          <mat-error *ngIf="item.controls['etepdContSalary'].errors?.['required']">
-                            Increment is <strong>required</strong></mat-error>
+                            placeholder=""></textarea>
                         </mat-form-field>
 
                         <div class="row mt-3">
                           <div class="col-md-offset-2 col-lg-5 col-md-4">
                             <button type="button" class="btn btn-primary" [disabled]="isContractEmployeeDisabled()"
                               (click)="(addContractEmp())">
-                              Add Contract Employee
+                              Renew Contract
                             </button>
                           </div>
                           <div class=" col-lg-5 col-md-4">
@@ -872,8 +854,10 @@
                     <div>
                       <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                         <mat-label>Clearance Date</mat-label>
-                        <input readonly id="daysvalue" [value]=perprobDate1 formControlName="relclrdate"
-                          name="relclrdate" matInput placeholder="clearance Date">
+                        <input  id="daysvalue" [value]=perprobDate1 formControlName="relclrdate"
+                          name="relclrdate" matInput placeholder="clearance Date" >
+                          <!-- <mat-datepicker-toggle matSuffix [for]="startDate3"></mat-datepicker-toggle> -->
+                        <!-- <mat-datepicker #startDate3></mat-datepicker> -->
 
                       </mat-form-field>
                     </div>

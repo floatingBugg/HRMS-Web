@@ -178,11 +178,12 @@ export class EditEmployeeComponent implements OnInit {
     this.getDropdownValue(2);
     this.empDataService.viewEmployeeData(this.id).subscribe((data) => {
       if (data.success) {
-        debugger;
-        let oneEmployeeData = data.data[0];
-        let userdata = oneEmployeeData.emsTblHrmsUser;
-        this.password = userdata[0].ethuPassword;
-        this.roleid = userdata[0].etrEthuRoleId;
+        debugger
+        let userdata = data.data;
+        // let oneEmployeeData = data.data[0];
+        // let userdata = oneEmployeeData.emsTblHrmsUser;
+        this.password = userdata[0].ethuPassword
+        this.roleid = userdata[0].etrEthuRoleId
         if (this.roleid == 1) {
           this.role = 'Super-Admin';
         } else if (this.roleid == 2) {
@@ -192,7 +193,12 @@ export class EditEmployeeComponent implements OnInit {
         } else {
           this.role = 'Employee';
         }
+
+        let oneEmployeeData = data.data[0];
+        console.log(oneEmployeeData);
         this.editDataArray = data.data[0];
+        console.log('edit array', this.editDataArray);
+        console.log('Personal Form', this.personalDetailsForm);
         this.profilePicUrl =
           this.personaldetails.apiUrl + oneEmployeeData.etedPhotograph;
         this.empID = oneEmployeeData.etedEmployeeId;
@@ -242,7 +248,7 @@ export class EditEmployeeComponent implements OnInit {
           oneEmployeeData.etedReligion
         );
         this.personalDetailsForm.controls['ethupassword'].setValue(
-          userdata[0].ethuPassword
+          userdata[0].ethupassword
         );
         this.personalDetailsForm.controls['etrethuroleid'].setValue(
           this.roleid.toString()
@@ -313,32 +319,28 @@ export class EditEmployeeComponent implements OnInit {
             'controls'
             ][i]['controls'];
 
-          controlPermanentEmployee['etepdPermJoinDate'].setValue(
-            this.permannetEmployee[i]['etepdPermJoinDate']
+          controlPermanentEmployee['eesStartDate'].setValue(
+            this.permannetEmployee[i]['eesStartDate']
           );
-          controlPermanentEmployee['etepdEmpProb'].setValue(
-            this.permannetEmployee[i]['etepdEmpProb']
+          controlPermanentEmployee['eesEndDate'].setValue(
+            this.permannetEmployee[i]['eesEndDate']
           );
-          controlPermanentEmployee['etepdPermIncDate'].setValue(
-            this.permannetEmployee[i]['etepdPermIncDate']
+          controlPermanentEmployee['eesDateOfIncrement'].setValue(
+            this.permannetEmployee[i]['eesDateOfIncrement']
           );
-          controlPermanentEmployee['etepdEmpProb1'].setValue(
-            this.permannetEmployee[i]['etepdEmpProb1']
+          controlPermanentEmployee['eesDuration'].setValue(
+            this.permannetEmployee[i]['eesDuration']
           );
-          controlPermanentEmployee['etperEmpDuration'].setValue(
-            this.permannetEmployee[i]['etperEmpDuration']
+          controlPermanentEmployee['eesIncrement'].setValue(
+            this.permannetEmployee[i]['eesIncrement']
           );
-          controlPermanentEmployee['etepdEmpInc'].setValue(
-            this.permannetEmployee[i]['etepdEmpInc']
+          controlPermanentEmployee['eesRemarks'].setValue(
+            this.permannetEmployee[i]['eesRemarks']
           );
-          controlPermanentEmployee['etedperremarks'].setValue(
-            this.permannetEmployee[i]['etedperremarks']
-          );
-          controlPermanentEmployee['etepdPerSalary'].setValue(
-            this.professionalDetails[0]['etepdSalary']
+          controlPermanentEmployee['eesSalary'].setValue(
+            this.professionalDetails[0]['eesSalary']
           );
         }
-        /////////Contract Employee//////
         ////////////////Contract Employee//////////////
 
         this.contractEmployee = oneEmployeeData.emsTblContractEmployee;
@@ -1258,32 +1260,32 @@ export class EditEmployeeComponent implements OnInit {
   permanentEmpstatus(event: any) {
     debugger
     console.log(event);
-    if (event.value == 'Permanent') {
+    if (event.value == 1) {
       this.permanentEmp = true;
     } else {
       this.permanentEmp = false;
     }
-    if (event.value == 'Contract') {
+    if (event.value == 2) {
       this.contractEmp = true;
     } else {
       this.contractEmp = false;
     }
-    if (event.value == 'Released') {
+    if (event.value == 3) {
       this.releasedEmp = true;
     } else {
       this.releasedEmp = false;
     }
-    if (event.value == 'Resigned') {
+    if (event.value == 4) {
       this.resignedEmp = true;
     } else {
       this.resignedEmp = false;
     }
-    if (event.value == 'PartTime') {
+    if (event.value == 6) {
       this.parttimeEmp = true;
     } else {
       this.parttimeEmp = false;
     }
-    if (event.value == 'Internship') {
+    if (event.value == 5) {
       this.interEmp = true;
     } else {
       this.interEmp = false;
@@ -1294,17 +1296,13 @@ export class EditEmployeeComponent implements OnInit {
   //////Permanent Employee array/////
   addemsTblPermanentEmployee(): FormGroup {
     return this.fb.group({
-      etepdPermJoinDate: ['', Validators.required],
-      etepdEmpProb: [''],
-      etepdPermIncDate: [''],
-      etepdEmpProb1: [''],
-      // etepdEmpProb:[''],
-      etperEmpDuration: [''],
-      etepdEmpInc: [''],
-      etedperremarks: [''],
-      etepdPerSalary: ['']
-
-
+      eesStartDate: ['', Validators.required],
+      eesEndDate: [''],
+      eesDateOfIncrement: [''],
+      eesDuration:[''],
+      eesIncrement: [''],
+      eesRemarks: [''],
+      eesSalary: [''],
     })
   }
   ///////////////Released Employee Duration Cal//////////////
@@ -1331,49 +1329,42 @@ export class EditEmployeeComponent implements OnInit {
     control['relclrdate'].setValue(this.probationDate);
   }
 
-  ///////////////change date///////////
-  setDate(event: any) {
-    let control = this.personalDetailsForm.get(
-      'emsTblPermanentEmployee'
-    )['controls'][0]['controls'];
-    control['etepdPermIncDate'].setValue(new Date(event))
-  }
   //////////////addpermannetemploye/////
   addPerEmp(): void {
     this.emsTblPermanentEmployee = this.personalDetailsForm.get(
       'emsTblPermanentEmployee'
-    ) as FormArray;
-    this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
-  }
-
-  getPerDate(index: any) {
-    debugger
-    let control = this.personalDetailsForm.get(
-      'emsTblPermanentEmployee'
-    )['controls'][index]['controls'];
-    let pdjoinDate = control['etepdPermJoinDate'].value;
-    let d = new Date(pdjoinDate);
-    this.monthval = (<HTMLInputElement>(
-      document.getElementById('monthVal1')
-    )).value;
-    let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
-    this.newDate = new Date(perprobDate1);
-    this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
-      dateStyle: 'full',
-    }).format(this.newDate); control
-    ['etepdEmpProb'].setValue(this.perprobDate1);
-  }
-  // perdate(){
-  //   var validdate = this.newDate;
-
-  //   var control =  this.personalDetailsForm.controls[
-  //     'emsTblPermanentEmployee'
-  //   ]['controls'][0]['controls'];
-
-  //   control['etepdEmpProb1'].setValue(this.validdate);
-  // }
-
-
+      ) as FormArray;
+      this.emsTblPermanentEmployee.push(this.addemsTblPermanentEmployee());
+    }
+    
+    getPerDate(index: any) {
+      let control = this.personalDetailsForm.get(
+        'emsTblPermanentEmployee'
+        )['controls'][index]['controls'];
+        let pdjoinDate = control['eesStartDate'].value;
+        let d = new Date(pdjoinDate);
+        this.monthval = (<HTMLInputElement>(
+          document.getElementById('monthVal1')
+          )).value;
+          let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
+          this.newDate = new Date(perprobDate1);
+          debugger
+          this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
+            dateStyle: 'full',
+          }).format(this.newDate); control
+          ['eesEndDate'].setValue(this.perprobDate1);
+        }
+        
+        ///////////////change date///////////
+        setDate(event: any) {
+          debugger
+          let control = this.personalDetailsForm.get(
+            'emsTblPermanentEmployee'
+          )['controls'][0]['controls'];
+          control['eesDateOfIncrement'].setValue(new Date(event))
+        }
+        /////////////////////////////////////////////
+        ///////////////////////////PartTime///////////////////
   addPartTime() {
     this.emsTblPertTimeEmployee = this, this.personalDetailsForm.get(
       'emsTblPertTimeEmployee'
