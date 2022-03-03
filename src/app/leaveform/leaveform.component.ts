@@ -92,8 +92,8 @@ createleaveForm(){
     console.log(this.endDate);
   }
   compareDates(index: any) {
-    this.startdate = this.leaveform.controls['startDate'].value;
-    this.endDate = this.leaveform.controls['endDate'].value;
+    this.startdate = this.leaveform.controls['lmselStartDate'].value;
+    this.endDate = this.leaveform.controls['lmselEndDate'].value;
     console.log(this.startdate);
     console.log(this.endDate);
     let start: any = new Date(this.startdate);
@@ -135,7 +135,7 @@ createleaveForm(){
         [years, ` years `, months, ' months ', days, ' days '].join('')
       );
     }
-    this.leaveform.controls['duration'].setValue(this.whDuration);
+    this.leaveform.controls['lmselDays'].setValue(this.noOfDays);
     return console.log(this.whDuration);
   }
   // applyFilter(event: Event) {
@@ -147,8 +147,8 @@ createleaveForm(){
 
 
   submitData() {
-    debugger
     console.log(this.leaveform.value);
+    debugger
     this.leave
       .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
         if (result.success) {
@@ -178,50 +178,4 @@ createleaveForm(){
                   }
                 });
             }
-          //   applyFilter(event: Event) {
-          //     const filterValue = (event.target as HTMLInputElement).value;
-          //     this.employeeData.filter = filterValue.trim().toLowerCase();
-          //   }
-          
-}
-
-  // submitData() {
-  //   console.log(this.screensForm.value);
-  //   this.inventory
-  //     .postAssets(this.screensForm.value)
-  //     .subscribe((result) => {
-  //       if (result.success) {
-  //         Swal.fire({
-  //           title: 'Added!',
-  //           text: 'Record added successfully',
-  //           icon: 'success',
-  //           showCancelButton: false,
-  //           confirmButtonText: 'Thank You',
-  //           //cancelButtonText: 'No, keep it'
-  //         }).then((res) => {
-  //           this.router.navigate(["inventory/unassigned-screens"])
-  //         })
-  //       } 
-  //       else
-  //        {
-  //         this.errorMsg = result.message;
-  //         Swal.fire({
-  //           title: 'ERROR!',
-  //           text: this.errorMsg,
-  //           icon: 'error',
-  //           showCancelButton: false,
-  //           confirmButtonText: 'Okay',
-  //           //cancelButtonText: 'No, keep it'
-  //         })
-  //         console.log(result.message);
-  //       }
-  //     });
-  // }
-
-
-  
-  
-
-
-
-
+          }

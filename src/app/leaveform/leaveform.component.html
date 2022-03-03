@@ -1,42 +1,51 @@
     <h3>Leave Form</h3>
     <div [formGroup]="leaveform">
-    <mat-form-field appearance="outline">
+      <!-- <mat-form-field matColumnDef="empID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Emp ID</th>
+        <td mat-cell *matCellDef="let Personal"> {{Personal.empID}} </td>
+      </ng-container> -->
+      <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input  matInput placeholder="" formControlName="lmselEtedEmployeeName">
-    </mat-form-field>
-    
+        <input matInput placeholder="" formControlName="LmselEtedEmployeeId">
+        <!-- <mat-select formControlName="LmselEtedEmployeeId" name="LmselEtedEmployeeId"> -->
+          <!-- <mat-option *ngFor="let emp of employeelist" [value]="emp.employeeID">{{emp.employeeName}} -->
+          <!-- </mat-option> -->
+        <!-- </mat-select> -->
+      </mat-form-field>
+
 
       <mat-form-field appearance="outline">
-        <mat-label >Leave Type</mat-label>
+        <mat-label>Leave Type</mat-label>
         <select matNativeControl formControlName="lmselLeaveType" required>
-          <option selected value="Sick">Sick</option>
-          <option value="Casual">Casual</option>
-          <option value="Annual">Annual</option>
+          <option selected value="1">Sick</option>
+          <option value="2">Casual</option>
+          <option value="3">Annual</option>
         </select>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Enter a date range</mat-label>
-        <mat-date-range-input [rangePicker]="picker" >
-          <input matStartDate name="start-date" formControlName="lmselStartDate" (dateChange)="compareDates($event)"   placeholder="Start date" required >
-          <input matEndDate name="end-date" formControlName="lmselEndDate" (dateChange)="compareDates($event)" placeholder="End date" required>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate name="lmselStartDate" formControlName="lmselStartDate" (dateChange)="compareDates($event)"
+            placeholder="Start date" required>
+          <input matEndDate name="lmselEndDate" formControlName="lmselEndDate" (dateChange)="compareDates($event)"
+            placeholder="End date" required>
         </mat-date-range-input>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Duration</mat-label>
-        <input matInput readonly  placeholder="" formControlName="lmselDays">
-    </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Duration <small>(Days)</small> </mat-label>
+        <input matInput readonly placeholder="" formControlName="lmselDays">
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="outline">
         <mat-label>Reason</mat-label>
         <textarea matInput placeholder="" formControlName="reason"></textarea>
       </mat-form-field>
     </div>
-      <div class="btnsubmit">
-        <button mat-raised-button color color="primary"
-        [disabled]="leaveform.invalid" mat-raised-button type="submit" color="primary"
-        (click)="submitData()">Save</button>
-        
-</div>
+    <div class="btnsubmit">
+      <button mat-raised-button color color="primary" [disabled]="leaveform.invalid" mat-raised-button type="submit"
+        color="primary" (click)="submitData()">Save</button>
+
+    </div>

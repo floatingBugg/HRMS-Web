@@ -24,6 +24,10 @@ data:any;
     return this.http.post(this.apiUrl + '/Leave/AssignLeave', data)
   }
 
+  addEmployeeLeaves(data:any){
+    return this.http.post(this.apiUrl +'/Leave/AddLeaveRecord', data);
+  }
+
   // postAssets(data: any): Observable<any> {
 
   //   return this.http.post(this.apiUrl + '/Asset/AddAsset', data);
