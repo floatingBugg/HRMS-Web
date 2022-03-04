@@ -41,6 +41,8 @@ export class LeaveformComponent implements OnInit {
   
   leaveform: any = FormGroup;
   startdate:any;
+  Id: any;
+
   endDate:any;
   day: any;
   diff: any;
@@ -48,6 +50,7 @@ export class LeaveformComponent implements OnInit {
   noOfDays: any;
   monthValue: any;
   newDate: any;
+  employeelist:any
   probationDate: any;
   monthval: any = 3;
   whDuration: any;
@@ -55,6 +58,8 @@ export class LeaveformComponent implements OnInit {
   dialog: any;
   public LeaveFormDetails:any = -1;
   
+  value: any;
+  employeeDdlData:any;
 
 
   constructor(
@@ -69,11 +74,14 @@ export class LeaveformComponent implements OnInit {
 
   ngOnInit(): void {
     this.createleaveForm();
-    this.leaveform.controls['lmselEtedEmployeeName'].setValue(this.leave.name)
+    // this.leaveform.controls['lmselEtedEmployeeName'].setValue(this.leave.name)
+    this.employeeDdlData = this.leave.data;
+    console.log(this.employeeDdlData)
   }
 createleaveForm(){
   this.leaveform = this.fb.group({
-    lmselEtedEmployeeName:['',Validators.required],
+    // lmselEtedEmployeeName:['',Validators.required],
+    lmslrEtedEmployeeId:[0,Validators.required],
     lmselLeaveType:['',Validators.required],
     lmselStartDate:['',Validators.required],
     lmselEndDate:['',Validators.required],
@@ -148,7 +156,7 @@ createleaveForm(){
 
   submitData() {
     console.log(this.leaveform.value);
-    
+    debugger
     this.leave
       .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
         if (result.success) {
@@ -178,4 +186,12 @@ createleaveForm(){
                   }
                 });
             }
+            getEmployeeData(){
+              
+             this.personaldetails.getEmployeeData().subscribe((res:any)=>{
+              this.value=res.data;
+              })
+            
           }
+          }
+          

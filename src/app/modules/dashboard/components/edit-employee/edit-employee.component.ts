@@ -1316,7 +1316,7 @@ export class EditEmployeeComponent implements OnInit {
     control['eesClearenceDate'].setValue(this.probationDate);
   }
 
-  //////////////addpermannetemploye/////
+  //////////////add permanent employee/////
   addPerEmp(): void {
     this.emsTblPermanentEmployee = this.personalDetailsForm.get(
       'emsTblPermanentEmployee'

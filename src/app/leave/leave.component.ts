@@ -63,6 +63,7 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
      // this.employeeData.sort = this.sort;
       this.leave.name = name;
+      this.leave.data = data.data;
       this.employeeData.paginator = this.paginator;
 
     });

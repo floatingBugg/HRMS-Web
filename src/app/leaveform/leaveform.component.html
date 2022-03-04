@@ -2,11 +2,11 @@
     <div [formGroup]="leaveform">
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
-        <input matInput placeholder="" formControlName="LmselEtedEmployeeId">
-        <!-- <mat-select formControlName="LmselEtedEmployeeId" name="LmselEtedEmployeeId"> -->
-          <!-- <mat-option *ngFor="let emp of employeelist" [value]="emp.employeeID">{{emp.employeeName}} -->
-          <!-- </mat-option> -->
-        <!-- </mat-select> -->
+        <!-- <input matInput placeholder="" formControlName="LmselEtedEmployeeId"> -->
+        <mat-select formControlName="lmslrEtedEmployeeId" name="lmslrEtedEmployeeId">
+          <mat-option *ngFor="let emp of this.employeeDdlData" [value]="emp.lmslrEtedEmployeeId">{{emp.lmslrEtedEmployeeName}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
 
 

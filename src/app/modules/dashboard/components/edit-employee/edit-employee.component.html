@@ -452,14 +452,14 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                       <mat-form-field style="display: none;" class="col-lg-5 col-md-5 input">
                         <mat-label>Academic Qualification Id</mat-label>
                         <input formControlName="etaqAqId" name="etaqAqId" matInput
                           placeholder="Academic QualificationId">
                       </mat-form-field>
 
-                      <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
+                      <mat-form-field class="col-lg-5 col-md-5 input" >
                         <mat-label>Degree Title</mat-label>
                         <mat-select formControlName="etaqQualification" name="etaqQualification">
                           <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}} </mat-option>
@@ -468,15 +468,15 @@
                           Degree Title is <strong>required</strong></mat-error>
                       </mat-form-field>
                     </div>
-                    <div class="col-lg-2 col-md-2 off-set-4 mt-2">
-                      <div class="button2">
-                        <button id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
+                    <div  class="col-5 off-set-2 mt-3" >
+                      
+                        <button  id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
                           color="primary">Add Degree</button>
-                      </div>
+                      
                     </div>
                   </div>
                   <div *ngIf="showAddNewDropDownField">
-                    <mat-form-field id="inputvalue" appearance="legacy" style="width:620px">
+                    <mat-form-field class="col-lg-5 col-md-5 input"id="inputvalue" appearance="legacy" >
                       <input matInput placeholder="Enter Degree here" ngModel [ngModelOptions]="{standalone: true}"
                         (keyup.enter)="pushValue($event.target,2)">
                     </mat-form-field>
