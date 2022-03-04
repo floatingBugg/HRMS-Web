@@ -31,7 +31,7 @@ rememberlogin:boolean=false;
       this.loginService.login(data).subscribe((result) => {
         if (result.success) {
           localStorage.setItem('token', result.data.token);
-          debugger
+          
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);
           localStorage.setItem('loggedIn_RoleId', result.data.roleId);
@@ -46,11 +46,11 @@ rememberlogin:boolean=false;
   }
 
   // remember(){
-  //   debugger
+  //   
   //   this.rememberlogin ? localStorage.setItem(LocalStorage.LoginForm, JSON.stringify(this.loginForm.value)):localStorage.removeItem(LocalStorage.LoginForm)
   // }
 // getForm(){
-//   debugger
+//   
 //   var existingValue=localStorage.getItem(LocalStorage.LoginForm)
 //   if(existingValue){
 //     this.rememberlogin=true;

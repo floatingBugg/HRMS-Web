@@ -49,7 +49,7 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
   ];
 }
   ngOnInit(): void {
-    // debugger
+    // 
     this.getEmployeeData();
  this.dummydata = this.dummydata;
   }

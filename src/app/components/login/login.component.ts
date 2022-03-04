@@ -33,6 +33,7 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginUser() {
+    debugger
     if (this.loginForm.valid) {
       let data = this.loginForm.value;
       this.loginService.login(data).subscribe((result) => {

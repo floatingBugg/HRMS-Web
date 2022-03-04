@@ -146,7 +146,7 @@ getEmployeeAsset(empID:any){
   .subscribe((data:any)=>{
     if (data.success) {
        this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
-       debugger;
+       ;
     }
   });
 }
@@ -160,7 +160,7 @@ getEmployeeAsset(empID:any){
           let userdata =oneEmployeeData[0].emsTblHrmsUser;
           this.password=userdata[0].ethuPassword;
           this.roleid=userdata.etrEthuRoleId;
-          debugger;
+          ;
           if(this.roleid==1)
           {
              this.role="Super-Admin";

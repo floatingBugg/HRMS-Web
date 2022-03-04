@@ -32,12 +32,12 @@ export class LeaveformComponent implements OnInit {
   _employeeView:boolean=false
   
   _roleId = localStorage.getItem('loggedIn_RoleId');
-  LeaveType: Leavetype[] = [
-    { value: 'Sick', viewValue: 'Sick' },
-    { value: 'Annual', viewValue: 'Annual' },
-    { value: 'Casual', viewValue: 'Casual' },
+  // LeaveType: Leavetype[] = [
+  //   { value: 'Sick', viewValue: 'Sick' },
+  //   { value: 'Annual', viewValue: 'Annual' },
+  //   { value: 'Casual', viewValue: 'Casual' },
     
-  ];
+  // ];
   
   leaveform: any = FormGroup;
   startdate:any;
@@ -148,7 +148,7 @@ createleaveForm(){
 
   submitData() {
     console.log(this.leaveform.value);
-    debugger
+    
     this.leave
       .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
         if (result.success) {

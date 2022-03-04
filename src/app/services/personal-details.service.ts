@@ -30,7 +30,7 @@ export class PersonalDetailsService {
     return this.http.post(this.apiUrl + '/Employee/AddEmployee', data);
   }
   getempsalary(){
-    debugger
+    
     return this.salary;
   }
   getEmployeeData() {

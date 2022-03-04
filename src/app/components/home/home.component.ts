@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
   }
 
   getPermissions(){
-    debugger;
+    ;
     const permissions = this.permissionService.getPermissionsByRole(this.roleid);
     this._update = permissions.update;
     this._delete = permissions.delete;

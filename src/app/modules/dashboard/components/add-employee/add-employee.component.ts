@@ -148,23 +148,6 @@ export class AddEmployeeComponent implements OnInit {
       {mtId:12,degMonth:"Decemeber"},
     ];
 
-    // this.Designation = [
-    //   { desName: 'HR Manager'},
-    //   { desName: 'HR Officer'},
-    //   { desName: 'Sr. Software Engineer' },
-    //   { desName: 'Jr. Software Engineer'},
-    //   { desName: 'SQA Engineer Intern'},
-    //   { desName: 'Angular Intern' },
-    //   { desName: '.NET Intern' },
-    //   { desName: 'Sr. SQA Engineer' },
-    //   { desName: 'Jr. SQA Engineer' },
-    //   { desName: 'Project Manager' },
-    //   { desName: 'System Administrator'},
-    //   { desName: 'Receptionist' },
-    //   { desName: 'Accountant' },
-    //   { desName: 'Office Boy' },
-    //   { desName: 'Guard' },
-      //];
   }
 
   ngOnInit(){
@@ -204,6 +187,10 @@ export class AddEmployeeComponent implements OnInit {
         this.getDropdownValue(dropdownid);
       }
     })
+  }
+
+  pushleavesdata(event:any){
+
   }
 
   getDropdownValue(id:number){
@@ -573,8 +560,11 @@ export class AddEmployeeComponent implements OnInit {
         lmslrSickAssign:[''],
         lmslrCasualAssign:[''],
         lmslrAnnualTaken:[''],
-        lmslrSicktaken:[''],
-        lmslrCasualTaken:['']
+        lmslrSickTaken:[''],
+        lmslrCasualTaken:[''],
+        lmslrTotalAssign:[''],
+        lmslrTotalTaken:['']
+
       });
     }
     /////adding leave to personaldetail from///
@@ -589,6 +579,8 @@ export class AddEmployeeComponent implements OnInit {
     var casualLeave = (12/12)*(13-event.value);
     var anualLeave = (6/12)*(13-event.value);
     var sickLeave = (6/12)*(13-event.value);
+    var Totalassign =(casualLeave + anualLeave + sickLeave+1 );
+
 
 
    var control =  this.personalDetailsForm.controls[
@@ -601,6 +593,8 @@ export class AddEmployeeComponent implements OnInit {
     control['lmslrCasualTaken'].setValue(Math.round(casualLeave));
     control['lmslrAnnualTaken'].setValue(Math.round(anualLeave));
     control['lmslrSickTaken'].setValue(Math.round(sickLeave));
+    control['lmslrTotalAssign'].setValue(Math.round(Totalassign));
+    control['lmslrTotalTaken'].setValue(Math.round(Totalassign));
    
 
   }
@@ -944,7 +938,7 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   onDateChange(event: any){
-    debugger
+    
   }
 }
 
