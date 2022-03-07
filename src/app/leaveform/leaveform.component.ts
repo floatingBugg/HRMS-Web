@@ -57,7 +57,7 @@ export class LeaveformComponent implements OnInit {
   monthval: any = 3;
   whDuration: any;
   errorMsg: any;
-  dialog: any;
+  // dialog: any;
   public LeaveFormDetails:any = -1;
   
   value: any;
@@ -69,7 +69,8 @@ export class LeaveformComponent implements OnInit {
     private personaldetails: PersonalDetailsService,
     private fb: FormBuilder,
     private router: Router,
-    private leave:LeaveService
+    private leave:LeaveService,
+    private dialog:MatDialog
   ) { 
     this.createleaveForm();
   }
@@ -169,8 +170,9 @@ createleaveForm(){
             confirmButtonText: 'Thank You',
             cancelButtonText: 'No, keep it'
           }).then((res) => {
-            this.router.navigate(["/home/leaveform"])
+            this.router.navigate(["/home/leave"])
           })
+          this.dialog.closeAll();
         }
         else
         {

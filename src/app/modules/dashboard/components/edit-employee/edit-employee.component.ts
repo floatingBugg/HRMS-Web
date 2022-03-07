@@ -932,7 +932,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateData() {
-    debugger
     let form = this.personalDetailsForm.value;
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;

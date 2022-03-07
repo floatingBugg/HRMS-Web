@@ -56,6 +56,9 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
   openDilog(){
     
  this.dialog.open(LeaveformComponent)
+ this.dialog.afterAllClosed.subscribe((res:any)=>{
+  this.getEmployeeData()
+ })
   }
   getEmployeeData() {
     this.leave.getEmployeeLeaveData().subscribe( (data:any) => {

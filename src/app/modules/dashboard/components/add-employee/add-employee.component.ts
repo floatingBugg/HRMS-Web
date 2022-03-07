@@ -583,11 +583,11 @@ export class AddEmployeeComponent implements OnInit {
     control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
     control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
     control['lmslrSickAssign'].setValue(Math.round(sickLeave));
-    control['lmslrCasualTaken'].setValue(Math.round(casualLeave));
-    control['lmslrAnnualTaken'].setValue(Math.round(anualLeave));
-    control['lmslrSickTaken'].setValue(Math.round(sickLeave));
+    control['lmslrCasualTaken'].setValue(0);
+    control['lmslrAnnualTaken'].setValue(0);
+    control['lmslrSickTaken'].setValue(0);
+    control['lmslrTotalTaken'].setValue(0);
     control['lmslrTotalAssign'].setValue(Math.round(Totalassign));
-    control['lmslrTotalTaken'].setValue(Math.round(Totalassign));
    
 
   }
