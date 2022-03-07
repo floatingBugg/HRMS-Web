@@ -30,6 +30,8 @@ export class LeaveformComponent implements OnInit {
   _insert:boolean=false
   _view:boolean=false
   _employeeView:boolean=false
+  userId = localStorage.getItem('loggedIn_UserId');
+  userName = localStorage.getItem('loggedIn_UserName');
   
   _roleId = localStorage.getItem('loggedIn_RoleId');
   // LeaveType: Leavetype[] = [
@@ -81,12 +83,16 @@ export class LeaveformComponent implements OnInit {
 createleaveForm(){
   this.leaveform = this.fb.group({
     // lmselEtedEmployeeName:['',Validators.required],
-    lmslrEtedEmployeeId:[0,Validators.required],
+    lmselEtedEmployeeId:[0,Validators.required],
     lmselLeaveType:['',Validators.required],
     lmselStartDate:['',Validators.required],
     lmselEndDate:['',Validators.required],
     lmselDays:[],
-    reason:[]
+    reason:[],
+    lmselCreatedBy:[this.userId],
+    lmselCreatedByName:[this.userName]
+
+    
   })
 }
 
@@ -186,12 +192,6 @@ createleaveForm(){
                   }
                 });
             }
-            getEmployeeData(){
-              
-             this.personaldetails.getEmployeeData().subscribe((res:any)=>{
-              this.value=res.data;
-              })
-            
-          }
+           
           }
           

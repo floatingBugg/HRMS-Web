@@ -21,11 +21,11 @@ data:any;
     return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord`);
   }
   assignEmployeeLeave(data:any):Observable<any> {
-    return this.http.post(this.apiUrl + '/Leave/AddLeaveRecord', data)
+    return this.http.post(this.apiUrl + '/Leave/AssignLeave', data)
   }
 
   addEmployeeLeaves(data:any){
-    return this.http.post(this.apiUrl +'/Leave/AddLeaveRecord', data);
+    return this.http.post(this.apiUrl +'/Leave/UpdateLeaveRecord', data);
   }
 
   // postAssets(data: any): Observable<any> {

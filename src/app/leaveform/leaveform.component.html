@@ -3,7 +3,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <!-- <input matInput placeholder="" formControlName="LmselEtedEmployeeId"> -->
-        <mat-select formControlName="lmslrEtedEmployeeId" name="lmslrEtedEmployeeId">
+        <mat-select formControlName="lmselEtedEmployeeId" name="lmselEtedEmployeeId">
           <mat-option *ngFor="let emp of this.employeeDdlData" [value]="emp.lmslrEtedEmployeeId">{{emp.lmslrEtedEmployeeName}}
           </mat-option>
         </mat-select>
@@ -13,9 +13,9 @@
       <mat-form-field appearance="outline">
         <mat-label>Leave Type</mat-label>
         <select matNativeControl formControlName="lmselLeaveType" required>
-          <option selected value="1">Sick</option>
-          <option value="2">Casual</option>
-          <option value="3">Annual</option>
+          <option selected value="2">Sick</option>
+          <option value="3">Casual</option>
+          <option value="1">Annual</option>
         </select>
       </mat-form-field>
 
