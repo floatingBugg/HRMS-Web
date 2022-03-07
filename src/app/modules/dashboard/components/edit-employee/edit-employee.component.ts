@@ -46,7 +46,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblAcademicQualification: any = FormArray;
   emsTblPermanentEmployee: any = FormArray;
   emsTblContractEmployee: any = FormArray;
-  emsTblPertTimeEmployee: any = FormArray;
+  emsTblPartTimeEmployee: any = FormArray;
   emsTblEmployeeProfessionalDetails: any = FormArray;
   emsTblProfessionalQualification: any = FormArray;
   emsTblWorkingHistory: any = FormArray;
@@ -134,6 +134,10 @@ export class EditEmployeeComponent implements OnInit {
   professionalQualification: any;
   permannetEmployee: any;
   contractEmployee: any;
+  releasedEmployee: any;
+  resignedEmployee: any;
+  internEmployee: any;
+  partTimeEmployee: any;
   assignleavestep: boolean = false;
   showAddNewDropDownField: boolean = false;
   workingHistory: any;
@@ -358,7 +362,7 @@ export class EditEmployeeComponent implements OnInit {
             this.contractEmployee[i]['eesDuration']
           );
           controlContractEmployee['eesSalary'].setValue(
-            this.contractEmployee[i]['eesSalary']
+            this.empDataService.salary
           );
           controlContractEmployee['eesRemarks'].setValue(
             this.contractEmployee[i]['eesRemarks']
@@ -371,7 +375,67 @@ export class EditEmployeeComponent implements OnInit {
           );
 
         }
+        ///////////////////released Employee///////////////////
+        let controlReleasedEmployee =
+          this.personalDetailsForm.controls['empreleaseddata'][
+          'controls'
+          ][0]['controls'];
+        controlReleasedEmployee['eesStartDate'].setValue(
+          this.releasedEmployee[0]['eesStartDate']
+        );
+        controlReleasedEmployee['eesEndDate'].setValue(
+          this.releasedEmployee[0]['eesEndDate']
+        );
+        controlReleasedEmployee['eesClearenceDate'].setValue(
+          this.releasedEmployee[0]['eesClearenceDate']
+        );
+        controlReleasedEmployee['eesDuration'].setValue(
+          this.releasedEmployee[0]['eesDuration']
+        );
+        controlReleasedEmployee['eesRemarks'].setValue(
+          this.releasedEmployee[0]['eesRemarks']
+        );
 
+        //////Employee resigned///////////////
+        let controlResignedEmployee =
+          this.personalDetailsForm.controls['empresigneddata'][
+          'controls'
+          ][0]['controls'];
+        controlResignedEmployee['eesStartDate'].setValue(
+          this.resignedEmployee[0]['eesStartDate']
+        );
+        controlResignedEmployee['eesEndDate'].setValue(
+          this.resignedEmployee[0]['eesEndDate']
+        );
+        controlResignedEmployee['eesClearenceDate'].setValue(
+          this.resignedEmployee[0]['eesClearenceDate']
+        );
+        controlResignedEmployee['eesDuration'].setValue(
+          this.resignedEmployee[0]['eesDuration']
+        );
+        controlResignedEmployee['eesRemarks'].setValue(
+          this.resignedEmployee[0]['eesRemarks']
+        );
+        ////////////////////Part Time/////////////
+        let controlPartTimeEmployee =
+          this.personalDetailsForm.controls['emsTblPartTimeEmployee'][
+          'controls'
+          ][0]['controls'];
+        controlPartTimeEmployee['eesStartDate'].setValue(
+          this.partTimeEmployee[0]['eesStartDate']
+        );
+        controlPartTimeEmployee['eesEndDate'].setValue(
+          this.partTimeEmployee[0]['eesEndDate']
+        );
+        controlPartTimeEmployee['eesClearenceDate'].setValue(
+          this.partTimeEmployee[0]['eesClearenceDate']
+        );
+        controlPartTimeEmployee['eesDuration'].setValue(
+          this.partTimeEmployee[0]['eesDuration']
+        );
+        controlPartTimeEmployee['eesRemarks'].setValue(
+          this.partTimeEmployee[0]['eesRemarks']
+        );
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -549,7 +613,7 @@ export class EditEmployeeComponent implements OnInit {
       }
     });
   }
- 
+
   /////////////Released//////////////
   addempreleaseddata(): FormGroup {
     return this.fb.group({
@@ -557,7 +621,7 @@ export class EditEmployeeComponent implements OnInit {
       eesEndDate: ['', Validators.required],
       eesDuration: [''],
       eesClearenceDate: [''],
-      relremarks: [''],
+      eesRemarks: [''],
 
     });
   }
@@ -572,7 +636,7 @@ export class EditEmployeeComponent implements OnInit {
   addempresigneddata(): FormGroup {
     return this.fb.group({
       eesStartDate: ['', Validators.required],
-      Resignperiod: [''],
+      eesDuration: [''],
       eesEndDate: [''],
       eesClearenceDate: [''],
       eesRemarks: [''],
@@ -624,7 +688,7 @@ export class EditEmployeeComponent implements OnInit {
   addInternddata(): FormGroup {
     return this.fb.group({
       eesStartDate: ['', Validators.required],
-      Internperiod: [''],
+      eesDuration: [''],
       eesEndDate: [''],
       eesSalary: ['', Validators.required],
       eesRemarks: ['', Validators.required]
@@ -862,7 +926,7 @@ export class EditEmployeeComponent implements OnInit {
       empreleaseddata: this.fb.array([this.addempreleaseddata()]),
       empresigneddata: this.fb.array([this.addempresigneddata()]),
       interneedata: this.fb.array([this.addInternddata()]),
-      emsTblPertTimeEmployee: this.fb.array([this.addemsTblPertTimeEmployee()])
+      emsTblPartTimeEmployee: this.fb.array([this.addemsTblPartTimeEmployee()])
 
     });
   }
@@ -877,13 +941,13 @@ export class EditEmployeeComponent implements OnInit {
     console.log(this.assetAssignDT);
     this.empDataService.salary = this.personalDetailsForm.value;
     this.personaldetails.updateEmployeeData(this.personalDetailsForm.value).subscribe((result) => {
-        if (result.success) {
-          this.dialog.open(SuccessDialogComponent);
-          console.log(result.message);
-        } else {
-          this.dialog.open(AddEmployeeFailureDialogComponent);
-        }
-      });
+      if (result.success) {
+        this.dialog.open(SuccessDialogComponent);
+        console.log(result.message);
+      } else {
+        this.dialog.open(AddEmployeeFailureDialogComponent);
+      }
+    });
 
   }
 
@@ -1353,15 +1417,15 @@ export class EditEmployeeComponent implements OnInit {
   /////////////////////////////////////////////
   ///////////////////////////PartTime///////////////////
   addPartTime() {
-    this.emsTblPertTimeEmployee = this, this.personalDetailsForm.get(
-      'emsTblPertTimeEmployee'
+    this.emsTblPartTimeEmployee = this, this.personalDetailsForm.get(
+      'emsTblPartTimeEmployee'
     ) as FormArray;
-    this.emsTblPertTimeEmployee.push(this.addemsTblPertTimeEmployee());
+    this.emsTblPartTimeEmployee.push(this.addemsTblPartTimeEmployee());
   }
   ////////////part Time employee///////////////
-  addemsTblPertTimeEmployee(): FormGroup {
+  addemsTblPartTimeEmployee(): FormGroup {
     return this.fb.group({
-      etedpartTime: ['', Validators.required],
+      eesetedpartTimetype: ['', Validators.required],
       monday: [false, Validators.required],
       tuesday: [false, Validators.required],
       wednesday: [false, Validators.required],

@@ -189,9 +189,9 @@ export class AddEmployeeComponent implements OnInit {
     })
   }
 
-  pushleavesdata(event:any){
+  // pushleavesdata(event:any){
 
-  }
+  // }
 
   getDropdownValue(id:number){
     this.Id=id;
@@ -544,14 +544,7 @@ export class AddEmployeeComponent implements OnInit {
         this.assignleavestep=false;
       }
     }
-    leav(event:any){
-      console.log(event);
-      if(event.value == 'Active'){
-        this.assignleavestep=true;
-      }else{
-        this.assignleavestep=false;
-      }
-    }
+    
 //////////////leave from array////////
     addempleaveassign():FormGroup{
       return this.fb.group({
@@ -579,7 +572,7 @@ export class AddEmployeeComponent implements OnInit {
     var casualLeave = (12/12)*(13-event.value);
     var anualLeave = (6/12)*(13-event.value);
     var sickLeave = (6/12)*(13-event.value);
-    var Totalassign =(casualLeave + anualLeave + sickLeave+1 );
+    var Totalassign =(casualLeave + anualLeave + sickLeave );
 
 
 

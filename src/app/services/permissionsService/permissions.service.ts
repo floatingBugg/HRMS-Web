@@ -11,6 +11,7 @@ export class PermissionsService {
     this._permissions={
       update:false,
       delete:false,
+      applyleave:false,
       insert:false,
       view:false,
       isSuperadmin:false,

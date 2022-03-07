@@ -91,11 +91,8 @@ createleaveForm(){
     reason:[],
     lmselCreatedBy:[this.userId],
     lmselCreatedByName:[this.userName]
-
-    
   })
 }
-
 
   onKeypressEvent(event: any, i: any) {
     this.startdate = event.target.value;
@@ -159,10 +156,8 @@ createleaveForm(){
   // }
 
 
-
   submitData() {
     console.log(this.leaveform.value);
-    debugger
     this.leave
       .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
         if (result.success) {

@@ -1,4 +1,5 @@
 export interface PermissionsModel{
+    applyleave:boolean,
     update:boolean,
     delete:boolean,
     insert:boolean,
