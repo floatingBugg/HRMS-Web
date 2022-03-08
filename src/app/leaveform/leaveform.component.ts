@@ -132,8 +132,8 @@ createleaveForm(){
   }
 
   getDuration(index: any) {
-    var years = Math.floor(this.noOfDays / 365);
-    var months = Math.floor((this.noOfDays % 365) / 30);
+    var years = Math.floor(this.noOfDays / 365)+1;
+    var months = Math.floor((this.noOfDays % 365) / 30)+1;
     var days = Math.floor((this.noOfDays % 365) % 30) + 1;
 
     if (years == 0 && months == 0) {
@@ -168,7 +168,7 @@ createleaveForm(){
             icon:'success',
             showCancelButton:false,
             confirmButtonText: 'Thank You',
-            cancelButtonText: 'No, keep it'
+            cancelButtonText: 'cancel'
           }).then((res) => {
             this.router.navigate(["/home/leave"])
           })
@@ -183,7 +183,7 @@ createleaveForm(){
            icon: 'error',
            showCancelButton: false,
            confirmButtonText: 'Okay',
-           cancelButtonText: 'No, keep it'
+           cancelButtonText: 'cancel'
             })
             console.log(result.message);
                   }

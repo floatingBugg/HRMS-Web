@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { LeaveformComponent } from '../leaveform/leaveform.component';
+import { DeleteEmployeeComponent } from '../modules/dashboard/components/delete-employee/delete-employee.component';
 import { LeaveService } from '../services/leave.service';
 import { PermissionsService } from '../services/permissionsService/permissions.service';
 import { employeeGrid } from '../_interfaces/employeeGrid';
@@ -30,6 +31,7 @@ export class LeaveComponent implements OnInit {
   Total!:string;
   Action!:any;
   dummydata:any=[];
+  _delete!:boolean;
   public employeeData:any;
   pageSizeOptions: number[] = [ 10, 25, 100];
 
@@ -70,6 +72,11 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
       this.employeeData.paginator = this.paginator;
 
     });
+  }
+  Filterdata(event: any) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.employeeData.filter = filterValue.trim().toLowerCase();
+    
   }
 
 }
