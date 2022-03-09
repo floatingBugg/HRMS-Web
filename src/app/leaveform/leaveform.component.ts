@@ -132,9 +132,9 @@ createleaveForm(){
   }
 
   getDuration(index: any) {
-    var years = Math.floor(this.noOfDays / 365)+1;
-    var months = Math.floor((this.noOfDays % 365) / 30)+1;
-    var days = Math.floor((this.noOfDays % 365) % 30) + 1;
+    var years = Math.floor(this.noOfDays / 365) ;
+    var months = Math.floor((this.noOfDays % 365) / 30);
+    var days = Math.floor((this.noOfDays % 365 + 1) % 30 ) ;
 
     if (years == 0 && months == 0) {
       this.whDuration = String([days, ' days '].join(''));

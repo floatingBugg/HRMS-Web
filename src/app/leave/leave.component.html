@@ -10,7 +10,7 @@
     <span class="example-spacer"></span>
   </mat-toolbar>
 <div class="search">
-  <mat-form-field appearance="legacy">
+  <mat-form-field appearance="standard">
     <mat-label>Search</mat-label>
     <input matInput (keyup)="Filterdata($event)" placeholder="">
     
@@ -18,7 +18,8 @@
   
  
 </div>
-
+<div class="buttonassign" ><button width="30%" (click)="openDilog()"  type="button" class="btn btn-outline-primary">Apply Leave</button></div>
+<!-- <button mat-button (click)="openDialog()">Open dialog</button> -->
 <div class="container m-0 screenMaxWidth">
   <div class="row">
     <div class="mt-4 col-lg-6">
@@ -60,7 +61,12 @@
       <ng-container matColumnDef="Action">
         <th width="10%" mat-header-cell *matHeaderCellDef>Action</th>
         <td  width="10%"mat-cell *matCellDef="let dummydata">  
-          <button width="30%" (click)="openDilog()"  type="button" class="btn btn-outline-primary">Apply Leave</button>
+          <button  mat-icon-button  title="View Employee Record">
+            <mat-icon>remove_red_eye</mat-icon>
+          </button>
+          <button  mat-icon-button  title="Edit Employee Record">
+            <mat-icon>edit</mat-icon>
+          </button>
         </td>
         
       </ng-container>
