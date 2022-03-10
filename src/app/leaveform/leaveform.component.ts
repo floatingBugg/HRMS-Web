@@ -62,6 +62,8 @@ export class LeaveformComponent implements OnInit {
   
   value: any;
   employeeDdlData:any;
+  
+  
 
 
   constructor(
@@ -73,6 +75,7 @@ export class LeaveformComponent implements OnInit {
     private dialog:MatDialog
   ) { 
     this.createleaveForm();
+        
   }
 
   ngOnInit(): void {
@@ -134,7 +137,7 @@ createleaveForm(){
   getDuration(index: any) {
     var years = Math.floor(this.noOfDays / 365) ;
     var months = Math.floor((this.noOfDays % 365) / 30);
-    var days = Math.floor((this.noOfDays % 365 + 1) % 30 ) ;
+    var days = Math.floor((this.noOfDays % 366) % 30 ) ;
 
     if (years == 0 && months == 0) {
       this.whDuration = String([days, ' days '].join(''));
@@ -150,12 +153,6 @@ createleaveForm(){
     this.leaveform.controls['lmselDays'].setValue(this.noOfDays);
     return console.log(this.whDuration);
   }
-  // applyFilter(event: Event) {
-  //   const filterValue = (event.target as HTMLInputElement).value;
-  //   this.employeeData.filter = filterValue.trim().toLowerCase();
-  //   this.personalData.filter = filterValue.trim().toLowerCase();
-  // }
-
 
   submitData() {
     console.log(this.leaveform.value);
@@ -189,6 +186,6 @@ createleaveForm(){
                   }
                 });
             }
-           
+            
           }
           

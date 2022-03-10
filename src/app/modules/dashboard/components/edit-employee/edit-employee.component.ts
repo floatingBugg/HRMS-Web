@@ -664,8 +664,8 @@ export class EditEmployeeComponent implements OnInit {
     this.newDate = new Date(probationDate);
     this.probationDate = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
-    }).format(this.newDate); control
-    ['eesEndDate'].setValue(this.probationDate);
+    }).format(this.newDate); 
+    control['eesEndDate'].setValue(this.probationDate);
   }
 
   resignclearancedate(index: any) {
