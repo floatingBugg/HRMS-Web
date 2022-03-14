@@ -15,13 +15,14 @@ import { employeeGrid } from '../_interfaces/employeeGrid';
   styleUrls: ['./leave.component.scss']
 })
 export class LeaveComponent implements OnInit {
+  [x: string]: any;
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
 
 
   roleid = localStorage.getItem('loggedIn_RoleId');
   empid=localStorage.getItem('loggedIn_empid');
   userName = localStorage.getItem('loggedIn_UserName');
-  _roleId = localStorage.getItem('loggedIn_RoleId');
+  // _roleId = localStorage.getItem('loggedIn_RoleId');
   ID!: any;
   Name!: string;
   Designation!:string;
@@ -31,14 +32,15 @@ export class LeaveComponent implements OnInit {
   Total!:string;
   Action!:any;
   dummydata:any=[];
-  _delete!:boolean;
+  // _delete!:boolean;
   public employeeData:any;
   pageSizeOptions: number[] = [ 10, 25, 100];
 
   displayedColumns: string[] = ['ID','Name','Designation','Sick','Casual','Annual','Total','Action'];
+  // permissionService: any;
   // dataSource :any;
 
-constructor(public dialog: MatDialog,private leave:LeaveService,private permission:PermissionsService)
+constructor(public dialog: MatDialog,private leave:LeaveService,private permissionService: PermissionsService)
 {
   this.dummydata = [
     {ID: 1, Name: 'Hamza Ashiq', Designation: 'Internee', Sick: '2',Casual:'3',Annual:'18',Total:'5',Action:''},
@@ -50,6 +52,13 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
     // {ID: 7, Name: 'Hydrogen', Designation: 1.0079, Sick: '2',Casual:'3',Annual:'4',Total:'15',Action:''},
   ];
 }
+_update:boolean=false
+_delete:boolean=false
+_insert:boolean=false
+_view:boolean=false
+_leave:boolean=false
+
+_roleId = localStorage.getItem('loggedIn_RoleId');
   ngOnInit(): void {
     // 
     this.getEmployeeData();
@@ -77,6 +86,14 @@ constructor(public dialog: MatDialog,private leave:LeaveService,private permissi
     const filterValue = (event.target as HTMLInputElement).value;
     this.employeeData.filter = filterValue.trim().toLowerCase();
     
+  }
+  getPermissions(){
+    const permissions = this.permissionService.getPermissionsByRole(this._roleId);
+    this._update = permissions.update;
+    this._delete = permissions.delete;
+    this._insert = permissions.insert;
+    this._view = permissions.view;
+    this._leave=permissions.leave;
   }
 
 }

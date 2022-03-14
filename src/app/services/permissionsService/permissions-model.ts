@@ -9,4 +9,5 @@ export interface PermissionsModel{
     isTeamLead:boolean,
     isUser:boolean,
     employeeView:boolean,
+    leave:boolean,
 }

@@ -31,6 +31,8 @@ import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { ViewleaveComponent } from './viewleave/viewleave.component';
+import { EditleaveComponent } from './editleave/editleave.component';
 // import { MatCheckbox } from '@angular/material/checkbox';
 
 @NgModule({
@@ -43,6 +45,8 @@ import { MatSelectModule } from '@angular/material/select';
     LogoutValidationComponent,
     LeaveComponent,
     LeaveformComponent,
+    ViewleaveComponent,
+    EditleaveComponent,
     
    
  

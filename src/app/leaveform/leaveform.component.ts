@@ -137,7 +137,7 @@ createleaveForm(){
   getDuration(index: any) {
     var years = Math.floor(this.noOfDays / 365) ;
     var months = Math.floor((this.noOfDays % 365) / 30);
-    var days = Math.floor((this.noOfDays % 366) % 30 ) ;
+    var days = Math.floor((this.noOfDays % 366) % 30 +1) ;
 
     if (years == 0 && months == 0) {
       this.whDuration = String([days, ' days '].join(''));
@@ -150,7 +150,7 @@ createleaveForm(){
         [years, ` years `, months, ' months ', days, ' days '].join('')
       );
     }
-    this.leaveform.controls['lmselDays'].setValue(this.noOfDays);
+    this.leaveform.controls['lmselDays'].setValue(days);
     return console.log(this.whDuration);
   }
 

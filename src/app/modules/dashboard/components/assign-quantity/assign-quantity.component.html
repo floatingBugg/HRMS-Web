@@ -12,7 +12,7 @@
             </mat-form-field>
            <mat-form-field class="col-lg-6 col-md-6 input">
                     <mat-label>Assign Date</mat-label> 
-                     <input formControlName="itasAssignedDate" (keypress)="onlyNumbersAllowed($event)" name="itasAssignedDate" placeholder="Date of Purchasing" matInput [matDatepicker]="dob"
+                     <input formControlName="itasAssignedDate" (keypress)="onlyNumbersAllowed($event)" name="itasAssignedDate" placeholder="Date of Assign" matInput [matDatepicker]="dob"
                       maxlength="20"> 
                       <mat-error *ngIf="assignForm.controls['itasAssignedDate'].errors?.['required'] ">
                         <strong>Required</strong></mat-error>

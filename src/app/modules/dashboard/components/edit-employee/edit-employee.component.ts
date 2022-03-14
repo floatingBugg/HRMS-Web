@@ -53,7 +53,7 @@ export class EditEmployeeComponent implements OnInit {
   emsTblEmergencyContact: any = FormArray;
   empreleaseddata: any = FormArray;
   empresigneddata: any = FormArray;
-  interneedata: any = FormArray;
+  emsTblInterneedata: any = FormArray;
   imsAssign: any = FormArray;
   permanentEmp: boolean = false;
   contractEmp: boolean = false;
@@ -421,21 +421,45 @@ export class EditEmployeeComponent implements OnInit {
           this.personalDetailsForm.controls['emsTblPartTimeEmployee'][
           'controls'
           ][0]['controls'];
-        controlPartTimeEmployee['eesStartDate'].setValue(
-          this.partTimeEmployee[0]['eesStartDate']
+        controlPartTimeEmployee['eesetedpartTimetype'].setValue(
+          this.partTimeEmployee[0]['eesetedpartTimetype']
         );
-        controlPartTimeEmployee['eesEndDate'].setValue(
-          this.partTimeEmployee[0]['eesEndDate']
+        controlPartTimeEmployee['monday'].setValue(
+          this.partTimeEmployee[0]['monday']
         );
-        controlPartTimeEmployee['eesClearenceDate'].setValue(
-          this.partTimeEmployee[0]['eesClearenceDate']
+        controlPartTimeEmployee['tuesday'].setValue(
+          this.partTimeEmployee[0]['tuesday']
         );
-        controlPartTimeEmployee['eesDuration'].setValue(
-          this.partTimeEmployee[0]['eesDuration']
+        controlPartTimeEmployee['wednesday'].setValue(
+          this.partTimeEmployee[0]['wednesday']
         );
-        controlPartTimeEmployee['eesRemarks'].setValue(
-          this.partTimeEmployee[0]['eesRemarks']
+        controlPartTimeEmployee['thrusday'].setValue(
+          this.partTimeEmployee[0]['thrusday']
         );
+        controlPartTimeEmployee['friday'].setValue(
+          this.partTimeEmployee[0]['friday']
+        );
+
+        ///////////////Internee employee////////
+        let controlInterneeEmployee =
+          this.personalDetailsForm.controls['emsTblPartTimeEmployee'][
+          'controls'
+          ][0]['controls'];
+          controlInterneeEmployee['eesStartDate'].setValue(
+          this.internEmployee[0]['eesStartDate']
+        );
+        controlInterneeEmployee['eesDuration'].setValue(
+          this.internEmployee[0]['eesDuration']
+        );
+        controlInterneeEmployee['eesEndDate'].setValue(
+          this.internEmployee[0]['eesEndDate']
+        );
+        controlInterneeEmployee['eesSalary'].setValue(
+          this.empDataService.salary
+        );
+        controlInterneeEmployee['eesRemarks'].setValue(
+          this.internEmployee[0]['eesRemarks']
+        ); 
         /////Academic Qualification //////
         this.academicQualification =
           oneEmployeeData.emsTblAcademicQualification;
@@ -617,10 +641,10 @@ export class EditEmployeeComponent implements OnInit {
   /////////////Released//////////////
   addempreleaseddata(): FormGroup {
     return this.fb.group({
-      eesStartDate: ['', Validators.required],
-      eesEndDate: ['', Validators.required],
+      eesStartDate: [null, Validators.required],
+      eesEndDate: [null, Validators.required],
       eesDuration: [''],
-      eesClearenceDate: [''],
+      eesClearenceDate: [null],
       eesRemarks: [''],
 
     });
@@ -635,10 +659,10 @@ export class EditEmployeeComponent implements OnInit {
   /////////////Resigned employee/////////////////
   addempresigneddata(): FormGroup {
     return this.fb.group({
-      eesStartDate: ['', Validators.required],
+      eesStartDate: [null, Validators.required],
       eesDuration: [''],
-      eesEndDate: [''],
-      eesClearenceDate: [''],
+      eesEndDate: [null],
+      eesClearenceDate: [null],
       eesRemarks: [''],
 
     });
@@ -664,8 +688,8 @@ export class EditEmployeeComponent implements OnInit {
     this.newDate = new Date(probationDate);
     this.probationDate = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
-    }).format(this.newDate); 
-    control['eesEndDate'].setValue(this.probationDate);
+    }).format(this.newDate); control
+    ['eesEndDate'].setValue(this.probationDate);
   }
 
   resignclearancedate(index: any) {
@@ -687,20 +711,20 @@ export class EditEmployeeComponent implements OnInit {
 
   addInternddata(): FormGroup {
     return this.fb.group({
-      eesStartDate: ['', Validators.required],
+      eesStartDate: [null, Validators.required],
       eesDuration: [''],
-      eesEndDate: [''],
-      eesSalary: ['', Validators.required],
+      eesEndDate: [null],
+      eesSalary: [0, Validators.required],
       eesRemarks: ['', Validators.required]
     });
   }
 
 
   addinterneeedata(): void {
-    this.interneedata = this.personalDetailsForm.get(
-      'interneedata'
+    this.emsTblInterneedata = this.personalDetailsForm.get(
+      'emsTblInterneedata'
     ) as FormArray;
-    this.interneedata.push(this.addInternddata());
+    this.emsTblInterneedata.push(this.addInternddata());
   }
   // internshipendDate(index: any) {
   //   
@@ -721,7 +745,7 @@ export class EditEmployeeComponent implements OnInit {
   // } 
   getJoiningDate3(index: any) {
     let control = this.personalDetailsForm.get(
-      'interneedata'
+      'emsTblInterneedata'
     )['controls'][index]['controls'];
     let pdjoinDate = control['eesStartDate'].value;
     let d = new Date(pdjoinDate);
@@ -877,6 +901,7 @@ export class EditEmployeeComponent implements OnInit {
     this.emsTblWorkingHistory.push(this.addemsTblWorkingHistory());
   }
   updateForm() {
+    debugger
     this.personalDetailsForm = this.fb.group({
       etedEmployeeId: [''],
       etedPhotograph: [''],
@@ -925,13 +950,14 @@ export class EditEmployeeComponent implements OnInit {
       emsTblContractEmployee: this.fb.array([this.addemsTblContractEmployee(),]),
       empreleaseddata: this.fb.array([this.addempreleaseddata()]),
       empresigneddata: this.fb.array([this.addempresigneddata()]),
-      interneedata: this.fb.array([this.addInternddata()]),
+      emsTblInterneedata: this.fb.array([this.addInternddata()]),
       emsTblPartTimeEmployee: this.fb.array([this.addemsTblPartTimeEmployee()])
 
     });
   }
 
   updateData() {
+    debugger
     let form = this.personalDetailsForm.value;
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
@@ -1004,6 +1030,8 @@ export class EditEmployeeComponent implements OnInit {
     }).format(this.newDate);
     control['etepdProbation'].setValue(this.probationDate);
   }
+
+  
 
   ///////////Compare dates and Duration Calculator generic///////////////////
   ////////////////////////////////////////////////////////////////////////////  
@@ -1346,11 +1374,10 @@ export class EditEmployeeComponent implements OnInit {
   //////Permanent Employee array/////
   addemsTblPermanentEmployee(): FormGroup {
     return this.fb.group({
-      eesStartDate: ['', Validators.required],
-      eesEndDate: [''],
+      eesStartDate: [null, Validators.required],
+      eesEndDate: [null],
       eesDateOfIncrement: [''],
-      eesDuration: [''],
-      eesIncrement: [''],
+      eesIncrement: [0],
       eesRemarks: [''],
       eesSalary: ['']
     })
@@ -1388,6 +1415,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   getPerDate(index: any) {
+    debugger
     let control = this.personalDetailsForm.get(
       'emsTblPermanentEmployee'
     )['controls'][index]['controls'];
@@ -1397,14 +1425,22 @@ export class EditEmployeeComponent implements OnInit {
       document.getElementById('monthVal1')
     )).value;
     let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
-    this.newDate = new Date(perprobDate1);
-
     this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
     }).format(this.newDate); control
     ['eesEndDate'].setValue(this.perprobDate1);
   }
+  //////////////date time format change///////////////
+  dateformat(){
+    debugger
+    let control= this.personalDetailsForm.get(
+      'emsTblPermanentEmployee'
+    )['controls'][0]['controls'];
+    let date = this.newDate(this.perprobDate1)
+  }
 
+
+  /////////////////////////////////////
   ///////////////change date///////////
   setDate(event: any) {
 
@@ -1413,7 +1449,7 @@ export class EditEmployeeComponent implements OnInit {
     )['controls'][0]['controls'];
     control['eesDateOfIncrement'].setValue(new Date(event));
   }
-  /////////////////////////////////////////////
+  //////////////////////////////////////////////////////
   ///////////////////////////PartTime///////////////////
   addPartTime() {
     this.emsTblPartTimeEmployee = this, this.personalDetailsForm.get(
@@ -1436,10 +1472,10 @@ export class EditEmployeeComponent implements OnInit {
   //////////Contract Employee//////////
   addemsTblContractEmployee(): FormGroup {
     return this.fb.group({
-      eesStartDate: ['', Validators.required],
-      eesEndDate: ['', Validators.required],
+      eesStartDate: [null, Validators.required],
+      eesEndDate: [null, Validators.required],
       eesDuration: ['', Validators.required],
-      eesSalary: [''],
+      eesSalary: [0],
       eesRemarks: [''],
       eesContractType: ['']
     })

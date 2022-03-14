@@ -976,8 +976,8 @@
           <mat-step label="Internee">
             <div class="form-group">
               <div class="form-group mt-3">
-                <div formArrayName="interneedata"
-                  *ngFor="let item of personalDetailsForm.get('interneedata')['controls']; let i = index;">
+                <div formArrayName="emsTblInterneedata"
+                  *ngFor="let item of personalDetailsForm.get('emsTblInterneedata')['controls']; let i = index;">
                   <div [formGroupName]="i">
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-12">

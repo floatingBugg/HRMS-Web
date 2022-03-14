@@ -9,6 +9,8 @@ export class PermissionsService {
   _permissions: PermissionsModel
   constructor() { 
     this._permissions={
+      leave:false,
+      // leaveform:false,
       update:false,
       delete:false,
       applyleave:false,
@@ -32,6 +34,8 @@ getPermissionsByRole(roleId:any){
       this._permissions.view = true;
       this._permissions.isSuperadmin=true;
       this._permissions.employeeView=true;
+      this._permissions.leave=true;
+      this._permissions.applyleave=true;
     }
     else if(roleId==2){
       this._permissions.delete = false;
@@ -40,6 +44,8 @@ getPermissionsByRole(roleId:any){
       this._permissions.view = true;
       this._permissions.isAdmin=true;
       this._permissions.employeeView=true;
+      this._permissions.leave=true;
+      this._permissions.applyleave=true;
     }
     else if(roleId==3){
       this._permissions.delete = false;
@@ -48,6 +54,8 @@ getPermissionsByRole(roleId:any){
       this._permissions.view = true;
       this._permissions.isTeamLead=true;
       this._permissions.employeeView=true;
+      this._permissions.leave=true;
+      this._permissions.applyleave=true;
     }
     else if(roleId==4){
       this._permissions.delete = false;
@@ -56,6 +64,8 @@ getPermissionsByRole(roleId:any){
       this._permissions.view = true;
       this._permissions.isUser=true;
       this._permissions.employeeView=false;
+      this._permissions.leave=true;
+      this._permissions.applyleave=true;
     }
     return this._permissions;
   }
