@@ -73,6 +73,7 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
   }
   getEmployeeData() {
     this.leave.getEmployeeLeaveData().subscribe( (data:any) => {
+    
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
      // this.employeeData.sort = this.sort;

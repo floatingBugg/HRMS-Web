@@ -549,14 +549,14 @@ export class AddEmployeeComponent implements OnInit {
     addempleaveassign():FormGroup{
       return this.fb.group({
         etpMonth:['',Validators.required],
-        lmslrAnnualAssign:[''],
-        lmslrSickAssign:[''],
-        lmslrCasualAssign:[''],
-        lmslrAnnualTaken:[''],
-        lmslrSickTaken:[''],
-        lmslrCasualTaken:[''],
-        lmslrTotalAssign:[''],
-        lmslrTotalTaken:['']
+        lmslrAnnualAssign:[0],
+        lmslrSickAssign:[0],
+        lmslrCasualAssign:[0],
+        lmslrAnnualTaken:[0],
+        lmslrSickTaken:[0],
+        lmslrCasualTaken:[0],
+        lmslrTotalAssign:[0],
+        lmslrTotalTaken:[0]
 
       });
     }
@@ -598,6 +598,8 @@ export class AddEmployeeComponent implements OnInit {
 
   createForm() {
     this.personalDetailsForm = this.fb.group({
+      etedEmployeeId:[0],
+      etedEthuEmpId:[0],
       etedPhotograph: [''],
       etedFirstName: ['', Validators.required],
       etedLastName: ['', Validators.required],
@@ -640,7 +642,7 @@ export class AddEmployeeComponent implements OnInit {
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
       imsAssign:this.fb.array([]),
-      empleaveassign:this.fb.array([this.addempleaveassign(),
+      empleaveassign:this.fb.array([this.addempleaveassign()
       ]),
       
 
@@ -651,7 +653,7 @@ export class AddEmployeeComponent implements OnInit {
   }
   submitData() {
 
-    
+    debugger
     let form = this.personalDetailsForm.value;
     
     this.assetAssignDT.forEach((elem: any, index: any) => {
