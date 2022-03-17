@@ -643,9 +643,9 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       eesStartDate: [null, Validators.required],
       eesEndDate: [null, Validators.required],
-      eesDuration: [''],
+      eesDuration: [null],
       eesClearenceDate: [null],
-      eesRemarks: [''],
+      eesRemarks: [null],
 
     });
   }
@@ -660,10 +660,10 @@ export class EditEmployeeComponent implements OnInit {
   addempresigneddata(): FormGroup {
     return this.fb.group({
       eesStartDate: [null, Validators.required],
-      eesDuration: [''],
+      eesDuration: [null],
       eesEndDate: [null],
       eesClearenceDate: [null],
-      eesRemarks: [''],
+      eesRemarks: [null],
 
     });
   }
@@ -712,10 +712,10 @@ export class EditEmployeeComponent implements OnInit {
   addInternddata(): FormGroup {
     return this.fb.group({
       eesStartDate: [null, Validators.required],
-      eesDuration: [''],
+      eesDuration: [null],
       eesEndDate: [null],
       eesSalary: [0, Validators.required],
-      eesRemarks: ['', Validators.required]
+      eesRemarks: [null, Validators.required]
     });
   }
 
@@ -1376,10 +1376,10 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       eesStartDate: [null, Validators.required],
       eesEndDate: [null],
-      eesDateOfIncrement: [''],
+      eesDateOfIncrement: [null],
       eesIncrement: [0],
-      eesRemarks: [''],
-      eesSalary: ['']
+      eesRemarks: [null],
+      eesSalary: [0]
     })
   }
   ///////////////Released Employee Duration Cal//////////////
@@ -1460,12 +1460,12 @@ export class EditEmployeeComponent implements OnInit {
   ////////////part Time employee///////////////
   addemsTblPartTimeEmployee(): FormGroup {
     return this.fb.group({
-      eesetedpartTimetype: ['', Validators.required],
-      monday: [false, Validators.required],
-      tuesday: [false, Validators.required],
-      wednesday: [false, Validators.required],
-      thrusday: [false, Validators.required],
-      friday: [false, Validators.required],
+      eesetedpartTimetype: [null, Validators.required],
+      monday: [false,null ],
+      tuesday: [false, null],
+      wednesday: [false,null ],
+      thrusday: [false, null],
+      friday: [false, null],
 
     })
   }
@@ -1474,10 +1474,10 @@ export class EditEmployeeComponent implements OnInit {
     return this.fb.group({
       eesStartDate: [null, Validators.required],
       eesEndDate: [null, Validators.required],
-      eesDuration: ['', Validators.required],
+      eesDuration: [null, Validators.required],
       eesSalary: [0],
-      eesRemarks: [''],
-      eesContractType: ['']
+      eesRemarks: [null],
+      eesContractType: [null]
     })
   }
   //////////value pushing Contract///////
