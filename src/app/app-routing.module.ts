@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { LeaveComponent } from './leave/leave.component';
 import { LeaveformComponent } from './leaveform/leaveform.component';
+import { ViewleaveComponent } from './viewleave/viewleave.component';
 
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -27,6 +28,10 @@ const routes: Routes = [
         path:'leaveform',
         component:LeaveformComponent,
     },
+    {
+        path:'viewleave',
+        component:ViewleaveComponent,
+    }
 ];
 
 @NgModule({

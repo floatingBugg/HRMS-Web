@@ -27,6 +27,9 @@ data:any;
   addEmployeeLeaves(data:any){
     return this.http.post(this.apiUrl +'/Leave/UpdateLeaveRecord', data);
   }
+  viewempoyeeleavedata(empid:any):Observable<any>{
+return this.http.get(this.apiUrl + `/Leave/ViewAssignLeaveByEmppid?id=${empid}`);
+  }
 
   // postAssets(data: any): Observable<any> {
 
