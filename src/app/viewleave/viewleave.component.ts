@@ -58,11 +58,16 @@ viewdataleave(id:any){
     });
 }
 getLeaveTypeName(leaveTypeId:any){
-if(leaveTypeId==1){
+if(leaveTypeId==2){
   return "Sick";
 }
-else{
+else if(leaveTypeId==3){
   return "Casual";
 }
+else (leaveTypeId==1) 
+{
+  return "Annual"
+}
+
 }
 }

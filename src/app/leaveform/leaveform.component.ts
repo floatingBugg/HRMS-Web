@@ -107,6 +107,7 @@ createleaveForm(){
     console.log(this.endDate);
   }
   compareDates(index: any) {
+    debugger
     this.startdate = this.leaveform.controls['lmselStartDate'].value;
     this.endDate = this.leaveform.controls['lmselEndDate'].value;
     console.log(this.startdate);
@@ -175,7 +176,7 @@ createleaveForm(){
         {
           this.errorMsg= result.message;
           Swal.fire({
-           title: 'ERROR!',
+           title: 'Limit Acceeded!',
            text: this.errorMsg,
            icon: 'error',
            showCancelButton: false,
