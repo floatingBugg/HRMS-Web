@@ -76,9 +76,9 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
     
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
-     // this.employeeData.sort = this.sort;
       this.leave.name = name;
       this.leave.data = data.data;
+      this.dummydata = this.employeeData.filteredData;
       this.employeeData.paginator = this.paginator;
 
     });
@@ -96,5 +96,9 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
     this._view = permissions.view;
     this._leave=permissions.leave;
   }
-
+  getId(data:any){
+    debugger
+    var id = data.lmslrEtedEmployeeId;
+    this.leave.recordId = id;
+  }
 }

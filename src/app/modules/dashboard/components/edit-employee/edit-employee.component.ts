@@ -1358,16 +1358,17 @@ export class EditEmployeeComponent implements OnInit {
     } else {
       this.resignedEmp = false;
     }
-    if (event.value == 6) {
-      this.parttimeEmp = true;
-    } else {
-      this.parttimeEmp = false;
-    }
     if (event.value == 5) {
       this.interEmp = true;
     } else {
       this.interEmp = false;
     }
+    if (event.value == 6) {
+      this.parttimeEmp = true;
+    } else {
+      this.parttimeEmp = false;
+    }
+   
 
 
   }

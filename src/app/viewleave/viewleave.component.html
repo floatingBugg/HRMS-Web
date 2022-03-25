@@ -9,57 +9,57 @@
   <span>HRMS</span>
   <span class="example-spacer"></span>
 </mat-toolbar>
-
+<div class="details">
+<h3 class=" mt-4"><b>Employee Leave Details</b>  </h3>
+</div>
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
-    <h3 class=" mt-4">Employee Name : </h3>
+    <h3 class=" mt-4">Employee Name : {{leaveempname}}</h3>
 
     <form>
 
-      <div class="container mt-4">
-        <div class="row">
+    
+        <div class="mt-3">
 
-          <mat-label class="col-lg-4 col-md-6 "><b>Employee Id :</b>
-
-          </mat-label>
-          <mat-label class="col-lg-4 col-md-6"><b>Designation :</b>
-
-          </mat-label>
+          <h3 class="col-lg-4 col-md-6 ">Employee Id :
+            {{leaveempid}}
+          </h3>
+         
         </div>
-       
-       
-      </div>
+
+
       
+
     </form>
-    
+
   </div>
-  
+
 </div>
-<div  class = "table1" class="full-width-div mt-4 ">
-    <table mat-table  class="mat-elevation-z8 ">
-      <ng-container matColumnDef="Leave Type">
-        <th width="10%"mat-header-cell *matHeaderCellDef>Leave Type </th>
-        <td width="10%" mat-cell *matCellDef="let leave"> {{leave.leavetype}} </td>
-        <!-- <td width="10%" >1 </td> -->
-      </ng-container>
-      <ng-container matColumnDef="Leave Date">
-        <th width="10%" mat-header-cell *matHeaderCellDef>Leave Date</th>
-        <td width="10%" mat-cell *matCellDef="let leave"> {{leave.leavedate}} </td>
-      </ng-container>
-      <ng-container matColumnDef="Leave Days">
-       <th width="10%" mat-header-cell *matHeaderCellDef>Leave Days</th>
-       <td width="10%" mat-cell *matCellDef="let leave"> {{leave.leavedays}} </td>
-      </ng-container>
-      <ng-container matColumnDef="Remarks">
-        <th width="10%" mat-header-cell *matHeaderCellDef>Remarks</th>
-        <td  width="10%" mat-cell *matCellDef="let leave" >{{leave.remarks}} </td>
-      </ng-container>
-      
-      <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
-    </table>
-    
-  </div>
+<div class="table1" class="full-width-div mt-4 ">
+  <table mat-table [dataSource]="leavetableData" class="mat-elevation-z8 " matsort>
+    <ng-container matColumnDef="Leave Type">
+      <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Type </th>
+      <td width="10%" mat-cell *matCellDef="let leave"> {{getLeaveTypeName(leave.lmselLeaveType)}} </td>
+      <!-- <td width="10%" >1 </td> -->
+    </ng-container>
+    <ng-container matColumnDef="Leave Date">
+      <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Date Range</th>
+      <td width="10%" mat-cell *matCellDef="let leave"> {{leave.lmselStartDate}} to {{leave.lmselEndDate}}</td>
+    </ng-container>
+    <ng-container matColumnDef="Leave Days">
+      <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Days</th>
+      <td width="10%" mat-cell *matCellDef="let leave"> {{leave.lmselDays}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Remarks">
+      <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</th>
+      <td width="10%" mat-cell *matCellDef="let leave">{{leave.reason}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+  </table>
+
+</div>
 <!-- <table mat-table class="mat-elevation-z8" matSort>
     <ng-container matColumnDef="LeaveType">
      

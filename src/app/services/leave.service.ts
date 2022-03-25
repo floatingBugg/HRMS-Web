@@ -15,6 +15,7 @@ export class LeaveService {
   apiUrl = 'http://localhost:57208';
 name:any;
 data:any;
+recordId:any;
 
   
   getEmployeeLeaveData() {
@@ -27,8 +28,8 @@ data:any;
   addEmployeeLeaves(data:any){
     return this.http.post(this.apiUrl +'/Leave/UpdateLeaveRecord', data);
   }
-  viewempoyeeleavedata(empid:any):Observable<any>{
-return this.http.get(this.apiUrl + `/Leave/ViewAssignLeaveByEmppid?id=${empid}`);
+  viewempoyeeleavedata(id:any):Observable<any>{
+return this.http.get(this.apiUrl + `/Leave/EmployeeLeaveDetail?id=${id}`);
   }
 
   // postAssets(data: any): Observable<any> {

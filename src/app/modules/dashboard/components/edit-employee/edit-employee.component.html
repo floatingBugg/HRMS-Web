@@ -459,7 +459,7 @@
                           placeholder="Academic QualificationId">
                       </mat-form-field>
 
-                      <mat-form-field class="col-lg-5 col-md-5 input" >
+                      <mat-form-field class="col-lg-6 col-md-6 input">
                         <mat-label>Degree Title</mat-label>
                         <mat-select formControlName="etaqQualification" name="etaqQualification">
                           <mat-option *ngFor="let deg of value1" [value]="deg">{{deg}} </mat-option>
@@ -468,15 +468,15 @@
                           Degree Title is <strong>required</strong></mat-error>
                       </mat-form-field>
                     </div>
-                    <div  class="col-5 off-set-2 mt-3" >
-                      
-                        <button  id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
-                          color="primary">Add Degree</button>
-                      
+                    <div class="col-5 off-set-2 mt-3">
+
+                      <button id="addvalue" (click)="showField()" ng-init="addvalue= true" mat-raised-button
+                        color="primary">Add Degree</button>
+
                     </div>
                   </div>
                   <div *ngIf="showAddNewDropDownField">
-                    <mat-form-field class="col-lg-5 col-md-5 input"id="inputvalue" appearance="legacy" >
+                    <mat-form-field class="col-lg-5 col-md-5 input" id="inputvalue" appearance="legacy">
                       <input matInput placeholder="Enter Degree here" ngModel [ngModelOptions]="{standalone: true}"
                         (keyup.enter)="pushValue($event.target,2)">
                     </mat-form-field>
@@ -563,7 +563,7 @@
                   </div>
                   <mat-form-field class="col-lg-5 col-md-5 input" style="width:620px">
                     <mat-label>Salary</mat-label>
-                    <input (keypress)="onlyNumbersAllowed($event)"  formControlName="etepdSalary" name="etepdSalary"
+                    <input (keypress)="onlyNumbersAllowed($event)" formControlName="etepdSalary" name="etepdSalary"
                       matInput placeholder="Salary">
                     <mat-error *ngIf="item.controls['etepdSalary'].errors?.['required']">
                       Salary is <strong>required</strong></mat-error>
@@ -641,7 +641,7 @@
         <div *ngIf="permanentEmp">
           <mat-step label="Permanent Employee">
             <div class="row">
-              <div >
+              <div>
                 <div formArrayName="emsTblPermanentEmployee"
                   *ngFor="let item of personalDetailsForm.get('emsTblPermanentEmployee')['controls']; let i = index;">
                   {{setCurrentIndexPermannetEmployee(i)}}
@@ -651,8 +651,8 @@
                     <div class="col-lg-6 col-md-6 col-sm-12" class="screenMaxWidth">
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Start Date</mat-label>
-                        <input matInput formControlName="eesStartDate" name="eesStartDate"
-                          [matDatepicker]="picker" (dateChange)="getPerDate(i)" (ngModelChange)="setDate($event)">
+                        <input matInput formControlName="eesStartDate" name="eesStartDate" [matDatepicker]="picker"
+                          (dateChange)="getPerDate(i)" (ngModelChange)="setDate($event)">
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker></mat-datepicker>
                         <mat-error *ngIf="item.controls['eesStartDate'].errors?.['required']">
@@ -670,7 +670,7 @@
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Probation Period</mat-label>
-                        <input value="12" type="number" id="monthVal1"  matInput (keyup)="getPerDate(i)">
+                        <input value="12" type="number" id="monthVal1" matInput (keyup)="getPerDate(i)">
 
                       </mat-form-field>
 
@@ -684,8 +684,8 @@
 
                       <mat-form-field class="col-lg-5 col-md-5 input">
                         <mat-label>Evaluation date</mat-label>
-                        <input readonly id="Perprob" [value]=perprobDate1 formControlName="eesEndDate"
-                          name="eesEndDate" matInput placeholder="Evaluation">
+                        <input readonly id="Perprob" [value]=perprobDate1 formControlName="eesEndDate" name="eesEndDate"
+                          matInput placeholder="Evaluation">
                         <mat-error *ngIf="item.controls['eesEndDate'].errors?.['required']">
                           End-date is <strong>required</strong></mat-error>
                       </mat-form-field>
@@ -741,8 +741,7 @@
                       <div class="col-lg-6 col-md-6 col-sm-12" class="screenMaxWidth">
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract-Start Date</mat-label>
-                          <input matInput formControlName="eesStartDate" name="eesStartDate"
-                            [matDatepicker]="picker"
+                          <input matInput formControlName="eesStartDate" name="eesStartDate" [matDatepicker]="picker"
                             (dateChange)="compareDatesGeneric(i,'emsTblContractEmployee','eesStartDate','eesEndDate','eesDuration')">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
@@ -776,15 +775,14 @@
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract Amount</mat-label>
                           <input id="PerInc" (keypress)="onlyNumbersAllowed($event)" formControlName="eesSalary"
-                            name="eesSalary" matInput >
+                            name="eesSalary" matInput>
                           <mat-error *ngIf="item.controls['eesSalary'].errors?.['required']">
                             Contract-Amount is <strong>required</strong></mat-error>
                         </mat-form-field>
 
                         <mat-form-field class=" col-lg-5 col-md-5 input">
                           <mat-label>Remarks</mat-label>
-                          <textarea formControlName="eesRemarks" name="eesRemarks" matInput
-                            placeholder=""></textarea>
+                          <textarea formControlName="eesRemarks" name="eesRemarks" matInput placeholder=""></textarea>
                         </mat-form-field>
 
                         <div class="row mt-3">
@@ -854,9 +852,9 @@
                     <div>
                       <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                         <mat-label>Clearance Date</mat-label>
-                        <input  id="daysvalue" [value]=perprobDate1 formControlName="eesClearenceDate"
-                          name="eesClearenceDate" matInput placeholder="clearance Date" >
-                          <!-- <mat-datepicker-toggle matSuffix [for]="startDate3"></mat-datepicker-toggle> -->
+                        <input id="daysvalue" [value]=perprobDate1 formControlName="eesClearenceDate"
+                          name="eesClearenceDate" matInput placeholder="clearance Date">
+                        <!-- <mat-datepicker-toggle matSuffix [for]="startDate3"></mat-datepicker-toggle> -->
                         <!-- <mat-datepicker #startDate3></mat-datepicker> -->
 
                       </mat-form-field>
@@ -904,7 +902,7 @@
                       <div class="prob">
                         <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                           <mat-label>Notice Period</mat-label>
-                          <input value="1" type="number" id="noticeperiod"  matInput placeholder="Notice Period"
+                          <input value="1" type="number" id="noticeperiod" matInput placeholder="Notice Period"
                             (keyup)="Resignednoticeperiod(i)">
 
                         </mat-form-field>
@@ -912,8 +910,8 @@
                       <div>
                         <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                           <mat-label>Releasing Date</mat-label>
-                          <input id="probation" [value]=probationDate formControlName="eesEndDate"
-                            name="eesEndDate" matInput placeholder="Releasing Date">
+                          <input id="probation" [value]=probationDate formControlName="eesEndDate" name="eesEndDate"
+                            matInput placeholder="Releasing Date">
                         </mat-form-field>
 
                         <div>
@@ -958,11 +956,16 @@
                           </mat-select>
                         </mat-form-field>
                         <section class="example-section">
-                          <mat-checkbox class="example-margin" id="monday" formControlName="monday">Monday </mat-checkbox>
-                          <mat-checkbox class="example-margin" id="tuesday" formControlName="tuesday">Tuesday </mat-checkbox>
-                          <mat-checkbox class="example-margin" id="wednesday" formControlName="wednesday">Wednesday </mat-checkbox>
-                          <mat-checkbox class="example-margin" id="thrusday" formControlName="thrusday">Thrusday </mat-checkbox>
-                          <mat-checkbox class="example-margin" id="friday" formControlName="friday">Friday </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="monday" formControlName="monday">Monday
+                          </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="tuesday" formControlName="tuesday">Tuesday
+                          </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="wednesday" formControlName="wednesday">Wednesday
+                          </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="thrusday" formControlName="thrusday">Thrusday
+                          </mat-checkbox>
+                          <mat-checkbox class="example-margin" id="friday" formControlName="friday">Friday
+                          </mat-checkbox>
                         </section>
                       </div>
                     </div>
@@ -976,8 +979,8 @@
           <mat-step label="Internee">
             <div class="form-group">
               <div class="form-group mt-3">
-                <div formArrayName="emsTblInterneedata"
-                  *ngFor="let item of personalDetailsForm.get('emsTblInterneedata')['controls']; let i = index;">
+                <div formArrayName="interneedata"
+                  *ngFor="let item of personalDetailsForm.get('interneedata')['controls']; let i = index;">
                   <div [formGroupName]="i">
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-12">
@@ -1001,14 +1004,14 @@
                         <div>
                           <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                             <mat-label>Internship End Date</mat-label>
-                            <input id="probation" [value]=probationDate formControlName="eesEndDate"
-                              name="eesEndDate" matInput placeholder="Internship End Date">
+                            <input id="probation" [value]=probationDate formControlName="eesEndDate" name="eesEndDate"
+                              matInput placeholder="Internship End Date">
                           </mat-form-field>
 
                           <div>
                             <mat-form-field class="col-lg-5 col-md-5 input" style="width:300px">
                               <mat-label>Stipend</mat-label>
-                              <input id="daysvalue"  (keypress)="onlyNumbersAllowed($event)" formControlName="eesSalary"
+                              <input id="daysvalue" (keypress)="onlyNumbersAllowed($event)" formControlName="eesSalary"
                                 name="eesSalary" matInput placeholder="Enter Stipend here!">
 
                             </mat-form-field>
@@ -1016,7 +1019,7 @@
                               <mat-label>Remarks</mat-label>
                               <textarea formControlName="eesRemarks" name="eesRemarks" matInput
                                 placeholder="Remarks"></textarea>
-      
+
                             </mat-form-field>
                           </div>
 

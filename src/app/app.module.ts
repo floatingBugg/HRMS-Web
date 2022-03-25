@@ -29,7 +29,7 @@ import { LeaveComponent } from './leave/leave.component';
 import { LeaveformComponent } from './leaveform/leaveform.component';
 import { MatTableModule } from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { ViewleaveComponent } from './viewleave/viewleave.component';
 import { EditleaveComponent } from './editleave/editleave.component';
