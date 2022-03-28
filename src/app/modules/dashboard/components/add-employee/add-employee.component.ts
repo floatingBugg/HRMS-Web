@@ -569,8 +569,8 @@ export class AddEmployeeComponent implements OnInit {
   }
 ///////leave cal//////////////
   leavecal(event:any){
-    var casualLeave = (6/12)*(13-event.value);
-    var anualLeave = (12/12)*(13-event.value);
+    var casualLeave = (12/12)*(13-event.value);
+    var anualLeave = (6/12)*(13-event.value);
     var sickLeave = (6/12)*(13-event.value);
     var Totalassign =(casualLeave + anualLeave + sickLeave );
 

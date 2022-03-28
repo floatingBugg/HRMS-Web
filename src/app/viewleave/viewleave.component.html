@@ -10,7 +10,7 @@
   <span class="example-spacer"></span>
 </mat-toolbar>
 <div class="details">
-<h3 class=" mt-4"><b>Employee Leave Details</b>  </h3>
+<h3 class=" mt-4"><b>Employee Leave Record</b>  </h3>
 </div>
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
@@ -44,7 +44,7 @@
     </ng-container>
     <ng-container matColumnDef="Leave Date">
       <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Date Range</th>
-      <td width="10%" mat-cell *matCellDef="let leave"> {{leave.lmselStartDateStr}} to {{leave.lmselEndDate}}</td>
+      <td width="10%" mat-cell *matCellDef="let leave"> {{leave.lmselStartDateStr}}<b> To </b>{{leave.lmselEndDateStr}}</td>
     </ng-container>
     <ng-container matColumnDef="Leave Days">
       <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Days</th>
