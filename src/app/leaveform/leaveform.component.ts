@@ -91,6 +91,8 @@ createleaveForm(){
     lmselLeaveType:['',Validators.required],
     lmselStartDate:['',Validators.required],
     lmselEndDate:['',Validators.required],
+    lmselStartDateStr:[''],
+    lmselEndDateStr:[''],
     lmselDays:[],
     reason:[],
     lmselCreatedBy:[this.userId],
@@ -157,6 +159,14 @@ createleaveForm(){
 
   submitData() {
     console.log(this.leaveform.value);
+    //this.leaveform.control['lmselStartDateStr'].setValue(this.leaveform.control['lmselStartDate'].value.toLocaleString());
+    this.leaveform.patchValue({
+      lmselStartDateStr: this.leaveform.value.lmselStartDate.toLocaleString()
+    });
+    this.leaveform.patchValue({
+      lmselEndDateStr: this.leaveform.value.lmselEndDate.toLocaleString()
+    });
+    
     this.leave
       .assignEmployeeLeave(this.leaveform.value).subscribe((result) => {
         if (result.success) {
