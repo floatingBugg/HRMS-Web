@@ -10,7 +10,7 @@
   <span class="example-spacer"></span>
 </mat-toolbar>
 <div class="details">
-<h3 class=" mt-4"><b>Employee Leave Record</b>  </h3>
+<h2 class=" mt-4"><b>Employee Leave Record</b>  </h2>
 </div>
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
@@ -50,10 +50,10 @@
       <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Leave Days</th>
       <td width="10%" mat-cell *matCellDef="let leave"> {{leave.lmselDays}} </td>
     </ng-container>
-    <ng-container matColumnDef="Remarks">
+    <!-- <ng-container matColumnDef="Remarks">
       <th width="10%" mat-header-cell *matHeaderCellDef mat-sort-header>Remarks</th>
       <td width="10%" mat-cell *matCellDef="let leave">{{leave.reason}} </td>
-    </ng-container>
+    </ng-container> -->
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>

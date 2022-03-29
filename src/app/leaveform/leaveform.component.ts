@@ -94,7 +94,7 @@ createleaveForm(){
     lmselStartDateStr:[''],
     lmselEndDateStr:[''],
     lmselDays:[],
-    reason:[],
+    reason:[''],
     lmselCreatedBy:[this.userId],
     lmselCreatedByName:[this.userName]
   })

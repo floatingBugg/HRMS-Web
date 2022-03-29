@@ -22,7 +22,7 @@ export class ViewleaveComponent implements OnInit {
     'Leave Type',
     'Leave Date',
     'Leave Days',
-    'Remarks',
+    
   ];
   leavetype: any;
   id: any;

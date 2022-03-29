@@ -61,7 +61,7 @@ export class EditEmployeeComponent implements OnInit {
   validdate: any;
   resignedEmp: boolean = false;
   parttimeEmp: boolean = false;
-  interEmp: boolean = false;
+  internshipEmp: boolean = false;
   startdateemp: any;
   endDateemp: any;
   public editDataArray: any = FormArray;
@@ -158,6 +158,8 @@ export class EditEmployeeComponent implements OnInit {
   noticeperiod: any = 1;
   internshipPrd: any = 3;
   daylist: any[] = ['Id', 'Name', 'isselected'];
+  monthVal1: any=12;
+  perprobDate2: any;
 
   constructor(
     // this.IsChecked = false,
@@ -1338,6 +1340,7 @@ export class EditEmployeeComponent implements OnInit {
   permanentEmpstatus(event: any) {
 
     console.log(event);
+    debugger
     if (event.value == 1) {
       this.permanentEmp = true;
     } else {
@@ -1358,17 +1361,16 @@ export class EditEmployeeComponent implements OnInit {
     } else {
       this.resignedEmp = false;
     }
-    if (event.value == 5) {
-      this.interEmp = true;
-    } else {
-      this.interEmp = false;
-    }
-    if (event.value == 6) {
+     if (event.value == 5) {
       this.parttimeEmp = true;
     } else {
       this.parttimeEmp = false;
     }
-   
+    if (event.value == 6) {
+      this.internshipEmp = true;
+    } else {
+      this.internshipEmp = false;
+    }
 
 
   }
@@ -1425,7 +1427,8 @@ export class EditEmployeeComponent implements OnInit {
     this.monthval = (<HTMLInputElement>(
       document.getElementById('monthVal1')
     )).value;
-    let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthval));
+    let perprobDate1 = d.setMonth(d.getMonth() + parseInt(this.monthVal1));
+    this.newDate = new Date(perprobDate1);
     this.perprobDate1 = new Intl.DateTimeFormat('en-GB', {
       dateStyle: 'full',
     }).format(this.newDate); control
@@ -1433,7 +1436,6 @@ export class EditEmployeeComponent implements OnInit {
   }
   //////////////date time format change///////////////
   dateformat(){
-    debugger
     let control= this.personalDetailsForm.get(
       'emsTblPermanentEmployee'
     )['controls'][0]['controls'];
