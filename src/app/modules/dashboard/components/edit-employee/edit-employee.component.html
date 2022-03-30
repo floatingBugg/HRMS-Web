@@ -725,7 +725,7 @@
                     *ngFor="let item of personalDetailsForm.get('emsTblContractEmployee')['controls']; let i = index;">
                     {{setCurrentIndexContractEmployee(i)}}
                     <div [formGroupName]="i">
-                      <p class="mb-3"><b>Contract Employee: {{i+1}}</b></p>
+                      <p class="mb-3 mt-3"><b>Contract Employee: {{i+1}}</b></p>
                       <div class="col-lg-6 col-md-6 col-sm-12" class="screenMaxWidth">
                         <mat-form-field class="col-lg-5 col-md-5 input">
                           <mat-label>Contract-Start Date</mat-label>
@@ -1171,7 +1171,7 @@
                 </button>
               </div>
 
-              <table mat-table [dataSource]="assetdata" class="mat-elevation-z8" matSort>
+              <table mat-table [dataSource]="assetdata" class="mat-elevation-z8 mt-3" matSort>
                 <ng-container matColumnDef="assetid">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header>Asset ID</th>
                   <td mat-cell *matCellDef="let asset"> {{asset.itasItaAssetId}} </td>

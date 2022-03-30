@@ -22,7 +22,7 @@ export class ViewleaveComponent implements OnInit {
     'Leave Type',
     'Leave Date',
     'Leave Days',
-    
+    'Remarks' 
   ];
   leavetype: any;
   id: any;
@@ -41,7 +41,6 @@ export class ViewleaveComponent implements OnInit {
   }
   
 viewdataleave(id:any){
-  debugger
   this.leaveservice.viewempoyeeleavedata(id).subscribe((data: any) => {  
     
     if (data.success) {
@@ -49,7 +48,6 @@ viewdataleave(id:any){
         
       this.leaveempname = oneEmployeeData[0].lmselEtedEmployeeName;
       this.leaveempid = oneEmployeeData[0].lmselEtedEmployeeId;
-      debugger
       this.leavetableData = new MatTableDataSource<viewleaveGrid>(data.data);
       
       

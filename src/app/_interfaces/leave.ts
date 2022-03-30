@@ -3,5 +3,5 @@ export interface viewleaveGrid {
     lmselStartDate: any;
     lmselEndDate:any;
     lmselDays: any;
-    // lmselreason:string;
+    lmselreason:string;
   }

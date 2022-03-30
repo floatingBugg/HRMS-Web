@@ -97,6 +97,7 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
     this._leave=permissions.leave;
   }
   getId(data:any){
+
     var id = data.lmslrEtedEmployeeId;
     this.leave.recordId = id;
   }
