@@ -37,6 +37,7 @@ import { AssignManagerComponent } from './components/assign-manager/assign-manag
 import { AssignAssetComponent } from './components/assign-asset/assign-asset.component';
 import { AssignQuantityComponent } from './components/assign-quantity/assign-quantity.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 // import { MatCheckbox } from '@angular/material/checkbox';
 
 @NgModule({
@@ -80,6 +81,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatSortModule,
     MatTableModule,
     MatProgressSpinnerModule,
+    MatAutocompleteModule
   ],
   providers: [
     {

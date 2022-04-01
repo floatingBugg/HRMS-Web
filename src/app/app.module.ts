@@ -33,6 +33,7 @@ import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { ViewleaveComponent } from './viewleave/viewleave.component';
 import { EditleaveComponent } from './editleave/editleave.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 // import { MatCheckbox } from '@angular/material/checkbox';
 
 @NgModule({
@@ -73,7 +74,8 @@ import { EditleaveComponent } from './editleave/editleave.component';
     MatNativeDateModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    MatAutocompleteModule
     // MatCheckbox
     
     // MatDialogConfig

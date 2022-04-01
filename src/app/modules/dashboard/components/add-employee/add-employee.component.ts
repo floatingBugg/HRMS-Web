@@ -572,14 +572,14 @@ export class AddEmployeeComponent implements OnInit {
     var casualLeave = (12/12)*(13-event.value);
     var anualLeave = (6/12)*(13-event.value);
     var sickLeave = (6/12)*(13-event.value);
-    var Totalassign =(casualLeave + anualLeave + sickLeave );
+    var Totalassign =(casualLeave + Math.round(anualLeave) + Math.round(sickLeave) );
 
 
 
    var control =  this.personalDetailsForm.controls[
       'empleaveassign'
     ]['controls'][0]['controls'];
-
+debugger
     control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
     control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
     control['lmslrSickAssign'].setValue(Math.round(sickLeave));

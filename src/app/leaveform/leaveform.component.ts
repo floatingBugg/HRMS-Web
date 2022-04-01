@@ -59,7 +59,7 @@ export class LeaveformComponent implements OnInit {
   errorMsg: any;
   // dialog: any;
   public LeaveFormDetails:any = -1;
-  
+  filter:any;
   value: any;
   employeeDdlData:any;
   
