@@ -5,6 +5,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ViewEmployeeComponent } from './components/view-employee/view-employee/view-employee.component';
+import { EditleaveComponent } from 'src/app/editleave/editleave.component';
 
 
 const routes: Routes = [{path:'',  component: DashboardComponent, children:[
@@ -13,7 +14,8 @@ const routes: Routes = [{path:'',  component: DashboardComponent, children:[
   {path:'viewemp/:id', component:ViewEmployeeComponent},
   {path:'employee', component:EmployeeComponent},
   {path:'', redirectTo:'/dashboard/employee', pathMatch:'full'},
-  {path:'**', redirectTo:'/dashboard/employee', pathMatch:'full'}
+  {path:'**', redirectTo:'/dashboard/employee', pathMatch:'full'},
+  {path:'editleave', component:EditleaveComponent}
 ]}];
 
 @NgModule({

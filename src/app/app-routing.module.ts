@@ -7,6 +7,7 @@ import { LeaveComponent } from './leave/leave.component';
 import { LeaveformComponent } from './leaveform/leaveform.component';
 import { ViewleaveComponent } from './viewleave/viewleave.component';
 
+
 const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,7 +32,10 @@ const routes: Routes = [
     {
         path:'viewleave',
         component:ViewleaveComponent,
-    }
+    },
+    
+
+    
 ];
 
 @NgModule({

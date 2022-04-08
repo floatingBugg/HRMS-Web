@@ -18,8 +18,18 @@
   
  
 </div>
-<div class="buttonassign" ><button width="30%" (click)="openDilog()"  type="button" class="btn btn-outline-primary">Apply Leave</button></div>
-<!-- <button mat-button (click)="openDialog()">Open dialog</button> -->
+
+<div class="buttonassign" >
+  <button  class="badge" mat-raised-button color="warn" routerLink="/editleave"
+          matBadge="8" matBadgePosition="before" matBadgeColor="accent" style="margin-right:20px">
+        Notifications
+      </button>
+  <button width="30%" (click)="openDilog()"  type="button" class="btn btn-outline-primary">Apply Leave</button>
+  
+    
+      
+</div>
+
 <div class="container m-0 screenMaxWidth">
   <div class="row">
     <div class="mt-4 col-lg-6">
@@ -27,6 +37,7 @@
     </div>
 
   </div>
+  
 <div  class = "table1" class="full-width-div">
   <table mat-table  class="mat-elevation-z8" [dataSource]="employeeData">
     <ng-container matColumnDef="ID">
