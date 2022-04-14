@@ -78,7 +78,7 @@ export class AddEmployeeComponent implements OnInit {
   public currentIndexProfessionalDetails: any = 0;
   public currentIndexProfessionalQ: any = -1;
   public currentIndexWorkingHistory: any = -1;
-  public assignleave:any;
+  public assignleave:any=0;
   userId = localStorage.getItem('loggedIn_UserId');
   userName = localStorage.getItem('loggedIn_UserName');
   isFileChanged!: boolean;
@@ -206,17 +206,6 @@ export class AddEmployeeComponent implements OnInit {
       })
    } 
   }
-
-//     control['etepdDesignation'].setValue(
-//       abc
-//     );
-    // control.controls['etepdDesignation'].pushValue(abc);
-// 
-    // this.emsTblEmployeeProfessionalDetails().controls['etepdDesignation'].setValue(valueFilter)
-    // this.personalDetailsForm.controls['etepdDesignation'].setValue(valueFilter)
-  
-  
- 
   getAssetByCategoryID(itacCategoryId: any) {
     this.inventory
       .getAssetAssign(itacCategoryId)
@@ -235,9 +224,7 @@ export class AddEmployeeComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res: any) => {
 
       if (res == true) {
-
-       
-
+        
        let objToRemove = this.inventory.assetObj.find((x:any) => x.assetid == itasItaAssetId);
 
        this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove),1);
@@ -359,15 +346,13 @@ export class AddEmployeeComponent implements OnInit {
   }
 
   //////Academic Qualification/////////////
-  
-  
-
   addAcademicQualificationList(): FormGroup {
     return this.fb.group({
+      // etaqAqId:[0,Validators.required],
       etaqUploadDocuments: [''],
       etaqQualification: ['', Validators.required],
       etaqPassingYear: [, [Validators.maxLength(4), Validators.required]],
-      etaqCgpa: [, Validators.required],
+      etaqCgpa: [0, Validators.required],
       etaqInstituteName: ['', Validators.required],
     });
   }
@@ -652,14 +637,10 @@ debugger
     });
   }
   submitData() {
-
-    debugger
     let form = this.personalDetailsForm.value;
-    
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
-    });
-    
+    }); 
     console.log(this.personalDetailsForm.value);
     
     this.personaldetails

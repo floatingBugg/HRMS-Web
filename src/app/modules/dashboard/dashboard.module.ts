@@ -40,6 +40,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatBadgeModule} from '@angular/material/badge';
 // import { MatCheckbox } from '@angular/material/checkbox';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,9 @@ import {MatBadgeModule} from '@angular/material/badge';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoginInterceptor
-    }
+    },
+    DatePipe
+
   ]
 })
 export class DashboardModule { }

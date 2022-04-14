@@ -41,6 +41,7 @@ export class ViewleaveComponent implements OnInit {
   }
   
 viewdataleave(id:any){
+  debugger
   this.leaveservice.viewempoyeeleavedata(id).subscribe((data: any) => {  
     
     if (data.success) {
