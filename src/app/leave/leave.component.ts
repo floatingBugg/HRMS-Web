@@ -17,12 +17,15 @@ import { employeeGrid } from '../_interfaces/employeeGrid';
 export class LeaveComponent implements OnInit {
   [x: string]: any;
   @ViewChild('employeeDataPage') paginator!: MatPaginator;
-
-
   roleid = localStorage.getItem('loggedIn_RoleId');
   empid=localStorage.getItem('loggedIn_empid');
   userName = localStorage.getItem('loggedIn_UserName');
-  // _roleId = localStorage.getItem('loggedIn_RoleId');
+
+  // roleid = localStorage.getItem('loggedIn_RoleId');
+  // empid=localStorage.getItem('loggedIn_empid');
+  // userName = localStorage.getItem('loggedIn_UserName');
+  // // _roleId = localStorage.getItem('loggedIn_RoleId');
+
   ID!: any;
   Name!: string;
   Designation!:string;
@@ -56,13 +59,14 @@ _update:boolean=false
 _delete:boolean=false
 _insert:boolean=false
 _view:boolean=false
-_leave:boolean=false
+_employeeView:boolean=false
 
 _roleId = localStorage.getItem('loggedIn_RoleId');
   ngOnInit(): void {
     // 
     this.getEmployeeData();
  this.dummydata = this.dummydata;
+ this.getPermissions();
   }
   openDilog(){
     
@@ -72,15 +76,13 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
  })
   }
   getEmployeeData() {
-    this.leave.getEmployeeLeaveData().subscribe( (data:any) => {
-    
+    this.leave.getEmployeeLeaveData(this.roleid,this.empid).subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
       this.leave.name = name;
       this.leave.data = data.data;
       this.dummydata = this.employeeData.filteredData;
       this.employeeData.paginator = this.paginator;
-
     });
   }
   Filterdata(event: any) {
@@ -94,7 +96,7 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
     this._delete = permissions.delete;
     this._insert = permissions.insert;
     this._view = permissions.view;
-    this._leave=permissions.leave;
+    this._employeeView=permissions.employeeView;
   }
   getId(data:any){
 

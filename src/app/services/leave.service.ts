@@ -18,8 +18,8 @@ data:any;
 recordId:any;
 
   
-  getEmployeeLeaveData() {
-    return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord`);
+  getEmployeeLeaveData(roleid:any,empid:any) {
+    return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord?roleid=${roleid}&empid=${empid}`);
   }
   assignEmployeeLeave(data:any):Observable<any> {
     return this.http.post(this.apiUrl + '/Leave/AssignLeave', data)
