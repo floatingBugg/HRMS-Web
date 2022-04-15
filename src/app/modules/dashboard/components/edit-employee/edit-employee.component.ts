@@ -1055,22 +1055,23 @@ export class EditEmployeeComponent implements OnInit {
     console.log(this.personalDetailsForm.value)
 
   let parttimedetails = [];
+  debugger
     if(this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['monday'].value){
       parttimedetails.push("1");
     }
-    else if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['tuesday'].value){
+    if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['tuesday'].value){
       
       parttimedetails.push("2");
     }
-    else if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['wednesday'].value){
+    if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['wednesday'].value){
       
       parttimedetails.push("3");
     }
-    else if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['thrusday'].value){
+    if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['thrusday'].value){
       
       parttimedetails.push("4");
     }
-    else(this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['friday'].value);{
+    if (this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['friday'].value){
       
       parttimedetails.push("5");
     }
