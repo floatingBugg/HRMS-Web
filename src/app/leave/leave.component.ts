@@ -73,10 +73,21 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
  this.dialog.open(LeaveformComponent)
  this.dialog.afterAllClosed.subscribe((res:any)=>{
   this.getEmployeeData()
+  
  })
   }
   getEmployeeData() {
     this.leave.getEmployeeLeaveData(this.roleid,this.empid).subscribe( (data:any) => {
+      this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
+      var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
+      this.leave.name = name;
+      this.leave.data = data.data;
+      this.dummydata = this.employeeData.filteredData;
+      this.employeeData.paginator = this.paginator;
+    });
+  }
+  employeedatabyroles(){
+    this.leave.getEmployeeLeavedatabyroles(this.roleid,this.empid).subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
       this.leave.name = name;

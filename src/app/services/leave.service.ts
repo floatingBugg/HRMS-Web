@@ -21,6 +21,9 @@ recordId:any;
   getEmployeeLeaveData(roleid:any,empid:any) {
     return this.http.get(this.apiUrl + `/Leave/ViewAllLeaveRecord?roleid=${roleid}&empid=${empid}`);
   }
+  getEmployeeLeavedatabyroles(roleid:any,empid:any){
+    return this.http.get(this.apiUrl + `/Leave/ViewLeaveEmployeeByRole?roleid=${roleid}&empid=${empid}`);
+  }
   assignEmployeeLeave(data:any):Observable<any> {
     return this.http.post(this.apiUrl + '/Leave/AssignLeave', data)
   }
