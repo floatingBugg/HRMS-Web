@@ -77,7 +77,7 @@ _roleId = localStorage.getItem('loggedIn_RoleId');
  })
   }
   getEmployeeData() {
-    this.leave.getEmployeeLeaveData(this.roleid,this.empid).subscribe( (data:any) => {
+    this.leave.getEmployeeLeavedatabyroles(this.roleid,this.empid).subscribe( (data:any) => {
       this.employeeData = new MatTableDataSource<employeeGrid>(data.data);
       var name = this.employeeData.filteredData[0].lmslrEtedEmployeeName;
       this.leave.name = name;
