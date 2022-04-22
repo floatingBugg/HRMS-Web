@@ -75,6 +75,7 @@ export class ViewEmployeeComponent implements OnInit {
       etaqInstituteName: '',
     },
   ];
+  /////////////assign leaves////////
   //////// Professional Qualification///////
   public profQualification = [
     {
@@ -96,14 +97,28 @@ export class ViewEmployeeComponent implements OnInit {
       etwhDuration: '',
     },
   ];
+  //////////assign asset///////
+  public assignasset=[
+
+    // {itasItaAssetId: 0, assetName: '', itasItacCategoryId: 0, assetCatagoryName: '', itasQuantity: 0, itasAssignedDate: new Date()}
+    {
+      itasAssignId: '',
+    itasItacCategoryId:'',
+      itasAssignedDate: '',
+      itasCreatedBy: '',
+      assetCatagoryName:'',
+      itasEtedEmployeeId: '',
+      itasQuantity: '',
+      itasItaAssetId: '',
+      
+    }
+  ]
   rowId: any;
   displayedColumns1:string[]=[
     'assetid',
     'nameModel',
     'category',
     'quantity',
-  
-
   ];
   @ViewChild(MatSort, {static: false}) sort!: MatSort;
   _update:boolean=false
@@ -199,6 +214,8 @@ getEmployeeAsset(empID:any){
           this.nationality = oneEmployeeData[0].etedNationality;
           //////Emergency Contact /////
           this.emergencyContact = oneEmployeeData[0].emsTblEmergencyContact;
+          debugger
+          this.assetData= oneEmployeeData[0].imsAssign;
           //////// Professional Details//////
           this.profDetails =
             oneEmployeeData[0].emsTblEmployeeProfessionalDetails;

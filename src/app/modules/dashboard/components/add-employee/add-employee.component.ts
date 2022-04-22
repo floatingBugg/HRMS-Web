@@ -622,7 +622,7 @@ debugger
       emsTblEmergencyContact: this.fb.array([this.addemsTblEmergencyContact()]),
       emsTblAcademicQualification: this.fb.array([]),
       emsTblEmployeeProfessionalDetails: this.fb.array([
-        this.addEmsTblEmployeeProfessionalDetails(),
+        // this.addEmsTblEmployeeProfessionalDetails(),
       ]),
       emsTblProfessionalQualification: this.fb.array([]),
       emsTblWorkingHistory: this.fb.array([]),
