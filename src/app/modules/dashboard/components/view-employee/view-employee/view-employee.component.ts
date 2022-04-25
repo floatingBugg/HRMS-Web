@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { InventoryGrid } from 'src/app/_interfaces/inventoryGrid';
 import { MatSort } from '@angular/material/sort';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-view-employee',
@@ -41,6 +42,8 @@ export class ViewEmployeeComponent implements OnInit {
   public Acadname : any[] = [];
   public assetData:any
   profilePicUrl: any;
+  assetEditData: any;
+  imsAssign: any = FormArray;
   //////Emergency Contact /////
   public emergencyContact = [
     {
@@ -75,7 +78,7 @@ export class ViewEmployeeComponent implements OnInit {
       etaqInstituteName: '',
     },
   ];
-  /////////////assign leaves////////
+  
   //////// Professional Qualification///////
   public profQualification = [
     {
@@ -97,9 +100,19 @@ export class ViewEmployeeComponent implements OnInit {
       etwhDuration: '',
     },
   ];
+  public assetdata: any;
+  assetdatatable: any[] = [];
+  assigndatatable: any[] = [];
+  assetAssignObj: any = {
+    itasItaAssetId: 0,
+    assetName: '',
+    itasItacCategoryId: 0,
+    assetCatagoryName: '',
+    itasQuantity: 0,
+    itasAssignedDate: new Date(),
+  };
   //////////assign asset///////
   public assignasset=[
-
     // {itasItaAssetId: 0, assetName: '', itasItacCategoryId: 0, assetCatagoryName: '', itasQuantity: 0, itasAssignedDate: new Date()}
     {
       itasAssignId: '',
@@ -113,6 +126,7 @@ export class ViewEmployeeComponent implements OnInit {
       
     }
   ]
+  assetAssignDT: any[] = [];
   rowId: any;
   displayedColumns1:string[]=[
     'assetid',
@@ -125,11 +139,17 @@ export class ViewEmployeeComponent implements OnInit {
   _delete:boolean=false
   _insert:boolean=false
   _view:boolean=false
+  userId: any;
+  userName: any;
+  personalDetailsForm: any;
+  id: any;
   constructor(
     public personalDetailService: PersonalDetailsService,
     public route: ActivatedRoute,
     private permissionService: PermissionsService,
-    public inventoryservice:InventoryService
+    public inventoryservice:InventoryService,
+    private fb: FormBuilder,
+    private inventory: InventoryService,
   ) {
   }
 
@@ -137,6 +157,7 @@ export class ViewEmployeeComponent implements OnInit {
     this.rowId = this.route.snapshot.paramMap.get('id');
     this.getEmployeeDataByID(this.rowId);
    this.getPermissions();
+   this.getEmployeeAsset(this.rowId);
 
 
   }
@@ -155,17 +176,77 @@ getPermissions(){
 
 //   });
 // }
-getEmployeeAsset(empID:any){
+// getEmployeeAsset(empID:any){
   
-  this.inventoryservice.getAllAssetbyEmpID(empID)
-  .subscribe((data:any)=>{
+//   this.inventoryservice.getAllAssetbyEmpID(empID)
+//   .subscribe((data:any)=>{
+//     if (data.success) {
+//        this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
+       
+//     }
+//   });
+// }
+getEmployeeAsset(empID: any) {
+  debugger
+  this.inventory.getAllAssetAssingedbyEmpID(empID).subscribe((data: any) => {
     if (data.success) {
-       this.assetData=new MatTableDataSource<InventoryGrid>(data.data);
-       ;
+      this.assetEditData = data.data;
+      this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetEditData);
     }
   });
 }
+addAssetAssignList(): FormGroup {
+  return this.fb.group({
+    itasItaAssetId: [''],
+    assetName: [''],
+    itasItacCategoryId: [''],
+    assetCatagoryName: [''],
+    itasQuantity: [''],
+    itasAssignedDate: [''],
+    itasCreatedBy: [this.userId],
+    itasCreatedByName: [this.userName],
+  });
+}
+addImsAssign(): void {
+  this.imsAssign = this.personalDetailsForm.get('imsAssign') as FormArray;
+  let assignForm = this.addAssetAssignList();
+  this.imsAssign.push(this.addAssetAssignList());
+}
+tempTable() {
+  this.assetAssignDT = [];
+  this.assetAssignDT = this.assetEditData;
+  this.inventory.assetObj.forEach((elem: any, index: any) => {
+    this.assetAssignObj = elem;
 
+    this.assetAssignObj.itasItaAssetId = elem.assetid;
+    this.assetAssignObj.assetName = elem.assetname;
+    this.assetAssignObj.itasItacCategoryId = elem.categoryid;
+    this.assetAssignObj.assetCatagoryName = elem.category;
+    this.assetAssignObj.itasQuantity = this.inventory.assignObj[index].itasQuantity;
+    this.assetAssignObj.itasAssignedDate = this.inventory.assignObj[index].itasAssignedDate;
+    //assetAssignObj.itasCreatedBy =
+
+    let imsAssign = (this.personalDetailsForm.controls['imsAssign'][
+      'controls'
+    ][index] = this.addAssetAssignList());
+
+    imsAssign.controls['itasItaAssetId'].setValue(
+      this.assetAssignObj.itasItaAssetId
+    );
+    imsAssign.controls['assetName'].setValue(this.assetAssignObj.assetName);
+
+    this.personalDetailsForm.controls['imsAssign']['controls'][
+      index
+    ].patchValue(imsAssign);
+  });
+  this.assetAssignDT.push(this.assetAssignObj);
+  this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
+
+
+  // this.addAssetAssignList().setValue(this.assetAssignDT);
+  // this.addImsAssign();
+  //this.assetData=new MatTableDataSource<InventoryGrid>(this.inventory.assetObj);
+}
   getEmployeeDataByID(rowId: any) {
     this.personalDetailService
       .viewEmployeeData(rowId)
@@ -214,7 +295,7 @@ getEmployeeAsset(empID:any){
           this.nationality = oneEmployeeData[0].etedNationality;
           //////Emergency Contact /////
           this.emergencyContact = oneEmployeeData[0].emsTblEmergencyContact;
-          debugger
+          
           this.assetData= oneEmployeeData[0].imsAssign;
           //////// Professional Details//////
           this.profDetails =
@@ -251,6 +332,8 @@ getEmployeeAsset(empID:any){
           this.workHistoryName[i]=fileNameWork;
           }
 
+
+          console.log(this.assetData);
           
 
         

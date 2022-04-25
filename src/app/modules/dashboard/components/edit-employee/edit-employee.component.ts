@@ -776,7 +776,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   resignclearancedate(index: any) {
-    debugger
     index = 0;
     let control = this.personalDetailsForm.get('empresigneddata')[
       'controls'

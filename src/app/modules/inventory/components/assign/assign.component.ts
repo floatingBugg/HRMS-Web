@@ -50,7 +50,6 @@ export class AssignComponent implements OnInit {
     return true;
   }
   createForm() {
-    debugger
     this.assignForm = this.fb.group({
       itasQuantity: ['', Validators.required],
       itasAssignedDate: ['', Validators.required],

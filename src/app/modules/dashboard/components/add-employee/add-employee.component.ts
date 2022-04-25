@@ -564,7 +564,6 @@ export class AddEmployeeComponent implements OnInit {
    var control =  this.personalDetailsForm.controls[
       'empleaveassign'
     ]['controls'][0]['controls'];
-debugger
     control['lmslrCasualAssign'].setValue(Math.round(casualLeave));
     control['lmslrAnnualAssign'].setValue(Math.round(anualLeave));
     control['lmslrSickAssign'].setValue(Math.round(sickLeave));

@@ -109,7 +109,6 @@ createleaveForm(){
     console.log(this.endDate);
   }
   compareDates(index: any) {
-    debugger
     this.startdate = this.leaveform.controls['lmselStartDate'].value;
     this.endDate = this.leaveform.controls['lmselEndDate'].value;
     console.log(this.startdate);
