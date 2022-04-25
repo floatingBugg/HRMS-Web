@@ -1,7 +1,7 @@
 <div class="add-employee-container container m-0 screenMaxWidth">
   <div class="row">
     <h3 class=" mt-4">Employee Detail: {{firstName}}</h3>
-    <mat-vertical-stepper>
+    <mat-vertical-stepper >
       <form>
         <mat-step label="Personal Details">
           <div class="container">
@@ -11,10 +11,10 @@
                 <img [src]="profilePicUrl" class="Image" alt="No Image Available/Not Uploaded">
               </div>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Employee ID:</b>
-               {{empID}}
+                {{empID}}
               </mat-label>
               <mat-label class="col-lg-6 col-md-6"><b>First Name:</b>
-               {{firstName}}
+                {{firstName}}
               </mat-label>
             </div>
 
@@ -142,7 +142,8 @@
               <p class="mb-3 mt-3"><b>Academic Qualification: {{i+1}}</b></p>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
               <div class="circle" *ngIf="apiURL+academicQualification[i].etaqUploadDocuments">
-                <button (click)="DownloadFile(apiURL+academicQualification[i].etaqUploadDocuments)">Download Here</button>{{this.Acadname[i]}}
+                <button (click)="DownloadFile(apiURL+academicQualification[i].etaqUploadDocuments)">Download
+                  Here</button>{{this.Acadname[i]}}
               </div>
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Degree Title:</b>
@@ -172,7 +173,8 @@
               <p class="mb-3"><b>Professional Qualification: {{i+1}}</b></p>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
               <div class="circle" *ngIf="apiURL+profQualification[i].etpqDocuments">
-                <button (click)="DownloadFile(apiURL+profQualification[i].etpqDocuments)">Download Here</button>{{this.profQualName[i]}}
+                <button (click)="DownloadFile(apiURL+profQualification[i].etpqDocuments)">Download
+                  Here</button>{{this.profQualName[i]}}
               </div>
               <div class="row mt-2">
                 <mat-label class=" col-lg-6 col-md-6 ml-5"><b>Certification:</b>
@@ -192,7 +194,7 @@
               </div>
             </div>
           </div>
-          <div *ngIf="profQualification.length <= 0">
+          <div *ngIf="profQualification.length == 0">
             <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
           </div>
         </mat-step>
@@ -202,7 +204,8 @@
               <p class="mb-3 mt-3"><b>Working History: {{i+1}}</b></p>
               <mat-label class="col-lg-6 col-md-6 ml-5"><b>Certificate: {{i+1}}</b></mat-label>
               <div class="circle" *ngIf="apiURL+workHistory[i].etwhExperienceLetter">
-                <button  (click)="DownloadFile(apiURL+workHistory[i].etwhExperienceLetter)">Download Here</button>{{this.workHistoryName[i]}}
+                <button (click)="DownloadFile(apiURL+workHistory[i].etwhExperienceLetter)">Download
+                  Here</button>{{this.workHistoryName[i]}}
               </div>
               <div class="row mt-2">
                 <mat-label class="col-lg-6 col-md-6 ml-5"><b>Company:</b>
@@ -253,13 +256,13 @@
           
           <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
-          <!-- <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onRowClicked(row)"></tr> -->
+      
         </table>
         <!-- <div *ngIf="assetData.length <= 0">
           <mat-label class=" col-lg-6 col-md-6 ml-5">No Record Found.</mat-label>
         </div> -->
         </mat-step>
-      </form>      
+      </form>
     </mat-vertical-stepper>
     <div class="text-align-right marginBottom6em">
       <button class="setPositionRight5em" routerLink="./employee" mat-raised-button color="warn">Back</button>

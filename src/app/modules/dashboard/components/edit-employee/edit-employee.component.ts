@@ -1043,6 +1043,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateData() {
+    debugger
     let form = this.personalDetailsForm.value;
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
@@ -1426,11 +1427,13 @@ export class EditEmployeeComponent implements OnInit {
     }
   }
   getEmployeeAsset(empID: any) {
+    
     this.inventory.getAllAssetAssingedbyEmpID(empID).subscribe((data: any) => {
       if (data.success) {
         this.assetEditData = data.data;
         this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetEditData);
       }
+      console.log(this.assetdata)
     });
   }
   onCreateAssign() {
@@ -1446,7 +1449,7 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   tempTable() {
-    ;
+    debugger    
     this.assetAssignDT = [];
     this.assetAssignDT = this.assetEditData;
     this.inventory.assetObj.forEach((elem: any, index: any) => {
@@ -1473,7 +1476,9 @@ export class EditEmployeeComponent implements OnInit {
         index
       ].patchValue(imsAssign);
     });
+    if(this.assetAssignObj && this.assetAssignObj.itasItaAssetId > 0)
     this.assetAssignDT.push(this.assetAssignObj);
+
     this.assetdata = new MatTableDataSource<InventoryGrid>(this.assetAssignDT);
 
 
@@ -1655,26 +1660,25 @@ export class EditEmployeeComponent implements OnInit {
   }
   //////////////////////////////////////////
   unAssignAssetById(itasItaAssetId: any) {
-
+  
     const dialogRef = this.dialog.open(UnassignAssetComponent);
 
     dialogRef.afterClosed().subscribe((res: any) => {
 
       if (res == true) {
+    
+       let objToRemove = this.assetEditData.find((x:any) => x.itasItaAssetId == itasItaAssetId);
 
+       this.assetEditData.splice(this.assetEditData.indexOf(objToRemove),1);
+       this.inventory._assetObj = []
+       this.assetAssignObj = null
+       this.tempTable();
+ 
+     }
 
-
-        let objToRemove = this.inventory.assetObj.find((x: any) => x.assetid == itasItaAssetId);
-
-        this.inventory.assetObj.splice(this.inventory.assetObj.indexOf(objToRemove), 1);
-
-        this.tempTable();
-
-
-      }
     });
-  }
 
+  }
   DownloadFile(path: any) {
     saveAs(path);
   }

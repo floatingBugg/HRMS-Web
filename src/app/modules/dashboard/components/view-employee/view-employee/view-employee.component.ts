@@ -40,9 +40,9 @@ export class ViewEmployeeComponent implements OnInit {
   public workHistoryName : any[] = [];
   public profQualName : any[] = [];
   public Acadname : any[] = [];
-  public assetData:any
   profilePicUrl: any;
   assetEditData: any;
+  public assetdata: any;
   imsAssign: any = FormArray;
   //////Emergency Contact /////
   public emergencyContact = [
@@ -100,7 +100,7 @@ export class ViewEmployeeComponent implements OnInit {
       etwhDuration: '',
     },
   ];
-  public assetdata: any;
+  
   assetdatatable: any[] = [];
   assigndatatable: any[] = [];
   assetAssignObj: any = {
@@ -128,7 +128,7 @@ export class ViewEmployeeComponent implements OnInit {
   ]
   assetAssignDT: any[] = [];
   rowId: any;
-  displayedColumns1:string[]=[
+  displayedColumns1: string[] = [
     'assetid',
     'nameModel',
     'category',
@@ -296,7 +296,7 @@ tempTable() {
           //////Emergency Contact /////
           this.emergencyContact = oneEmployeeData[0].emsTblEmergencyContact;
           
-          this.assetData= oneEmployeeData[0].imsAssign;
+          this.assetdata= oneEmployeeData[0].imsAssign;
           //////// Professional Details//////
           this.profDetails =
             oneEmployeeData[0].emsTblEmployeeProfessionalDetails;
@@ -333,7 +333,7 @@ tempTable() {
           }
 
 
-          console.log(this.assetData);
+          console.log(this.assetdata);
           
 
         
@@ -343,6 +343,7 @@ tempTable() {
         }
       });
   }
+  
   DownloadFile(path:any){
     saveAs(path)
     }

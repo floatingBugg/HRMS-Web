@@ -770,7 +770,7 @@ export class AddEmployeeComponent implements OnInit {
       let result =
         this.personalDetailsForm.controls['emsTblEmployeeProfessionalDetails'][
           'controls'
-        ][0].valid;
+        ][0]?.valid;
       return !result;
     } else {
       return false;
