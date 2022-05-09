@@ -44,6 +44,7 @@ export class ViewEmployeeComponent implements OnInit {
   assetEditData: any;
   public assetdata: any;
   imsAssign: any = FormArray;
+  emsTblPermanentEmployee: any = FormArray;
   //////Emergency Contact /////
   public emergencyContact = [
     {
@@ -89,6 +90,19 @@ export class ViewEmployeeComponent implements OnInit {
       etpqInstituteName: '',
     },
   ];
+  //////// Permanent employee/////
+  public permanentemp = [
+    {
+      eesStartDate:'',
+      eesEvaluationDate: '',
+      eesDateOfIncrement: '',
+      eesIncrement: '',
+      eesRemarks: '',
+      eesSalary: ''
+    },
+  ];
+
+  
   //////// Working History///////
   public workHistory = [
     {
@@ -300,6 +314,9 @@ tempTable() {
           //////// Professional Details//////
           this.profDetails =
             oneEmployeeData[0].emsTblEmployeeProfessionalDetails;
+            ////// Permanent Employee//////
+            this.permanentemp =
+            oneEmployeeData[0].emsTblPermanentEmployee;
           /////// Academic Qualification/////////
           
           this.academicQualification =
