@@ -1042,7 +1042,6 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   updateData() {
-    debugger
     let form = this.personalDetailsForm.value;
     this.assetAssignDT.forEach((elem: any, index: any) => {
       form.imsAssign[index] = elem;
@@ -1051,7 +1050,6 @@ export class EditEmployeeComponent implements OnInit {
     console.log(this.assetAssignDT);
     this.empDataService.salary = this.personalDetailsForm.value;
     console.log(this.personalDetailsForm.value)
-
   let parttimedetails = [];
     if(this.personalDetailsForm.controls.emsTblPartTimeEmployee.controls[0].controls['monday'].value){
       parttimedetails.push("1");
