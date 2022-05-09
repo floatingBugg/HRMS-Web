@@ -33,10 +33,11 @@ export class LoginComponent implements OnInit {
   ) {}
 
   loginUser() {
+    debugger
     if (this.loginForm.valid) {
       let data = this.loginForm.value;
       this.loginService.login(data).subscribe((result) => {
-        if (result.success) {
+        if (result?.success) {
           localStorage.setItem('token', result.data.token);
           localStorage.setItem('loggedIn_UserId', result.data.userId);
           localStorage.setItem('loggedIn_UserName', result.data.userName);

@@ -190,14 +190,14 @@ export class EditEmployeeComponent implements OnInit {
   {
     this.updateForm();
 
-      // this.Empstatus=[
-      //   {stId:1,stname:"Permanent"},
-      //   {stId:2,stname:"Contract"},
-      //   {stId:3,stname:"Released"},
-      //   {stId:4,stname:"Resigned"},
-      //   {stId:5,stname:"Part-Time"},
-      //   {stId:6,stname:"Internship"},
-      // ];
+      this.Empstatus=[
+        {stId:1,stname:"Permanent"},
+        {stId:2,stname:"Contract"},
+        {stId:3,stname:"Released"},
+        {stId:4,stname:"Resigned"},
+        {stId:5,stname:"Part-Time"},
+        {stId:6,stname:"Internship"},
+      ];
     
   }
   
@@ -310,9 +310,8 @@ export class EditEmployeeComponent implements OnInit {
         controlProfessionalDetails['etedManagerId'].setValue(
           this.professionalDetails[0]['etedManagerId']
         );
-        // controlProfessionalDetails['etepdEcsStatusId'].setValue(
-        // this.professionalDetails[0]['etepdEcsStatusId']
-        // );
+        controlProfessionalDetails['etepdEcsStatusId'].setValue(
+        oneEmployeeData.emsEmployementStatus['']);
         this.empDataService.salary = this.professionalDetails[0]['etepdSalary'];
 
         //////Emergency Contact /////

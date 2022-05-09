@@ -609,7 +609,9 @@
                         <mat-select formControlName="etepdEcsStatusId" name="etepdEcsStatusId"
                           (selectionChange)="permanentEmpstatus($event)">
                           <mat-option [value]="">---Select One---</mat-option>
-                           <!-- <mat-option (onSelectionChange)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option> -->
+                          <mat-option *ngFor="let es of Empstatus" [value]="es.stId">{{es.stname}}
+                          </mat-option>
+                           <!-- <mat-option (onSelectionChange)="leaveassign()" id="leaveassign" ng-init="leaveassign=true" value="Active">Active</mat-option>
                            <mat-option value="1">Permanent</mat-option>
                           <mat-option value="2">Contract
                           </mat-option>
@@ -620,7 +622,7 @@
                           <mat-option value="5">Part-Time
                           </mat-option>
                           <mat-option value="6">Internship
-                          </mat-option>
+                          </mat-option> -->
                         </mat-select>
 
                       </mat-form-field> 
